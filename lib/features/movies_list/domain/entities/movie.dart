@@ -5,7 +5,7 @@ part 'movie.freezed.dart';
 part 'movie.g.dart';
 
 @freezed
-abstract class Movie with _$Movie {
+class Movie with _$Movie {
   const Movie._();
 
   const factory Movie({
