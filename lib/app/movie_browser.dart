@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/top5_movies/top5_movies_cubit.dart';
 import 'package:movie_browser/features/movies_list/presentation/cubits/top20_movie_list/top20_movie_list_cubit.dart';
 import 'package:movie_browser/injection.dart';
 
@@ -14,12 +15,12 @@ class MovieBrowser extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => getIt<Top20MovieListCubit>()),
+        BlocProvider(create: (context) => getIt<Top5MoviesCubit>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
-        theme: ThemeData.dark(
-            // useMaterial3: true,
-            ),
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(colorScheme: ColorScheme.dark()),
         home: const HomePage(),
       ),
     );
