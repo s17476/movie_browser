@@ -2,24 +2,24 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'movie.dart';
+import 'tv_show.dart';
 
-part 'movie_list.freezed.dart';
-part 'movie_list.g.dart';
+part 'tv_show_list.freezed.dart';
+part 'tv_show_list.g.dart';
 
 @freezed
-class MovieList with _$MovieList {
+class TvShowList with _$TvShowList {
   @JsonSerializable(fieldRename: FieldRename.snake)
-  const factory MovieList({
+  const factory TvShowList({
     required int page,
     required int totalPages,
     required int totalResults,
-    required List<Movie> results,
+    required List<TvShow> results,
     @JsonKey(includeFromJson: false) String? lastQuery,
-  }) = _MovieList;
+  }) = _TvShowList;
 
-  factory MovieList.initial() {
-    return const MovieList(
+  factory TvShowList.initial() {
+    return const TvShowList(
       page: 0,
       totalPages: 0,
       totalResults: 0,
@@ -28,6 +28,6 @@ class MovieList with _$MovieList {
     );
   }
 
-  factory MovieList.fromJson(Map<String, dynamic> json) =>
-      _$MovieListFromJson(json);
+  factory TvShowList.fromJson(Map<String, dynamic> json) =>
+      _$TvShowListFromJson(json);
 }

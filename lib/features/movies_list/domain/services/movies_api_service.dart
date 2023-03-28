@@ -1,4 +1,5 @@
 import '../entities/movie_list.dart';
+import '../entities/tv_show_list.dart';
 
 abstract class MoviesApiService {
   Future<MovieList> searchMovies(String query, {int page = 1});
@@ -7,4 +8,5 @@ abstract class MoviesApiService {
     int page,
   );
   Future<MovieList> top20Movies();
+  Future<TvShowList> top20TvShows();
 }

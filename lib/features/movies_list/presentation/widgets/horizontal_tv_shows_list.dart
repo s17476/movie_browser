@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/tv_show.dart';
 
 import '../../../core/constants/constants.dart';
-import '../../domain/entities/movie.dart';
 
-class HorizontalMoviesList extends StatelessWidget {
+class HorizontalTvShowsList extends StatelessWidget {
   final String title;
   final TextStyle? titleStyle;
-  final List<Movie> movies;
+  final List<TvShow> shows;
   final bool showCount;
-  const HorizontalMoviesList({
+  const HorizontalTvShowsList({
     Key? key,
     required this.title,
     this.titleStyle,
-    required this.movies,
+    required this.shows,
     this.showCount = false,
   }) : super(key: key);
 
@@ -36,9 +36,9 @@ class HorizontalMoviesList extends StatelessWidget {
               padding: const EdgeInsets.all(8),
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
-              itemCount: movies.length,
+              itemCount: shows.length,
               itemBuilder: (context, index) {
-                if (movies[index].posterPath != null) {
+                if (shows[index].posterPath != null) {
                   return Container(
                     // padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
@@ -57,7 +57,7 @@ class HorizontalMoviesList extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Hero(
-                              tag: movies[index].id,
+                              tag: shows[index].id,
                               child: FadeInImage.assetNetwork(
                                 imageErrorBuilder:
                                     (context, error, stackTrace) =>
@@ -71,7 +71,7 @@ class HorizontalMoviesList extends StatelessWidget {
                                 placeholderFit: BoxFit.scaleDown,
                                 placeholderScale: 2,
                                 image:
-                                    '${imagesBaseUrl}w154${movies[index].posterPath}',
+                                    '${imagesBaseUrl}w154${shows[index].posterPath}',
                                 fit: BoxFit.fitHeight,
                               ),
                             ),

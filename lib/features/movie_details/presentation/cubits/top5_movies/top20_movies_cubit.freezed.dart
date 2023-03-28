@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'top5_movies_cubit.dart';
+part of 'top20_movies_cubit.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -15,7 +15,7 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-mixin _$Top5MoviesState {
+mixin _$Top20MoviesState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
@@ -69,16 +69,16 @@ mixin _$Top5MoviesState {
 }
 
 /// @nodoc
-abstract class $Top5MoviesStateCopyWith<$Res> {
-  factory $Top5MoviesStateCopyWith(
-          Top5MoviesState value, $Res Function(Top5MoviesState) then) =
-      _$Top5MoviesStateCopyWithImpl<$Res, Top5MoviesState>;
+abstract class $Top20MoviesStateCopyWith<$Res> {
+  factory $Top20MoviesStateCopyWith(
+          Top20MoviesState value, $Res Function(Top20MoviesState) then) =
+      _$Top20MoviesStateCopyWithImpl<$Res, Top20MoviesState>;
 }
 
 /// @nodoc
-class _$Top5MoviesStateCopyWithImpl<$Res, $Val extends Top5MoviesState>
-    implements $Top5MoviesStateCopyWith<$Res> {
-  _$Top5MoviesStateCopyWithImpl(this._value, this._then);
+class _$Top20MoviesStateCopyWithImpl<$Res, $Val extends Top20MoviesState>
+    implements $Top20MoviesStateCopyWith<$Res> {
+  _$Top20MoviesStateCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -95,7 +95,7 @@ abstract class _$$_InitialCopyWith<$Res> {
 
 /// @nodoc
 class __$$_InitialCopyWithImpl<$Res>
-    extends _$Top5MoviesStateCopyWithImpl<$Res, _$_Initial>
+    extends _$Top20MoviesStateCopyWithImpl<$Res, _$_Initial>
     implements _$$_InitialCopyWith<$Res> {
   __$$_InitialCopyWithImpl(_$_Initial _value, $Res Function(_$_Initial) _then)
       : super(_value, _then);
@@ -108,7 +108,7 @@ class _$_Initial implements _Initial {
 
   @override
   String toString() {
-    return 'Top5MoviesState.initial()';
+    return 'Top20MoviesState.initial()';
   }
 
   @override
@@ -195,7 +195,7 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements Top5MoviesState {
+abstract class _Initial implements Top20MoviesState {
   const factory _Initial() = _$_Initial;
 }
 
@@ -207,7 +207,7 @@ abstract class _$$_ErrorCopyWith<$Res> {
 
 /// @nodoc
 class __$$_ErrorCopyWithImpl<$Res>
-    extends _$Top5MoviesStateCopyWithImpl<$Res, _$_Error>
+    extends _$Top20MoviesStateCopyWithImpl<$Res, _$_Error>
     implements _$$_ErrorCopyWith<$Res> {
   __$$_ErrorCopyWithImpl(_$_Error _value, $Res Function(_$_Error) _then)
       : super(_value, _then);
@@ -220,7 +220,7 @@ class _$_Error implements _Error {
 
   @override
   String toString() {
-    return 'Top5MoviesState.error()';
+    return 'Top20MoviesState.error()';
   }
 
   @override
@@ -307,7 +307,7 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements Top5MoviesState {
+abstract class _Error implements Top20MoviesState {
   const factory _Error() = _$_Error;
 }
 
@@ -320,7 +320,7 @@ abstract class _$$_LoadingCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadingCopyWithImpl<$Res>
-    extends _$Top5MoviesStateCopyWithImpl<$Res, _$_Loading>
+    extends _$Top20MoviesStateCopyWithImpl<$Res, _$_Loading>
     implements _$$_LoadingCopyWith<$Res> {
   __$$_LoadingCopyWithImpl(_$_Loading _value, $Res Function(_$_Loading) _then)
       : super(_value, _then);
@@ -333,7 +333,7 @@ class _$_Loading implements _Loading {
 
   @override
   String toString() {
-    return 'Top5MoviesState.loading()';
+    return 'Top20MoviesState.loading()';
   }
 
   @override
@@ -420,7 +420,7 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements Top5MoviesState {
+abstract class _Loading implements Top20MoviesState {
   const factory _Loading() = _$_Loading;
 }
 
@@ -434,7 +434,7 @@ abstract class _$$_LoadedCopyWith<$Res> {
 
 /// @nodoc
 class __$$_LoadedCopyWithImpl<$Res>
-    extends _$Top5MoviesStateCopyWithImpl<$Res, _$_Loaded>
+    extends _$Top20MoviesStateCopyWithImpl<$Res, _$_Loaded>
     implements _$$_LoadedCopyWith<$Res> {
   __$$_LoadedCopyWithImpl(_$_Loaded _value, $Res Function(_$_Loaded) _then)
       : super(_value, _then);
@@ -469,7 +469,7 @@ class _$_Loaded implements _Loaded {
 
   @override
   String toString() {
-    return 'Top5MoviesState.loaded(movies: $movies)';
+    return 'Top20MoviesState.loaded(movies: $movies)';
   }
 
   @override
@@ -565,7 +565,7 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements Top5MoviesState {
+abstract class _Loaded implements Top20MoviesState {
   const factory _Loaded({required final List<MovieDetails> movies}) = _$_Loaded;
 
   List<MovieDetails> get movies;

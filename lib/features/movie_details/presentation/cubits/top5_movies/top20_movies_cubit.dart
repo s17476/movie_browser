@@ -9,40 +9,40 @@ import '../../../../movies_list/presentation/cubits/top20_movie_list/top20_movie
 import '../../../domain/entities/movie_details.dart';
 import '../../../domain/repositories/movie_details_repository.dart';
 
-part 'top5_movies_cubit.freezed.dart';
-part 'top5_movies_state.dart';
+part 'top20_movies_cubit.freezed.dart';
+part 'top20_movies_state.dart';
 
 @singleton
-class Top5MoviesCubit extends Cubit<Top5MoviesState> {
+class Top20MoviesCubit extends Cubit<Top20MoviesState> {
   final MovieDetailsRepository _repository;
   final Top20MovieListCubit _top20movieListCubit;
   late StreamSubscription _top20StreamSubscription;
-  Top5MoviesCubit(
+  Top20MoviesCubit(
     this._top20movieListCubit,
     this._repository,
-  ) : super(const Top5MoviesState.initial()) {
+  ) : super(const Top20MoviesState.initial()) {
     _top20movieListCubit.stream.listen((state) {
       state.maybeMap(
-        loaded: (state) => fetchTop5(state.movieList.results),
+        loaded: (state) => fetchTop20(state.movieList.results),
         orElse: () => null,
       );
     });
   }
 
-  Future<void> fetchTop5(List<Movie> movieList) async {
+  Future<void> fetchTop20(List<Movie> movieList) async {
     List<MovieDetails> movies = [];
-    for (var i = 0; movies.length < 5 && i < 20; i++) {
+    for (var movie in movieList) {
       final failureOrMovieDetails =
-          await _repository.fetchMovieDetails(movieList[i].id);
+          await _repository.fetchMovieDetails(movie.id);
       await failureOrMovieDetails.fold(
         (_) async => null,
         (movie) async => movies.add(movie),
       );
     }
     if (movies.isEmpty) {
-      emit(const Top5MoviesState.error());
+      emit(const Top20MoviesState.error());
     } else {
-      emit(Top5MoviesState.loaded(movies: movies));
+      emit(Top20MoviesState.loaded(movies: movies));
     }
   }
 

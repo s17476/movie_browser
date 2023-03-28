@@ -20,15 +20,20 @@ import 'features/movie_details/domain/repositories/movie_details_repository.dart
     as _i5;
 import 'features/movie_details/domain/services/movie_details_api_service.dart'
     as _i3;
-import 'features/movie_details/presentation/cubits/top5_movies/top5_movies_cubit.dart'
-    as _i12;
+import 'features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart'
+    as _i7;
+import 'features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart'
+    as _i13;
 import 'features/movies_list/data/repositories/movies_repository_impl.dart'
-    as _i10;
-import 'features/movies_list/data/services/movies_api_service_impl.dart' as _i8;
-import 'features/movies_list/domain/repositories/movies_repository.dart' as _i9;
-import 'features/movies_list/domain/services/movies_api_service.dart' as _i7;
-import 'features/movies_list/presentation/cubits/top20_movie_list/top20_movie_list_cubit.dart'
     as _i11;
+import 'features/movies_list/data/services/movies_api_service_impl.dart' as _i9;
+import 'features/movies_list/domain/repositories/movies_repository.dart'
+    as _i10;
+import 'features/movies_list/domain/services/movies_api_service.dart' as _i8;
+import 'features/movies_list/presentation/cubits/top20_movie_list/top20_movie_list_cubit.dart'
+    as _i12;
+import 'features/movies_list/presentation/cubits/top20_tv_shows_list/top20_tv_shows_list_cubit.dart'
+    as _i14;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -46,15 +51,19 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i5.MovieDetailsRepository>(() =>
         _i6.MovieDetailsRepositoryImpl(
             apiService: gh<_i3.MovieDetailsApiService>()));
-    gh.lazySingleton<_i7.MoviesApiService>(() => _i8.MoviesApiServiceImpl());
-    gh.lazySingleton<_i9.MoviesRepository>(() =>
-        _i10.MoviesRepositoryImpl(apiService: gh<_i7.MoviesApiService>()));
-    gh.singleton<_i11.Top20MovieListCubit>(
-        _i11.Top20MovieListCubit(gh<_i9.MoviesRepository>()));
-    gh.singleton<_i12.Top5MoviesCubit>(_i12.Top5MoviesCubit(
-      gh<_i11.Top20MovieListCubit>(),
+    gh.singleton<_i7.MovieGenresCubit>(
+        _i7.MovieGenresCubit(gh<_i5.MovieDetailsRepository>()));
+    gh.lazySingleton<_i8.MoviesApiService>(() => _i9.MoviesApiServiceImpl());
+    gh.lazySingleton<_i10.MoviesRepository>(() =>
+        _i11.MoviesRepositoryImpl(apiService: gh<_i8.MoviesApiService>()));
+    gh.singleton<_i12.Top20MovieListCubit>(
+        _i12.Top20MovieListCubit(gh<_i10.MoviesRepository>()));
+    gh.singleton<_i13.Top20MoviesCubit>(_i13.Top20MoviesCubit(
+      gh<_i12.Top20MovieListCubit>(),
       gh<_i5.MovieDetailsRepository>(),
     ));
+    gh.singleton<_i14.Top20TvShowsListCubit>(
+        _i14.Top20TvShowsListCubit(gh<_i10.MoviesRepository>()));
     return this;
   }
 }

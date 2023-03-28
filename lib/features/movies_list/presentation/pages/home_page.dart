@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:movie_browser/features/movies_list/presentation/widgets/top5_switcher.dart';
 
+import '../widgets/genres_list.dart';
 import '../widgets/top20_list.dart';
+import '../widgets/top20_switcher.dart';
+import '../widgets/top20_tv_list.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -13,9 +15,21 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Movie Browser'),
       ),
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [Top5Switcher(), Flexible(child: Top20List())],
+      body: ListView(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).padding.bottom + 16,
+        ),
+        // shrinkWrap: true,
+        // crossAxisAlignment: CrossAxisAlignment.start,
+        children: const [
+          Top20Switcher(),
+          SizedBox(
+            height: 8,
+          ),
+          Top20List(),
+          Top20TvList(),
+          Genreslist(),
+        ],
       ),
     );
   }

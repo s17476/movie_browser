@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 import '../../../core/errors/failure.dart';
 import '../../../core/errors/movie_exception.dart';
 import '../../domain/entities/movie_list.dart';
+import '../../domain/entities/tv_show_list.dart';
 import '../../domain/repositories/movies_repository.dart';
 import '../../domain/services/movies_api_service.dart';
 
@@ -45,6 +46,18 @@ class MoviesRepositoryImpl extends MoviesRepository {
   Future<Either<Failure, MovieList>> top20Movies() async {
     try {
       final MovieList movieList = await apiService.top20Movies();
+      return right(movieList);
+    } on MovieException catch (e) {
+      return left(Failure(message: e.message));
+    } catch (e) {
+      return left(const Failure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, TvShowList>> top20TvShows() async {
+    try {
+      final TvShowList movieList = await apiService.top20TvShows();
       return right(movieList);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));

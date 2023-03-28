@@ -7,6 +7,7 @@ import '../../../core/constants/constants.dart';
 import '../../../core/errors/http_error_handler.dart';
 import '../../../core/errors/movie_exception.dart';
 import '../../domain/entities/movie_list.dart';
+import '../../domain/entities/tv_show_list.dart';
 import '../../domain/services/movies_api_service.dart';
 
 @LazySingleton(as: MoviesApiService)
@@ -65,6 +66,38 @@ class MoviesApiServiceImpl extends MoviesApiService {
       }
       final json = jsonDecode(response.body);
       final movieList = MovieList.fromJson(json);
+
+      if (movieList.results.isEmpty) {
+        throw MovieException('No movies found.');
+      }
+
+      return movieList;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<TvShowList> top20TvShows() async {
+    final Uri uri = Uri(
+      scheme: 'https',
+      host: baseUrl,
+      path: '3/discover/tv',
+      queryParameters: {
+        'api_key': apiKey,
+        'sort_by': 'popularity.desc',
+        'with_original_language': 'en',
+      },
+    );
+
+    try {
+      final response = await http.get(uri);
+
+      if (response.statusCode != 200) {
+        throw Exception(httpErrorHandler(response));
+      }
+      final json = jsonDecode(response.body);
+      final movieList = TvShowList.fromJson(json);
 
       if (movieList.results.isEmpty) {
         throw MovieException('No movies found.');
