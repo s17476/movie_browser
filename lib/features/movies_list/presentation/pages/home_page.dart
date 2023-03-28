@@ -14,6 +14,7 @@ class HomePage extends StatelessWidget {
         title: const Text('Movie Browser'),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: const [Top5Switcher(), Flexible(child: Top20List())],
       ),
     );

@@ -18,6 +18,7 @@ class StarRating extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             for (int i = 0; i < stars; i++)
               const Icon(
@@ -40,7 +41,7 @@ class StarRating extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 12),
-        Text('$voteAverange/10'),
+        Text('${voteAverange.toStringAsFixed(1)}/10'),
       ],
     );
   }

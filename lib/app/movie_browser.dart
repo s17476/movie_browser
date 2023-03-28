@@ -24,7 +24,7 @@ class MovieBrowser extends StatelessWidget {
           colorScheme: const ColorScheme.dark(),
           scaffoldBackgroundColor: Colors.black,
           appBarTheme: const AppBarTheme(
-            backgroundColor: Colors.black45,
+            backgroundColor: Colors.black26,
             elevation: 5,
           ),
         ),
