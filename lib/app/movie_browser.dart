@@ -20,7 +20,10 @@ class MovieBrowser extends StatelessWidget {
       child: MaterialApp(
         title: 'Flutter Demo',
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(colorScheme: ColorScheme.dark()),
+        theme: ThemeData(
+          colorScheme: const ColorScheme.dark(),
+          scaffoldBackgroundColor: Colors.black,
+        ),
         home: const HomePage(),
       ),
     );
