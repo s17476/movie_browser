@@ -9,6 +9,7 @@ part 'movie_list.g.dart';
 
 @freezed
 class MovieList with _$MovieList {
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory MovieList({
     required int page,
     required int totalPages,

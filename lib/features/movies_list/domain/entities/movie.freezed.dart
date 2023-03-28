@@ -156,7 +156,8 @@ class __$$_MovieCopyWithImpl<$Res> extends _$MovieCopyWithImpl<$Res, _$_Movie>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$_Movie extends _Movie with DiagnosticableTreeMixin {
   const _$_Movie(
       {required this.title,

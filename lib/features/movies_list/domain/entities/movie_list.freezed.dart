@@ -148,7 +148,8 @@ class __$$_MovieListCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
+@JsonSerializable(fieldRename: FieldRename.snake)
 class _$_MovieList implements _MovieList {
   const _$_MovieList(
       {required this.page,

@@ -8,8 +8,8 @@ part of 'movie_list.dart';
 
 _$_MovieList _$$_MovieListFromJson(Map<String, dynamic> json) => _$_MovieList(
       page: json['page'] as int,
-      totalPages: json['totalPages'] as int,
-      totalResults: json['totalResults'] as int,
+      totalPages: json['total_pages'] as int,
+      totalResults: json['total_results'] as int,
       results: (json['results'] as List<dynamic>)
           .map((e) => Movie.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -18,7 +18,7 @@ _$_MovieList _$$_MovieListFromJson(Map<String, dynamic> json) => _$_MovieList(
 Map<String, dynamic> _$$_MovieListToJson(_$_MovieList instance) =>
     <String, dynamic>{
       'page': instance.page,
-      'totalPages': instance.totalPages,
-      'totalResults': instance.totalResults,
+      'total_pages': instance.totalPages,
+      'total_results': instance.totalResults,
       'results': instance.results,
     };

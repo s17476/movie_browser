@@ -1,45 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_browser/features/movies_list/presentation/cubits/top20_movie_list/top20_movie_list_cubit.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/movie_list_tile.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('widget.title'),
+        title: const Text('Movie Browser'),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+      body: BlocBuilder<Top20MovieListCubit, Top20MovieListState>(
+        builder: (context, state) {
+          return state.maybeMap(
+            error: (_) => const Text('Error loading data'),
+            loading: (_) => const CircularProgressIndicator(),
+            loaded: (state) => ListView(
+              children: [
+                ...state.movieList.results.map(
+                  (movie) => MovieListTile(movie: movie),
+                  // (e) => Text(e.title),
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+            orElse: () => const Text('init'),
+          );
+        },
       ),
     );
   }

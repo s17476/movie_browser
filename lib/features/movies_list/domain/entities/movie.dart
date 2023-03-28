@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:flutter/foundation.dart';
 
@@ -8,6 +10,7 @@ part 'movie.g.dart';
 class Movie with _$Movie {
   const Movie._();
 
+  @JsonSerializable(fieldRename: FieldRename.snake)
   const factory Movie({
     required String title,
     required double voteAverage,

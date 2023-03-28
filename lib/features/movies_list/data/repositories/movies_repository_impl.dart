@@ -8,10 +8,10 @@ import '../../domain/repositories/movies_repository.dart';
 import '../../domain/services/movies_api_service.dart';
 
 @LazySingleton(as: MoviesRepository)
-class MovieRepositoryImpl extends MoviesRepository {
+class MoviesRepositoryImpl extends MoviesRepository {
   final MoviesApiService apiService;
 
-  MovieRepositoryImpl({
+  MoviesRepositoryImpl({
     required this.apiService,
   });
 

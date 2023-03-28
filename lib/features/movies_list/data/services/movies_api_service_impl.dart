@@ -63,7 +63,6 @@ class MoviesApiServiceImpl extends MoviesApiService {
       if (response.statusCode != 200) {
         throw Exception(httpErrorHandler(response));
       }
-
       final json = jsonDecode(response.body);
       final movieList = MovieList.fromJson(json);
 
