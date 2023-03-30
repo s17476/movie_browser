@@ -9,4 +9,5 @@ abstract class MoviesApiService {
   );
   Future<MovieList> top20Movies();
   Future<TvShowList> top20TvShows();
+  Future<MovieList> fetchByGenreId(int id);
 }

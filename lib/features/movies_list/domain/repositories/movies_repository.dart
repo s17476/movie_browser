@@ -9,4 +9,5 @@ abstract class MoviesRepository {
   Future<Either<Failure, TvShowList>> top20TvShows();
   Future<Either<Failure, MovieList>> searchMovies(String query);
   Future<Either<Failure, MovieList>> loadNextPage(String query, int page);
+  Future<Either<Failure, MovieList>> fetchByGenreId(int id);
 }

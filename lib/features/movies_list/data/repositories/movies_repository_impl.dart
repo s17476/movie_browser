@@ -44,8 +44,18 @@ class MoviesRepositoryImpl extends MoviesRepository {
 
   @override
   Future<Either<Failure, MovieList>> top20Movies() async {
+    return performApiCall(apiService.top20Movies);
+  }
+
+  @override
+  Future<Either<Failure, TvShowList>> top20TvShows() async {
+    return performApiCall(apiService.top20TvShows);
+  }
+
+  @override
+  Future<Either<Failure, MovieList>> fetchByGenreId(int id) async {
     try {
-      final MovieList movieList = await apiService.top20Movies();
+      final MovieList movieList = await apiService.fetchByGenreId(id);
       return right(movieList);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));
@@ -54,11 +64,10 @@ class MoviesRepositoryImpl extends MoviesRepository {
     }
   }
 
-  @override
-  Future<Either<Failure, TvShowList>> top20TvShows() async {
+  Future<Either<Failure, T>> performApiCall<T>(Function apiFunction) async {
     try {
-      final TvShowList movieList = await apiService.top20TvShows();
-      return right(movieList);
+      final T list = await apiFunction();
+      return right(list);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));
     } catch (e) {

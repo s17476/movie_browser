@@ -14,18 +14,18 @@ import '../../domain/services/movies_api_service.dart';
 class MoviesApiServiceImpl extends MoviesApiService {
   @override
   Future<MovieList> searchMovies(String query, {int page = 1}) async {
-    final Uri uri = Uri(
-      scheme: 'https',
-      host: kBaseUrl,
-      path: '3/search/movie',
-      queryParameters: {
-        'api_key': kApiKey,
-        'query': query,
-        'page': page.toString(),
-      },
-    );
-
     try {
+      final Uri uri = Uri(
+        scheme: 'https',
+        host: kBaseUrl,
+        path: '3/search/movie',
+        queryParameters: {
+          'api_key': kApiKey,
+          'query': query,
+          'page': page.toString(),
+        },
+      );
+
       final response = await http.get(uri);
 
       if (response.statusCode != 200) {
@@ -51,14 +51,14 @@ class MoviesApiServiceImpl extends MoviesApiService {
 
   @override
   Future<MovieList> top20Movies() async {
-    final Uri uri = Uri(
-      scheme: 'https',
-      host: kBaseUrl,
-      path: '3/discover/movie',
-      queryParameters: {'api_key': kApiKey, 'sort_by': 'popularity.desc'},
-    );
-
     try {
+      final Uri uri = Uri(
+        scheme: 'https',
+        host: kBaseUrl,
+        path: '3/discover/movie',
+        queryParameters: {'api_key': kApiKey, 'sort_by': 'popularity.desc'},
+      );
+
       final response = await http.get(uri);
 
       if (response.statusCode != 200) {
@@ -79,18 +79,18 @@ class MoviesApiServiceImpl extends MoviesApiService {
 
   @override
   Future<TvShowList> top20TvShows() async {
-    final Uri uri = Uri(
-      scheme: 'https',
-      host: kBaseUrl,
-      path: '3/discover/tv',
-      queryParameters: {
-        'api_key': kApiKey,
-        'sort_by': 'popularity.desc',
-        'with_original_language': 'en',
-      },
-    );
-
     try {
+      final Uri uri = Uri(
+        scheme: 'https',
+        host: kBaseUrl,
+        path: '3/discover/tv',
+        queryParameters: {
+          'api_key': kApiKey,
+          'sort_by': 'popularity.desc',
+          'with_original_language': 'en',
+        },
+      );
+
       final response = await http.get(uri);
 
       if (response.statusCode != 200) {
@@ -98,6 +98,39 @@ class MoviesApiServiceImpl extends MoviesApiService {
       }
       final json = jsonDecode(response.body);
       final movieList = TvShowList.fromJson(json);
+
+      if (movieList.results.isEmpty) {
+        throw MovieException('No movies found.');
+      }
+
+      return movieList;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<MovieList> fetchByGenreId(int id) async {
+    try {
+      final Uri uri = Uri(
+        scheme: 'https',
+        host: kBaseUrl,
+        path: '3/discover/movie',
+        queryParameters: {
+          'api_key': kApiKey,
+          'sort_by': 'popularity.desc',
+          'with_original_language': 'en',
+          'with_genres': id.toString(),
+        },
+      );
+
+      final response = await http.get(uri);
+
+      if (response.statusCode != 200) {
+        throw Exception(httpErrorHandler(response));
+      }
+      final json = jsonDecode(response.body);
+      final movieList = MovieList.fromJson(json);
 
       if (movieList.results.isEmpty) {
         throw MovieException('No movies found.');
