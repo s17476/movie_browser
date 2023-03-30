@@ -54,17 +54,15 @@ class HorizontalGenresList extends StatelessWidget {
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
                           child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Image.asset(
+                                height: 80,
                                 'assets/images/${genres[index].name.toLowerCase()}.png',
-                              ),
-                              const SizedBox(
-                                height: 4,
                               ),
                               Text(
                                 genres[index].name,
-                                style: Theme.of(context).textTheme.titleMedium,
+                                style: Theme.of(context).textTheme.bodyMedium,
                               ),
                             ],
                           ),
