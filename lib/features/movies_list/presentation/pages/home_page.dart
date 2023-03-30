@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../cubits/random_genres/random_genres_cubit.dart';
 import '../widgets/build_movies_list.dart';
 import '../widgets/genres_list.dart';
-import '../widgets/movie_search.dart';
+import '../widgets/search_delegate/movie_search.dart';
 import '../widgets/top20_list.dart';
 import '../widgets/top20_switcher.dart';
 import '../widgets/top20_tv_list.dart';

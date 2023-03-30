@@ -23,7 +23,7 @@ import 'features/movie_details/domain/services/movie_details_api_service.dart'
 import 'features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart'
     as _i7;
 import 'features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart'
-    as _i14;
+    as _i15;
 import 'features/movies_list/data/repositories/movies_repository_impl.dart'
     as _i11;
 import 'features/movies_list/data/services/movies_api_service_impl.dart' as _i9;
@@ -32,10 +32,12 @@ import 'features/movies_list/domain/repositories/movies_repository.dart'
 import 'features/movies_list/domain/services/movies_api_service.dart' as _i8;
 import 'features/movies_list/presentation/cubits/random_genres/random_genres_cubit.dart'
     as _i12;
-import 'features/movies_list/presentation/cubits/top20_movie_list/top20_movie_list_cubit.dart'
+import 'features/movies_list/presentation/cubits/search_suggestions/search_suggestions_cubit.dart'
     as _i13;
+import 'features/movies_list/presentation/cubits/top20_movie_list/top20_movie_list_cubit.dart'
+    as _i14;
 import 'features/movies_list/presentation/cubits/top20_tv_shows_list/top20_tv_shows_list_cubit.dart'
-    as _i15;
+    as _i16;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -62,14 +64,16 @@ extension GetItInjectableX on _i1.GetIt {
       gh<_i10.MoviesRepository>(),
       gh<_i7.MovieGenresCubit>(),
     ));
-    gh.singleton<_i13.Top20MovieListCubit>(
-        _i13.Top20MovieListCubit(gh<_i10.MoviesRepository>()));
-    gh.singleton<_i14.Top20MoviesCubit>(_i14.Top20MoviesCubit(
-      gh<_i13.Top20MovieListCubit>(),
+    gh.factory<_i13.SearchSuggestionsCubit>(
+        () => _i13.SearchSuggestionsCubit(gh<_i10.MoviesRepository>()));
+    gh.singleton<_i14.Top20MovieListCubit>(
+        _i14.Top20MovieListCubit(gh<_i10.MoviesRepository>()));
+    gh.singleton<_i15.Top20MoviesCubit>(_i15.Top20MoviesCubit(
+      gh<_i14.Top20MovieListCubit>(),
       gh<_i5.MovieDetailsRepository>(),
     ));
-    gh.singleton<_i15.Top20TvShowsListCubit>(
-        _i15.Top20TvShowsListCubit(gh<_i10.MoviesRepository>()));
+    gh.singleton<_i16.Top20TvShowsListCubit>(
+        _i16.Top20TvShowsListCubit(gh<_i10.MoviesRepository>()));
     return this;
   }
 }

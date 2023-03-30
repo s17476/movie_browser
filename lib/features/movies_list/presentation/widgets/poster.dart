@@ -17,21 +17,18 @@ class Poster extends StatelessWidget {
       aspectRatio: 2 / 3,
       child: ClipRRect(
         borderRadius: BorderRadius.circular(15),
-        child: Hero(
-          tag: id,
-          child: FadeInImage.assetNetwork(
-            imageErrorBuilder: (context, error, stackTrace) => const Center(
-              child: Text(
-                'No image found',
-                textAlign: TextAlign.center,
-              ),
+        child: FadeInImage.assetNetwork(
+          imageErrorBuilder: (context, error, stackTrace) => const Center(
+            child: Text(
+              'No image found',
+              textAlign: TextAlign.center,
             ),
-            placeholder: 'assets/images/loading.gif',
-            placeholderFit: BoxFit.scaleDown,
-            placeholderScale: 2,
-            image: '${kImagesBaseUrl}w154$posterPath',
-            fit: BoxFit.fitHeight,
           ),
+          placeholder: 'assets/images/loading.gif',
+          placeholderFit: BoxFit.scaleDown,
+          placeholderScale: 2,
+          image: '${kImagesBaseUrl}w154$posterPath',
+          fit: BoxFit.fitHeight,
         ),
       ),
     );

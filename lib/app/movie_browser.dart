@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_browser/features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart';
 import 'package:movie_browser/features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart';
 import 'package:movie_browser/features/movies_list/presentation/cubits/random_genres/random_genres_cubit.dart';
+import 'package:movie_browser/features/movies_list/presentation/cubits/search_suggestions/search_suggestions_cubit.dart';
 import 'package:movie_browser/features/movies_list/presentation/cubits/top20_movie_list/top20_movie_list_cubit.dart';
 import 'package:movie_browser/injection.dart';
 
@@ -22,6 +23,7 @@ class MovieBrowser extends StatelessWidget {
         BlocProvider(create: (context) => getIt<Top20MoviesCubit>()),
         BlocProvider(create: (context) => getIt<MovieGenresCubit>()),
         BlocProvider(create: (context) => getIt<RandomGenresCubit>()),
+        BlocProvider(create: (context) => getIt<SearchSuggestionsCubit>()),
       ],
       child: MaterialApp(
         title: 'Flutter Demo',
