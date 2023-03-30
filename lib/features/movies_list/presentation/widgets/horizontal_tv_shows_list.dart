@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_browser/features/movies_list/domain/entities/tv_show.dart';
 
-import '../../../core/constants/constants.dart';
+import '../../domain/entities/tv_show.dart';
+import 'position_count.dart';
+import 'poster.dart';
 
 class HorizontalTvShowsList extends StatelessWidget {
   final String title;
@@ -52,48 +53,14 @@ class HorizontalTvShowsList extends StatelessWidget {
                     ),
                     child: Stack(
                       children: [
-                        AspectRatio(
-                          aspectRatio: 2 / 3,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Hero(
-                              tag: shows[index].id,
-                              child: FadeInImage.assetNetwork(
-                                imageErrorBuilder:
-                                    (context, error, stackTrace) =>
-                                        const Center(
-                                  child: Text(
-                                    'No image found',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                placeholder: 'assets/images/loading.gif',
-                                placeholderFit: BoxFit.scaleDown,
-                                placeholderScale: 2,
-                                image:
-                                    '${imagesBaseUrl}w154${shows[index].posterPath}',
-                                fit: BoxFit.fitHeight,
-                              ),
-                            ),
-                          ),
+                        Poster(
+                          id: shows[index].id,
+                          posterPath: shows[index].posterPath,
                         ),
                         if (showCount)
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: Colors.black26,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                bottomRight: Radius.circular(15),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Text(
-                                '#${index + 1}',
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
-                            ),
-                          )
+                          PositionCount(
+                            index: index,
+                          ),
                       ],
                     ),
                   );

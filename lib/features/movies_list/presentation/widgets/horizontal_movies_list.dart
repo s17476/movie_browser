@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/constants.dart';
 import '../../domain/entities/movie.dart';
+import 'position_count.dart';
+import 'poster.dart';
 
 class HorizontalMoviesList extends StatelessWidget {
   final String title;
@@ -40,7 +41,6 @@ class HorizontalMoviesList extends StatelessWidget {
               itemBuilder: (context, index) {
                 if (movies[index].posterPath != null) {
                   return Container(
-                    // padding: const EdgeInsets.all(4),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(15),
                       boxShadow: [
@@ -52,48 +52,11 @@ class HorizontalMoviesList extends StatelessWidget {
                     ),
                     child: Stack(
                       children: [
-                        AspectRatio(
-                          aspectRatio: 2 / 3,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Hero(
-                              tag: movies[index].id,
-                              child: FadeInImage.assetNetwork(
-                                imageErrorBuilder:
-                                    (context, error, stackTrace) =>
-                                        const Center(
-                                  child: Text(
-                                    'No image found',
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ),
-                                placeholder: 'assets/images/loading.gif',
-                                placeholderFit: BoxFit.scaleDown,
-                                placeholderScale: 2,
-                                image:
-                                    '${imagesBaseUrl}w154${movies[index].posterPath}',
-                                fit: BoxFit.fitHeight,
-                              ),
-                            ),
-                          ),
+                        Poster(
+                          id: movies[index].id,
+                          posterPath: movies[index].posterPath,
                         ),
-                        if (showCount)
-                          Container(
-                            decoration: const BoxDecoration(
-                              color: Colors.black26,
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(15),
-                                bottomRight: Radius.circular(15),
-                              ),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Text(
-                                '#${index + 1}',
-                                style: Theme.of(context).textTheme.labelMedium,
-                              ),
-                            ),
-                          )
+                        if (showCount) PositionCount(index: index),
                       ],
                     ),
                   );

@@ -54,7 +54,7 @@ class MovieListTile extends StatelessWidget {
                       placeholder: 'assets/images/loading.gif',
                       // placeholderFit: BoxFit.scaleDown,
                       placeholderScale: 1,
-                      image: '${imagesBaseUrl}w92${movie.posterPath}',
+                      image: '${kImagesBaseUrl}w92${movie.posterPath}',
                       fit: BoxFit.fitHeight,
                     ),
                   ),

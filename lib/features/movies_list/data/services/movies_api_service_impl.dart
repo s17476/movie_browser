@@ -16,10 +16,10 @@ class MoviesApiServiceImpl extends MoviesApiService {
   Future<MovieList> searchMovies(String query, {int page = 1}) async {
     final Uri uri = Uri(
       scheme: 'https',
-      host: baseUrl,
+      host: kBaseUrl,
       path: '3/search/movie',
       queryParameters: {
-        'api_key': apiKey,
+        'api_key': kApiKey,
         'query': query,
         'page': page.toString(),
       },
@@ -53,9 +53,9 @@ class MoviesApiServiceImpl extends MoviesApiService {
   Future<MovieList> top20Movies() async {
     final Uri uri = Uri(
       scheme: 'https',
-      host: baseUrl,
+      host: kBaseUrl,
       path: '3/discover/movie',
-      queryParameters: {'api_key': apiKey, 'sort_by': 'popularity.desc'},
+      queryParameters: {'api_key': kApiKey, 'sort_by': 'popularity.desc'},
     );
 
     try {
@@ -81,10 +81,10 @@ class MoviesApiServiceImpl extends MoviesApiService {
   Future<TvShowList> top20TvShows() async {
     final Uri uri = Uri(
       scheme: 'https',
-      host: baseUrl,
+      host: kBaseUrl,
       path: '3/discover/tv',
       queryParameters: {
-        'api_key': apiKey,
+        'api_key': kApiKey,
         'sort_by': 'popularity.desc',
         'with_original_language': 'en',
       },

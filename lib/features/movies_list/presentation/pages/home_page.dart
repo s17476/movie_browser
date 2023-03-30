@@ -19,13 +19,8 @@ class HomePage extends StatelessWidget {
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).padding.bottom + 16,
         ),
-        // shrinkWrap: true,
-        // crossAxisAlignment: CrossAxisAlignment.start,
         children: const [
           Top20Switcher(),
-          SizedBox(
-            height: 8,
-          ),
           Top20List(),
           Top20TvList(),
           Genreslist(),

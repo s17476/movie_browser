@@ -16,10 +16,10 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
   Future<MovieDetails> fetchMovieDetails(int movieId) async {
     final Uri uri = Uri(
       scheme: 'https',
-      host: baseUrl,
+      host: kBaseUrl,
       path: '3/movie/$movieId',
       queryParameters: {
-        'api_key': apiKey,
+        'api_key': kApiKey,
       },
     );
 
@@ -47,10 +47,10 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
   Future<MovieGenreList> fetchMovieGenres() async {
     final Uri uri = Uri(
       scheme: 'https',
-      host: baseUrl,
+      host: kBaseUrl,
       path: '3/genre/movie/list',
       queryParameters: {
-        'api_key': apiKey,
+        'api_key': kApiKey,
       },
     );
 

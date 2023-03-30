@@ -158,7 +158,7 @@ class PosterImage extends StatelessWidget {
                           placeholderFit: BoxFit.scaleDown,
                           placeholderScale: 2,
                           image:
-                              '${imagesBaseUrl}w500${_movies[_pos].posterPath}',
+                              '${kImagesBaseUrl}w500${_movies[_pos].posterPath}',
                           fit: BoxFit.fitHeight,
                         ),
                       ),
@@ -290,7 +290,7 @@ class PosterBackground extends StatelessWidget {
               width: double.infinity,
               child: FadeInImage.assetNetwork(
                 placeholder: 'assets/images/loading_empty.gif',
-                image: '${imagesBaseUrl}w500${_movies[_pos].posterPath}',
+                image: '${kImagesBaseUrl}w500${_movies[_pos].posterPath}',
                 fit: BoxFit.fitWidth,
                 imageErrorBuilder: (context, error, stackTrace) =>
                     const SizedBox(),
