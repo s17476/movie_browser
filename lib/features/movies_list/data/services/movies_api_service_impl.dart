@@ -56,7 +56,10 @@ class MoviesApiServiceImpl extends MoviesApiService {
         scheme: 'https',
         host: kBaseUrl,
         path: '3/discover/movie',
-        queryParameters: {'api_key': kApiKey, 'sort_by': 'popularity.desc'},
+        queryParameters: {
+          'api_key': kApiKey,
+          'sort_by': 'popularity.desc',
+        },
       );
 
       final response = await http.get(uri);
