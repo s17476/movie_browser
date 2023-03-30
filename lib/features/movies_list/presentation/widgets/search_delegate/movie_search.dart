@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../cubits/search_movies/search_movies_cubit.dart';
 import '../../cubits/search_suggestions/search_suggestions_cubit.dart';
+import 'results_list.dart';
 import 'suggetions_list.dart';
 
 class MovieSearch extends SearchDelegate {
@@ -25,7 +27,15 @@ class MovieSearch extends SearchDelegate {
       );
 
   @override
-  Widget buildResults(BuildContext context) => const SizedBox();
+  Widget buildResults(BuildContext context) {
+    if (query.isNotEmpty) {
+      context.read<SearchMoviesCubit>().searchMovies(query);
+    } else {
+      context.read<SearchMoviesCubit>().clear();
+    }
+
+    return const ResultsList();
+  }
 
   @override
   Widget buildSuggestions(BuildContext context) {

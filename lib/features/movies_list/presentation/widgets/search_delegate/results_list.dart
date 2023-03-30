@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubits/search_suggestions/search_suggestions_cubit.dart';
-import 'suggestion_tile.dart';
+import '../../cubits/search_movies/search_movies_cubit.dart';
+import 'movie_list_tile.dart';
 
-class SuggestionsList extends StatelessWidget {
-  final Function(BuildContext, String) search;
-  const SuggestionsList({
-    Key? key,
-    required this.search,
-  }) : super(key: key);
+class ResultsList extends StatelessWidget {
+  const ResultsList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchSuggestionsCubit, SearchSuggestionsState>(
+    return BlocBuilder<SearchMoviesCubit, SearchMoviesState>(
       builder: (context, state) {
         return state.maybeMap(
           loading: (_) => Center(
@@ -24,16 +20,14 @@ class SuggestionsList extends StatelessWidget {
             ),
           ),
           loaded: (state) => ListView.separated(
-            itemCount: state.suggestions.results.length,
-            itemBuilder: (context, index) => SuggestionTile(
-              movie: state.suggestions.results[index],
-              search: search,
+            itemCount: state.movieList.results.length,
+            itemBuilder: (context, index) => MovieListTile(
+              movie: state.movieList.results[index],
             ),
             separatorBuilder: (context, index) => Container(
-              margin: const EdgeInsets.symmetric(horizontal: 8),
               height: 1,
               width: double.infinity,
-              color: Colors.white12,
+              color: Colors.grey.shade800,
             ),
           ),
           orElse: () => const SizedBox(),

@@ -12,6 +12,12 @@ import '../../domain/services/movies_api_service.dart';
 
 @LazySingleton(as: MoviesApiService)
 class MoviesApiServiceImpl extends MoviesApiService {
+  final http.Client client;
+
+  MoviesApiServiceImpl({
+    required this.client,
+  });
+
   @override
   Future<MovieList> searchMovies(String query, {int page = 1}) async {
     try {
@@ -26,7 +32,7 @@ class MoviesApiServiceImpl extends MoviesApiService {
         },
       );
 
-      final response = await http.get(uri);
+      final response = await client.get(uri);
 
       if (response.statusCode != 200) {
         throw Exception(httpErrorHandler(response));
@@ -62,7 +68,7 @@ class MoviesApiServiceImpl extends MoviesApiService {
         },
       );
 
-      final response = await http.get(uri);
+      final response = await client.get(uri);
 
       if (response.statusCode != 200) {
         throw Exception(httpErrorHandler(response));
@@ -94,7 +100,7 @@ class MoviesApiServiceImpl extends MoviesApiService {
         },
       );
 
-      final response = await http.get(uri);
+      final response = await client.get(uri);
 
       if (response.statusCode != 200) {
         throw Exception(httpErrorHandler(response));
@@ -127,7 +133,7 @@ class MoviesApiServiceImpl extends MoviesApiService {
         },
       );
 
-      final response = await http.get(uri);
+      final response = await client.get(uri);
 
       if (response.statusCode != 200) {
         throw Exception(httpErrorHandler(response));

@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+
 import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
 import 'package:movie_browser/features/movie_details/domain/entities/movie_genre_list.dart';
 
@@ -12,6 +13,12 @@ import '../../domain/services/movie_details_api_service.dart';
 
 @LazySingleton(as: MovieDetailsApiService)
 class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
+  final http.Client client;
+
+  MovieDetailsApiServiceImpl({
+    required this.client,
+  });
+
   @override
   Future<MovieDetails> fetchMovieDetails(int movieId) async {
     final Uri uri = Uri(
@@ -24,7 +31,7 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
     );
 
     try {
-      final response = await http.get(uri);
+      final response = await client.get(uri);
 
       if (response.statusCode != 200) {
         throw Exception(httpErrorHandler(response));
@@ -55,7 +62,7 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
     );
 
     try {
-      final response = await http.get(uri);
+      final response = await client.get(uri);
 
       if (response.statusCode != 200) {
         throw Exception(httpErrorHandler(response));
