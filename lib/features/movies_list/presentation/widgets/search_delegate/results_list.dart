@@ -4,12 +4,60 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../cubits/search_movies/search_movies_cubit.dart';
 import 'movie_list_tile.dart';
 
-class ResultsList extends StatelessWidget {
+class ResultsList extends StatefulWidget {
   const ResultsList({super.key});
 
   @override
+  State<ResultsList> createState() => _ResultsListState();
+}
+
+class _ResultsListState extends State<ResultsList> {
+  late final ScrollController _scrollController;
+
+  Future<void> _loadNextResultsPage() async {
+    if (_scrollController.position.extentAfter < 500) {
+      context.read<SearchMoviesCubit>().loadNextresultsPage();
+    }
+  }
+
+  void _showResultInfo(BuildContext context, int totalResults) {
+    ScaffoldMessenger.of(context)
+      ..hideCurrentSnackBar()
+      ..showSnackBar(
+        SnackBar(
+          backgroundColor: Colors.black,
+          content: Text(
+            '$totalResults results found',
+            style: Theme.of(context).textTheme.bodyLarge,
+          ),
+        ),
+      );
+  }
+
+  @override
+  void initState() {
+    _scrollController = ScrollController()..addListener(_loadNextResultsPage);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SearchMoviesCubit, SearchMoviesState>(
+    return BlocConsumer<SearchMoviesCubit, SearchMoviesState>(
+      listener: (context, state) {
+        state.mapOrNull(
+          loaded: (state) {
+            if (!state.isLoadingNextPage && state.movieList.page == 1) {
+              _showResultInfo(context, state.movieList.totalResults);
+            }
+          },
+        );
+      },
       builder: (context, state) {
         return state.maybeMap(
           loading: (_) => Center(
@@ -19,17 +67,36 @@ class ResultsList extends StatelessWidget {
               width: 90,
             ),
           ),
-          loaded: (state) => ListView.separated(
-            itemCount: state.movieList.results.length,
-            itemBuilder: (context, index) => MovieListTile(
-              movie: state.movieList.results[index],
-            ),
-            separatorBuilder: (context, index) => Container(
-              height: 1,
-              width: double.infinity,
-              color: Colors.grey.shade800,
-            ),
-          ),
+          loaded: (state) {
+            return Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                // results list
+                ListView.separated(
+                  controller: _scrollController,
+                  itemCount: state.movieList.results.length,
+                  itemBuilder: (context, index) => MovieListTile(
+                    movie: state.movieList.results[index],
+                  ),
+                  separatorBuilder: (context, index) => Container(
+                    height: 1,
+                    width: double.infinity,
+                    color: Colors.grey.shade800,
+                  ),
+                ),
+                // next page loading indicator
+                if (state.isLoadingNextPage)
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 16),
+                    child: Image.asset(
+                      'assets/images/loading.gif',
+                      height: 90,
+                      width: 90,
+                    ),
+                  )
+              ],
+            );
+          },
           orElse: () => const SizedBox(),
         );
       },

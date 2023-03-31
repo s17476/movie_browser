@@ -53,16 +53,34 @@ class HorizontalGenresList extends StatelessWidget {
                         aspectRatio: 2 / 3,
                         child: ClipRRect(
                           borderRadius: BorderRadius.circular(15),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          child: Stack(
+                            alignment: Alignment.center,
                             children: [
-                              Image.asset(
-                                height: 80,
-                                'assets/images/${genres[index].name.toLowerCase()}.png',
+                              Column(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Image.asset(
+                                    height: 80,
+                                    'assets/images/${genres[index].name.toLowerCase()}.png',
+                                  ),
+                                  Text(
+                                    genres[index].name,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  ),
+                                ],
                               ),
-                              Text(
-                                genres[index].name,
-                                style: Theme.of(context).textTheme.bodyMedium,
+                              Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  // TODO
+                                  onTap: () {},
+                                  child: const SizedBox(
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                  ),
+                                ),
                               ),
                             ],
                           ),

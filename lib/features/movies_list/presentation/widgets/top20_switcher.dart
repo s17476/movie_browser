@@ -146,20 +146,31 @@ class PosterImage extends StatelessWidget {
                       aspectRatio: 2 / 3,
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        child: FadeInImage.assetNetwork(
-                          imageErrorBuilder: (context, error, stackTrace) =>
-                              const Center(
-                            child: Text(
-                              'No image found',
-                              textAlign: TextAlign.center,
+                        child: Stack(
+                          children: [
+                            Container(
+                              height: double.infinity,
+                              width: double.infinity,
+                              color: Colors.black,
                             ),
-                          ),
-                          placeholder: 'assets/images/loading.gif',
-                          placeholderFit: BoxFit.scaleDown,
-                          placeholderScale: 2,
-                          image:
-                              '${kImagesBaseUrl}w500${_movies[_pos].posterPath}',
-                          fit: BoxFit.fitHeight,
+                            FadeInImage.assetNetwork(
+                              imageErrorBuilder: (context, error, stackTrace) =>
+                                  const Center(
+                                child: Text(
+                                  'No image found',
+                                  textAlign: TextAlign.center,
+                                ),
+                              ),
+                              placeholder: 'assets/images/loading.gif',
+                              placeholderFit: BoxFit.scaleDown,
+                              placeholderScale: 2,
+                              image:
+                                  '${kImagesBaseUrl}w500${_movies[_pos].posterPath}',
+                              fit: BoxFit.fitHeight,
+                              height: double.infinity,
+                              width: double.infinity,
+                            ),
+                          ],
                         ),
                       ),
                     ),

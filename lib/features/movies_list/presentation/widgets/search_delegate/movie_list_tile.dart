@@ -83,6 +83,7 @@ class MovieListTile extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             overflow: TextOverflow.clip,
                           ),
+                          maxLines: 2,
                         ),
                         const SizedBox(
                           height: 2,
