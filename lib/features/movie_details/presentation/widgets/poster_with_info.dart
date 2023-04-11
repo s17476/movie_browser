@@ -1,9 +1,12 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/constants/constants.dart';
+import '../../../core/widgets/images_carousel.dart';
 import '../../domain/entities/movie_details.dart';
+import '../cubits/movie_images/movie_images_cubit.dart';
 import 'info_box.dart';
 
 class PosterWithInfo extends StatelessWidget {
@@ -55,21 +58,39 @@ class PosterWithInfo extends StatelessWidget {
                         width: double.infinity,
                         child: Hero(
                           tag: movie.id,
-                          child: FadeInImage.assetNetwork(
-                            imageErrorBuilder: (context, error, stackTrace) =>
-                                Container(
-                              height: 100,
-                              alignment: Alignment.center,
-                              child: const Text(
-                                'No image found',
+                          child: InkWell(
+                            onTap: () {
+                              final List<String> images = [];
+                              context.read<MovieImagesCubit>().state.mapOrNull(
+                                loaded: (state) {
+                                  images.addAll(state.images);
+                                },
+                              );
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => ImagesCarousel(
+                                    images: images,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: FadeInImage.assetNetwork(
+                              imageErrorBuilder: (context, error, stackTrace) =>
+                                  Container(
+                                height: 100,
+                                alignment: Alignment.center,
+                                child: const Text(
+                                  'No image found',
+                                ),
                               ),
+                              placeholder: 'assets/images/loading.gif',
+                              image: '${kImagesBaseUrl}w500${movie.posterPath}',
+                              fit: BoxFit.cover,
+                              placeholderFit: BoxFit.scaleDown,
+                              placeholderScale: 5,
+                              height: 450,
                             ),
-                            placeholder: 'assets/images/loading.gif',
-                            image: '${kImagesBaseUrl}w500${movie.posterPath}',
-                            fit: BoxFit.cover,
-                            placeholderFit: BoxFit.scaleDown,
-                            placeholderScale: 5,
-                            height: 450,
                           ),
                         ),
                       ),

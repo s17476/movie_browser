@@ -126,7 +126,7 @@ class _ImagesCarouselState extends State<ImagesCarousel> {
             ),
           ),
           Positioned(
-            bottom: Platform.isIOS ? 24 : 16,
+            bottom: MediaQuery.of(context).padding.bottom + 16,
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               width: MediaQuery.of(context).size.width,

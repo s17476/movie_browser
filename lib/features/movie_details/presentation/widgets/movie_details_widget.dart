@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../domain/entities/movie_details.dart';
 import 'horizontal_images_list.dart';
+import 'horizontal_videos_list.dart';
 import 'movie_description.dart';
 import 'poster_with_info.dart';
 
@@ -38,9 +39,13 @@ class MovieDetailsWidget extends StatelessWidget {
           children: [
             PosterWithInfo(movie: movie),
             MovieDescription(movie: movie),
+            const HorizontalVideosList(),
+            const SizedBox(
+              height: 4,
+            ),
             const HorizontalImagesList(),
             const SizedBox(
-              height: 50,
+              height: 100,
             ),
           ],
         ),
