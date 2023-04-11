@@ -16,13 +16,13 @@ class MovieBrowser extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
           colorScheme: const ColorScheme.dark(),
-          canvasColor: Colors.black,
-          navigationBarTheme:
-              const NavigationBarThemeData(backgroundColor: Colors.black),
+          // canvasColor: Colors.black,
+          // navigationBarTheme:
+          //     const NavigationBarThemeData(backgroundColor: Colors.black),
           scaffoldBackgroundColor: Colors.black,
           appBarTheme: const AppBarTheme(
             backgroundColor: Colors.black26,
-            elevation: 5,
+            elevation: 0.0,
           ),
         ),
         home: const HomePage(),
