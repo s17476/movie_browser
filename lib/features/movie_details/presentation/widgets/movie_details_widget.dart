@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/horizontal_cast_list.dart';
 
 import '../../domain/entities/movie_details.dart';
 import 'horizontal_images_list.dart';
@@ -36,6 +37,7 @@ class MovieDetailsWidget extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             PosterWithInfo(movie: movie),
             MovieDescription(movie: movie),
@@ -44,6 +46,10 @@ class MovieDetailsWidget extends StatelessWidget {
               height: 4,
             ),
             const HorizontalImagesList(),
+            const SizedBox(
+              height: 4,
+            ),
+            const HorizontalCastList(),
             const SizedBox(
               height: 100,
             ),

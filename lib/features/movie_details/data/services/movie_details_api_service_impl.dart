@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/credits.dart';
 
 import '../../../core/constants/constants.dart';
 import '../../../core/errors/http_error_handler.dart';
@@ -86,7 +87,6 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
       path: '3/movie/$movieId/videos',
       queryParameters: {
         'api_key': kApiKey,
-        'include_video_language': 'en',
       },
     );
 
@@ -101,6 +101,33 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
       final videos = VideoList.fromJson(json);
 
       return videos;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<Credits> fetchCredits(int movieId) async {
+    final Uri uri = Uri(
+      scheme: 'https',
+      host: kBaseUrl,
+      path: '3/movie/$movieId/credits',
+      queryParameters: {
+        'api_key': kApiKey,
+      },
+    );
+
+    try {
+      final response = await client.get(uri);
+
+      if (response.statusCode != 200) {
+        throw Exception(httpErrorHandler(response));
+      }
+
+      final json = jsonDecode(response.body);
+      final credits = Credits.fromJson(json);
+
+      return credits;
     } catch (e) {
       rethrow;
     }

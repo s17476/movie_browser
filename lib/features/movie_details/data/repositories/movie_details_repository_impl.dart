@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../core/errors/failure.dart';
 import '../../../core/errors/movie_exception.dart';
+import '../../domain/entities/credits.dart';
 import '../../domain/entities/movie_details.dart';
 import '../../domain/entities/movie_genre_list.dart';
 import '../../domain/entities/movie_image_list.dart';
@@ -57,6 +58,18 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
     try {
       final VideoList videos = await apiService.fetchVideos(movieId);
       return right(videos);
+    } on MovieException catch (e) {
+      return left(Failure(message: e.message));
+    } catch (e) {
+      return left(const Failure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Credits>> fetchCredits(int movieId) async {
+    try {
+      final Credits credits = await apiService.fetchCredits(movieId);
+      return right(credits);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));
     } catch (e) {
