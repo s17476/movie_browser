@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_browser/features/movie_details/presentation/cubits/video/video_cubit.dart';
-import 'package:movie_browser/features/movie_details/presentation/widgets/movie_video.dart';
 
 import '../../domain/entities/video.dart';
 import '../cubits/movie_images/movie_images_cubit.dart';
+import '../cubits/video/video_cubit.dart';
 import 'movie_image.dart';
+import 'movie_video.dart';
 
 class HorizontalImagesList extends StatefulWidget {
   const HorizontalImagesList({super.key});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../domain/entities/video.dart';
+import '../pages/youtube_video_player.dart';
 
 class MovieVideo extends StatelessWidget {
   final Video video;
@@ -26,23 +27,51 @@ class MovieVideo extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => ImagesCarousel(
-                  //       images: images,
-                  //       initialPage: index,
-                  //     ),
-                  //   ),
-                  // );
+                  if (video.site.toLowerCase().contains('youtube')) {
+                    Navigator.pushNamed(
+                      context,
+                      YoutubeVideoPlayer.routeName,
+                      arguments: video.key,
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context)
+                      ..hideCurrentSnackBar()
+                      ..showSnackBar(
+                        const SnackBar(
+                          content: Text(
+                            'Video format not supported',
+                          ),
+                        ),
+                      );
+                  }
                 },
                 child: SizedBox(
                   width: double.infinity,
                   height: double.infinity,
-                  child: Icon(
-                    Icons.play_circle_outline_rounded,
-                    size: 50,
-                    color: Colors.grey.shade500,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.play_circle_outline_rounded,
+                        size: 30,
+                        color: Colors.grey.shade500,
+                      ),
+                      if (video.name.isNotEmpty) ...[
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 4),
+                          child: Text(
+                            video.name,
+                            style: Theme.of(context).textTheme.bodySmall,
+                            textAlign: TextAlign.center,
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 2,
+                          ),
+                        )
+                      ],
+                    ],
                   ),
                 ),
               ),

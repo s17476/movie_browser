@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movie_browser/features/core/widgets/images_carousel.dart';
 
 import '../features/movie_details/presentation/pages/movie_details_page.dart';
+import '../features/movie_details/presentation/pages/youtube_video_player.dart';
 import '../features/movies_list/presentation/pages/home_page.dart';
 import 'custom_multi_bloc_provider.dart';
 
@@ -28,7 +28,8 @@ class MovieBrowser extends StatelessWidget {
         ),
         home: const HomePage(),
         routes: {
-          MovieDetailsPage.route: (context) => const MovieDetailsPage(),
+          MovieDetailsPage.routeName: (context) => const MovieDetailsPage(),
+          YoutubeVideoPlayer.routeName: (context) => const YoutubeVideoPlayer(),
         },
       ),
     );

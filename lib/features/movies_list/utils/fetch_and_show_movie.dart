@@ -6,5 +6,5 @@ import '../../movie_details/presentation/pages/movie_details_page.dart';
 
 void fetchAndShowMovie(BuildContext context, int movieId) {
   context.read<MovieDetailsCubit>().fetchMovieDetails(movieId);
-  Navigator.pushNamed(context, MovieDetailsPage.route);
+  Navigator.pushNamed(context, MovieDetailsPage.routeName);
 }
