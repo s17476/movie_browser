@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart';
 import '../features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart';
+import '../features/movie_details/presentation/cubits/movie_images/movie_images_cubit.dart';
 import '../features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart';
 import '../features/movies_list/presentation/cubits/random_genres/random_genres_cubit.dart';
 import '../features/movies_list/presentation/cubits/search_movies/search_movies_cubit.dart';
@@ -30,6 +31,7 @@ class CustomMultiBlocProvider extends StatelessWidget {
         BlocProvider(create: (context) => getIt<SearchSuggestionsCubit>()),
         BlocProvider(create: (context) => getIt<SearchMoviesCubit>()),
         BlocProvider(create: (context) => getIt<MovieDetailsCubit>()),
+        BlocProvider(create: (context) => getIt<MovieImagesCubit>()),
       ],
       child: child,
     );

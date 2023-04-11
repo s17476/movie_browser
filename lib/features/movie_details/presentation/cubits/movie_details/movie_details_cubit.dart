@@ -8,7 +8,7 @@ import '../../../domain/repositories/movie_details_repository.dart';
 part 'movie_details_cubit.freezed.dart';
 part 'movie_details_state.dart';
 
-@injectable
+@singleton
 class MovieDetailsCubit extends Cubit<MovieDetailsState> {
   final MovieDetailsRepository _repository;
   MovieDetailsCubit(

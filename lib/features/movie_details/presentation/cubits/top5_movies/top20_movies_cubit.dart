@@ -21,7 +21,7 @@ class Top20MoviesCubit extends Cubit<Top20MoviesState> {
     this._top20movieListCubit,
     this._repository,
   ) : super(const Top20MoviesState.initial()) {
-    _top20movieListCubit.stream.listen((state) {
+    _top20StreamSubscription = _top20movieListCubit.stream.listen((state) {
       state.maybeMap(
         loaded: (state) => fetchTop20(state.movieList.results),
         orElse: () => null,

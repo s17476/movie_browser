@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 
-import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
-import 'package:movie_browser/features/movie_details/domain/entities/movie_genre_list.dart';
-
 import '../../../core/constants/constants.dart';
 import '../../../core/errors/http_error_handler.dart';
 import '../../../core/errors/movie_exception.dart';
+import '../../domain/entities/movie_details.dart';
+import '../../domain/entities/movie_genre_list.dart';
+import '../../domain/entities/movie_image_list.dart';
 import '../../domain/services/movie_details_api_service.dart';
 
 @LazySingleton(as: MovieDetailsApiService)
@@ -45,6 +45,33 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
       }
 
       return movieDetails;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<MovieImageList> fetchMovieImages(int movieId) async {
+    final Uri uri = Uri(
+      scheme: 'https',
+      host: kBaseUrl,
+      path: '3/movie/$movieId/images',
+      queryParameters: {
+        'api_key': kApiKey,
+      },
+    );
+
+    try {
+      final response = await client.get(uri);
+
+      if (response.statusCode != 200) {
+        throw Exception(httpErrorHandler(response));
+      }
+
+      final json = jsonDecode(response.body);
+      final images = MovieImageList.fromJson(json);
+
+      return images;
     } catch (e) {
       rethrow;
     }
