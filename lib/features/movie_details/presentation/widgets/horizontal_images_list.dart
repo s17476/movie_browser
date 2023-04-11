@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_browser/features/movie_details/presentation/widgets/movie_image.dart';
 
 import '../cubits/movie_images/movie_images_cubit.dart';
+import 'movie_image.dart';
 
 class HorizontalImagesList extends StatelessWidget {
   const HorizontalImagesList({super.key});
@@ -32,7 +32,10 @@ class HorizontalImagesList extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: MovieImage(posterPath: state.images[index]),
+                      child: MovieImage(
+                        images: state.images,
+                        index: index,
+                      ),
                     );
                   }
                   return const SizedBox();

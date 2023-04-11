@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/constants.dart';
+import '../../../core/widgets/images_carousel.dart';
 
 class MovieImage extends StatelessWidget {
-  final String posterPath;
+  final List<String> images;
+  final int index;
   const MovieImage({
     Key? key,
-    required this.posterPath,
+    required this.images,
+    required this.index,
   }) : super(key: key);
 
   @override
@@ -32,7 +35,7 @@ class MovieImage extends StatelessWidget {
               placeholder: 'assets/images/loading.gif',
               placeholderFit: BoxFit.scaleDown,
               placeholderScale: 2,
-              image: '${kImagesBaseUrl}w154$posterPath',
+              image: '${kImagesBaseUrl}w154${images[index]}',
               height: double.infinity,
               width: double.infinity,
               fit: BoxFit.fitHeight,
@@ -40,7 +43,17 @@ class MovieImage extends StatelessWidget {
             Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ImagesCarousel(
+                        images: images,
+                        initialPage: index,
+                      ),
+                    ),
+                  );
+                },
                 child: const SizedBox(
                   width: double.infinity,
                   height: double.infinity,

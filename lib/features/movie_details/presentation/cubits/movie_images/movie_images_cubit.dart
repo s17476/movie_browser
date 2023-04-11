@@ -22,12 +22,12 @@ class MovieImagesCubit extends Cubit<MovieImagesState> {
   ) : super(const MovieImagesState.initial()) {
     _streamSubscription = _movieDetailsCubit.stream.listen((state) {
       state.mapOrNull(
-        loaded: (state) => fetchImages(state.id),
+        loaded: (state) => fetchImages(state.id, state.movie.posterPath),
       );
     });
   }
 
-  Future<void> fetchImages(int movieId) async {
+  Future<void> fetchImages(int movieId, String posterUrl) async {
     emit(const MovieImagesState.lodaing());
 
     final failureOrImages = await _repository.fetchMovieImages(movieId);
@@ -35,8 +35,11 @@ class MovieImagesCubit extends Cubit<MovieImagesState> {
       (_) async => emit(const MovieImagesState.error()),
       (images) async {
         List<String> urls = [];
+        if (posterUrl.isNotEmpty) {
+          urls.add(posterUrl);
+        }
         urls.addAll(images.backdrops.map((img) => img.filePath).toList());
-        urls.addAll(images.posters.map((img) => img.filePath).toList());
+        // urls.addAll(images.posters.map((img) => img.filePath).toList());
 
         emit(
           MovieImagesState.loaded(
