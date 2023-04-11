@@ -130,6 +130,7 @@ class _ImagesCarouselState extends State<ImagesCarousel> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
               width: MediaQuery.of(context).size.width,
+              height: 18,
               child: FittedBox(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,

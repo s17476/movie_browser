@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/video/video_cubit.dart';
 
 import '../features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart';
 import '../features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart';
@@ -32,6 +33,7 @@ class CustomMultiBlocProvider extends StatelessWidget {
         BlocProvider(create: (context) => getIt<SearchMoviesCubit>()),
         BlocProvider(create: (context) => getIt<MovieDetailsCubit>()),
         BlocProvider(create: (context) => getIt<MovieImagesCubit>()),
+        BlocProvider(create: (context) => getIt<VideoCubit>()),
       ],
       child: child,
     );

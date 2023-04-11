@@ -1,10 +1,11 @@
-import 'package:movie_browser/features/movie_details/domain/entities/movie_genre_list.dart';
-import 'package:movie_browser/features/movie_details/domain/entities/movie_image_list.dart';
-
 import '../entities/movie_details.dart';
+import '../entities/movie_genre_list.dart';
+import '../entities/movie_image_list.dart';
+import '../entities/video_list.dart';
 
 abstract class MovieDetailsApiService {
   Future<MovieDetails> fetchMovieDetails(int movieId);
   Future<MovieImageList> fetchMovieImages(int movieId);
+  Future<VideoList> fetchVideos(int movieId);
   Future<MovieGenreList> fetchMovieGenres();
 }

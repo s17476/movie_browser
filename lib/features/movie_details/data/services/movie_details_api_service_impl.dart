@@ -9,6 +9,7 @@ import '../../../core/errors/movie_exception.dart';
 import '../../domain/entities/movie_details.dart';
 import '../../domain/entities/movie_genre_list.dart';
 import '../../domain/entities/movie_image_list.dart';
+import '../../domain/entities/video_list.dart';
 import '../../domain/services/movie_details_api_service.dart';
 
 @LazySingleton(as: MovieDetailsApiService)
@@ -72,6 +73,34 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
       final images = MovieImageList.fromJson(json);
 
       return images;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<VideoList> fetchVideos(int movieId) async {
+    final Uri uri = Uri(
+      scheme: 'https',
+      host: kBaseUrl,
+      path: '3/movie/$movieId/videos',
+      queryParameters: {
+        'api_key': kApiKey,
+        'include_video_language': 'en',
+      },
+    );
+
+    try {
+      final response = await client.get(uri);
+
+      if (response.statusCode != 200) {
+        throw Exception(httpErrorHandler(response));
+      }
+
+      final json = jsonDecode(response.body);
+      final videos = VideoList.fromJson(json);
+
+      return videos;
     } catch (e) {
       rethrow;
     }

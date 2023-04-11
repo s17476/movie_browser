@@ -1,11 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie_browser/features/movie_details/domain/entities/movie_image_list.dart';
 
 import '../../../core/errors/failure.dart';
 import '../../../core/errors/movie_exception.dart';
 import '../../domain/entities/movie_details.dart';
 import '../../domain/entities/movie_genre_list.dart';
+import '../../domain/entities/movie_image_list.dart';
+import '../../domain/entities/video_list.dart';
 import '../../domain/repositories/movie_details_repository.dart';
 import '../../domain/services/movie_details_api_service.dart';
 
@@ -44,6 +45,18 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
     try {
       final MovieImageList images = await apiService.fetchMovieImages(movieId);
       return right(images);
+    } on MovieException catch (e) {
+      return left(Failure(message: e.message));
+    } catch (e) {
+      return left(const Failure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, VideoList>> fetchVideos(int movieId) async {
+    try {
+      final VideoList videos = await apiService.fetchVideos(movieId);
+      return right(videos);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));
     } catch (e) {
