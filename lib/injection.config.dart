@@ -21,6 +21,8 @@ import 'features/movie_details/domain/repositories/movie_details_repository.dart
     as _i6;
 import 'features/movie_details/domain/services/movie_details_api_service.dart'
     as _i4;
+import 'features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart'
+    as _i19;
 import 'features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart'
     as _i8;
 import 'features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart'
@@ -42,7 +44,7 @@ import 'features/movies_list/presentation/cubits/top20_movie_list/top20_movie_li
     as _i16;
 import 'features/movies_list/presentation/cubits/top20_tv_shows_list/top20_tv_shows_list_cubit.dart'
     as _i18;
-import 'injectable_modules.dart' as _i19;
+import 'injectable_modules.dart' as _i20;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -84,8 +86,10 @@ extension GetItInjectableX on _i1.GetIt {
     ));
     gh.singleton<_i18.Top20TvShowsListCubit>(
         _i18.Top20TvShowsListCubit(gh<_i11.MoviesRepository>()));
+    gh.factory<_i19.MovieDetailsCubit>(
+        () => _i19.MovieDetailsCubit(gh<_i6.MovieDetailsRepository>()));
     return this;
   }
 }
 
-class _$HttpClient extends _i19.HttpClient {}
+class _$HttpClient extends _i20.HttpClient {}

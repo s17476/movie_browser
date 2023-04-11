@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie_browser/features/movie_details/domain/entities/movie_genre_list.dart';
 
 import '../../../core/errors/failure.dart';
 import '../../../core/errors/movie_exception.dart';
 import '../../domain/entities/movie_details.dart';
+import '../../domain/entities/movie_genre_list.dart';
 import '../../domain/repositories/movie_details_repository.dart';
 import '../../domain/services/movie_details_api_service.dart';
 

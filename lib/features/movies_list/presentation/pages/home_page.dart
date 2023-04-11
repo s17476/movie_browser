@@ -45,11 +45,12 @@ class _HomePageState extends State<HomePage> {
         title: const Text('Movie Browser'),
         actions: [
           IconButton(
-              onPressed: () => showSearch(
-                    context: context,
-                    delegate: MovieSearch(),
-                  ),
-              icon: const Icon(Icons.search)),
+            onPressed: () => showSearch(
+              context: context,
+              delegate: MovieSearch(),
+            ),
+            icon: const Icon(Icons.search),
+          ),
         ],
       ),
       body: ListView(

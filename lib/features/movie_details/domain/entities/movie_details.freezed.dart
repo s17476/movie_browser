@@ -20,6 +20,7 @@ MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MovieDetails {
+  int get id => throw _privateConstructorUsedError;
   bool get adult => throw _privateConstructorUsedError;
   double get budget => throw _privateConstructorUsedError;
   List<MovieGenre> get genres => throw _privateConstructorUsedError;
@@ -46,7 +47,8 @@ abstract class $MovieDetailsCopyWith<$Res> {
       _$MovieDetailsCopyWithImpl<$Res, MovieDetails>;
   @useResult
   $Res call(
-      {bool adult,
+      {int id,
+      bool adult,
       double budget,
       List<MovieGenre> genres,
       String overview,
@@ -73,6 +75,7 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? adult = null,
     Object? budget = null,
     Object? genres = null,
@@ -87,6 +90,10 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
     Object? voteCount = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       adult: null == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
@@ -148,7 +155,8 @@ abstract class _$$_MoviedetailsCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool adult,
+      {int id,
+      bool adult,
       double budget,
       List<MovieGenre> genres,
       String overview,
@@ -173,6 +181,7 @@ class __$$_MoviedetailsCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? adult = null,
     Object? budget = null,
     Object? genres = null,
@@ -187,6 +196,10 @@ class __$$_MoviedetailsCopyWithImpl<$Res>
     Object? voteCount = null,
   }) {
     return _then(_$_Moviedetails(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int,
       adult: null == adult
           ? _value.adult
           : adult // ignore: cast_nullable_to_non_nullable
@@ -244,7 +257,8 @@ class __$$_MoviedetailsCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$_Moviedetails implements _Moviedetails {
   const _$_Moviedetails(
-      {required this.adult,
+      {required this.id,
+      required this.adult,
       required this.budget,
       required final List<MovieGenre> genres,
       required this.overview,
@@ -261,6 +275,8 @@ class _$_Moviedetails implements _Moviedetails {
   factory _$_Moviedetails.fromJson(Map<String, dynamic> json) =>
       _$$_MoviedetailsFromJson(json);
 
+  @override
+  final int id;
   @override
   final bool adult;
   @override
@@ -294,7 +310,7 @@ class _$_Moviedetails implements _Moviedetails {
 
   @override
   String toString() {
-    return 'MovieDetails(adult: $adult, budget: $budget, genres: $genres, overview: $overview, posterPath: $posterPath, releaseDate: $releaseDate, revenue: $revenue, runtime: $runtime, tagline: $tagline, title: $title, voteAverage: $voteAverage, voteCount: $voteCount)';
+    return 'MovieDetails(id: $id, adult: $adult, budget: $budget, genres: $genres, overview: $overview, posterPath: $posterPath, releaseDate: $releaseDate, revenue: $revenue, runtime: $runtime, tagline: $tagline, title: $title, voteAverage: $voteAverage, voteCount: $voteCount)';
   }
 
   @override
@@ -302,6 +318,7 @@ class _$_Moviedetails implements _Moviedetails {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Moviedetails &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.adult, adult) || other.adult == adult) &&
             (identical(other.budget, budget) || other.budget == budget) &&
             const DeepCollectionEquality().equals(other._genres, _genres) &&
@@ -325,6 +342,7 @@ class _$_Moviedetails implements _Moviedetails {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       adult,
       budget,
       const DeepCollectionEquality().hash(_genres),
@@ -354,7 +372,8 @@ class _$_Moviedetails implements _Moviedetails {
 
 abstract class _Moviedetails implements MovieDetails {
   const factory _Moviedetails(
-      {required final bool adult,
+      {required final int id,
+      required final bool adult,
       required final double budget,
       required final List<MovieGenre> genres,
       required final String overview,
@@ -370,6 +389,8 @@ abstract class _Moviedetails implements MovieDetails {
   factory _Moviedetails.fromJson(Map<String, dynamic> json) =
       _$_Moviedetails.fromJson;
 
+  @override
+  int get id;
   @override
   bool get adult;
   @override

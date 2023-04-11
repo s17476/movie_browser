@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/constants.dart';
 import '../../../../core/widgets/star_rating.dart';
 import '../../../domain/entities/movie.dart';
+import '../../../utils/fetch_and_show_movie.dart';
 
 class MovieListTile extends StatelessWidget {
   final Movie movie;
@@ -23,11 +24,7 @@ class MovieListTile extends StatelessWidget {
         child: InkWell(
           onTap: () {
             // go to details screen
-            // Navigator.pushNamed(
-            //   context,
-            //   MovieDetailsPage.route,
-            //   arguments: movie,
-            // );
+            fetchAndShowMovie(context, movie.id);
           },
           child: SizedBox(
             height: 100,

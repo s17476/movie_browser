@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_browser/features/movies_list/utils/fetch_and_show_movie.dart';
 
 import '../../../core/constants/constants.dart';
 
@@ -42,8 +43,7 @@ class Poster extends StatelessWidget {
             Material(
               color: Colors.transparent,
               child: InkWell(
-                // TODO
-                onTap: () {},
+                onTap: () => fetchAndShowMovie(context, id),
                 child: const SizedBox(
                   width: double.infinity,
                   height: double.infinity,

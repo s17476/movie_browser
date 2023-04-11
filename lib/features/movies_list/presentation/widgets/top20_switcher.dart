@@ -10,6 +10,7 @@ import '../../../core/utils/format_currency.dart';
 import '../../../core/widgets/star_rating.dart';
 import '../../../movie_details/domain/entities/movie_details.dart';
 import '../../../movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart';
+import '../../utils/fetch_and_show_movie.dart';
 
 class Top20Switcher extends StatefulWidget {
   const Top20Switcher({super.key});
@@ -51,6 +52,7 @@ class _Top20SwitcherState extends State<Top20Switcher> {
   Widget build(BuildContext context) {
     if (_movies.isNotEmpty) {
       return GestureDetector(
+        onTap: () => fetchAndShowMovie(context, _movies[_pos].id),
         onHorizontalDragEnd: (details) {
           int newPos = _pos;
           if (details.primaryVelocity! < 0) {

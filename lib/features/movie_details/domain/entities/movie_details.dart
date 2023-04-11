@@ -11,6 +11,7 @@ part 'movie_details.g.dart';
 class MovieDetails with _$MovieDetails {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory MovieDetails({
+    required int id,
     required bool adult,
     required double budget,
     required List<MovieGenre> genres,
