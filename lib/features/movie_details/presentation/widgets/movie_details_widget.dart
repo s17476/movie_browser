@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movie_browser/features/movie_details/presentation/widgets/recommended_movies.dart';
 
 import '../../domain/entities/movie_details.dart';
 import 'horizontal_cast_list.dart';
@@ -7,6 +6,7 @@ import 'horizontal_images_list.dart';
 import 'horizontal_videos_list.dart';
 import 'movie_description.dart';
 import 'poster_with_info.dart';
+import 'recommended_movies.dart';
 
 class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
@@ -28,6 +28,7 @@ class MovieDetailsWidget extends StatelessWidget {
           icon: const Icon(
             Icons.arrow_back_ios_new,
             shadows: [
+              Shadow(color: Colors.black, blurRadius: 40),
               Shadow(color: Colors.black, blurRadius: 40),
               Shadow(color: Colors.black, blurRadius: 40),
               Shadow(color: Colors.black, blurRadius: 40),

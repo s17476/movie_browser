@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/constants.dart';
+import '../../../people/utils/fetch_and_show_person.dart';
 import '../../domain/entities/actor.dart';
 
 class ActorCard extends StatelessWidget {
@@ -80,17 +81,7 @@ class ActorCard extends StatelessWidget {
             Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => ImagesCarousel(
-                  //       images: images,
-                  //       initialPage: index,
-                  //     ),
-                  //   ),
-                  // );
-                },
+                onTap: () => fetchAndShowPerson(context, actor.id, true),
                 child: const SizedBox(
                   width: double.infinity,
                   height: double.infinity,

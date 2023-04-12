@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../features/movie_details/presentation/pages/movie_details_page.dart';
 import '../features/movie_details/presentation/pages/youtube_video_player.dart';
 import '../features/movies_list/presentation/pages/home_page.dart';
+import '../features/people/presentation/pages/person_details_page.dart';
 import 'custom_multi_bloc_provider.dart';
 
 class MovieBrowser extends StatelessWidget {
@@ -29,6 +30,7 @@ class MovieBrowser extends StatelessWidget {
         home: const HomePage(),
         routes: {
           MovieDetailsPage.routeName: (context) => const MovieDetailsPage(),
+          PersonDetailsPage.routeName: (context) => const PersonDetailsPage(),
           YoutubeVideoPlayer.routeName: (context) => const YoutubeVideoPlayer(),
         },
       ),
