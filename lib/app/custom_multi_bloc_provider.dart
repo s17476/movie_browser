@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_browser/features/movie_details/presentation/cubits/Cast/cast_cubit.dart';
 
+import '../features/movie_details/presentation/cubits/cast/cast_cubit.dart';
 import '../features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart';
 import '../features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart';
 import '../features/movie_details/presentation/cubits/movie_images/movie_images_cubit.dart';
+import '../features/movie_details/presentation/cubits/recommendations/recommendations_cubit.dart';
 import '../features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart';
 import '../features/movie_details/presentation/cubits/video/video_cubit.dart';
 import '../features/movies_list/presentation/cubits/random_genres/random_genres_cubit.dart';
@@ -36,6 +37,7 @@ class CustomMultiBlocProvider extends StatelessWidget {
         BlocProvider(create: (context) => getIt<MovieImagesCubit>()),
         BlocProvider(create: (context) => getIt<VideoCubit>()),
         BlocProvider(create: (context) => getIt<CastCubit>()),
+        BlocProvider(create: (context) => getIt<RecommendationsCubit>()),
       ],
       child: child,
     );

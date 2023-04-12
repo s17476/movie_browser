@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:movie_browser/features/movie_details/presentation/widgets/horizontal_cast_list.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/recommended_movies.dart';
 
 import '../../domain/entities/movie_details.dart';
+import 'horizontal_cast_list.dart';
 import 'horizontal_images_list.dart';
 import 'horizontal_videos_list.dart';
 import 'movie_description.dart';
@@ -50,6 +51,10 @@ class MovieDetailsWidget extends StatelessWidget {
               height: 4,
             ),
             const HorizontalCastList(),
+            const SizedBox(
+              height: 4,
+            ),
+            const RecommendedMovies(),
             const SizedBox(
               height: 100,
             ),

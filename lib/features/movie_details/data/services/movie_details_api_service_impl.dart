@@ -2,11 +2,12 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
-import 'package:movie_browser/features/movie_details/domain/entities/credits.dart';
 
 import '../../../core/constants/constants.dart';
 import '../../../core/errors/http_error_handler.dart';
 import '../../../core/errors/movie_exception.dart';
+import '../../../movies_list/domain/entities/movie_list.dart';
+import '../../domain/entities/credits.dart';
 import '../../domain/entities/movie_details.dart';
 import '../../domain/entities/movie_genre_list.dart';
 import '../../domain/entities/movie_image_list.dart';
@@ -158,6 +159,34 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
       }
 
       return genres;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<MovieList> fetchRecommendations(int movieId) async {
+    try {
+      final Uri uri = Uri(
+        scheme: 'https',
+        host: kBaseUrl,
+        path: '3/movie/$movieId/recommendations',
+        queryParameters: {
+          'api_key': kApiKey,
+          'page': '1',
+        },
+      );
+
+      final response = await client.get(uri);
+
+      if (response.statusCode != 200) {
+        throw Exception(httpErrorHandler(response));
+      }
+
+      final json = jsonDecode(response.body);
+      final movieList = MovieList.fromJson(json);
+
+      return movieList;
     } catch (e) {
       rethrow;
     }

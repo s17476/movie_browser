@@ -1,3 +1,4 @@
+import '../../../movies_list/domain/entities/movie_list.dart';
 import '../entities/credits.dart';
 import '../entities/movie_details.dart';
 import '../entities/movie_genre_list.dart';
@@ -10,4 +11,5 @@ abstract class MovieDetailsApiService {
   Future<VideoList> fetchVideos(int movieId);
   Future<Credits> fetchCredits(int movieId);
   Future<MovieGenreList> fetchMovieGenres();
+  Future<MovieList> fetchRecommendations(int movieId);
 }

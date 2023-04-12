@@ -21,18 +21,20 @@ import 'features/movie_details/domain/repositories/movie_details_repository.dart
     as _i6;
 import 'features/movie_details/domain/services/movie_details_api_service.dart'
     as _i4;
-import 'features/movie_details/presentation/cubits/Cast/cast_cubit.dart'
-    as _i22;
+import 'features/movie_details/presentation/cubits/cast/cast_cubit.dart'
+    as _i23;
 import 'features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart'
     as _i19;
 import 'features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart'
     as _i8;
 import 'features/movie_details/presentation/cubits/movie_images/movie_images_cubit.dart'
     as _i20;
+import 'features/movie_details/presentation/cubits/recommendations/recommendations_cubit.dart'
+    as _i21;
 import 'features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart'
     as _i17;
 import 'features/movie_details/presentation/cubits/video/video_cubit.dart'
-    as _i21;
+    as _i22;
 import 'features/movies_list/data/repositories/movies_repository_impl.dart'
     as _i12;
 import 'features/movies_list/data/services/movies_api_service_impl.dart'
@@ -50,7 +52,7 @@ import 'features/movies_list/presentation/cubits/top20_movie_list/top20_movie_li
     as _i16;
 import 'features/movies_list/presentation/cubits/top20_tv_shows_list/top20_tv_shows_list_cubit.dart'
     as _i18;
-import 'injectable_modules.dart' as _i23;
+import 'injectable_modules.dart' as _i24;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -98,11 +100,15 @@ extension GetItInjectableX on _i1.GetIt {
       gh<_i6.MovieDetailsRepository>(),
       gh<_i19.MovieDetailsCubit>(),
     ));
-    gh.singleton<_i21.VideoCubit>(_i21.VideoCubit(
+    gh.singleton<_i21.RecommendationsCubit>(_i21.RecommendationsCubit(
       gh<_i6.MovieDetailsRepository>(),
       gh<_i19.MovieDetailsCubit>(),
     ));
-    gh.singleton<_i22.CastCubit>(_i22.CastCubit(
+    gh.singleton<_i22.VideoCubit>(_i22.VideoCubit(
+      gh<_i6.MovieDetailsRepository>(),
+      gh<_i19.MovieDetailsCubit>(),
+    ));
+    gh.singleton<_i23.CastCubit>(_i23.CastCubit(
       gh<_i6.MovieDetailsRepository>(),
       gh<_i19.MovieDetailsCubit>(),
     ));
@@ -110,4 +116,4 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$HttpClient extends _i23.HttpClient {}
+class _$HttpClient extends _i24.HttpClient {}

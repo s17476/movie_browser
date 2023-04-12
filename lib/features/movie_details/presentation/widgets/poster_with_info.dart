@@ -58,38 +58,45 @@ class PosterWithInfo extends StatelessWidget {
                         width: double.infinity,
                         child: Hero(
                           tag: movie.id,
-                          child: InkWell(
-                            onTap: () {
-                              final List<String> images = [];
-                              context.read<MovieImagesCubit>().state.mapOrNull(
-                                loaded: (state) {
-                                  images.addAll(state.images);
-                                },
-                              );
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => ImagesCarousel(
-                                    images: images,
+                          child: Material(
+                            color: Colors.transparent,
+                            child: InkWell(
+                              onTap: () {
+                                final List<String> images = [];
+                                context
+                                    .read<MovieImagesCubit>()
+                                    .state
+                                    .mapOrNull(
+                                  loaded: (state) {
+                                    images.addAll(state.images);
+                                  },
+                                );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ImagesCarousel(
+                                      images: images,
+                                    ),
+                                  ),
+                                );
+                              },
+                              child: FadeInImage.assetNetwork(
+                                imageErrorBuilder:
+                                    (context, error, stackTrace) => Container(
+                                  height: 100,
+                                  alignment: Alignment.center,
+                                  child: const Text(
+                                    'No image found',
                                   ),
                                 ),
-                              );
-                            },
-                            child: FadeInImage.assetNetwork(
-                              imageErrorBuilder: (context, error, stackTrace) =>
-                                  Container(
-                                height: 100,
-                                alignment: Alignment.center,
-                                child: const Text(
-                                  'No image found',
-                                ),
+                                placeholder: 'assets/images/loading.gif',
+                                image:
+                                    '${kImagesBaseUrl}w500${movie.posterPath}',
+                                fit: BoxFit.cover,
+                                placeholderFit: BoxFit.scaleDown,
+                                placeholderScale: 5,
+                                height: 450,
                               ),
-                              placeholder: 'assets/images/loading.gif',
-                              image: '${kImagesBaseUrl}w500${movie.posterPath}',
-                              fit: BoxFit.cover,
-                              placeholderFit: BoxFit.scaleDown,
-                              placeholderScale: 5,
-                              height: 450,
                             ),
                           ),
                         ),

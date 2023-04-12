@@ -9,12 +9,16 @@ class HorizontalMoviesList extends StatelessWidget {
   final TextStyle? titleStyle;
   final List<Movie> movies;
   final bool showCount;
+  final EdgeInsetsGeometry? titlePadding;
+  final bool shouldReplacePage;
   const HorizontalMoviesList({
     Key? key,
     required this.title,
     this.titleStyle,
     required this.movies,
     this.showCount = false,
+    this.titlePadding,
+    this.shouldReplacePage = false,
   }) : super(key: key);
 
   @override
@@ -24,7 +28,7 @@ class HorizontalMoviesList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Padding(
-          padding: const EdgeInsets.all(8),
+          padding: titlePadding ?? const EdgeInsets.all(8),
           child: Text(
             title,
             style: titleStyle ?? Theme.of(context).textTheme.titleLarge,
@@ -55,6 +59,7 @@ class HorizontalMoviesList extends StatelessWidget {
                         Poster(
                           id: movies[index].id,
                           posterPath: movies[index].posterPath,
+                          shouldReplacePage: shouldReplacePage,
                         ),
                         if (showCount) PositionCount(index: index),
                       ],

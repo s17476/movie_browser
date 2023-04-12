@@ -107,56 +107,57 @@ class InfoBox extends StatelessWidget {
             height: 8,
           ),
           // budget
-          Row(
-            children: [
-              const Text(
-                'Budget: ',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+          if (movie.budget > 0 && movie.revenue > 0)
+            Row(
+              children: [
+                const Text(
+                  'Budget: ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-              Text(
-                format.currencySymbol,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.amber,
+                Text(
+                  format.currencySymbol,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.amber,
+                  ),
                 ),
-              ),
-              Text(
-                formatCurrency(movie.budget),
-                style: const TextStyle(
-                  fontSize: 16,
+                Text(
+                  formatCurrency(movie.budget),
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-              const Expanded(
-                child: SizedBox(),
-              ),
-              // revenue
-              const Text(
-                'Revenue: ',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
+                const Expanded(
+                  child: SizedBox(),
                 ),
-              ),
-              Text(
-                format.currencySymbol,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.amber,
+                // revenue
+                const Text(
+                  'Revenue: ',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
                 ),
-              ),
-              Text(
-                formatCurrency(movie.revenue),
-                style: const TextStyle(
-                  fontSize: 16,
+                Text(
+                  format.currencySymbol,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                    color: Colors.amber,
+                  ),
                 ),
-              ),
-            ],
-          ),
+                Text(
+                  formatCurrency(movie.revenue),
+                  style: const TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              ],
+            ),
         ],
       ),
     );

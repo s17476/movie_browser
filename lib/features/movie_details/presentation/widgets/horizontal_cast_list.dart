@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubits/Cast/cast_cubit.dart';
+import '../cubits/cast/cast_cubit.dart';
 import 'actor_card.dart';
 
 class HorizontalCastList extends StatelessWidget {
