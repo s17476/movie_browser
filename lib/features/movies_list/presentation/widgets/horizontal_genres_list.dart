@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../movie_details/domain/entities/movie_genre.dart';
+import '../../utils/fetch_by_genre_and_show_movies.dart';
 
 class HorizontalGenresList extends StatelessWidget {
   final String title;
@@ -74,8 +75,10 @@ class HorizontalGenresList extends StatelessWidget {
                               Material(
                                 color: Colors.transparent,
                                 child: InkWell(
-                                  // TODO
-                                  onTap: () {},
+                                  onTap: () => fetchByGenreAndShowMovies(
+                                    context,
+                                    genres[index].id,
+                                  ),
                                   child: const SizedBox(
                                     width: double.infinity,
                                     height: double.infinity,

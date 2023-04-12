@@ -6,5 +6,6 @@ abstract class MoviesApiService {
   Future<TvShowList> top20TvShows();
   Future<MovieList> searchMovies(String query, {int page = 1});
   Future<MovieList> loadNextResultsPage(String query, int page);
-  Future<MovieList> fetchByGenreId(int id);
+  Future<MovieList> fetchByGenreId(int id, {int page = 1});
+  Future<MovieList> fetchNextPageByGenreId(int id, int page);
 }

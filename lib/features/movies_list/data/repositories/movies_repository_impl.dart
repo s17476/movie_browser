@@ -64,6 +64,20 @@ class MoviesRepositoryImpl extends MoviesRepository {
     }
   }
 
+  @override
+  Future<Either<Failure, MovieList>> fetchNextPageByGenreId(
+      int id, int page) async {
+    try {
+      final MovieList movieList =
+          await apiService.fetchNextPageByGenreId(id, page);
+      return right(movieList);
+    } on MovieException catch (e) {
+      return left(Failure(message: e.message));
+    } catch (e) {
+      return left(const Failure());
+    }
+  }
+
   Future<Either<Failure, T>> performApiCall<T>(Function apiFunction) async {
     try {
       final T list = await apiFunction();

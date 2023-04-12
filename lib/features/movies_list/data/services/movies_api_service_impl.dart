@@ -119,7 +119,7 @@ class MoviesApiServiceImpl extends MoviesApiService {
   }
 
   @override
-  Future<MovieList> fetchByGenreId(int id) async {
+  Future<MovieList> fetchByGenreId(int id, {int page = 1}) async {
     try {
       final Uri uri = Uri(
         scheme: 'https',
@@ -130,6 +130,7 @@ class MoviesApiServiceImpl extends MoviesApiService {
           'sort_by': 'popularity.desc',
           'with_original_language': 'en',
           'with_genres': id.toString(),
+          'page': page.toString(),
         },
       );
 
@@ -150,4 +151,8 @@ class MoviesApiServiceImpl extends MoviesApiService {
       rethrow;
     }
   }
+
+  @override
+  Future<MovieList> fetchNextPageByGenreId(int id, int page) =>
+      fetchByGenreId(id, page: page);
 }

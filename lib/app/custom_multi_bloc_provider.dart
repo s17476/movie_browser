@@ -8,6 +8,7 @@ import '../features/movie_details/presentation/cubits/movie_images/movie_images_
 import '../features/movie_details/presentation/cubits/recommendations/recommendations_cubit.dart';
 import '../features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart';
 import '../features/movie_details/presentation/cubits/video/video_cubit.dart';
+import '../features/movies_list/presentation/cubits/category_movies/category_movies_cubit.dart';
 import '../features/movies_list/presentation/cubits/random_genres/random_genres_cubit.dart';
 import '../features/movies_list/presentation/cubits/search_movies/search_movies_cubit.dart';
 import '../features/movies_list/presentation/cubits/search_suggestions/search_suggestions_cubit.dart';
@@ -42,6 +43,7 @@ class CustomMultiBlocProvider extends StatelessWidget {
         BlocProvider(create: (context) => getIt<RecommendationsCubit>()),
         BlocProvider(create: (context) => getIt<PersonDetailsCubit>()),
         BlocProvider(create: (context) => getIt<PersonCreditsCubit>()),
+        BlocProvider(create: (context) => getIt<CategoryMoviesCubit>()),
       ],
       child: child,
     );

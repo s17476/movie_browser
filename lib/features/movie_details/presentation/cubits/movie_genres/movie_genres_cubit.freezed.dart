@@ -103,8 +103,8 @@ class __$$_InitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
-  const _$_Initial();
+class _$_Initial extends _Initial {
+  const _$_Initial() : super._();
 
   @override
   String toString() {
@@ -195,8 +195,9 @@ class _$_Initial implements _Initial {
   }
 }
 
-abstract class _Initial implements MovieGenresState {
+abstract class _Initial extends MovieGenresState {
   const factory _Initial() = _$_Initial;
+  const _Initial._() : super._();
 }
 
 /// @nodoc
@@ -216,8 +217,8 @@ class __$$_LoadingCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loading implements _Loading {
-  const _$_Loading();
+class _$_Loading extends _Loading {
+  const _$_Loading() : super._();
 
   @override
   String toString() {
@@ -308,8 +309,9 @@ class _$_Loading implements _Loading {
   }
 }
 
-abstract class _Loading implements MovieGenresState {
+abstract class _Loading extends MovieGenresState {
   const factory _Loading() = _$_Loading;
+  const _Loading._() : super._();
 }
 
 /// @nodoc
@@ -328,8 +330,8 @@ class __$$_ErrorCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Error implements _Error {
-  const _$_Error();
+class _$_Error extends _Error {
+  const _$_Error() : super._();
 
   @override
   String toString() {
@@ -420,8 +422,9 @@ class _$_Error implements _Error {
   }
 }
 
-abstract class _Error implements MovieGenresState {
+abstract class _Error extends MovieGenresState {
   const factory _Error() = _$_Error;
+  const _Error._() : super._();
 }
 
 /// @nodoc
@@ -465,8 +468,8 @@ class __$$_LoadedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Loaded implements _Loaded {
-  const _$_Loaded({required this.genreList});
+class _$_Loaded extends _Loaded {
+  const _$_Loaded({required this.genreList}) : super._();
 
   @override
   final MovieGenreList genreList;
@@ -569,8 +572,9 @@ class _$_Loaded implements _Loaded {
   }
 }
 
-abstract class _Loaded implements MovieGenresState {
+abstract class _Loaded extends MovieGenresState {
   const factory _Loaded({required final MovieGenreList genreList}) = _$_Loaded;
+  const _Loaded._() : super._();
 
   MovieGenreList get genreList;
   @JsonKey(ignore: true)
