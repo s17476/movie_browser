@@ -1,4 +1,4 @@
-package com.lnasoftware.movieBrowser.movie_browser
+package com.lnasoftware.movie_browser
 
 import io.flutter.embedding.android.FlutterActivity
 

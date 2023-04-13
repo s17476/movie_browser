@@ -2,7 +2,7 @@
     package="com.lnasoftware.movie_browser">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="movie_browser"
+        android:label="Movie Browser"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
