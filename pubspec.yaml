@@ -26,6 +26,8 @@ dependencies:
   photo_view: ^0.14.0
   smooth_page_indicator: ^1.0.1
   youtube_player_iframe: ^4.0.4
+  firebase_core: ^2.9.0
+  firebase_auth: ^4.2.2
 
 dev_dependencies:
   flutter_test:
