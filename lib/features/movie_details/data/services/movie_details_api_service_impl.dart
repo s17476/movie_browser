@@ -85,17 +85,17 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
   }
 
   @override
-  Future<MovieImageList> fetchMovieImages(int movieId) async {
-    final Uri uri = Uri(
-      scheme: 'https',
-      host: kBaseUrl,
-      path: '3/movie/$movieId/images',
-      queryParameters: {
-        'api_key': kApiKey,
-      },
-    );
-
+  Future<MovieImageList> fetchMovieImages(int movieId, bool isTvShow) async {
     try {
+      final endpoint = isTvShow ? 'tv' : 'movie';
+      final Uri uri = Uri(
+        scheme: 'https',
+        host: kBaseUrl,
+        path: '3/$endpoint/$movieId/images',
+        queryParameters: {
+          'api_key': kApiKey,
+        },
+      );
       final response = await client.get(uri);
 
       if (response.statusCode != 200) {
@@ -112,17 +112,17 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
   }
 
   @override
-  Future<VideoList> fetchVideos(int movieId) async {
-    final Uri uri = Uri(
-      scheme: 'https',
-      host: kBaseUrl,
-      path: '3/movie/$movieId/videos',
-      queryParameters: {
-        'api_key': kApiKey,
-      },
-    );
-
+  Future<VideoList> fetchVideos(int movieId, bool isTvShow) async {
     try {
+      final endpoint = isTvShow ? 'tv' : 'movie';
+      final Uri uri = Uri(
+        scheme: 'https',
+        host: kBaseUrl,
+        path: '3/$endpoint/$movieId/videos',
+        queryParameters: {
+          'api_key': kApiKey,
+        },
+      );
       final response = await client.get(uri);
 
       if (response.statusCode != 200) {
@@ -139,17 +139,17 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
   }
 
   @override
-  Future<Credits> fetchCredits(int movieId) async {
-    final Uri uri = Uri(
-      scheme: 'https',
-      host: kBaseUrl,
-      path: '3/movie/$movieId/credits',
-      queryParameters: {
-        'api_key': kApiKey,
-      },
-    );
-
+  Future<Credits> fetchCredits(int movieId, bool isTvShow) async {
     try {
+      final endpoint = isTvShow ? 'tv' : 'movie';
+      final Uri uri = Uri(
+        scheme: 'https',
+        host: kBaseUrl,
+        path: '3/$endpoint/$movieId/credits',
+        queryParameters: {
+          'api_key': kApiKey,
+        },
+      );
       final response = await client.get(uri);
 
       if (response.statusCode != 200) {
@@ -166,12 +166,13 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
   }
 
   @override
-  Future<MovieList> fetchRecommendations(int movieId) async {
+  Future<MovieList> fetchRecommendations(int movieId, bool isTvShow) async {
+    final endpoint = isTvShow ? 'tv' : 'movie';
     try {
       final Uri uri = Uri(
         scheme: 'https',
         host: kBaseUrl,
-        path: '3/movie/$movieId/recommendations',
+        path: '3/$endpoint/$movieId/recommendations',
         queryParameters: {
           'api_key': kApiKey,
           'page': '1',
@@ -219,115 +220,6 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
       }
 
       return showDetails;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<MovieImageList> fetchTvShowImages(int showId) async {
-    final Uri uri = Uri(
-      scheme: 'https',
-      host: kBaseUrl,
-      path: '3/tv/$showId/images',
-      queryParameters: {
-        'api_key': kApiKey,
-      },
-    );
-
-    try {
-      final response = await client.get(uri);
-
-      if (response.statusCode != 200) {
-        throw Exception(httpErrorHandler(response));
-      }
-
-      final json = jsonDecode(response.body);
-      final images = MovieImageList.fromJson(json);
-
-      return images;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<VideoList> fetchTvShowVideos(int showId) async {
-    final Uri uri = Uri(
-      scheme: 'https',
-      host: kBaseUrl,
-      path: '3/tv/$showId/videos',
-      queryParameters: {
-        'api_key': kApiKey,
-      },
-    );
-
-    try {
-      final response = await client.get(uri);
-
-      if (response.statusCode != 200) {
-        throw Exception(httpErrorHandler(response));
-      }
-
-      final json = jsonDecode(response.body);
-      final videos = VideoList.fromJson(json);
-
-      return videos;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<Credits> fetchTvShowCredits(int showId) async {
-    final Uri uri = Uri(
-      scheme: 'https',
-      host: kBaseUrl,
-      path: '3/tv/$showId/credits',
-      queryParameters: {
-        'api_key': kApiKey,
-      },
-    );
-
-    try {
-      final response = await client.get(uri);
-
-      if (response.statusCode != 200) {
-        throw Exception(httpErrorHandler(response));
-      }
-
-      final json = jsonDecode(response.body);
-      final credits = Credits.fromJson(json);
-
-      return credits;
-    } catch (e) {
-      rethrow;
-    }
-  }
-
-  @override
-  Future<MovieList> fetchTvShowRecommendations(int showId) async {
-    try {
-      final Uri uri = Uri(
-        scheme: 'https',
-        host: kBaseUrl,
-        path: '3/tv/$showId/recommendations',
-        queryParameters: {
-          'api_key': kApiKey,
-          'page': '1',
-        },
-      );
-
-      final response = await client.get(uri);
-
-      if (response.statusCode != 200) {
-        throw Exception(httpErrorHandler(response));
-      }
-
-      final json = jsonDecode(response.body);
-      final movieList = MovieList.fromJson(json);
-
-      return movieList;
     } catch (e) {
       rethrow;
     }

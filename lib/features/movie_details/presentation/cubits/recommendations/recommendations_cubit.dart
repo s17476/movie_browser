@@ -26,36 +26,22 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
   ) : super(const RecommendationsState.initial()) {
     _movieStreamSubscription = _movieDetailsCubit.stream.listen((state) {
       state.mapOrNull(
-        loaded: (state) => fetchRecommendations(state.id),
+        loaded: (state) => fetchRecommendations(state.id, false),
       );
     });
 
     _tvShowStreamSubscription = _tvShowDetailsCubit.stream.listen((state) {
       state.mapOrNull(
-        loaded: (state) => fetchTvShowRecommendations(state.id),
+        loaded: (state) => fetchRecommendations(state.id, true),
       );
     });
   }
 
-  Future<void> fetchRecommendations(int movieId) async {
-    emit(const RecommendationsState.loading());
-
-    final failureOrMovieList = await _repository.fetchRecommendations(movieId);
-    await failureOrMovieList.fold(
-      (_) async => emit(const RecommendationsState.error()),
-      (movieList) async => emit(
-        RecommendationsState.loaded(
-          movies: movieList.results,
-        ),
-      ),
-    );
-  }
-
-  Future<void> fetchTvShowRecommendations(int showId) async {
+  Future<void> fetchRecommendations(int movieId, bool isTvShow) async {
     emit(const RecommendationsState.loading());
 
     final failureOrMovieList =
-        await _repository.fetchTvShowRecommendations(showId);
+        await _repository.fetchRecommendations(movieId, isTvShow);
     await failureOrMovieList.fold(
       (_) async => emit(const RecommendationsState.error()),
       (movieList) async => emit(

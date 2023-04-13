@@ -26,31 +26,21 @@ class VideoCubit extends Cubit<VideoState> {
   ) : super(const VideoState.initial()) {
     _movieStreamSubscription = _movieDetailsCubit.stream.listen((state) {
       state.mapOrNull(
-        loaded: (state) => fetchVideos(state.id),
+        loaded: (state) => fetchVideos(state.id, false),
       );
     });
 
     _showStreamSubscription = _tvShowDetailsCubit.stream.listen((state) {
       state.mapOrNull(
-        loaded: (state) => fetchTvShowVideos(state.id),
+        loaded: (state) => fetchVideos(state.id, true),
       );
     });
   }
 
-  Future<void> fetchVideos(int movieId) async {
+  Future<void> fetchVideos(int movieId, bool isTvShow) async {
     emit(const VideoState.loading());
 
-    final failureOrVideos = await _repository.fetchVideos(movieId);
-    await failureOrVideos.fold(
-      (_) async => emit(const VideoState.error()),
-      (videos) async => emit(VideoState.loaded(videos: videos)),
-    );
-  }
-
-  Future<void> fetchTvShowVideos(int showId) async {
-    emit(const VideoState.loading());
-
-    final failureOrVideos = await _repository.fetchTvShowVideos(showId);
+    final failureOrVideos = await _repository.fetchVideos(movieId, isTvShow);
     await failureOrVideos.fold(
       (_) async => emit(const VideoState.error()),
       (videos) async => emit(VideoState.loaded(videos: videos)),

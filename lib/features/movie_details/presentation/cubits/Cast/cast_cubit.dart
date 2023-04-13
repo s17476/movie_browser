@@ -26,35 +26,21 @@ class CastCubit extends Cubit<CastState> {
   ) : super(const CastState.initial()) {
     _movieStreamSubscription = _movieDetailsCubit.stream.listen((state) {
       state.mapOrNull(
-        loaded: (state) => fetchCredits(state.id),
+        loaded: (state) => fetchCredits(state.id, false),
       );
     });
 
     _tvShowStreamSubscription = _tvShowDetailsCubit.stream.listen((state) {
       state.mapOrNull(
-        loaded: (state) => fetchTvShowCredits(state.id),
+        loaded: (state) => fetchCredits(state.id, true),
       );
     });
   }
 
-  Future<void> fetchCredits(int movieId) async {
+  Future<void> fetchCredits(int movieId, bool isTvShow) async {
     emit(const CastState.loading());
 
-    final failureOrCredits = await _repository.fetchCredits(movieId);
-    await failureOrCredits.fold(
-      (_) async => emit(const CastState.error()),
-      (credits) async => emit(
-        CastState.loaded(
-          credits: credits,
-        ),
-      ),
-    );
-  }
-
-  Future<void> fetchTvShowCredits(int showId) async {
-    emit(const CastState.loading());
-
-    final failureOrCredits = await _repository.fetchTvShowCredits(showId);
+    final failureOrCredits = await _repository.fetchCredits(movieId, isTvShow);
     await failureOrCredits.fold(
       (_) async => emit(const CastState.error()),
       (credits) async => emit(

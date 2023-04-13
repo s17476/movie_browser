@@ -44,9 +44,13 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
   }
 
   @override
-  Future<Either<Failure, MovieImageList>> fetchMovieImages(int movieId) async {
+  Future<Either<Failure, MovieImageList>> fetchMovieImages(
+    int movieId,
+    bool isTvShow,
+  ) async {
     try {
-      final MovieImageList images = await apiService.fetchMovieImages(movieId);
+      final MovieImageList images =
+          await apiService.fetchMovieImages(movieId, isTvShow);
       return right(images);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));
@@ -56,9 +60,12 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
   }
 
   @override
-  Future<Either<Failure, VideoList>> fetchVideos(int movieId) async {
+  Future<Either<Failure, VideoList>> fetchVideos(
+    int movieId,
+    bool isTvShow,
+  ) async {
     try {
-      final VideoList videos = await apiService.fetchVideos(movieId);
+      final VideoList videos = await apiService.fetchVideos(movieId, isTvShow);
       return right(videos);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));
@@ -68,9 +75,12 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
   }
 
   @override
-  Future<Either<Failure, Credits>> fetchCredits(int movieId) async {
+  Future<Either<Failure, Credits>> fetchCredits(
+    int movieId,
+    bool isTvShow,
+  ) async {
     try {
-      final Credits credits = await apiService.fetchCredits(movieId);
+      final Credits credits = await apiService.fetchCredits(movieId, isTvShow);
       return right(credits);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));
@@ -80,10 +90,13 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
   }
 
   @override
-  Future<Either<Failure, MovieList>> fetchRecommendations(int movieId) async {
+  Future<Either<Failure, MovieList>> fetchRecommendations(
+    int movieId,
+    bool isTvShow,
+  ) async {
     try {
       final MovieList movieList =
-          await apiService.fetchRecommendations(movieId);
+          await apiService.fetchRecommendations(movieId, isTvShow);
       return right(movieList);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));
@@ -97,56 +110,6 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
     try {
       final TvShowDetails show = await apiService.fetchTvShowDetails(showId);
       return right(show);
-    } on MovieException catch (e) {
-      return left(Failure(message: e.message));
-    } catch (e) {
-      return left(const Failure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, MovieImageList>> fetchTvShowImages(int showId) async {
-    try {
-      final MovieImageList images = await apiService.fetchTvShowImages(showId);
-      return right(images);
-    } on MovieException catch (e) {
-      return left(Failure(message: e.message));
-    } catch (e) {
-      return left(const Failure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, VideoList>> fetchTvShowVideos(int showId) async {
-    try {
-      final VideoList videos = await apiService.fetchTvShowVideos(showId);
-      return right(videos);
-    } on MovieException catch (e) {
-      return left(Failure(message: e.message));
-    } catch (e) {
-      return left(const Failure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, Credits>> fetchTvShowCredits(int showId) async {
-    try {
-      final Credits credits = await apiService.fetchTvShowCredits(showId);
-      return right(credits);
-    } on MovieException catch (e) {
-      return left(Failure(message: e.message));
-    } catch (e) {
-      return left(const Failure());
-    }
-  }
-
-  @override
-  Future<Either<Failure, MovieList>> fetchTvShowRecommendations(
-      int showId) async {
-    try {
-      final MovieList movieList =
-          await apiService.fetchTvShowRecommendations(showId);
-      return right(movieList);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));
     } catch (e) {

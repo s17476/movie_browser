@@ -9,13 +9,9 @@ import '../entities/video_list.dart';
 abstract class MovieDetailsApiService {
   Future<MovieGenreList> fetchMovieGenres();
   Future<MovieDetails> fetchMovieDetails(int movieId);
-  Future<MovieImageList> fetchMovieImages(int movieId);
-  Future<VideoList> fetchVideos(int movieId);
-  Future<Credits> fetchCredits(int movieId);
-  Future<MovieList> fetchRecommendations(int movieId);
+  Future<MovieImageList> fetchMovieImages(int movieId, bool isTvShow);
+  Future<VideoList> fetchVideos(int movieId, bool isTvShow);
+  Future<Credits> fetchCredits(int movieId, bool isTvShow);
+  Future<MovieList> fetchRecommendations(int movieId, bool isTvShow);
   Future<TvShowDetails> fetchTvShowDetails(int showId);
-  Future<MovieImageList> fetchTvShowImages(int showId);
-  Future<VideoList> fetchTvShowVideos(int showId);
-  Future<Credits> fetchTvShowCredits(int showId);
-  Future<MovieList> fetchTvShowRecommendations(int showId);
 }

@@ -26,22 +26,31 @@ class MovieImagesCubit extends Cubit<MovieImagesState> {
   ) : super(const MovieImagesState.initial()) {
     _movieStreamSubscription = _movieDetailsCubit.stream.listen((state) {
       state.mapOrNull(
-        loaded: (state) => fetchMovieImages(state.id, state.movie.posterPath),
+        loaded: (state) => fetchMovieImages(
+          state.id,
+          state.movie.posterPath,
+          false,
+        ),
       );
     });
 
     _showStreamSubscription = _tvShowDetailsCubit.stream.listen((state) {
       state.mapOrNull(
         loaded: (state) =>
-            fetchShowImages(state.id, state.tvShow.posterPath ?? ''),
+            fetchMovieImages(state.id, state.tvShow.posterPath ?? '', true),
       );
     });
   }
 
-  Future<void> fetchMovieImages(int movieId, String posterUrl) async {
+  Future<void> fetchMovieImages(
+    int movieId,
+    String posterUrl,
+    bool isTvShow,
+  ) async {
     emit(const MovieImagesState.lodaing());
 
-    final failureOrImages = await _repository.fetchMovieImages(movieId);
+    final failureOrImages =
+        await _repository.fetchMovieImages(movieId, isTvShow);
     await failureOrImages.fold(
       (_) async => emit(const MovieImagesState.error()),
       (images) async {
@@ -54,29 +63,6 @@ class MovieImagesCubit extends Cubit<MovieImagesState> {
         emit(
           MovieImagesState.loaded(
             id: movieId,
-            images: urls,
-          ),
-        );
-      },
-    );
-  }
-
-  Future<void> fetchShowImages(int showId, String posterUrl) async {
-    emit(const MovieImagesState.lodaing());
-
-    final failureOrImages = await _repository.fetchTvShowImages(showId);
-    await failureOrImages.fold(
-      (_) async => emit(const MovieImagesState.error()),
-      (images) async {
-        List<String> urls = [];
-        if (posterUrl.isNotEmpty) {
-          urls.add(posterUrl);
-        }
-        urls.addAll(images.backdrops.map((img) => img.filePath).toList());
-
-        emit(
-          MovieImagesState.loaded(
-            id: showId,
             images: urls,
           ),
         );

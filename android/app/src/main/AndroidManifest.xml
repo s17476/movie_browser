@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.lnasoftware.movieBrowser.movie_browser">
+    package="com.lnasoftware.movie_browser">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
         android:label="movie_browser"

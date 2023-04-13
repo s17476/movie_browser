@@ -113,7 +113,6 @@
 				F756A84B60A6F619CA257063 /* Pods-Runner.release.xcconfig */,
 				AC3F1ADB1B151AD5920D4EEB /* Pods-Runner.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -365,7 +364,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lnasoftware.movieBrowser.movieBrowser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lnasoftware.movieBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
@@ -494,7 +493,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lnasoftware.movieBrowser.movieBrowser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lnasoftware.movieBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -517,7 +516,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.lnasoftware.movieBrowser.movieBrowser;
+				PRODUCT_BUNDLE_IDENTIFIER = com.lnasoftware.movieBrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
