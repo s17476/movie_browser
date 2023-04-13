@@ -56,6 +56,7 @@ class HorizontalTvShowsList extends StatelessWidget {
                         Poster(
                           id: shows[index].id,
                           posterPath: shows[index].posterPath,
+                          isTvShow: true,
                         ),
                         if (showCount)
                           PositionCount(

@@ -7,6 +7,7 @@ import 'package:injectable/injectable.dart';
 import '../../../domain/entities/video_list.dart';
 import '../../../domain/repositories/movie_details_repository.dart';
 import '../movie_details/movie_details_cubit.dart';
+import '../tv_show_details/tv_show_details_cubit.dart';
 
 part 'video_cubit.freezed.dart';
 part 'video_state.dart';
@@ -15,14 +16,23 @@ part 'video_state.dart';
 class VideoCubit extends Cubit<VideoState> {
   final MovieDetailsRepository _repository;
   final MovieDetailsCubit _movieDetailsCubit;
-  late StreamSubscription _streamSubscription;
+  final TvShowDetailsCubit _tvShowDetailsCubit;
+  late StreamSubscription _movieStreamSubscription;
+  late StreamSubscription _showStreamSubscription;
   VideoCubit(
     this._repository,
     this._movieDetailsCubit,
+    this._tvShowDetailsCubit,
   ) : super(const VideoState.initial()) {
-    _streamSubscription = _movieDetailsCubit.stream.listen((state) {
+    _movieStreamSubscription = _movieDetailsCubit.stream.listen((state) {
       state.mapOrNull(
         loaded: (state) => fetchVideos(state.id),
+      );
+    });
+
+    _showStreamSubscription = _tvShowDetailsCubit.stream.listen((state) {
+      state.mapOrNull(
+        loaded: (state) => fetchTvShowVideos(state.id),
       );
     });
   }
@@ -37,9 +47,20 @@ class VideoCubit extends Cubit<VideoState> {
     );
   }
 
+  Future<void> fetchTvShowVideos(int showId) async {
+    emit(const VideoState.loading());
+
+    final failureOrVideos = await _repository.fetchTvShowVideos(showId);
+    await failureOrVideos.fold(
+      (_) async => emit(const VideoState.error()),
+      (videos) async => emit(VideoState.loaded(videos: videos)),
+    );
+  }
+
   @override
   Future<void> close() {
-    _streamSubscription.cancel();
+    _movieStreamSubscription.cancel();
+    _showStreamSubscription.cancel();
     return super.close();
   }
 }

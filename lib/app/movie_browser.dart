@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../features/movie_details/presentation/pages/movie_details_page.dart';
+import '../features/movie_details/presentation/pages/tv_show_details_page.dart';
 import '../features/movie_details/presentation/pages/youtube_video_player.dart';
 import '../features/movies_list/presentation/pages/genre_page.dart';
 import '../features/movies_list/presentation/pages/home_page.dart';
@@ -10,7 +11,6 @@ import 'custom_multi_bloc_provider.dart';
 class MovieBrowser extends StatelessWidget {
   const MovieBrowser({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return CustomMultiBlocProvider(
@@ -28,6 +28,7 @@ class MovieBrowser extends StatelessWidget {
         home: const HomePage(),
         routes: {
           MovieDetailsPage.routeName: (context) => const MovieDetailsPage(),
+          TvShowDetailsPage.routeName: (context) => const TvShowDetailsPage(),
           PersonDetailsPage.routeName: (context) => const PersonDetailsPage(),
           YoutubeVideoPlayer.routeName: (context) => const YoutubeVideoPlayer(),
           GenrePage.routeName: (context) => const GenrePage(),

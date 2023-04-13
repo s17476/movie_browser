@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/movie_details.dart';
-
 class MovieDescription extends StatefulWidget {
-  final MovieDetails movie;
+  final String description;
   const MovieDescription({
     Key? key,
-    required this.movie,
+    required this.description,
   }) : super(key: key);
 
   @override
@@ -38,7 +36,7 @@ class _MovieDescriptionState extends State<MovieDescription> {
             width: double.infinity,
             height: _isExpanded ? null : 32,
             child: Text(
-              widget.movie.overview,
+              widget.description,
               textAlign: TextAlign.justify,
               softWrap: true,
               overflow: TextOverflow.fade,

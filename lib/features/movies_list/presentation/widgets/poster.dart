@@ -2,16 +2,19 @@ import 'package:flutter/material.dart';
 
 import '../../../core/constants/constants.dart';
 import '../../utils/fetch_and_show_movie.dart';
+import '../../utils/fetch_and_show_tv_show.dart';
 
 class Poster extends StatelessWidget {
   final int id;
   final String posterPath;
   final bool shouldReplacePage;
+  final bool isTvShow;
   const Poster({
     Key? key,
     required this.id,
     required this.posterPath,
     this.shouldReplacePage = false,
+    this.isTvShow = false,
   }) : super(key: key);
 
   @override
@@ -45,7 +48,9 @@ class Poster extends StatelessWidget {
             Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () => fetchAndShowMovie(context, id, shouldReplacePage),
+                onTap: isTvShow
+                    ? () => fetchAndShowTvShow(context, id, shouldReplacePage)
+                    : () => fetchAndShowMovie(context, id, shouldReplacePage),
                 child: const SizedBox(
                   width: double.infinity,
                   height: double.infinity,

@@ -8,6 +8,7 @@ import '../../domain/entities/credits.dart';
 import '../../domain/entities/movie_details.dart';
 import '../../domain/entities/movie_genre_list.dart';
 import '../../domain/entities/movie_image_list.dart';
+import '../../domain/entities/tv_show_details.dart';
 import '../../domain/entities/video_list.dart';
 import '../../domain/repositories/movie_details_repository.dart';
 import '../../domain/services/movie_details_api_service.dart';
@@ -19,10 +20,10 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
   MovieDetailsRepositoryImpl({required this.apiService});
 
   @override
-  Future<Either<Failure, MovieDetails>> fetchMovieDetails(int movieId) async {
+  Future<Either<Failure, MovieGenreList>> fetchMovieGenres() async {
     try {
-      final MovieDetails movie = await apiService.fetchMovieDetails(movieId);
-      return right(movie);
+      final MovieGenreList genres = await apiService.fetchMovieGenres();
+      return right(genres);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));
     } catch (e) {
@@ -31,10 +32,10 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
   }
 
   @override
-  Future<Either<Failure, MovieGenreList>> fetchMovieGenres() async {
+  Future<Either<Failure, MovieDetails>> fetchMovieDetails(int movieId) async {
     try {
-      final MovieGenreList genres = await apiService.fetchMovieGenres();
-      return right(genres);
+      final MovieDetails movie = await apiService.fetchMovieDetails(movieId);
+      return right(movie);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));
     } catch (e) {
@@ -83,6 +84,68 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
     try {
       final MovieList movieList =
           await apiService.fetchRecommendations(movieId);
+      return right(movieList);
+    } on MovieException catch (e) {
+      return left(Failure(message: e.message));
+    } catch (e) {
+      return left(const Failure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, TvShowDetails>> fetchTvShowDetails(int showId) async {
+    try {
+      final TvShowDetails show = await apiService.fetchTvShowDetails(showId);
+      return right(show);
+    } on MovieException catch (e) {
+      return left(Failure(message: e.message));
+    } catch (e) {
+      return left(const Failure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, MovieImageList>> fetchTvShowImages(int showId) async {
+    try {
+      final MovieImageList images = await apiService.fetchTvShowImages(showId);
+      return right(images);
+    } on MovieException catch (e) {
+      return left(Failure(message: e.message));
+    } catch (e) {
+      return left(const Failure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, VideoList>> fetchTvShowVideos(int showId) async {
+    try {
+      final VideoList videos = await apiService.fetchTvShowVideos(showId);
+      return right(videos);
+    } on MovieException catch (e) {
+      return left(Failure(message: e.message));
+    } catch (e) {
+      return left(const Failure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, Credits>> fetchTvShowCredits(int showId) async {
+    try {
+      final Credits credits = await apiService.fetchTvShowCredits(showId);
+      return right(credits);
+    } on MovieException catch (e) {
+      return left(Failure(message: e.message));
+    } catch (e) {
+      return left(const Failure());
+    }
+  }
+
+  @override
+  Future<Either<Failure, MovieList>> fetchTvShowRecommendations(
+      int showId) async {
+    try {
+      final MovieList movieList =
+          await apiService.fetchTvShowRecommendations(showId);
       return right(movieList);
     } on MovieException catch (e) {
       return left(Failure(message: e.message));

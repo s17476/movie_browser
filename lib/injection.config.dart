@@ -22,19 +22,21 @@ import 'features/movie_details/domain/repositories/movie_details_repository.dart
 import 'features/movie_details/domain/services/movie_details_api_service.dart'
     as _i4;
 import 'features/movie_details/presentation/cubits/cast/cast_cubit.dart'
-    as _i29;
+    as _i30;
 import 'features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart'
-    as _i24;
+    as _i25;
 import 'features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart'
     as _i8;
 import 'features/movie_details/presentation/cubits/movie_images/movie_images_cubit.dart'
-    as _i25;
+    as _i26;
 import 'features/movie_details/presentation/cubits/recommendations/recommendations_cubit.dart'
-    as _i27;
+    as _i28;
 import 'features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart'
     as _i21;
+import 'features/movie_details/presentation/cubits/tv_show_details/tv_show_details_cubit.dart'
+    as _i23;
 import 'features/movie_details/presentation/cubits/video/video_cubit.dart'
-    as _i28;
+    as _i29;
 import 'features/movies_list/data/repositories/movies_repository_impl.dart'
     as _i12;
 import 'features/movies_list/data/services/movies_api_service_impl.dart'
@@ -43,7 +45,7 @@ import 'features/movies_list/domain/repositories/movies_repository.dart'
     as _i11;
 import 'features/movies_list/domain/services/movies_api_service.dart' as _i9;
 import 'features/movies_list/presentation/cubits/category_movies/category_movies_cubit.dart'
-    as _i23;
+    as _i24;
 import 'features/movies_list/presentation/cubits/random_genres/random_genres_cubit.dart'
     as _i17;
 import 'features/movies_list/presentation/cubits/search_movies/search_movies_cubit.dart'
@@ -63,10 +65,10 @@ import 'features/people/domain/repositories/person_details_repository.dart'
 import 'features/people/domain/services/person_details_api_service.dart'
     as _i13;
 import 'features/people/presentation/cubits/person_credits/person_credits_cubit.dart'
-    as _i30;
+    as _i31;
 import 'features/people/presentation/cubits/person_details/person_details_cubit.dart'
-    as _i26;
-import 'injectable_modules.dart' as _i31;
+    as _i27;
+import 'injectable_modules.dart' as _i32;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -113,34 +115,40 @@ extension GetItInjectableX on _i1.GetIt {
     ));
     gh.singleton<_i22.Top20TvShowsListCubit>(
         _i22.Top20TvShowsListCubit(gh<_i11.MoviesRepository>()));
-    gh.singleton<_i23.CategoryMoviesCubit>(
-        _i23.CategoryMoviesCubit(gh<_i11.MoviesRepository>()));
-    gh.singleton<_i24.MovieDetailsCubit>(
-        _i24.MovieDetailsCubit(gh<_i6.MovieDetailsRepository>()));
-    gh.singleton<_i25.MovieImagesCubit>(_i25.MovieImagesCubit(
+    gh.singleton<_i23.TvShowDetailsCubit>(
+        _i23.TvShowDetailsCubit(gh<_i6.MovieDetailsRepository>()));
+    gh.singleton<_i24.CategoryMoviesCubit>(
+        _i24.CategoryMoviesCubit(gh<_i11.MoviesRepository>()));
+    gh.singleton<_i25.MovieDetailsCubit>(
+        _i25.MovieDetailsCubit(gh<_i6.MovieDetailsRepository>()));
+    gh.singleton<_i26.MovieImagesCubit>(_i26.MovieImagesCubit(
       gh<_i6.MovieDetailsRepository>(),
-      gh<_i24.MovieDetailsCubit>(),
+      gh<_i25.MovieDetailsCubit>(),
+      gh<_i23.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i26.PersonDetailsCubit>(
-        _i26.PersonDetailsCubit(gh<_i15.PersonDetailsRepository>()));
-    gh.singleton<_i27.RecommendationsCubit>(_i27.RecommendationsCubit(
+    gh.singleton<_i27.PersonDetailsCubit>(
+        _i27.PersonDetailsCubit(gh<_i15.PersonDetailsRepository>()));
+    gh.singleton<_i28.RecommendationsCubit>(_i28.RecommendationsCubit(
       gh<_i6.MovieDetailsRepository>(),
-      gh<_i24.MovieDetailsCubit>(),
+      gh<_i25.MovieDetailsCubit>(),
+      gh<_i23.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i28.VideoCubit>(_i28.VideoCubit(
+    gh.singleton<_i29.VideoCubit>(_i29.VideoCubit(
       gh<_i6.MovieDetailsRepository>(),
-      gh<_i24.MovieDetailsCubit>(),
+      gh<_i25.MovieDetailsCubit>(),
+      gh<_i23.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i29.CastCubit>(_i29.CastCubit(
+    gh.singleton<_i30.CastCubit>(_i30.CastCubit(
       gh<_i6.MovieDetailsRepository>(),
-      gh<_i24.MovieDetailsCubit>(),
+      gh<_i25.MovieDetailsCubit>(),
+      gh<_i23.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i30.PersonCreditsCubit>(_i30.PersonCreditsCubit(
+    gh.singleton<_i31.PersonCreditsCubit>(_i31.PersonCreditsCubit(
       gh<_i15.PersonDetailsRepository>(),
-      gh<_i26.PersonDetailsCubit>(),
+      gh<_i27.PersonDetailsCubit>(),
     ));
     return this;
   }
 }
 
-class _$HttpClient extends _i31.HttpClient {}
+class _$HttpClient extends _i32.HttpClient {}
