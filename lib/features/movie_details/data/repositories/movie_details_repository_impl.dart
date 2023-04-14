@@ -25,9 +25,9 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
       final MovieGenreList genres = await apiService.fetchMovieGenres();
       return right(genres);
     } on MovieException catch (e) {
-      return left(Failure(message: e.message));
+      return left(Failure.general(message: e.message));
     } catch (e) {
-      return left(const Failure());
+      return left(Failure.general(message: e.toString()));
     }
   }
 
@@ -37,9 +37,9 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
       final MovieDetails movie = await apiService.fetchMovieDetails(movieId);
       return right(movie);
     } on MovieException catch (e) {
-      return left(Failure(message: e.message));
+      return left(Failure.general(message: e.message));
     } catch (e) {
-      return left(const Failure());
+      return left(Failure.general(message: e.toString()));
     }
   }
 
@@ -53,9 +53,9 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
           await apiService.fetchMovieImages(movieId, isTvShow);
       return right(images);
     } on MovieException catch (e) {
-      return left(Failure(message: e.message));
+      return left(Failure.general(message: e.message));
     } catch (e) {
-      return left(const Failure());
+      return left(Failure.general(message: e.toString()));
     }
   }
 
@@ -68,9 +68,9 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
       final VideoList videos = await apiService.fetchVideos(movieId, isTvShow);
       return right(videos);
     } on MovieException catch (e) {
-      return left(Failure(message: e.message));
+      return left(Failure.general(message: e.message));
     } catch (e) {
-      return left(const Failure());
+      return left(Failure.general(message: e.toString()));
     }
   }
 
@@ -83,9 +83,9 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
       final Credits credits = await apiService.fetchCredits(movieId, isTvShow);
       return right(credits);
     } on MovieException catch (e) {
-      return left(Failure(message: e.message));
+      return left(Failure.general(message: e.message));
     } catch (e) {
-      return left(const Failure());
+      return left(Failure.general(message: e.toString()));
     }
   }
 
@@ -99,9 +99,9 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
           await apiService.fetchRecommendations(movieId, isTvShow);
       return right(movieList);
     } on MovieException catch (e) {
-      return left(Failure(message: e.message));
+      return left(Failure.general(message: e.message));
     } catch (e) {
-      return left(const Failure());
+      return left(Failure.general(message: e.toString()));
     }
   }
 
@@ -111,9 +111,9 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
       final TvShowDetails show = await apiService.fetchTvShowDetails(showId);
       return right(show);
     } on MovieException catch (e) {
-      return left(Failure(message: e.message));
+      return left(Failure.general(message: e.message));
     } catch (e) {
-      return left(const Failure());
+      return left(Failure.general(message: e.toString()));
     }
   }
 }

@@ -22,9 +22,9 @@ class MoviesRepositoryImpl extends MoviesRepository {
       final MovieList movieList = await apiService.searchMovies(query);
       return right(movieList);
     } on MovieException catch (e) {
-      return left(Failure(message: e.message));
+      return left(Failure.general(message: e.message));
     } catch (e) {
-      return left(const Failure());
+      return left(Failure.general(message: e.toString()));
     }
   }
 
@@ -36,9 +36,9 @@ class MoviesRepositoryImpl extends MoviesRepository {
           await apiService.loadNextResultsPage(query, page);
       return right(movieList);
     } on MovieException catch (e) {
-      return left(Failure(message: e.message));
+      return left(Failure.general(message: e.message));
     } catch (e) {
-      return left(const Failure());
+      return left(Failure.general(message: e.toString()));
     }
   }
 
@@ -58,9 +58,9 @@ class MoviesRepositoryImpl extends MoviesRepository {
       final MovieList movieList = await apiService.fetchByGenreId(id);
       return right(movieList);
     } on MovieException catch (e) {
-      return left(Failure(message: e.message));
+      return left(Failure.general(message: e.message));
     } catch (e) {
-      return left(const Failure());
+      return left(Failure.general(message: e.toString()));
     }
   }
 
@@ -72,9 +72,9 @@ class MoviesRepositoryImpl extends MoviesRepository {
           await apiService.fetchNextPageByGenreId(id, page);
       return right(movieList);
     } on MovieException catch (e) {
-      return left(Failure(message: e.message));
+      return left(Failure.general(message: e.message));
     } catch (e) {
-      return left(const Failure());
+      return left(Failure.general(message: e.toString()));
     }
   }
 
@@ -83,9 +83,9 @@ class MoviesRepositoryImpl extends MoviesRepository {
       final T list = await apiFunction();
       return right(list);
     } on MovieException catch (e) {
-      return left(Failure(message: e.message));
+      return left(Failure.general(message: e.message));
     } catch (e) {
-      return left(const Failure());
+      return left(Failure.general(message: e.toString()));
     }
   }
 }
