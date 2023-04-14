@@ -17,7 +17,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'features/auth/data/repositories/authentication_repository_impl.dart'
     as _i26;
 import 'features/auth/domain/repositories/auth_repository.dart' as _i25;
-import 'features/auth/presentation/blocs/bloc/auth_bloc_bloc.dart' as _i34;
+import 'features/auth/presentation/blocs/bloc/auth_bloc.dart' as _i34;
 import 'features/auth/presentation/cubits/email_provider/email_provider_cubit.dart'
     as _i28;
 import 'features/movie_details/data/repositories/movie_details_repository_impl.dart'
@@ -152,8 +152,7 @@ extension GetItInjectableX on _i1.GetIt {
       gh<_i29.MovieDetailsCubit>(),
       gh<_i24.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i34.AuthBlocBloc>(
-        _i34.AuthBlocBloc(gh<_i25.AuthRepository>()));
+    gh.singleton<_i34.AuthBloc>(_i34.AuthBloc(gh<_i25.AuthRepository>()));
     gh.singleton<_i35.CastCubit>(_i35.CastCubit(
       gh<_i7.MovieDetailsRepository>(),
       gh<_i29.MovieDetailsCubit>(),

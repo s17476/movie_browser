@@ -8,14 +8,14 @@ import 'package:injectable/injectable.dart';
 import '../../../domain/repositories/auth_repository.dart';
 
 part 'auth_bloc_bloc.freezed.dart';
-part 'auth_bloc_event.dart';
-part 'auth_bloc_state.dart';
+part 'auth_event.dart';
+part 'auth_state.dart';
 
 @singleton
-class AuthBlocBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
+class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
   final AuthRepository _repository;
   late StreamSubscription _streamSubscription;
-  AuthBlocBloc(
+  AuthBloc(
     this._repository,
   ) : super(const _Initial()) {
     _streamSubscription = _repository.user.listen((user) {

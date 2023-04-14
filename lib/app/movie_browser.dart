@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../features/auth/presentation/pages/authentication_page.dart';
 import '../features/movie_details/presentation/pages/movie_details_page.dart';
 import '../features/movie_details/presentation/pages/tv_show_details_page.dart';
 import '../features/movie_details/presentation/pages/youtube_video_player.dart';
@@ -26,7 +27,9 @@ class MovieBrowser extends StatelessWidget {
           title: 'Movie Browser',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
-            colorScheme: const ColorScheme.dark(),
+            colorScheme: const ColorScheme.dark().copyWith(
+              primary: Colors.amber.shade600,
+            ),
             scaffoldBackgroundColor: Colors.black,
             appBarTheme: const AppBarTheme(
               backgroundColor: Colors.black26,
@@ -41,6 +44,7 @@ class MovieBrowser extends StatelessWidget {
             YoutubeVideoPlayer.routeName: (context) =>
                 const YoutubeVideoPlayer(),
             GenrePage.routeName: (context) => const GenrePage(),
+            EmailAuthPage.routeName: (context) => const EmailAuthPage(),
           },
         ),
       ),

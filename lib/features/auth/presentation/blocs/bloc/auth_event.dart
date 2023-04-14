@@ -1,4 +1,4 @@
-part of 'auth_bloc_bloc.dart';
+part of 'auth_bloc.dart';
 
 @freezed
 class AuthBlocEvent with _$AuthBlocEvent {

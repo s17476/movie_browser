@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_browser/features/auth/presentation/blocs/bloc/auth_bloc.dart';
+import 'package:movie_browser/features/auth/presentation/cubits/email_provider/email_provider_cubit.dart';
 
 import '../features/movie_details/presentation/cubits/cast/cast_cubit.dart';
 import '../features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart';
@@ -46,6 +48,8 @@ class CustomMultiBlocProvider extends StatelessWidget {
         BlocProvider(create: (context) => getIt<PersonCreditsCubit>()),
         BlocProvider(create: (context) => getIt<CategoryMoviesCubit>()),
         BlocProvider(create: (context) => getIt<TvShowDetailsCubit>()),
+        BlocProvider(create: (context) => getIt<AuthBloc>()),
+        BlocProvider(create: (context) => getIt<EmailProviderCubit>()),
       ],
       child: child,
     );

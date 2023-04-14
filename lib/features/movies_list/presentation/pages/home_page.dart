@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_browser/features/auth/presentation/pages/authentication_page.dart';
 
 import '../cubits/random_genres/random_genres_cubit.dart';
 import '../widgets/build_movies_list.dart';
@@ -53,6 +54,10 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Movie Browser'),
         actions: [
+          IconButton(
+              onPressed: () =>
+                  Navigator.pushNamed(context, EmailAuthPage.routeName),
+              icon: const Icon(Icons.person)),
           IconButton(
             onPressed: () => showSearch(
               context: context,
