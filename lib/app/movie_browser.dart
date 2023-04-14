@@ -28,7 +28,7 @@ class MovieBrowser extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             colorScheme: const ColorScheme.dark().copyWith(
-              primary: Colors.amber.shade600,
+              primary: Colors.amber.shade800,
               error: Colors.red.shade800,
             ),
             dialogBackgroundColor: Colors.grey.shade900,

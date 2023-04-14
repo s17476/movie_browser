@@ -1,0 +1,71 @@
+import 'dart:io';
+
+import 'package:flutter/material.dart';
+import 'package:movie_browser/features/auth/presentation/pages/email_auth_page.dart';
+import 'package:movie_browser/features/auth/presentation/widgets/custom_signin_button.dart';
+import 'package:movie_browser/features/core/widgets/glass_layer.dart';
+import 'package:sign_button/sign_button.dart';
+
+void showAuthProvidersDialog(BuildContext context) {
+  showDialog(
+    context: context,
+    barrierColor: Colors.transparent,
+    builder: (context) => Material(
+      color: Colors.transparent,
+      child: GlassLayer(
+        onDismiss: () => Navigator.pop(context),
+        child: AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          title: const Center(child: Text('Signin / Signup')),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const CustomSigninButton(
+                buttonType: ButtonType.mail,
+                route: EmailAuthPage.routeName,
+              ),
+              const Divider(),
+              if (Platform.isIOS)
+                SignInButton(
+                  buttonType: ButtonType.apple,
+                  onPressed: () {},
+                ),
+              const SizedBox(
+                height: 4,
+              ),
+              SignInButton(
+                buttonType: ButtonType.google,
+                onPressed: () {},
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              SignInButton(
+                buttonType: ButtonType.facebook,
+                width: double.infinity,
+                onPressed: () {},
+              ),
+              const Divider(),
+              // cancel button
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () => Navigator.pop(context),
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  child: const Text('Cancel'),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    ),
+  );
+}

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_browser/features/auth/utils/show_auth_providers_dialog.dart';
+import 'package:movie_browser/features/auth/utils/show_signout_dialog.dart';
 
 import '../../../auth/presentation/blocs/bloc/auth_bloc.dart';
 import '../../../auth/presentation/pages/email_auth_page.dart';
@@ -60,15 +62,12 @@ class _HomePageState extends State<HomePage> {
               return state.maybeMap(
                 // signout
                 authenticated: (state) => IconButton(
-                  onPressed: () => context.read<AuthBloc>().add(
-                        const AuthBlocEvent.signOut(),
-                      ),
+                  onPressed: () => showSignoutDialog(context: context),
                   icon: const Icon(Icons.person_off),
                 ),
                 // go to login page
                 orElse: () => IconButton(
-                  onPressed: () =>
-                      Navigator.pushNamed(context, EmailAuthPage.routeName),
+                  onPressed: () => showAuthProvidersDialog(context),
                   icon: const Icon(Icons.person),
                 ),
               );
