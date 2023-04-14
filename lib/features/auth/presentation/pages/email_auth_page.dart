@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_browser/features/auth/presentation/widgets/custom_text_form_field.dart';
 
 import '../../../core/utils/show_snack_bar.dart';
 import '../blocs/bloc/auth_bloc.dart';
 import '../cubits/email_provider/email_provider_cubit.dart';
+import '../widgets/reset_password_text_button.dart';
 
 class EmailAuthPage extends StatefulWidget {
   const EmailAuthPage({Key? key}) : super(key: key);
@@ -29,38 +31,6 @@ class _EmailAuthPageState extends State<EmailAuthPage>
   AnimationController? _animationController;
   Animation<Offset>? _slideAnimation;
   Animation<double>? _opacityAnimation;
-
-  @override
-  void initState() {
-    //initialize animations controllers
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 300),
-    );
-    _slideAnimation = Tween<Offset>(
-      begin: const Offset(0, -1.3),
-      end: const Offset(0, 0),
-    ).animate(
-      CurvedAnimation(
-        parent: _animationController!,
-        curve: Curves.linear,
-      ),
-    );
-    _opacityAnimation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
-      parent: _animationController!,
-      curve: Curves.easeIn,
-    ));
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _animationController!.dispose();
-    _emailController.dispose();
-    _passwordController.dispose();
-    _repeatPasswordController.dispose();
-    super.dispose();
-  }
 
   void _togglePasswordVisibility() {
     setState(() {
@@ -103,6 +73,38 @@ class _EmailAuthPageState extends State<EmailAuthPage>
   }
 
   @override
+  void initState() {
+    //initialize animations controllers
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 300),
+    );
+    _slideAnimation = Tween<Offset>(
+      begin: const Offset(0, -1.3),
+      end: const Offset(0, 0),
+    ).animate(
+      CurvedAnimation(
+        parent: _animationController!,
+        curve: Curves.linear,
+      ),
+    );
+    _opacityAnimation = Tween(begin: 0.0, end: 1.0).animate(CurvedAnimation(
+      parent: _animationController!,
+      curve: Curves.easeIn,
+    ));
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _animationController!.dispose();
+    _emailController.dispose();
+    _passwordController.dispose();
+    _repeatPasswordController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -122,78 +124,37 @@ class _EmailAuthPageState extends State<EmailAuthPage>
             child: Column(
               children: [
                 // email text field
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
-                  child: SizedBox(
-                    width: 500,
-                    child: TextFormField(
-                      controller: _emailController,
-                      key: const ValueKey('email'),
-                      keyboardType: TextInputType.emailAddress,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                        prefixIcon: const Icon(Icons.person),
-                        floatingLabelStyle: TextStyle(
-                          color:
-                              Theme.of(context).textTheme.displayLarge!.color,
-                        ),
-                        labelText: 'E-mail',
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                      ),
-                    ),
-                  ),
+                CustomTextFormField(
+                  textEditingController: _emailController,
+                  keyboardType: TextInputType.emailAddress,
+                  textInputAction: TextInputAction.next,
+                  labelText: 'E-mail',
+                  prefixIcon: const Icon(Icons.person),
+                  key: const ValueKey('email'),
                 ),
                 const SizedBox(
                   height: 16,
                 ),
                 // password text field
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
+                CustomTextFormField(
+                  textEditingController: _passwordController,
+                  keyboardType: TextInputType.visiblePassword,
+                  textInputAction: _isInLoginMode
+                      ? TextInputAction.done
+                      : TextInputAction.next,
+                  labelText: 'Password',
+                  prefixIcon: const Icon(Icons.lock_rounded),
+                  obscureText: !_passwordIsVisible,
+                  onEditingComplete: _isInLoginMode ? _tryToSubmit : null,
+                  suffixIcon: IconButton(
+                    onPressed: _togglePasswordVisibility,
+                    icon: _passwordIsVisible
+                        ? const Icon(Icons.visibility_off)
+                        : const Icon(Icons.visibility),
                   ),
-                  child: SizedBox(
-                    width: 500,
-                    child: TextFormField(
-                      controller: _passwordController,
-                      key: const ValueKey('password'),
-                      obscureText: !_passwordIsVisible,
-                      keyboardType: TextInputType.visiblePassword,
-                      textInputAction: TextInputAction.done,
-                      decoration: InputDecoration(
-                        suffixIcon: IconButton(
-                          onPressed: _togglePasswordVisibility,
-                          icon: _passwordIsVisible
-                              ? const Icon(Icons.visibility_off)
-                              : const Icon(Icons.visibility),
-                        ),
-                        prefixIcon: const Icon(Icons.lock_rounded),
-                        floatingLabelStyle: TextStyle(
-                          color:
-                              Theme.of(context).textTheme.displayLarge!.color,
-                        ),
-                        labelText: 'Password',
-                        contentPadding: const EdgeInsets.symmetric(
-                          vertical: 10,
-                        ),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: BorderSide.none,
-                        ),
-                        filled: true,
-                      ),
-                      onEditingComplete: _tryToSubmit,
-                    ),
-                  ),
+                  key: const ValueKey('password'),
                 ),
+
                 // repeat password
                 FadeTransition(
                   opacity: _opacityAnimation!,
@@ -204,46 +165,21 @@ class _EmailAuthPageState extends State<EmailAuthPage>
                         const SizedBox(
                           height: 16,
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
+                        CustomTextFormField(
+                          textEditingController: _repeatPasswordController,
+                          keyboardType: TextInputType.visiblePassword,
+                          textInputAction: TextInputAction.done,
+                          labelText: 'Repeat password',
+                          prefixIcon: const Icon(Icons.lock_rounded),
+                          obscureText: !_passwordIsVisible,
+                          onEditingComplete: _tryToSubmit,
+                          suffixIcon: IconButton(
+                            onPressed: _togglePasswordVisibility,
+                            icon: _passwordIsVisible
+                                ? const Icon(Icons.visibility_off)
+                                : const Icon(Icons.visibility),
                           ),
-                          child: SizedBox(
-                            width: 500,
-                            child: TextFormField(
-                              enabled: !_isInLoginMode,
-                              controller: _repeatPasswordController,
-                              key: const ValueKey('password'),
-                              obscureText: !_passwordIsVisible,
-                              keyboardType: TextInputType.visiblePassword,
-                              textInputAction: TextInputAction.done,
-                              decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  onPressed: _togglePasswordVisibility,
-                                  icon: _passwordIsVisible
-                                      ? const Icon(Icons.visibility_off)
-                                      : const Icon(Icons.visibility),
-                                ),
-                                prefixIcon: const Icon(Icons.lock_rounded),
-                                floatingLabelStyle: TextStyle(
-                                  color: Theme.of(context)
-                                      .textTheme
-                                      .displayLarge!
-                                      .color,
-                                ),
-                                labelText: 'Repeat password',
-                                contentPadding: const EdgeInsets.symmetric(
-                                  vertical: 10,
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide.none,
-                                ),
-                                filled: true,
-                              ),
-                              onEditingComplete: _tryToSubmit,
-                            ),
-                          ),
+                          key: const ValueKey('password-repeat'),
                         ),
                       ],
                     ),
@@ -331,8 +267,8 @@ class _EmailAuthPageState extends State<EmailAuthPage>
                   ),
                 ),
 
-                // if (_failureCounter > 2)
-                //   ResetPasswordTextButton(slideAnimation: _slideAnimation),
+                if (_failureCounter > 2)
+                  ResetPasswordTextButton(slideAnimation: _slideAnimation),
               ],
             ),
           ),

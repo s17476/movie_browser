@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_browser/features/auth/presentation/pages/authentication_page.dart';
 
+import '../../../auth/presentation/blocs/bloc/auth_bloc.dart';
+import '../../../auth/presentation/pages/email_auth_page.dart';
 import '../cubits/random_genres/random_genres_cubit.dart';
 import '../widgets/build_movies_list.dart';
 import '../widgets/genres_list.dart';
@@ -23,7 +24,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.dark);
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -44,6 +44,7 @@ class _HomePageState extends State<HomePage> {
           _randomCategoryLists = buildMoviesLists(state.movieLists);
         },
         orElse: () => null);
+
     super.didChangeDependencies();
   }
 
@@ -54,10 +55,25 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         title: const Text('Movie Browser'),
         actions: [
-          IconButton(
-              onPressed: () =>
-                  Navigator.pushNamed(context, EmailAuthPage.routeName),
-              icon: const Icon(Icons.person)),
+          BlocBuilder<AuthBloc, AuthBlocState>(
+            builder: (context, state) {
+              return state.maybeMap(
+                // signout
+                authenticated: (state) => IconButton(
+                  onPressed: () => context.read<AuthBloc>().add(
+                        const AuthBlocEvent.signOut(),
+                      ),
+                  icon: const Icon(Icons.person_off),
+                ),
+                // go to login page
+                orElse: () => IconButton(
+                  onPressed: () =>
+                      Navigator.pushNamed(context, EmailAuthPage.routeName),
+                  icon: const Icon(Icons.person),
+                ),
+              );
+            },
+          ),
           IconButton(
             onPressed: () => showSearch(
               context: context,

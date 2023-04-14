@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../../domain/repositories/auth_repository.dart';
 
-part 'auth_bloc_bloc.freezed.dart';
+part 'auth_bloc.freezed.dart';
 part 'auth_event.dart';
 part 'auth_state.dart';
 
@@ -32,7 +32,9 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
           emit(
             AuthBlocState.authenticated(
               userId: event.user.uid,
-              email: event.user.email ?? '',
+              email: event.user.email,
+              displayName: event.user.displayName,
+              photoUrl: event.user.photoURL,
             ),
           );
         },

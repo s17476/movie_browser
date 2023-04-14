@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../features/auth/presentation/pages/authentication_page.dart';
+import '../features/auth/presentation/pages/email_auth_page.dart';
 import '../features/movie_details/presentation/pages/movie_details_page.dart';
 import '../features/movie_details/presentation/pages/tv_show_details_page.dart';
 import '../features/movie_details/presentation/pages/youtube_video_player.dart';
@@ -29,7 +29,9 @@ class MovieBrowser extends StatelessWidget {
           theme: ThemeData(
             colorScheme: const ColorScheme.dark().copyWith(
               primary: Colors.amber.shade600,
+              error: Colors.red.shade800,
             ),
+            dialogBackgroundColor: Colors.grey.shade900,
             scaffoldBackgroundColor: Colors.black,
             appBarTheme: const AppBarTheme(
               backgroundColor: Colors.black26,
