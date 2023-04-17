@@ -3,6 +3,8 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 
+import 'firebase_options.dart';
+
 @module
 abstract class HttpClient {
   @lazySingleton
@@ -18,5 +20,7 @@ abstract class FirebaseAuthenticationService {
 @module
 abstract class GoogleSignInService {
   @lazySingleton
-  GoogleSignIn get googleSignIn => GoogleSignIn();
+  GoogleSignIn get googleSignIn => GoogleSignIn(
+        clientId: DefaultFirebaseOptions.currentPlatform.iosClientId,
+      );
 }

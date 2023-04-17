@@ -38,14 +38,13 @@ void showAuthProvidersDialog(BuildContext context) {
               const SizedBox(
                 height: 4,
               ),
-              if (Platform.isAndroid)
-                SignInButton(
-                  buttonType: ButtonType.google,
-                  onPressed: () {
-                    context.read<GoogleProviderCubit>().signIn();
-                    Navigator.pop(context);
-                  },
-                ),
+              SignInButton(
+                buttonType: ButtonType.google,
+                onPressed: () {
+                  context.read<GoogleProviderCubit>().signIn();
+                  Navigator.pop(context);
+                },
+              ),
               const SizedBox(
                 height: 4,
               ),
