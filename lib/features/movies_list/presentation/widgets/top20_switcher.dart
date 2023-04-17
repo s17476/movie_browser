@@ -31,9 +31,11 @@ class _Top20SwitcherState extends State<Top20Switcher> {
             _movies = state.movies;
             _pos = 0;
             _timer = Timer.periodic(const Duration(seconds: 10), (_) {
-              setState(() {
-                _pos = (_pos + 1) % _movies.length;
-              });
+              if (mounted) {
+                setState(() {
+                  _pos = (_pos + 1) % _movies.length;
+                });
+              }
             });
           },
           orElse: () => null,

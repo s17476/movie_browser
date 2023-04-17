@@ -18,6 +18,8 @@ abstract class AuthRepository {
 
   Future<Either<Failure, Unit>> signInWithGoogle();
 
+  Future<Either<Failure, Unit>> signInWithApple();
+
   Future<Either<Failure, Unit>> sendPasswordResetEmail({required String email});
 
   Future<Either<Failure, Unit>> signout();

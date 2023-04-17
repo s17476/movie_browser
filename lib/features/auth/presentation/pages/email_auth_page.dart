@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/utils/show_snack_bar.dart';
-import '../blocs/bloc/auth_bloc.dart';
+import '../blocs/auth/auth_bloc.dart';
 import '../cubits/email_provider/email_provider_cubit.dart';
 import '../widgets/custom_text_form_field.dart';
 import '../widgets/reset_password_text_button.dart';

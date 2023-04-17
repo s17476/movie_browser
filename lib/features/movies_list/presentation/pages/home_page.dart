@@ -4,8 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_browser/features/auth/utils/show_auth_providers_dialog.dart';
 import 'package:movie_browser/features/auth/utils/show_signout_dialog.dart';
 
-import '../../../auth/presentation/blocs/bloc/auth_bloc.dart';
-import '../../../auth/presentation/pages/email_auth_page.dart';
+import '../../../auth/presentation/blocs/auth/auth_bloc.dart';
 import '../cubits/random_genres/random_genres_cubit.dart';
 import '../widgets/build_movies_list.dart';
 import '../widgets/genres_list.dart';

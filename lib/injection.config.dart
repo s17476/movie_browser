@@ -18,7 +18,9 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'features/auth/data/repositories/authentication_repository_impl.dart'
     as _i27;
 import 'features/auth/domain/repositories/auth_repository.dart' as _i26;
-import 'features/auth/presentation/blocs/bloc/auth_bloc.dart' as _i36;
+import 'features/auth/presentation/blocs/auth/auth_bloc.dart' as _i37;
+import 'features/auth/presentation/cubits/apple_provider/apple_provider_cubit.dart'
+    as _i36;
 import 'features/auth/presentation/cubits/email_provider/email_provider_cubit.dart'
     as _i29;
 import 'features/auth/presentation/cubits/google_provider/google_provider_cubit.dart'
@@ -32,7 +34,7 @@ import 'features/movie_details/domain/repositories/movie_details_repository.dart
 import 'features/movie_details/domain/services/movie_details_api_service.dart'
     as _i6;
 import 'features/movie_details/presentation/cubits/cast/cast_cubit.dart'
-    as _i37;
+    as _i38;
 import 'features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart'
     as _i31;
 import 'features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart'
@@ -75,10 +77,10 @@ import 'features/people/domain/repositories/person_details_repository.dart'
 import 'features/people/domain/services/person_details_api_service.dart'
     as _i15;
 import 'features/people/presentation/cubits/person_credits/person_credits_cubit.dart'
-    as _i38;
+    as _i39;
 import 'features/people/presentation/cubits/person_details/person_details_cubit.dart'
     as _i33;
-import 'injectable_modules.dart' as _i39;
+import 'injectable_modules.dart' as _i40;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -162,13 +164,15 @@ extension GetItInjectableX on _i1.GetIt {
       gh<_i31.MovieDetailsCubit>(),
       gh<_i25.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i36.AuthBloc>(_i36.AuthBloc(gh<_i26.AuthRepository>()));
-    gh.singleton<_i37.CastCubit>(_i37.CastCubit(
+    gh.factory<_i36.AppleProviderCubit>(
+        () => _i36.AppleProviderCubit(gh<_i26.AuthRepository>()));
+    gh.singleton<_i37.AuthBloc>(_i37.AuthBloc(gh<_i26.AuthRepository>()));
+    gh.singleton<_i38.CastCubit>(_i38.CastCubit(
       gh<_i8.MovieDetailsRepository>(),
       gh<_i31.MovieDetailsCubit>(),
       gh<_i25.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i38.PersonCreditsCubit>(_i38.PersonCreditsCubit(
+    gh.singleton<_i39.PersonCreditsCubit>(_i39.PersonCreditsCubit(
       gh<_i17.PersonDetailsRepository>(),
       gh<_i33.PersonDetailsCubit>(),
     ));
@@ -176,9 +180,9 @@ extension GetItInjectableX on _i1.GetIt {
   }
 }
 
-class _$HttpClient extends _i39.HttpClient {}
+class _$HttpClient extends _i40.HttpClient {}
 
 class _$FirebaseAuthenticationService
-    extends _i39.FirebaseAuthenticationService {}
+    extends _i40.FirebaseAuthenticationService {}
 
-class _$GoogleSignInService extends _i39.GoogleSignInService {}
+class _$GoogleSignInService extends _i40.GoogleSignInService {}
