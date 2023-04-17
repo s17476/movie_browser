@@ -38,8 +38,6 @@ class EmailProviderCubit extends Cubit<EmailProviderState> {
   ) async {
     emit(const EmailProviderState.submitting());
 
-    emit(const EmailProviderState.submitting());
-
     final failureOrUnit = await _repository.signinWithEmailAndPassword(
       email: email,
       password: password,

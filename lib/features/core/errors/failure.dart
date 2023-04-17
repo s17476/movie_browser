@@ -9,4 +9,8 @@ class Failure with _$Failure {
 
   /// Authentication service failure
   const factory Failure.auth({required String message}) = _Auth;
+
+  /// Authentication cancelled by the user
+  const factory Failure.cancelledByUser({required String message}) =
+      _CancelledByUser;
 }

@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../core/errors/failure.dart';
@@ -9,9 +10,11 @@ import '../../domain/repositories/auth_repository.dart';
 @LazySingleton(as: AuthRepository)
 class AuthenticationRepositoryImpl extends AuthRepository {
   final FirebaseAuth _firebaseAuth;
+  final GoogleSignIn _googleSignIn;
 
   AuthenticationRepositoryImpl(
     this._firebaseAuth,
+    this._googleSignIn,
   );
 
   @override
@@ -38,6 +41,7 @@ class AuthenticationRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, Unit>> signout() async {
     await _firebaseAuth.signOut();
+    await _googleSignIn.signOut();
     return right(unit);
   }
 
@@ -87,6 +91,33 @@ class AuthenticationRepositoryImpl extends AuthRepository {
 
       // delete user account
       await authResult.user!.delete();
+
+      return right(unit);
+    } on FirebaseAuthException catch (e) {
+      return Left(Failure.auth(message: e.message ?? ''));
+    } catch (e) {
+      return Left(Failure.general(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+
+      if (googleUser == null) {
+        return const Left(Failure.cancelledByUser(message: ''));
+      }
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      await FirebaseAuth.instance.signInWithCredential(credential);
 
       return right(unit);
     } on FirebaseAuthException catch (e) {

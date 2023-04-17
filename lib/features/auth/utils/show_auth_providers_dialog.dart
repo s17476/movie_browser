@@ -1,10 +1,13 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:movie_browser/features/auth/presentation/pages/email_auth_page.dart';
-import 'package:movie_browser/features/auth/presentation/widgets/custom_signin_button.dart';
-import 'package:movie_browser/features/core/widgets/glass_layer.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sign_button/sign_button.dart';
+
+import '../../core/widgets/glass_layer.dart';
+import '../presentation/cubits/google_provider/google_provider_cubit.dart';
+import '../presentation/pages/email_auth_page.dart';
+import '../presentation/widgets/custom_signin_button.dart';
 
 void showAuthProvidersDialog(BuildContext context) {
   showDialog(
@@ -35,10 +38,14 @@ void showAuthProvidersDialog(BuildContext context) {
               const SizedBox(
                 height: 4,
               ),
-              SignInButton(
-                buttonType: ButtonType.google,
-                onPressed: () {},
-              ),
+              if (Platform.isAndroid)
+                SignInButton(
+                  buttonType: ButtonType.google,
+                  onPressed: () {
+                    context.read<GoogleProviderCubit>().signIn();
+                    Navigator.pop(context);
+                  },
+                ),
               const SizedBox(
                 height: 4,
               ),

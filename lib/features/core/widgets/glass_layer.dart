@@ -12,7 +12,7 @@ class GlassLayer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TweenAnimationBuilder(
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 300),
       tween: Tween<double>(begin: 0.0, end: 1),
       child: child,
       builder: (context, double value, child) {

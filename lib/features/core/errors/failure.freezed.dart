@@ -21,18 +21,21 @@ mixin _$Failure {
   TResult when<TResult extends Object?>({
     required TResult Function(String message) general,
     required TResult Function(String message) auth,
+    required TResult Function(String message) cancelledByUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String message)? general,
     TResult? Function(String message)? auth,
+    TResult? Function(String message)? cancelledByUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String message)? general,
     TResult Function(String message)? auth,
+    TResult Function(String message)? cancelledByUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -40,18 +43,21 @@ mixin _$Failure {
   TResult map<TResult extends Object?>({
     required TResult Function(_General value) general,
     required TResult Function(_Auth value) auth,
+    required TResult Function(_CancelledByUser value) cancelledByUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_General value)? general,
     TResult? Function(_Auth value)? auth,
+    TResult? Function(_CancelledByUser value)? cancelledByUser,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_General value)? general,
     TResult Function(_Auth value)? auth,
+    TResult Function(_CancelledByUser value)? cancelledByUser,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -158,6 +164,7 @@ class _$_General implements _General {
   TResult when<TResult extends Object?>({
     required TResult Function(String message) general,
     required TResult Function(String message) auth,
+    required TResult Function(String message) cancelledByUser,
   }) {
     return general(message);
   }
@@ -167,6 +174,7 @@ class _$_General implements _General {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String message)? general,
     TResult? Function(String message)? auth,
+    TResult? Function(String message)? cancelledByUser,
   }) {
     return general?.call(message);
   }
@@ -176,6 +184,7 @@ class _$_General implements _General {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String message)? general,
     TResult Function(String message)? auth,
+    TResult Function(String message)? cancelledByUser,
     required TResult orElse(),
   }) {
     if (general != null) {
@@ -189,6 +198,7 @@ class _$_General implements _General {
   TResult map<TResult extends Object?>({
     required TResult Function(_General value) general,
     required TResult Function(_Auth value) auth,
+    required TResult Function(_CancelledByUser value) cancelledByUser,
   }) {
     return general(this);
   }
@@ -198,6 +208,7 @@ class _$_General implements _General {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_General value)? general,
     TResult? Function(_Auth value)? auth,
+    TResult? Function(_CancelledByUser value)? cancelledByUser,
   }) {
     return general?.call(this);
   }
@@ -207,6 +218,7 @@ class _$_General implements _General {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_General value)? general,
     TResult Function(_Auth value)? auth,
+    TResult Function(_CancelledByUser value)? cancelledByUser,
     required TResult orElse(),
   }) {
     if (general != null) {
@@ -291,6 +303,7 @@ class _$_Auth implements _Auth {
   TResult when<TResult extends Object?>({
     required TResult Function(String message) general,
     required TResult Function(String message) auth,
+    required TResult Function(String message) cancelledByUser,
   }) {
     return auth(message);
   }
@@ -300,6 +313,7 @@ class _$_Auth implements _Auth {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(String message)? general,
     TResult? Function(String message)? auth,
+    TResult? Function(String message)? cancelledByUser,
   }) {
     return auth?.call(message);
   }
@@ -309,6 +323,7 @@ class _$_Auth implements _Auth {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(String message)? general,
     TResult Function(String message)? auth,
+    TResult Function(String message)? cancelledByUser,
     required TResult orElse(),
   }) {
     if (auth != null) {
@@ -322,6 +337,7 @@ class _$_Auth implements _Auth {
   TResult map<TResult extends Object?>({
     required TResult Function(_General value) general,
     required TResult Function(_Auth value) auth,
+    required TResult Function(_CancelledByUser value) cancelledByUser,
   }) {
     return auth(this);
   }
@@ -331,6 +347,7 @@ class _$_Auth implements _Auth {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_General value)? general,
     TResult? Function(_Auth value)? auth,
+    TResult? Function(_CancelledByUser value)? cancelledByUser,
   }) {
     return auth?.call(this);
   }
@@ -340,6 +357,7 @@ class _$_Auth implements _Auth {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_General value)? general,
     TResult Function(_Auth value)? auth,
+    TResult Function(_CancelledByUser value)? cancelledByUser,
     required TResult orElse(),
   }) {
     if (auth != null) {
@@ -357,4 +375,148 @@ abstract class _Auth implements Failure {
   @override
   @JsonKey(ignore: true)
   _$$_AuthCopyWith<_$_Auth> get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_CancelledByUserCopyWith<$Res>
+    implements $FailureCopyWith<$Res> {
+  factory _$$_CancelledByUserCopyWith(
+          _$_CancelledByUser value, $Res Function(_$_CancelledByUser) then) =
+      __$$_CancelledByUserCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$_CancelledByUserCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$_CancelledByUser>
+    implements _$$_CancelledByUserCopyWith<$Res> {
+  __$$_CancelledByUserCopyWithImpl(
+      _$_CancelledByUser _value, $Res Function(_$_CancelledByUser) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$_CancelledByUser(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_CancelledByUser implements _CancelledByUser {
+  const _$_CancelledByUser({required this.message});
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'Failure.cancelledByUser(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_CancelledByUser &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_CancelledByUserCopyWith<_$_CancelledByUser> get copyWith =>
+      __$$_CancelledByUserCopyWithImpl<_$_CancelledByUser>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) general,
+    required TResult Function(String message) auth,
+    required TResult Function(String message) cancelledByUser,
+  }) {
+    return cancelledByUser(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? general,
+    TResult? Function(String message)? auth,
+    TResult? Function(String message)? cancelledByUser,
+  }) {
+    return cancelledByUser?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? general,
+    TResult Function(String message)? auth,
+    TResult Function(String message)? cancelledByUser,
+    required TResult orElse(),
+  }) {
+    if (cancelledByUser != null) {
+      return cancelledByUser(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_General value) general,
+    required TResult Function(_Auth value) auth,
+    required TResult Function(_CancelledByUser value) cancelledByUser,
+  }) {
+    return cancelledByUser(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_General value)? general,
+    TResult? Function(_Auth value)? auth,
+    TResult? Function(_CancelledByUser value)? cancelledByUser,
+  }) {
+    return cancelledByUser?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_General value)? general,
+    TResult Function(_Auth value)? auth,
+    TResult Function(_CancelledByUser value)? cancelledByUser,
+    required TResult orElse(),
+  }) {
+    if (cancelledByUser != null) {
+      return cancelledByUser(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _CancelledByUser implements Failure {
+  const factory _CancelledByUser({required final String message}) =
+      _$_CancelledByUser;
+
+  @override
+  String get message;
+  @override
+  @JsonKey(ignore: true)
+  _$$_CancelledByUserCopyWith<_$_CancelledByUser> get copyWith =>
+      throw _privateConstructorUsedError;
 }
