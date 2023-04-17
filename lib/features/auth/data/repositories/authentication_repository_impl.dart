@@ -3,7 +3,6 @@ import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
-import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../../../core/errors/failure.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -131,30 +130,14 @@ class AuthenticationRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, Unit>> signInWithApple() async {
     try {
-      final appleProvider =
-          AppleAuthProvider().addScope('photoPath').addScope('fullName');
-
-      print('appleProvider.parameters');
-      print(appleProvider.parameters);
-      print('appleProvider.scopes');
-      print(appleProvider.scopes);
+      final appleProvider = AppleAuthProvider().addScope('fullName');
 
       await _firebaseAuth.signInWithProvider(appleProvider);
-
-      // final credential = await SignInWithApple.getAppleIDCredential(
-      //   scopes: [
-      //     AppleIDAuthorizationScopes.email,
-      //     AppleIDAuthorizationScopes.fullName,
-      //   ],
-      // );
-
-      // print(credential);
 
       return right(unit);
     } on FirebaseAuthException catch (e) {
       return Left(Failure.auth(message: e.message ?? ''));
     } catch (e) {
-      print(e);
       return Left(Failure.general(message: e.toString()));
     }
   }

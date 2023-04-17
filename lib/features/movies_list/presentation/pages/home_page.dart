@@ -5,6 +5,7 @@ import 'package:movie_browser/features/auth/utils/show_auth_providers_dialog.dar
 import 'package:movie_browser/features/auth/utils/show_signout_dialog.dart';
 
 import '../../../auth/presentation/blocs/auth/auth_bloc.dart';
+import '../../../core/utils/show_snack_bar.dart';
 import '../cubits/random_genres/random_genres_cubit.dart';
 import '../widgets/build_movies_list.dart';
 import '../widgets/genres_list.dart';
@@ -51,47 +52,55 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        title: const Text('Movie Browser'),
-        actions: [
-          BlocBuilder<AuthBloc, AuthBlocState>(
-            builder: (context, state) {
-              return state.maybeMap(
-                // signout
-                authenticated: (state) => IconButton(
-                  onPressed: () => showSignoutDialog(context: context),
-                  icon: const Icon(Icons.person_off),
-                ),
-                // go to login page
-                orElse: () => IconButton(
-                  onPressed: () => showAuthProvidersDialog(context),
-                  icon: const Icon(Icons.person),
-                ),
-              );
-            },
-          ),
-          IconButton(
-            onPressed: () => showSearch(
-              context: context,
-              delegate: MovieSearch(),
+    return BlocListener<AuthBloc, AuthBlocState>(
+      listener: (context, state) {
+        state.mapOrNull(
+          authenticated: (state) =>
+              showSnackBar(context: context, message: state.toString()),
+        );
+      },
+      child: Scaffold(
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          title: const Text('Movie Browser'),
+          actions: [
+            BlocBuilder<AuthBloc, AuthBlocState>(
+              builder: (context, state) {
+                return state.maybeMap(
+                  // signout
+                  authenticated: (state) => IconButton(
+                    onPressed: () => showSignoutDialog(context: context),
+                    icon: const Icon(Icons.person_off),
+                  ),
+                  // go to login page
+                  orElse: () => IconButton(
+                    onPressed: () => showAuthProvidersDialog(context),
+                    icon: const Icon(Icons.person),
+                  ),
+                );
+              },
             ),
-            icon: const Icon(Icons.search),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).padding.bottom + 32,
+            IconButton(
+              onPressed: () => showSearch(
+                context: context,
+                delegate: MovieSearch(),
+              ),
+              icon: const Icon(Icons.search),
+            ),
+          ],
         ),
-        children: [
-          const Top20Switcher(),
-          const Top20List(),
-          const Top20TvList(),
-          const Genreslist(),
-          ..._randomCategoryLists
-        ],
+        body: ListView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).padding.bottom + 32,
+          ),
+          children: [
+            const Top20Switcher(),
+            const Top20List(),
+            const Top20TvList(),
+            const Genreslist(),
+            ..._randomCategoryLists
+          ],
+        ),
       ),
     );
   }

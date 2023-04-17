@@ -21,6 +21,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
     _streamSubscription = _repository.user.listen((user) {
       if (user != null) {
         add(AuthBlocEvent.autoSignIn(user: user));
+        print('user');
         print(user);
       }
     });
