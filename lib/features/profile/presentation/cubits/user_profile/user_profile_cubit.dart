@@ -28,6 +28,19 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     });
   }
 
+  Future<void> deleteUserProfile() async {
+    await state.mapOrNull(
+      loaded: (state) async {
+        final failureOrUnit =
+            await _repository.deleteUserProfile(state.userProfile.id);
+        await failureOrUnit.fold(
+          (_) async => emit(const UserProfileState.error()),
+          (_) async => emit(const UserProfileState.initial()),
+        );
+      },
+    );
+  }
+
   Future<void> fetchUserProfile(String userId) async {
     emit(const UserProfileState.loading());
 

@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
-import 'package:movie_browser/features/profile/data/models/user_profile_dto.dart';
 
 import '../../../core/errors/failure.dart';
 import '../../domain/entities/user_profile.dart';
 import '../../domain/repositories/profile_repository.dart';
 import '../../domain/services/profile_api_service.dart';
+import '../models/user_profile_dto.dart';
 
 @LazySingleton(as: ProfileRepository)
 class ProfileRepositoryImpl extends ProfileRepository {
@@ -19,9 +19,16 @@ class ProfileRepositoryImpl extends ProfileRepository {
   );
 
   @override
-  Future<Either<Failure, Unit>> deleteUserProfile() {
-    // TODO: implement deleteUserProfile
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> deleteUserProfile(String userId) async {
+    try {
+      await _firebaseFirestore.collection('users').doc(userId).delete();
+
+      return const Right(unit);
+    } on FirebaseException catch (e) {
+      return left(Failure.general(message: e.message ?? 'DataBase Failure'));
+    } catch (e) {
+      return left(Failure.general(message: e.toString()));
+    }
   }
 
   @override

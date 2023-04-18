@@ -8,5 +8,5 @@ abstract class ProfileRepository {
   Future<Either<Failure, String>> createGuestSession();
   Future<Either<Failure, Unit>> createUserProfile(UserProfile userProfile);
   Future<Either<Failure, Unit>> updateUserProfile();
-  Future<Either<Failure, Unit>> deleteUserProfile();
+  Future<Either<Failure, Unit>> deleteUserProfile(String userId);
 }
