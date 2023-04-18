@@ -4,6 +4,7 @@ import 'package:movie_browser/features/auth/presentation/blocs/auth/auth_bloc.da
 import 'package:movie_browser/features/auth/presentation/cubits/email_provider/email_provider_cubit.dart';
 
 import '../features/auth/presentation/cubits/apple_provider/apple_provider_cubit.dart';
+import '../features/auth/presentation/cubits/facebook_provider/facebook_provider_cubit.dart';
 import '../features/auth/presentation/cubits/google_provider/google_provider_cubit.dart';
 import '../features/movie_details/presentation/cubits/cast/cast_cubit.dart';
 import '../features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart';
@@ -54,6 +55,7 @@ class CustomMultiBlocProvider extends StatelessWidget {
         BlocProvider(create: (context) => getIt<EmailProviderCubit>()),
         BlocProvider(create: (context) => getIt<GoogleProviderCubit>()),
         BlocProvider(create: (context) => getIt<AppleProviderCubit>()),
+        BlocProvider(create: (context) => getIt<FacebookProviderCubit>()),
       ],
       child: child,
     );

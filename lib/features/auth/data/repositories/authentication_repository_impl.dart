@@ -1,6 +1,6 @@
 import 'package:dartz/dartz.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
@@ -11,10 +11,12 @@ import '../../domain/repositories/auth_repository.dart';
 class AuthenticationRepositoryImpl extends AuthRepository {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
+  final FacebookAuth _facebookAuth;
 
   AuthenticationRepositoryImpl(
     this._firebaseAuth,
     this._googleSignIn,
+    this._facebookAuth,
   );
 
   @override
@@ -42,6 +44,7 @@ class AuthenticationRepositoryImpl extends AuthRepository {
   Future<Either<Failure, Unit>> signout() async {
     await _firebaseAuth.signOut();
     await _googleSignIn.signOut();
+    await _facebookAuth.logOut();
     return right(unit);
   }
 
@@ -135,6 +138,28 @@ class AuthenticationRepositoryImpl extends AuthRepository {
       await _firebaseAuth.signInWithProvider(appleProvider);
 
       return right(unit);
+    } on FirebaseAuthException catch (e) {
+      return Left(Failure.auth(message: e.message ?? ''));
+    } catch (e) {
+      return Left(Failure.general(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> signInWithFacebook() async {
+    try {
+      final LoginResult result = await _facebookAuth.login();
+
+      if (result.status == LoginStatus.success) {
+        // Create a credential from the access token
+        final OAuthCredential credential =
+            FacebookAuthProvider.credential(result.accessToken!.token);
+        // Once signed in, return the UserCredential
+        await FirebaseAuth.instance.signInWithCredential(credential);
+
+        return right(unit);
+      }
+      return const Left(Failure.cancelledByUser(message: ''));
     } on FirebaseAuthException catch (e) {
       return Left(Failure.auth(message: e.message ?? ''));
     } catch (e) {

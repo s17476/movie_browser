@@ -54,9 +54,21 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>fb2182333578630755</string>
 				<string>com.googleusercontent.apps.687197294009-4rd8ij0bg59iu96msqgh48qqc7hmov8e</string>
 			</array>
 		</dict>
+	</array>
+	<key>FacebookAppID</key>
+	<string>2182333578630755</string>
+	<key>FacebookClientToken</key>
+	<string>77f1a2983df1d7e5376bc756818d0889</string>
+	<key>FacebookDisplayName</key>
+	<string>Movie Browser</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
 	</array>
 </dict>
 </plist>

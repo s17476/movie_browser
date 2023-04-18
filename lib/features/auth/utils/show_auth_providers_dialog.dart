@@ -6,6 +6,7 @@ import 'package:sign_button/sign_button.dart';
 
 import '../../core/widgets/glass_layer.dart';
 import '../presentation/cubits/apple_provider/apple_provider_cubit.dart';
+import '../presentation/cubits/facebook_provider/facebook_provider_cubit.dart';
 import '../presentation/cubits/google_provider/google_provider_cubit.dart';
 import '../presentation/pages/email_auth_page.dart';
 import '../presentation/widgets/custom_signin_button.dart';
@@ -55,7 +56,10 @@ void showAuthProvidersDialog(BuildContext context) {
               SignInButton(
                 buttonType: ButtonType.facebook,
                 width: double.infinity,
-                onPressed: () {},
+                onPressed: () {
+                  context.read<FacebookProviderCubit>().signIn();
+                  Navigator.pop(context);
+                },
               ),
               const Divider(),
               // cancel button

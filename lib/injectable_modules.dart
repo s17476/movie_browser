@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
@@ -23,4 +24,10 @@ abstract class GoogleSignInService {
   GoogleSignIn get googleSignIn => GoogleSignIn(
         clientId: DefaultFirebaseOptions.currentPlatform.iosClientId,
       );
+}
+
+@module
+abstract class FacebookSignInService {
+  @lazySingleton
+  FacebookAuth get facebookSignIn => FacebookAuth.instance;
 }
