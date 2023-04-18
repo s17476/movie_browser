@@ -4,7 +4,7 @@ import '../../../core/errors/failure.dart';
 import '../entities/user_profile.dart';
 
 abstract class ProfileRepository {
-  Future<Either<Failure, UserProfile>> fetchUserProfile();
+  Future<Either<Failure, UserProfile>> fetchUserProfile(String userId);
   Future<Either<Failure, Unit>> updateUserProfile();
   Future<Either<Failure, Unit>> deleteUserProfile();
 }

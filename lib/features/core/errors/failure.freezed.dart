@@ -22,6 +22,7 @@ mixin _$Failure {
     required TResult Function(String message) general,
     required TResult Function(String message) auth,
     required TResult Function(String message) cancelledByUser,
+    required TResult Function(String message) userNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,6 +30,7 @@ mixin _$Failure {
     TResult? Function(String message)? general,
     TResult? Function(String message)? auth,
     TResult? Function(String message)? cancelledByUser,
+    TResult? Function(String message)? userNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +38,7 @@ mixin _$Failure {
     TResult Function(String message)? general,
     TResult Function(String message)? auth,
     TResult Function(String message)? cancelledByUser,
+    TResult Function(String message)? userNotFound,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -44,6 +47,7 @@ mixin _$Failure {
     required TResult Function(_General value) general,
     required TResult Function(_Auth value) auth,
     required TResult Function(_CancelledByUser value) cancelledByUser,
+    required TResult Function(_UserNotFound value) userNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -51,6 +55,7 @@ mixin _$Failure {
     TResult? Function(_General value)? general,
     TResult? Function(_Auth value)? auth,
     TResult? Function(_CancelledByUser value)? cancelledByUser,
+    TResult? Function(_UserNotFound value)? userNotFound,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -58,6 +63,7 @@ mixin _$Failure {
     TResult Function(_General value)? general,
     TResult Function(_Auth value)? auth,
     TResult Function(_CancelledByUser value)? cancelledByUser,
+    TResult Function(_UserNotFound value)? userNotFound,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -165,6 +171,7 @@ class _$_General implements _General {
     required TResult Function(String message) general,
     required TResult Function(String message) auth,
     required TResult Function(String message) cancelledByUser,
+    required TResult Function(String message) userNotFound,
   }) {
     return general(message);
   }
@@ -175,6 +182,7 @@ class _$_General implements _General {
     TResult? Function(String message)? general,
     TResult? Function(String message)? auth,
     TResult? Function(String message)? cancelledByUser,
+    TResult? Function(String message)? userNotFound,
   }) {
     return general?.call(message);
   }
@@ -185,6 +193,7 @@ class _$_General implements _General {
     TResult Function(String message)? general,
     TResult Function(String message)? auth,
     TResult Function(String message)? cancelledByUser,
+    TResult Function(String message)? userNotFound,
     required TResult orElse(),
   }) {
     if (general != null) {
@@ -199,6 +208,7 @@ class _$_General implements _General {
     required TResult Function(_General value) general,
     required TResult Function(_Auth value) auth,
     required TResult Function(_CancelledByUser value) cancelledByUser,
+    required TResult Function(_UserNotFound value) userNotFound,
   }) {
     return general(this);
   }
@@ -209,6 +219,7 @@ class _$_General implements _General {
     TResult? Function(_General value)? general,
     TResult? Function(_Auth value)? auth,
     TResult? Function(_CancelledByUser value)? cancelledByUser,
+    TResult? Function(_UserNotFound value)? userNotFound,
   }) {
     return general?.call(this);
   }
@@ -219,6 +230,7 @@ class _$_General implements _General {
     TResult Function(_General value)? general,
     TResult Function(_Auth value)? auth,
     TResult Function(_CancelledByUser value)? cancelledByUser,
+    TResult Function(_UserNotFound value)? userNotFound,
     required TResult orElse(),
   }) {
     if (general != null) {
@@ -304,6 +316,7 @@ class _$_Auth implements _Auth {
     required TResult Function(String message) general,
     required TResult Function(String message) auth,
     required TResult Function(String message) cancelledByUser,
+    required TResult Function(String message) userNotFound,
   }) {
     return auth(message);
   }
@@ -314,6 +327,7 @@ class _$_Auth implements _Auth {
     TResult? Function(String message)? general,
     TResult? Function(String message)? auth,
     TResult? Function(String message)? cancelledByUser,
+    TResult? Function(String message)? userNotFound,
   }) {
     return auth?.call(message);
   }
@@ -324,6 +338,7 @@ class _$_Auth implements _Auth {
     TResult Function(String message)? general,
     TResult Function(String message)? auth,
     TResult Function(String message)? cancelledByUser,
+    TResult Function(String message)? userNotFound,
     required TResult orElse(),
   }) {
     if (auth != null) {
@@ -338,6 +353,7 @@ class _$_Auth implements _Auth {
     required TResult Function(_General value) general,
     required TResult Function(_Auth value) auth,
     required TResult Function(_CancelledByUser value) cancelledByUser,
+    required TResult Function(_UserNotFound value) userNotFound,
   }) {
     return auth(this);
   }
@@ -348,6 +364,7 @@ class _$_Auth implements _Auth {
     TResult? Function(_General value)? general,
     TResult? Function(_Auth value)? auth,
     TResult? Function(_CancelledByUser value)? cancelledByUser,
+    TResult? Function(_UserNotFound value)? userNotFound,
   }) {
     return auth?.call(this);
   }
@@ -358,6 +375,7 @@ class _$_Auth implements _Auth {
     TResult Function(_General value)? general,
     TResult Function(_Auth value)? auth,
     TResult Function(_CancelledByUser value)? cancelledByUser,
+    TResult Function(_UserNotFound value)? userNotFound,
     required TResult orElse(),
   }) {
     if (auth != null) {
@@ -446,6 +464,7 @@ class _$_CancelledByUser implements _CancelledByUser {
     required TResult Function(String message) general,
     required TResult Function(String message) auth,
     required TResult Function(String message) cancelledByUser,
+    required TResult Function(String message) userNotFound,
   }) {
     return cancelledByUser(message);
   }
@@ -456,6 +475,7 @@ class _$_CancelledByUser implements _CancelledByUser {
     TResult? Function(String message)? general,
     TResult? Function(String message)? auth,
     TResult? Function(String message)? cancelledByUser,
+    TResult? Function(String message)? userNotFound,
   }) {
     return cancelledByUser?.call(message);
   }
@@ -466,6 +486,7 @@ class _$_CancelledByUser implements _CancelledByUser {
     TResult Function(String message)? general,
     TResult Function(String message)? auth,
     TResult Function(String message)? cancelledByUser,
+    TResult Function(String message)? userNotFound,
     required TResult orElse(),
   }) {
     if (cancelledByUser != null) {
@@ -480,6 +501,7 @@ class _$_CancelledByUser implements _CancelledByUser {
     required TResult Function(_General value) general,
     required TResult Function(_Auth value) auth,
     required TResult Function(_CancelledByUser value) cancelledByUser,
+    required TResult Function(_UserNotFound value) userNotFound,
   }) {
     return cancelledByUser(this);
   }
@@ -490,6 +512,7 @@ class _$_CancelledByUser implements _CancelledByUser {
     TResult? Function(_General value)? general,
     TResult? Function(_Auth value)? auth,
     TResult? Function(_CancelledByUser value)? cancelledByUser,
+    TResult? Function(_UserNotFound value)? userNotFound,
   }) {
     return cancelledByUser?.call(this);
   }
@@ -500,6 +523,7 @@ class _$_CancelledByUser implements _CancelledByUser {
     TResult Function(_General value)? general,
     TResult Function(_Auth value)? auth,
     TResult Function(_CancelledByUser value)? cancelledByUser,
+    TResult Function(_UserNotFound value)? userNotFound,
     required TResult orElse(),
   }) {
     if (cancelledByUser != null) {
@@ -518,5 +542,155 @@ abstract class _CancelledByUser implements Failure {
   @override
   @JsonKey(ignore: true)
   _$$_CancelledByUserCopyWith<_$_CancelledByUser> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$_UserNotFoundCopyWith<$Res>
+    implements $FailureCopyWith<$Res> {
+  factory _$$_UserNotFoundCopyWith(
+          _$_UserNotFound value, $Res Function(_$_UserNotFound) then) =
+      __$$_UserNotFoundCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message});
+}
+
+/// @nodoc
+class __$$_UserNotFoundCopyWithImpl<$Res>
+    extends _$FailureCopyWithImpl<$Res, _$_UserNotFound>
+    implements _$$_UserNotFoundCopyWith<$Res> {
+  __$$_UserNotFoundCopyWithImpl(
+      _$_UserNotFound _value, $Res Function(_$_UserNotFound) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+  }) {
+    return _then(_$_UserNotFound(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UserNotFound implements _UserNotFound {
+  const _$_UserNotFound({required this.message});
+
+  @override
+  final String message;
+
+  @override
+  String toString() {
+    return 'Failure.userNotFound(message: $message)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UserNotFound &&
+            (identical(other.message, message) || other.message == message));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, message);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UserNotFoundCopyWith<_$_UserNotFound> get copyWith =>
+      __$$_UserNotFoundCopyWithImpl<_$_UserNotFound>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(String message) general,
+    required TResult Function(String message) auth,
+    required TResult Function(String message) cancelledByUser,
+    required TResult Function(String message) userNotFound,
+  }) {
+    return userNotFound(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(String message)? general,
+    TResult? Function(String message)? auth,
+    TResult? Function(String message)? cancelledByUser,
+    TResult? Function(String message)? userNotFound,
+  }) {
+    return userNotFound?.call(message);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(String message)? general,
+    TResult Function(String message)? auth,
+    TResult Function(String message)? cancelledByUser,
+    TResult Function(String message)? userNotFound,
+    required TResult orElse(),
+  }) {
+    if (userNotFound != null) {
+      return userNotFound(message);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_General value) general,
+    required TResult Function(_Auth value) auth,
+    required TResult Function(_CancelledByUser value) cancelledByUser,
+    required TResult Function(_UserNotFound value) userNotFound,
+  }) {
+    return userNotFound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_General value)? general,
+    TResult? Function(_Auth value)? auth,
+    TResult? Function(_CancelledByUser value)? cancelledByUser,
+    TResult? Function(_UserNotFound value)? userNotFound,
+  }) {
+    return userNotFound?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_General value)? general,
+    TResult Function(_Auth value)? auth,
+    TResult Function(_CancelledByUser value)? cancelledByUser,
+    TResult Function(_UserNotFound value)? userNotFound,
+    required TResult orElse(),
+  }) {
+    if (userNotFound != null) {
+      return userNotFound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _UserNotFound implements Failure {
+  const factory _UserNotFound({required final String message}) =
+      _$_UserNotFound;
+
+  @override
+  String get message;
+  @override
+  @JsonKey(ignore: true)
+  _$$_UserNotFoundCopyWith<_$_UserNotFound> get copyWith =>
       throw _privateConstructorUsedError;
 }

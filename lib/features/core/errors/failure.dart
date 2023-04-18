@@ -13,4 +13,7 @@ class Failure with _$Failure {
   /// Authentication cancelled by the user
   const factory Failure.cancelledByUser({required String message}) =
       _CancelledByUser;
+
+  /// User not found
+  const factory Failure.userNotFound({required String message}) = _UserNotFound;
 }
