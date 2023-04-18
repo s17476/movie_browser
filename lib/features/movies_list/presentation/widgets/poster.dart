@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/constants.dart';
@@ -30,17 +31,18 @@ class Poster extends StatelessWidget {
               width: double.infinity,
               color: Colors.black,
             ),
-            FadeInImage.assetNetwork(
+            FadeInImage(
               imageErrorBuilder: (context, error, stackTrace) => const Center(
                 child: Text(
                   'No image found',
                   textAlign: TextAlign.center,
                 ),
               ),
-              placeholder: 'assets/images/loading.gif',
+              placeholder: const AssetImage('assets/images/loading.gif'),
               placeholderFit: BoxFit.scaleDown,
-              placeholderScale: 2,
-              image: '${kImagesBaseUrl}w154$posterPath',
+              image: CachedNetworkImageProvider(
+                '${kImagesBaseUrl}w154$posterPath',
+              ),
               height: double.infinity,
               width: double.infinity,
               fit: BoxFit.fitHeight,

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/widgets/star_rating.dart';
+import '../../../core/presentation/widgets/star_rating.dart';
 import '../../domain/entities/tv_show_details.dart';
 
 class TvShowInfoBox extends StatelessWidget {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/utils/format_currency.dart';
-import '../../../core/widgets/star_rating.dart';
+import '../../../core/presentation/widgets/star_rating.dart';
 import '../../domain/entities/movie_details.dart';
 
 class InfoBox extends StatelessWidget {

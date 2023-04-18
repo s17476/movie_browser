@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/constants/constants.dart';
-import '../../../../core/widgets/star_rating.dart';
+import '../../../../core/presentation/widgets/star_rating.dart';
 import '../../../domain/entities/movie.dart';
 import '../../../utils/fetch_and_show_movie.dart';
 

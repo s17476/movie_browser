@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/constants.dart';
-import '../../../core/widgets/images_carousel.dart';
+import '../../../core/presentation/widgets/images_carousel.dart';
 
 class MovieImage extends StatelessWidget {
   final List<String> images;

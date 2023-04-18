@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/constants/constants.dart';
-import '../../../core/widgets/images_carousel.dart';
+import '../../../core/presentation/widgets/images_carousel.dart';
 import '../../domain/entities/movie_details.dart';
 import '../cubits/movie_images/movie_images_cubit.dart';
 import 'info_box.dart';

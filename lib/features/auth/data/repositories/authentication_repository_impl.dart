@@ -133,7 +133,8 @@ class AuthenticationRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, Unit>> signInWithApple() async {
     try {
-      final appleProvider = AppleAuthProvider().addScope('fullName');
+      final appleProvider =
+          AppleAuthProvider().addScope('fullName').addScope('email');
 
       await _firebaseAuth.signInWithProvider(appleProvider);
 

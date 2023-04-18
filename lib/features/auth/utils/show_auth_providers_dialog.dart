@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sign_button/sign_button.dart';
 
-import '../../core/widgets/glass_layer.dart';
+import '../../core/presentation/widgets/glass_layer.dart';
 import '../presentation/cubits/apple_provider/apple_provider_cubit.dart';
 import '../presentation/cubits/facebook_provider/facebook_provider_cubit.dart';
 import '../presentation/cubits/google_provider/google_provider_cubit.dart';
