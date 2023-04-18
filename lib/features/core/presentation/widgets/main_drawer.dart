@@ -60,7 +60,6 @@ class MainDrawer extends StatelessWidget {
                               indent: 8,
                               endIndent: 8,
                             ),
-                            SizedBox(),
                           ],
                         )),
                         Divider(

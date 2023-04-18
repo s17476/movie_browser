@@ -18,17 +18,17 @@ import 'package:http/http.dart' as _i3;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'features/auth/data/repositories/authentication_repository_impl.dart'
-    as _i32;
-import 'features/auth/domain/repositories/auth_repository.dart' as _i31;
-import 'features/auth/presentation/blocs/auth/auth_bloc.dart' as _i43;
+    as _i33;
+import 'features/auth/domain/repositories/auth_repository.dart' as _i32;
+import 'features/auth/presentation/blocs/auth/auth_bloc.dart' as _i44;
 import 'features/auth/presentation/cubits/apple_provider/apple_provider_cubit.dart'
-    as _i42;
+    as _i43;
 import 'features/auth/presentation/cubits/email_provider/email_provider_cubit.dart'
-    as _i34;
-import 'features/auth/presentation/cubits/facebook_provider/facebook_provider_cubit.dart'
     as _i35;
-import 'features/auth/presentation/cubits/google_provider/google_provider_cubit.dart'
+import 'features/auth/presentation/cubits/facebook_provider/facebook_provider_cubit.dart'
     as _i36;
+import 'features/auth/presentation/cubits/google_provider/google_provider_cubit.dart'
+    as _i37;
 import 'features/movie_details/data/repositories/movie_details_repository_impl.dart'
     as _i11;
 import 'features/movie_details/data/services/movie_details_api_service_impl.dart'
@@ -38,21 +38,21 @@ import 'features/movie_details/domain/repositories/movie_details_repository.dart
 import 'features/movie_details/domain/services/movie_details_api_service.dart'
     as _i8;
 import 'features/movie_details/presentation/cubits/cast/cast_cubit.dart'
-    as _i44;
+    as _i45;
 import 'features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart'
-    as _i37;
+    as _i38;
 import 'features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart'
     as _i12;
 import 'features/movie_details/presentation/cubits/movie_images/movie_images_cubit.dart'
-    as _i38;
+    as _i39;
 import 'features/movie_details/presentation/cubits/recommendations/recommendations_cubit.dart'
-    as _i40;
-import 'features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart'
-    as _i28;
-import 'features/movie_details/presentation/cubits/tv_show_details/tv_show_details_cubit.dart'
-    as _i30;
-import 'features/movie_details/presentation/cubits/video/video_cubit.dart'
     as _i41;
+import 'features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart'
+    as _i29;
+import 'features/movie_details/presentation/cubits/tv_show_details/tv_show_details_cubit.dart'
+    as _i31;
+import 'features/movie_details/presentation/cubits/video/video_cubit.dart'
+    as _i42;
 import 'features/movies_list/data/repositories/movies_repository_impl.dart'
     as _i16;
 import 'features/movies_list/data/services/movies_api_service_impl.dart'
@@ -61,17 +61,17 @@ import 'features/movies_list/domain/repositories/movies_repository.dart'
     as _i15;
 import 'features/movies_list/domain/services/movies_api_service.dart' as _i13;
 import 'features/movies_list/presentation/cubits/category_movies/category_movies_cubit.dart'
-    as _i33;
+    as _i34;
 import 'features/movies_list/presentation/cubits/random_genres/random_genres_cubit.dart'
-    as _i24;
-import 'features/movies_list/presentation/cubits/search_movies/search_movies_cubit.dart'
     as _i25;
-import 'features/movies_list/presentation/cubits/search_suggestions/search_suggestions_cubit.dart'
+import 'features/movies_list/presentation/cubits/search_movies/search_movies_cubit.dart'
     as _i26;
-import 'features/movies_list/presentation/cubits/top20_movie_list/top20_movie_list_cubit.dart'
+import 'features/movies_list/presentation/cubits/search_suggestions/search_suggestions_cubit.dart'
     as _i27;
+import 'features/movies_list/presentation/cubits/top20_movie_list/top20_movie_list_cubit.dart'
+    as _i28;
 import 'features/movies_list/presentation/cubits/top20_tv_shows_list/top20_tv_shows_list_cubit.dart'
-    as _i29;
+    as _i30;
 import 'features/people/data/repositories/person_details_repository_impl.dart'
     as _i20;
 import 'features/people/data/services/person_details_api_service_impl.dart'
@@ -81,14 +81,17 @@ import 'features/people/domain/repositories/person_details_repository.dart'
 import 'features/people/domain/services/person_details_api_service.dart'
     as _i17;
 import 'features/people/presentation/cubits/person_credits/person_credits_cubit.dart'
-    as _i45;
+    as _i46;
 import 'features/people/presentation/cubits/person_details/person_details_cubit.dart'
-    as _i39;
+    as _i40;
 import 'features/profile/data/repositories/profile_repository_impl.dart'
-    as _i22;
-import 'features/profile/domain/repositories/profile_repository.dart' as _i21;
-import 'features/profile/domain/services/profile_api_service.dart' as _i23;
-import 'injectable_modules.dart' as _i46;
+    as _i24;
+import 'features/profile/data/services/profile_api_service_impl.dart' as _i22;
+import 'features/profile/domain/repositories/profile_repository.dart' as _i23;
+import 'features/profile/domain/services/profile_api_service.dart' as _i21;
+import 'features/profile/presentation/cubits/user_profile/user_profile_cubit.dart'
+    as _i47;
+import 'injectable_modules.dart' as _i48;
 
 extension GetItInjectableX on _i1.GetIt {
   // initializes the registration of main-scope dependencies inside of GetIt
@@ -130,84 +133,90 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i19.PersonDetailsRepository>(() =>
         _i20.PersonDetailsRepositoryImpl(
             apiService: gh<_i17.PersonDetailsApiService>()));
-    gh.lazySingleton<_i21.ProfileRepository>(() => _i22.ProfileRepositoryImpl(
-          gh<_i23.ProfileApiService>(),
+    gh.lazySingleton<_i21.ProfileApiService>(
+        () => _i22.ProfileApiServiceImpl(client: gh<_i3.Client>()));
+    gh.lazySingleton<_i23.ProfileRepository>(() => _i24.ProfileRepositoryImpl(
+          gh<_i21.ProfileApiService>(),
           gh<_i6.FirebaseFirestore>(),
         ));
-    gh.singleton<_i24.RandomGenresCubit>(_i24.RandomGenresCubit(
+    gh.singleton<_i25.RandomGenresCubit>(_i25.RandomGenresCubit(
       gh<_i15.MoviesRepository>(),
       gh<_i12.MovieGenresCubit>(),
     ));
-    gh.factory<_i25.SearchMoviesCubit>(
-        () => _i25.SearchMoviesCubit(gh<_i15.MoviesRepository>()));
-    gh.factory<_i26.SearchSuggestionsCubit>(
-        () => _i26.SearchSuggestionsCubit(gh<_i15.MoviesRepository>()));
-    gh.singleton<_i27.Top20MovieListCubit>(
-        _i27.Top20MovieListCubit(gh<_i15.MoviesRepository>()));
-    gh.singleton<_i28.Top20MoviesCubit>(_i28.Top20MoviesCubit(
-      gh<_i27.Top20MovieListCubit>(),
+    gh.factory<_i26.SearchMoviesCubit>(
+        () => _i26.SearchMoviesCubit(gh<_i15.MoviesRepository>()));
+    gh.factory<_i27.SearchSuggestionsCubit>(
+        () => _i27.SearchSuggestionsCubit(gh<_i15.MoviesRepository>()));
+    gh.singleton<_i28.Top20MovieListCubit>(
+        _i28.Top20MovieListCubit(gh<_i15.MoviesRepository>()));
+    gh.singleton<_i29.Top20MoviesCubit>(_i29.Top20MoviesCubit(
+      gh<_i28.Top20MovieListCubit>(),
       gh<_i10.MovieDetailsRepository>(),
     ));
-    gh.singleton<_i29.Top20TvShowsListCubit>(
-        _i29.Top20TvShowsListCubit(gh<_i15.MoviesRepository>()));
-    gh.singleton<_i30.TvShowDetailsCubit>(
-        _i30.TvShowDetailsCubit(gh<_i10.MovieDetailsRepository>()));
-    gh.lazySingleton<_i31.AuthRepository>(
-        () => _i32.AuthenticationRepositoryImpl(
+    gh.singleton<_i30.Top20TvShowsListCubit>(
+        _i30.Top20TvShowsListCubit(gh<_i15.MoviesRepository>()));
+    gh.singleton<_i31.TvShowDetailsCubit>(
+        _i31.TvShowDetailsCubit(gh<_i10.MovieDetailsRepository>()));
+    gh.lazySingleton<_i32.AuthRepository>(
+        () => _i33.AuthenticationRepositoryImpl(
               gh<_i5.FirebaseAuth>(),
               gh<_i7.GoogleSignIn>(),
               gh<_i4.FacebookAuth>(),
             ));
-    gh.singleton<_i33.CategoryMoviesCubit>(
-        _i33.CategoryMoviesCubit(gh<_i15.MoviesRepository>()));
-    gh.factory<_i34.EmailProviderCubit>(
-        () => _i34.EmailProviderCubit(gh<_i31.AuthRepository>()));
-    gh.factory<_i35.FacebookProviderCubit>(
-        () => _i35.FacebookProviderCubit(gh<_i31.AuthRepository>()));
-    gh.factory<_i36.GoogleProviderCubit>(
-        () => _i36.GoogleProviderCubit(gh<_i31.AuthRepository>()));
-    gh.singleton<_i37.MovieDetailsCubit>(
-        _i37.MovieDetailsCubit(gh<_i10.MovieDetailsRepository>()));
-    gh.singleton<_i38.MovieImagesCubit>(_i38.MovieImagesCubit(
+    gh.singleton<_i34.CategoryMoviesCubit>(
+        _i34.CategoryMoviesCubit(gh<_i15.MoviesRepository>()));
+    gh.factory<_i35.EmailProviderCubit>(
+        () => _i35.EmailProviderCubit(gh<_i32.AuthRepository>()));
+    gh.factory<_i36.FacebookProviderCubit>(
+        () => _i36.FacebookProviderCubit(gh<_i32.AuthRepository>()));
+    gh.factory<_i37.GoogleProviderCubit>(
+        () => _i37.GoogleProviderCubit(gh<_i32.AuthRepository>()));
+    gh.singleton<_i38.MovieDetailsCubit>(
+        _i38.MovieDetailsCubit(gh<_i10.MovieDetailsRepository>()));
+    gh.singleton<_i39.MovieImagesCubit>(_i39.MovieImagesCubit(
       gh<_i10.MovieDetailsRepository>(),
-      gh<_i37.MovieDetailsCubit>(),
-      gh<_i30.TvShowDetailsCubit>(),
+      gh<_i38.MovieDetailsCubit>(),
+      gh<_i31.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i39.PersonDetailsCubit>(
-        _i39.PersonDetailsCubit(gh<_i19.PersonDetailsRepository>()));
-    gh.singleton<_i40.RecommendationsCubit>(_i40.RecommendationsCubit(
+    gh.singleton<_i40.PersonDetailsCubit>(
+        _i40.PersonDetailsCubit(gh<_i19.PersonDetailsRepository>()));
+    gh.singleton<_i41.RecommendationsCubit>(_i41.RecommendationsCubit(
       gh<_i10.MovieDetailsRepository>(),
-      gh<_i37.MovieDetailsCubit>(),
-      gh<_i30.TvShowDetailsCubit>(),
+      gh<_i38.MovieDetailsCubit>(),
+      gh<_i31.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i41.VideoCubit>(_i41.VideoCubit(
+    gh.singleton<_i42.VideoCubit>(_i42.VideoCubit(
       gh<_i10.MovieDetailsRepository>(),
-      gh<_i37.MovieDetailsCubit>(),
-      gh<_i30.TvShowDetailsCubit>(),
+      gh<_i38.MovieDetailsCubit>(),
+      gh<_i31.TvShowDetailsCubit>(),
     ));
-    gh.factory<_i42.AppleProviderCubit>(
-        () => _i42.AppleProviderCubit(gh<_i31.AuthRepository>()));
-    gh.singleton<_i43.AuthBloc>(_i43.AuthBloc(gh<_i31.AuthRepository>()));
-    gh.singleton<_i44.CastCubit>(_i44.CastCubit(
+    gh.factory<_i43.AppleProviderCubit>(
+        () => _i43.AppleProviderCubit(gh<_i32.AuthRepository>()));
+    gh.singleton<_i44.AuthBloc>(_i44.AuthBloc(gh<_i32.AuthRepository>()));
+    gh.singleton<_i45.CastCubit>(_i45.CastCubit(
       gh<_i10.MovieDetailsRepository>(),
-      gh<_i37.MovieDetailsCubit>(),
-      gh<_i30.TvShowDetailsCubit>(),
+      gh<_i38.MovieDetailsCubit>(),
+      gh<_i31.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i45.PersonCreditsCubit>(_i45.PersonCreditsCubit(
+    gh.singleton<_i46.PersonCreditsCubit>(_i46.PersonCreditsCubit(
       gh<_i19.PersonDetailsRepository>(),
-      gh<_i39.PersonDetailsCubit>(),
+      gh<_i40.PersonDetailsCubit>(),
+    ));
+    gh.singleton<_i47.UserProfileCubit>(_i47.UserProfileCubit(
+      gh<_i23.ProfileRepository>(),
+      gh<_i44.AuthBloc>(),
     ));
     return this;
   }
 }
 
-class _$HttpClient extends _i46.HttpClient {}
+class _$HttpClient extends _i48.HttpClient {}
 
 class _$FirebaseAuthenticationService
-    extends _i46.FirebaseAuthenticationService {}
+    extends _i48.FirebaseAuthenticationService {}
 
-class _$FirebaseFirestoreService extends _i46.FirebaseFirestoreService {}
+class _$FirebaseFirestoreService extends _i48.FirebaseFirestoreService {}
 
-class _$GoogleSignInService extends _i46.GoogleSignInService {}
+class _$GoogleSignInService extends _i48.GoogleSignInService {}
 
-class _$FacebookSignInService extends _i46.FacebookSignInService {}
+class _$FacebookSignInService extends _i48.FacebookSignInService {}

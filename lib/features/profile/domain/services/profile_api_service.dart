@@ -1,3 +1,3 @@
-import '../entities/user_profile.dart';
-
-abstract class ProfileApiService {}
+abstract class ProfileApiService {
+  Future<String> createGuestSession();
+}

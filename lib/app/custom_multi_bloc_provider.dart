@@ -22,6 +22,7 @@ import '../features/movies_list/presentation/cubits/top20_movie_list/top20_movie
 import '../features/movies_list/presentation/cubits/top20_tv_shows_list/top20_tv_shows_list_cubit.dart';
 import '../features/people/presentation/cubits/person_credits/person_credits_cubit.dart';
 import '../features/people/presentation/cubits/person_details/person_details_cubit.dart';
+import '../features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
 import '../injection.dart';
 
 class CustomMultiBlocProvider extends StatelessWidget {
@@ -56,6 +57,7 @@ class CustomMultiBlocProvider extends StatelessWidget {
         BlocProvider(create: (context) => getIt<GoogleProviderCubit>()),
         BlocProvider(create: (context) => getIt<AppleProviderCubit>()),
         BlocProvider(create: (context) => getIt<FacebookProviderCubit>()),
+        BlocProvider(create: (context) => getIt<UserProfileCubit>()),
       ],
       child: child,
     );

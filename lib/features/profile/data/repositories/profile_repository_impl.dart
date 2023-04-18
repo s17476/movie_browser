@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
+import 'package:movie_browser/features/profile/data/models/user_profile_dto.dart';
 
 import '../../../core/errors/failure.dart';
 import '../../domain/entities/user_profile.dart';
@@ -30,19 +31,16 @@ class ProfileRepositoryImpl extends ProfileRepository {
           await _firebaseFirestore.collection('users').doc(userId).get();
 
       if (userSnapshot.exists) {
-        return right(UserProfile.newUser('id'));
-        // final UserProfile userProfile =
-        //     UserProfileModel.fromMap(userSnapshot.data()!, userSnapshot.id);
-        // return Right(userProfile);
+        final userProfileDto = UserProfileDto.fromFirestore(userSnapshot);
+        final userProfile = userProfileDto.toDomain();
+        return Right(userProfile);
       } else {
-        throw Exception(['No user found for the given ID']);
+        return left(const Failure.userNotFound(message: ''));
       }
     } on FirebaseException catch (e) {
-      return Left(Failure.general(message: e.message ?? 'DataBase Failure'));
+      return left(Failure.general(message: e.message ?? 'DataBase Failure'));
     } catch (e) {
-      return Left(
-        Failure.general(message: e.toString()),
-      );
+      return left(Failure.general(message: e.toString()));
     }
   }
 
@@ -50,5 +48,34 @@ class ProfileRepositoryImpl extends ProfileRepository {
   Future<Either<Failure, Unit>> updateUserProfile() {
     // TODO: implement updateUserProfile
     throw UnimplementedError();
+  }
+
+  @override
+  Future<Either<Failure, String>> createGuestSession() async {
+    try {
+      final sessionId = await _apiService.createGuestSession();
+      return right(sessionId);
+    } catch (e) {
+      return left(Failure.general(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> createUserProfile(
+      UserProfile userProfile) async {
+    try {
+      final userReference =
+          _firebaseFirestore.collection('users').doc(userProfile.id);
+
+      final userProfileDto = UserProfileDto.fromDomain(userProfile);
+
+      userReference.set(userProfileDto.toJson());
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(Failure.general(message: e.message ?? 'DataBase Failure'));
+    } catch (e) {
+      return left(Failure.general(message: e.toString()));
+    }
   }
 }

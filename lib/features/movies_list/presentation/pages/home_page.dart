@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_browser/features/auth/utils/show_auth_providers_dialog.dart';
 import 'package:movie_browser/features/auth/utils/show_signout_dialog.dart';
 import 'package:movie_browser/features/core/presentation/widgets/main_drawer.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 import '../../../auth/presentation/blocs/auth/auth_bloc.dart';
 import '../../../core/presentation/widgets/user_avatar.dart';
