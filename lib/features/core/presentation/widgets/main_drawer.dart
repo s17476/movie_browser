@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_browser/features/core/presentation/widgets/user_avatar.dart';
 
 import '../../../auth/presentation/blocs/auth/auth_bloc.dart';
 import 'app_logo.dart';
 import 'sign_in_button.dart';
 import 'sign_out_button.dart';
+import 'user_avatar.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
