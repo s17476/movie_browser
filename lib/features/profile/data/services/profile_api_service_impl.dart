@@ -61,4 +61,70 @@ class ProfileApiServiceImpl extends ProfileApiService {
       rethrow;
     }
   }
+
+  @override
+  Future<void> rateMovie(int movieId, String sessionId, int value) async {
+    try {
+      final Uri uri = Uri(
+        scheme: 'https',
+        host: kBaseUrl,
+        path: '3/movie/$movieId/rating',
+        queryParameters: {
+          'api_key': kApiKey,
+          'guest_session_id': sessionId,
+        },
+      );
+
+      final Map<String, dynamic> requestBody = {
+        "value": value,
+      };
+
+      Response response = await client.post(uri, body: requestBody);
+
+      if (response.statusCode != 200) {
+        throw Exception(httpErrorHandler(response));
+      }
+
+      response = await client.get(uri);
+
+      if (response.statusCode != 200) {
+        throw Exception(httpErrorHandler(response));
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<void> rateTvShow(int showId, String sessionId, int value) async {
+    try {
+      final Uri uri = Uri(
+        scheme: 'https',
+        host: kBaseUrl,
+        path: '3/tv/$showId/rating',
+        queryParameters: {
+          'api_key': kApiKey,
+          'guest_session_id': sessionId,
+        },
+      );
+
+      final Map<String, dynamic> requestBody = {
+        "value": value,
+      };
+
+      Response response = await client.post(uri, body: requestBody);
+
+      if (response.statusCode != 200) {
+        throw Exception(httpErrorHandler(response));
+      }
+
+      response = await client.get(uri);
+
+      if (response.statusCode != 200) {
+        throw Exception(httpErrorHandler(response));
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

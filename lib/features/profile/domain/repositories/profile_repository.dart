@@ -9,4 +9,14 @@ abstract class ProfileRepository {
   Future<Either<Failure, Unit>> createUserProfile(UserProfile userProfile);
   Future<Either<Failure, Unit>> updateUserProfile(UserProfile userProfile);
   Future<Either<Failure, Unit>> deleteUserProfile(String userId);
+  Future<Either<Failure, Unit>> rateMovie(
+    int movieId,
+    String sessionId,
+    int value,
+  );
+  Future<Either<Failure, Unit>> rateTvShow(
+    int showId,
+    String sessionId,
+    int value,
+  );
 }

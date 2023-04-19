@@ -44,7 +44,6 @@ class MovieActions extends StatelessWidget {
                     listType:
                         isTvShow ? ListType.ratedShows : ListType.ratedMovies,
                   ),
-
                   // favorites
                   MovieActionIconButton(
                     movieId: movieId,
@@ -54,7 +53,6 @@ class MovieActions extends StatelessWidget {
                         ? ListType.favoriteShows
                         : ListType.favoriteMovies,
                   ),
-
                   // watchlist
                   MovieActionIconButton(
                     movieId: movieId,
@@ -64,7 +62,6 @@ class MovieActions extends StatelessWidget {
                         ? ListType.watchlistShows
                         : ListType.watchlistMovies,
                   ),
-
                   // watched
                   MovieActionIconButton(
                     movieId: movieId,

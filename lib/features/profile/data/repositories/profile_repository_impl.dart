@@ -53,7 +53,8 @@ class ProfileRepositoryImpl extends ProfileRepository {
 
   @override
   Future<Either<Failure, Unit>> updateUserProfile(
-      UserProfile userProfile) async {
+    UserProfile userProfile,
+  ) async {
     try {
       final userReference =
           _firebaseFirestore.collection('users').doc(userProfile.id);
@@ -82,7 +83,8 @@ class ProfileRepositoryImpl extends ProfileRepository {
 
   @override
   Future<Either<Failure, Unit>> createUserProfile(
-      UserProfile userProfile) async {
+    UserProfile userProfile,
+  ) async {
     try {
       final userReference =
           _firebaseFirestore.collection('users').doc(userProfile.id);
@@ -90,6 +92,40 @@ class ProfileRepositoryImpl extends ProfileRepository {
       final userProfileDto = UserProfileDto.fromDomain(userProfile);
 
       await userReference.set(userProfileDto.toJson());
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(Failure.general(message: e.message ?? 'DataBase Failure'));
+    } catch (e) {
+      return left(Failure.general(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> rateMovie(
+    int movieId,
+    String sessionId,
+    int value,
+  ) async {
+    try {
+      await _apiService.rateMovie(movieId, sessionId, value);
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(Failure.general(message: e.message ?? 'DataBase Failure'));
+    } catch (e) {
+      return left(Failure.general(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, Unit>> rateTvShow(
+    int showId,
+    String sessionId,
+    int value,
+  ) async {
+    try {
+      await _apiService.rateMovie(showId, sessionId, value);
 
       return right(unit);
     } on FirebaseException catch (e) {

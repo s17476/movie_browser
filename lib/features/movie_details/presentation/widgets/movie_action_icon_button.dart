@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:movie_browser/features/core/utils/show_snack_bar.dart';
+import 'package:movie_browser/features/movie_details/utils/show_rate_dialog.dart';
 
 import '../../../profile/presentation/cubits/user_profile/user_profile_cubit.dart';
 
@@ -41,10 +43,18 @@ class MovieActionIconButton extends HookWidget {
           ? IconButton(
               key: const ValueKey('selected'),
               onPressed: () {
-                userProfileCubit.removeMovieFrom(
-                  listType: listType,
-                  movieId: movieId,
-                );
+                if (listType != ListType.ratedMovies &&
+                    listType != ListType.ratedShows) {
+                  userProfileCubit.removeMovieFrom(
+                    listType: listType,
+                    movieId: movieId,
+                  );
+                } else {
+                  showSnackBar(
+                    context: context,
+                    message: 'You have already rated this movie.',
+                  );
+                }
               },
               icon: Icon(
                 selectedIconData,
@@ -59,10 +69,15 @@ class MovieActionIconButton extends HookWidget {
           : IconButton(
               key: const ValueKey('unselected'),
               onPressed: () {
-                userProfileCubit.addMovieTo(
-                  listType: listType,
-                  movieId: movieId,
-                );
+                if (listType != ListType.ratedMovies &&
+                    listType != ListType.ratedShows) {
+                  userProfileCubit.addMovieTo(
+                    listType: listType,
+                    movieId: movieId,
+                  );
+                } else {
+                  showrateDialog(context, listType, movieId);
+                }
               },
               icon: Icon(
                 unselectedIconData,
