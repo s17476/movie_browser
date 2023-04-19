@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
-import 'package:movie_browser/features/profile/presentation/pages/favorites_page.dart';
 
 import '../../../auth/presentation/blocs/auth/auth_bloc.dart';
+import '../../../profile/presentation/cubits/user_profile/user_profile_cubit.dart';
+import '../../../profile/presentation/pages/user_lists_page.dart';
 import 'app_logo.dart';
 import 'sign_in_button.dart';
 import 'sign_out_button.dart';
@@ -81,12 +81,20 @@ class MainDrawer extends StatelessWidget {
                               title: 'watchlist',
                             ),
                             DrawerItem(
-                              onPressed: () {},
+                              onPressed: () => Navigator.popAndPushNamed(
+                                context,
+                                UserListPage.routeName,
+                                arguments: ListType.watchedMovies,
+                              ),
                               iconData: Icons.remove_red_eye,
                               title: 'Watched',
                             ),
                             DrawerItem(
-                              onPressed: () {},
+                              onPressed: () => Navigator.popAndPushNamed(
+                                context,
+                                UserListPage.routeName,
+                                arguments: ListType.ratedMovies,
+                              ),
                               iconData: Icons.star,
                               title: 'Rated',
                             ),
