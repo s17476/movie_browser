@@ -79,7 +79,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
               }
               await result.fold(
                 (_) async => emit(state.copyWith(isError: true)),
-                (_) async => print('rated value: $value'),
+                (_) async => null,
               );
             },
           );

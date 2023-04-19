@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:movie_browser/features/core/utils/show_snack_bar.dart';
-import 'package:movie_browser/features/movie_details/utils/show_rate_dialog.dart';
 
+import '../../../core/utils/show_snack_bar.dart';
 import '../../../profile/presentation/cubits/user_profile/user_profile_cubit.dart';
+import '../../utils/show_rate_dialog.dart';
 
 class MovieActionIconButton extends HookWidget {
   final int movieId;
@@ -26,6 +26,24 @@ class MovieActionIconButton extends HookWidget {
           listType: listType,
           movieId: movieId,
         );
+  }
+
+  void _showFeedback(BuildContext context) {
+    String message = '';
+    if (listType == ListType.favoriteMovies ||
+        listType == ListType.favoriteShows) {
+      message = 'Added to favorites';
+    } else if (listType == ListType.watchedMovies ||
+        listType == ListType.watchedShows) {
+      message = 'Added to watched';
+    } else if (listType == ListType.watchlistMovies ||
+        listType == ListType.watchlistShows) {
+      message = 'Added to watchlist';
+    }
+
+    if (message.isNotEmpty) {
+      showSnackBar(context: context, message: message);
+    }
   }
 
   @override
@@ -75,6 +93,7 @@ class MovieActionIconButton extends HookWidget {
                     listType: listType,
                     movieId: movieId,
                   );
+                  _showFeedback(context);
                 } else {
                   showrateDialog(context, listType, movieId);
                 }

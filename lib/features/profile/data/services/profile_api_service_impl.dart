@@ -76,18 +76,12 @@ class ProfileApiServiceImpl extends ProfileApiService {
       );
 
       final Map<String, dynamic> requestBody = {
-        "value": value,
+        "value": value.toString(),
       };
 
-      Response response = await client.post(uri, body: requestBody);
+      final Response response = await client.post(uri, body: requestBody);
 
-      if (response.statusCode != 200) {
-        throw Exception(httpErrorHandler(response));
-      }
-
-      response = await client.get(uri);
-
-      if (response.statusCode != 200) {
+      if (response.statusCode != 201) {
         throw Exception(httpErrorHandler(response));
       }
     } catch (e) {
@@ -109,18 +103,12 @@ class ProfileApiServiceImpl extends ProfileApiService {
       );
 
       final Map<String, dynamic> requestBody = {
-        "value": value,
+        "value": value.toString(),
       };
 
-      Response response = await client.post(uri, body: requestBody);
+      final Response response = await client.post(uri, body: requestBody);
 
-      if (response.statusCode != 200) {
-        throw Exception(httpErrorHandler(response));
-      }
-
-      response = await client.get(uri);
-
-      if (response.statusCode != 200) {
+      if (response.statusCode != 201) {
         throw Exception(httpErrorHandler(response));
       }
     } catch (e) {
