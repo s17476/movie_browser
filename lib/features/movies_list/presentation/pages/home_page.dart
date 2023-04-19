@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
 
+import '../../../auth/presentation/blocs/auth/auth_bloc.dart';
 import '../../../core/presentation/widgets/main_drawer.dart';
 import '../../../core/presentation/widgets/user_avatar.dart';
 import '../cubits/random_genres/random_genres_cubit.dart';
@@ -50,34 +52,44 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      drawer: const MainDrawer(),
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        backgroundColor: Colors.black.withOpacity(0.65),
-        title: const Text('Movie Browser'),
-        leading: const UserAvatar(),
-        actions: [
-          IconButton(
-            onPressed: () => showSearch(
-              context: context,
-              delegate: MovieSearch(),
+    return BlocListener<UserProfileCubit, UserProfileState>(
+      listener: (context, state) {
+        print(state);
+      },
+      child: Scaffold(
+        drawer: const MainDrawer(),
+        extendBodyBehindAppBar: true,
+        appBar: AppBar(
+          backgroundColor: Colors.black.withOpacity(0.65),
+          title: const Text('Movie Browser'),
+          leading: Builder(builder: (context) {
+            return InkWell(
+              onTap: () => Scaffold.of(context).openDrawer(),
+              child: const UserAvatar(),
+            );
+          }),
+          actions: [
+            IconButton(
+              onPressed: () => showSearch(
+                context: context,
+                delegate: MovieSearch(),
+              ),
+              icon: const Icon(Icons.search),
             ),
-            icon: const Icon(Icons.search),
-          ),
-        ],
-      ),
-      body: ListView(
-        padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).padding.bottom + 32,
+          ],
         ),
-        children: [
-          const Top20Switcher(),
-          const Top20List(),
-          const Top20TvList(),
-          const Genreslist(),
-          ..._randomCategoryLists
-        ],
+        body: ListView(
+          padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).padding.bottom + 32,
+          ),
+          children: [
+            const Top20Switcher(),
+            const Top20List(),
+            const Top20TvList(),
+            const Genreslist(),
+            ..._randomCategoryLists
+          ],
+        ),
       ),
     );
   }

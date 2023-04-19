@@ -7,5 +7,6 @@ class UserProfileState with _$UserProfileState {
   const factory UserProfileState.loading() = _Loading;
   const factory UserProfileState.loaded({
     required UserProfile userProfile,
+    required bool isError,
   }) = _Loaded;
 }

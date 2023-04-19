@@ -11,6 +11,17 @@ import '../../../domain/repositories/profile_repository.dart';
 part 'user_profile_cubit.freezed.dart';
 part 'user_profile_state.dart';
 
+enum ListType {
+  favoriteMovies,
+  favoriteShows,
+  watchlistMovies,
+  watchlistShows,
+  watchedMovies,
+  watchedShows,
+  ratedMovies,
+  ratedShows,
+}
+
 @singleton
 class UserProfileCubit extends Cubit<UserProfileState> {
   final ProfileRepository _repository;
@@ -26,6 +37,56 @@ class UserProfileCubit extends Cubit<UserProfileState> {
         orElse: () => _reset(),
       );
     });
+  }
+
+  Future<void> addMovieTo({
+    required ListType listType,
+    required int movieId,
+  }) async {
+    await state.mapOrNull(
+      loaded: (state) async {
+        final oldState = state;
+        final updatedUserProfile = _addToUser(
+          userProfile: state.userProfile,
+          listType: listType,
+          movieId: movieId,
+        );
+
+        emit(state.copyWith(userProfile: updatedUserProfile));
+
+        final failureOrUnit =
+            await _repository.updateUserProfile(updatedUserProfile);
+        await failureOrUnit.fold(
+          (_) async => emit(oldState.copyWith(isError: true)),
+          (_) async => null,
+        );
+      },
+    );
+  }
+
+  Future<void> removeMovieFrom({
+    required ListType listType,
+    required int movieId,
+  }) async {
+    await state.mapOrNull(
+      loaded: (state) async {
+        final oldState = state;
+        final updatedUserProfile = _removeFromUser(
+          userProfile: state.userProfile,
+          listType: listType,
+          movieId: movieId,
+        );
+
+        emit(state.copyWith(userProfile: updatedUserProfile));
+
+        final failureOrUnit =
+            await _repository.updateUserProfile(updatedUserProfile);
+        await failureOrUnit.fold(
+          (_) async => emit(oldState.copyWith(isError: true)),
+          (_) async => null,
+        );
+      },
+    );
   }
 
   Future<void> deleteUserProfile() async {
@@ -52,8 +113,9 @@ class UserProfileCubit extends Cubit<UserProfileState> {
         // database or connection error
         orElse: () async => emit(const UserProfileState.error()),
       ),
-      (userProfile) async =>
-          emit(UserProfileState.loaded(userProfile: userProfile)),
+      (userProfile) async => emit(
+        UserProfileState.loaded(userProfile: userProfile, isError: false),
+      ),
     );
   }
 
@@ -69,7 +131,9 @@ class UserProfileCubit extends Cubit<UserProfileState> {
         final failureOrUnit = await _repository.createUserProfile(userProfile);
         await failureOrUnit.fold(
           (_) async => emit(const UserProfileState.error()),
-          (_) async => emit(UserProfileState.loaded(userProfile: userProfile)),
+          (_) async => emit(
+            UserProfileState.loaded(userProfile: userProfile, isError: false),
+          ),
         );
       },
     );
@@ -77,6 +141,92 @@ class UserProfileCubit extends Cubit<UserProfileState> {
 
   Future<void> _reset() async {
     emit(const UserProfileState.initial());
+  }
+
+  UserProfile _addToUser({
+    required UserProfile userProfile,
+    required ListType listType,
+    required int movieId,
+  }) {
+    switch (listType) {
+      case ListType.favoriteMovies:
+        return userProfile.copyWith(
+          favoriteMovies: [...userProfile.favoriteMovies, movieId],
+        );
+      case ListType.favoriteShows:
+        return userProfile.copyWith(
+          favoriteTvShows: [...userProfile.favoriteTvShows, movieId],
+        );
+      case ListType.ratedMovies:
+        return userProfile.copyWith(
+          ratedMovies: [...userProfile.ratedMovies, movieId],
+        );
+      case ListType.ratedShows:
+        return userProfile.copyWith(
+          ratedTvShows: [...userProfile.ratedTvShows, movieId],
+        );
+      case ListType.watchedMovies:
+        return userProfile.copyWith(
+          watchedMovies: [...userProfile.watchedMovies, movieId],
+        );
+      case ListType.watchedShows:
+        return userProfile.copyWith(
+          watchedShows: [...userProfile.watchedShows, movieId],
+        );
+      case ListType.watchlistMovies:
+        return userProfile.copyWith(
+          toWatchMovies: [...userProfile.toWatchMovies, movieId],
+        );
+      case ListType.watchlistShows:
+        return userProfile.copyWith(
+          toWatchShows: [...userProfile.toWatchShows, movieId],
+        );
+      default:
+        return userProfile;
+    }
+  }
+
+  UserProfile _removeFromUser({
+    required UserProfile userProfile,
+    required ListType listType,
+    required int movieId,
+  }) {
+    switch (listType) {
+      case ListType.favoriteMovies:
+        return userProfile.copyWith(
+          favoriteMovies: userProfile.favoriteMovies..remove(movieId),
+        );
+      case ListType.favoriteShows:
+        return userProfile.copyWith(
+          favoriteTvShows: userProfile.favoriteTvShows..remove(movieId),
+        );
+      case ListType.ratedMovies:
+        return userProfile.copyWith(
+          ratedMovies: userProfile.ratedMovies..remove(movieId),
+        );
+      case ListType.ratedShows:
+        return userProfile.copyWith(
+          ratedTvShows: userProfile.ratedTvShows..remove(movieId),
+        );
+      case ListType.watchedMovies:
+        return userProfile.copyWith(
+          watchedMovies: userProfile.watchedMovies..remove(movieId),
+        );
+      case ListType.watchedShows:
+        return userProfile.copyWith(
+          watchedShows: userProfile.watchedShows..remove(movieId),
+        );
+      case ListType.watchlistMovies:
+        return userProfile.copyWith(
+          toWatchMovies: userProfile.toWatchMovies..remove(movieId),
+        );
+      case ListType.watchlistShows:
+        return userProfile.copyWith(
+          toWatchShows: userProfile.toWatchShows..remove(movieId),
+        );
+      default:
+        return userProfile;
+    }
   }
 
   @override

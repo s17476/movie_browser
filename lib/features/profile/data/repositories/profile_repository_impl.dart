@@ -52,9 +52,22 @@ class ProfileRepositoryImpl extends ProfileRepository {
   }
 
   @override
-  Future<Either<Failure, Unit>> updateUserProfile() {
-    // TODO: implement updateUserProfile
-    throw UnimplementedError();
+  Future<Either<Failure, Unit>> updateUserProfile(
+      UserProfile userProfile) async {
+    try {
+      final userReference =
+          _firebaseFirestore.collection('users').doc(userProfile.id);
+
+      final userProfileDto = UserProfileDto.fromDomain(userProfile);
+
+      await userReference.update(userProfileDto.toJson());
+
+      return right(unit);
+    } on FirebaseException catch (e) {
+      return left(Failure.general(message: e.message ?? 'DataBase Failure'));
+    } catch (e) {
+      return left(Failure.general(message: e.toString()));
+    }
   }
 
   @override
@@ -76,7 +89,7 @@ class ProfileRepositoryImpl extends ProfileRepository {
 
       final userProfileDto = UserProfileDto.fromDomain(userProfile);
 
-      userReference.set(userProfileDto.toJson());
+      await userReference.set(userProfileDto.toJson());
 
       return right(unit);
     } on FirebaseException catch (e) {

@@ -23,14 +23,11 @@ class UserAvatar extends StatelessWidget {
                 ? CachedNetworkImageProvider(state.photoUrl!) as ImageProvider
                 : const AssetImage('assets/images.user.png');
 
-            return InkWell(
-              onTap: () => Scaffold.of(context).openDrawer(),
-              child: Padding(
-                padding: padding,
-                child: CircleAvatar(
-                  radius: radius,
-                  backgroundImage: imageProvider,
-                ),
+            return Padding(
+              padding: padding,
+              child: CircleAvatar(
+                radius: radius,
+                backgroundImage: imageProvider,
               ),
             );
           },
