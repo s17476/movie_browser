@@ -194,35 +194,35 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     switch (listType) {
       case ListType.favoriteMovies:
         return userProfile.copyWith(
-          favoriteMovies: userProfile.favoriteMovies..remove(movieId),
+          favoriteMovies: [...userProfile.favoriteMovies]..remove(movieId),
         );
       case ListType.favoriteShows:
         return userProfile.copyWith(
-          favoriteTvShows: userProfile.favoriteTvShows..remove(movieId),
+          favoriteTvShows: [...userProfile.favoriteTvShows]..remove(movieId),
         );
       case ListType.ratedMovies:
         return userProfile.copyWith(
-          ratedMovies: userProfile.ratedMovies..remove(movieId),
+          ratedMovies: [...userProfile.ratedMovies]..remove(movieId),
         );
       case ListType.ratedShows:
         return userProfile.copyWith(
-          ratedTvShows: userProfile.ratedTvShows..remove(movieId),
+          ratedTvShows: [...userProfile.ratedTvShows]..remove(movieId),
         );
       case ListType.watchedMovies:
         return userProfile.copyWith(
-          watchedMovies: userProfile.watchedMovies..remove(movieId),
+          watchedMovies: [...userProfile.watchedMovies]..remove(movieId),
         );
       case ListType.watchedShows:
         return userProfile.copyWith(
-          watchedShows: userProfile.watchedShows..remove(movieId),
+          watchedShows: [...userProfile.watchedShows]..remove(movieId),
         );
       case ListType.watchlistMovies:
         return userProfile.copyWith(
-          toWatchMovies: userProfile.toWatchMovies..remove(movieId),
+          toWatchMovies: [...userProfile.toWatchMovies]..remove(movieId),
         );
       case ListType.watchlistShows:
         return userProfile.copyWith(
-          toWatchShows: userProfile.toWatchShows..remove(movieId),
+          toWatchShows: [...userProfile.toWatchShows]..remove(movieId),
         );
       default:
         return userProfile;

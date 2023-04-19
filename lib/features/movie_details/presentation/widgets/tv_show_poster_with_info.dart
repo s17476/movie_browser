@@ -7,6 +7,7 @@ import '../../../core/constants/constants.dart';
 import '../../../core/presentation/widgets/images_carousel.dart';
 import '../../domain/entities/tv_show_details.dart';
 import '../cubits/movie_images/movie_images_cubit.dart';
+import 'movie_actions.dart';
 import 'tv_show_info_box.dart';
 
 class TvShowPosterWithInfo extends StatelessWidget {
@@ -127,6 +128,14 @@ class TvShowPosterWithInfo extends StatelessWidget {
                 ),
               ],
             ),
+            Positioned(
+              top: MediaQuery.of(context).padding.top,
+              right: 24,
+              child: MovieActions(
+                isTvShow: true,
+                movieId: show.id,
+              ),
+            )
           ],
         ),
       ],

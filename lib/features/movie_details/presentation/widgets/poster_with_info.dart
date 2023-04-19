@@ -1,13 +1,19 @@
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+
+import 'package:movie_browser/features/core/utils/show_snack_bar.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 import '../../../core/constants/constants.dart';
 import '../../../core/presentation/widgets/images_carousel.dart';
 import '../../domain/entities/movie_details.dart';
 import '../cubits/movie_images/movie_images_cubit.dart';
 import 'info_box.dart';
+import 'movie_actions.dart';
 
 class PosterWithInfo extends StatelessWidget {
   final MovieDetails movie;
@@ -80,7 +86,7 @@ class PosterWithInfo extends StatelessWidget {
                                   ),
                                 );
                               },
-                              child: FadeInImage.assetNetwork(
+                              child: FadeInImage(
                                 imageErrorBuilder:
                                     (context, error, stackTrace) => Container(
                                   height: 100,
@@ -89,12 +95,15 @@ class PosterWithInfo extends StatelessWidget {
                                     'No image found',
                                   ),
                                 ),
-                                placeholder: 'assets/images/loading.gif',
-                                image:
-                                    '${kImagesBaseUrl}w500${movie.posterPath}',
+                                placeholder: const AssetImage(
+                                  'assets/images/loading.gif',
+                                ),
+                                image: CachedNetworkImageProvider(
+                                  '${kImagesBaseUrl}w500${movie.posterPath}',
+                                ),
                                 fit: BoxFit.cover,
                                 placeholderFit: BoxFit.scaleDown,
-                                placeholderScale: 5,
+                                // placeholderScale: 5,
                                 height: 450,
                               ),
                             ),
@@ -127,6 +136,14 @@ class PosterWithInfo extends StatelessWidget {
                 ),
               ],
             ),
+            Positioned(
+              top: MediaQuery.of(context).padding.top,
+              right: 24,
+              child: MovieActions(
+                isTvShow: false,
+                movieId: movie.id,
+              ),
+            )
           ],
         ),
       ],
