@@ -31,7 +31,10 @@ class AppLogo extends StatelessWidget {
             child: FittedBox(
               child: Text(
                 'Movie Browser',
-                style: Theme.of(context).textTheme.displaySmall,
+                style: Theme.of(context)
+                    .textTheme
+                    .displaySmall!
+                    .copyWith(color: Colors.grey.shade200),
               ),
             ),
           ),

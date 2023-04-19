@@ -18,17 +18,17 @@ import 'package:http/http.dart' as _i3;
 import 'package:injectable/injectable.dart' as _i2;
 
 import 'features/auth/data/repositories/authentication_repository_impl.dart'
-    as _i34;
-import 'features/auth/domain/repositories/auth_repository.dart' as _i33;
-import 'features/auth/presentation/blocs/auth/auth_bloc.dart' as _i45;
+    as _i33;
+import 'features/auth/domain/repositories/auth_repository.dart' as _i32;
+import 'features/auth/presentation/blocs/auth/auth_bloc.dart' as _i44;
 import 'features/auth/presentation/cubits/apple_provider/apple_provider_cubit.dart'
-    as _i44;
+    as _i43;
 import 'features/auth/presentation/cubits/email_provider/email_provider_cubit.dart'
-    as _i36;
+    as _i35;
 import 'features/auth/presentation/cubits/facebook_provider/facebook_provider_cubit.dart'
-    as _i37;
+    as _i36;
 import 'features/auth/presentation/cubits/google_provider/google_provider_cubit.dart'
-    as _i38;
+    as _i37;
 import 'features/movie_details/data/repositories/movie_details_repository_impl.dart'
     as _i11;
 import 'features/movie_details/data/services/movie_details_api_service_impl.dart'
@@ -38,21 +38,21 @@ import 'features/movie_details/domain/repositories/movie_details_repository.dart
 import 'features/movie_details/domain/services/movie_details_api_service.dart'
     as _i8;
 import 'features/movie_details/presentation/cubits/cast/cast_cubit.dart'
-    as _i46;
+    as _i45;
 import 'features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart'
-    as _i39;
+    as _i38;
 import 'features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart'
     as _i12;
 import 'features/movie_details/presentation/cubits/movie_images/movie_images_cubit.dart'
-    as _i40;
+    as _i39;
 import 'features/movie_details/presentation/cubits/recommendations/recommendations_cubit.dart'
-    as _i42;
+    as _i41;
 import 'features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart'
     as _i29;
 import 'features/movie_details/presentation/cubits/tv_show_details/tv_show_details_cubit.dart'
     as _i31;
 import 'features/movie_details/presentation/cubits/video/video_cubit.dart'
-    as _i43;
+    as _i42;
 import 'features/movies_list/data/repositories/movies_repository_impl.dart'
     as _i16;
 import 'features/movies_list/data/services/movies_api_service_impl.dart'
@@ -61,7 +61,7 @@ import 'features/movies_list/domain/repositories/movies_repository.dart'
     as _i15;
 import 'features/movies_list/domain/services/movies_api_service.dart' as _i13;
 import 'features/movies_list/presentation/cubits/category_movies/category_movies_cubit.dart'
-    as _i35;
+    as _i34;
 import 'features/movies_list/presentation/cubits/random_genres/random_genres_cubit.dart'
     as _i25;
 import 'features/movies_list/presentation/cubits/search_movies/search_movies_cubit.dart'
@@ -81,18 +81,18 @@ import 'features/people/domain/repositories/person_details_repository.dart'
 import 'features/people/domain/services/person_details_api_service.dart'
     as _i17;
 import 'features/people/presentation/cubits/person_credits/person_credits_cubit.dart'
-    as _i47;
+    as _i46;
 import 'features/people/presentation/cubits/person_details/person_details_cubit.dart'
-    as _i41;
+    as _i40;
 import 'features/profile/data/repositories/profile_repository_impl.dart'
     as _i24;
 import 'features/profile/data/services/profile_api_service_impl.dart' as _i22;
 import 'features/profile/domain/repositories/profile_repository.dart' as _i23;
 import 'features/profile/domain/services/profile_api_service.dart' as _i21;
 import 'features/profile/presentation/cubits/user_lists/user_lists_cubit.dart'
-    as _i32;
-import 'features/profile/presentation/cubits/user_profile/user_profile_cubit.dart'
     as _i48;
+import 'features/profile/presentation/cubits/user_profile/user_profile_cubit.dart'
+    as _i47;
 import 'injectable_modules.dart' as _i49;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -159,56 +159,58 @@ extension GetItInjectableX on _i1.GetIt {
         _i30.Top20TvShowsListCubit(gh<_i15.MoviesRepository>()));
     gh.singleton<_i31.TvShowDetailsCubit>(
         _i31.TvShowDetailsCubit(gh<_i10.MovieDetailsRepository>()));
-    gh.factory<_i32.UserListsCubit>(
-        () => _i32.UserListsCubit(gh<_i10.MovieDetailsRepository>()));
-    gh.lazySingleton<_i33.AuthRepository>(
-        () => _i34.AuthenticationRepositoryImpl(
+    gh.lazySingleton<_i32.AuthRepository>(
+        () => _i33.AuthenticationRepositoryImpl(
               gh<_i5.FirebaseAuth>(),
               gh<_i7.GoogleSignIn>(),
               gh<_i4.FacebookAuth>(),
             ));
-    gh.singleton<_i35.CategoryMoviesCubit>(
-        _i35.CategoryMoviesCubit(gh<_i15.MoviesRepository>()));
-    gh.factory<_i36.EmailProviderCubit>(
-        () => _i36.EmailProviderCubit(gh<_i33.AuthRepository>()));
-    gh.factory<_i37.FacebookProviderCubit>(
-        () => _i37.FacebookProviderCubit(gh<_i33.AuthRepository>()));
-    gh.factory<_i38.GoogleProviderCubit>(
-        () => _i38.GoogleProviderCubit(gh<_i33.AuthRepository>()));
-    gh.singleton<_i39.MovieDetailsCubit>(
-        _i39.MovieDetailsCubit(gh<_i10.MovieDetailsRepository>()));
-    gh.singleton<_i40.MovieImagesCubit>(_i40.MovieImagesCubit(
+    gh.singleton<_i34.CategoryMoviesCubit>(
+        _i34.CategoryMoviesCubit(gh<_i15.MoviesRepository>()));
+    gh.factory<_i35.EmailProviderCubit>(
+        () => _i35.EmailProviderCubit(gh<_i32.AuthRepository>()));
+    gh.factory<_i36.FacebookProviderCubit>(
+        () => _i36.FacebookProviderCubit(gh<_i32.AuthRepository>()));
+    gh.factory<_i37.GoogleProviderCubit>(
+        () => _i37.GoogleProviderCubit(gh<_i32.AuthRepository>()));
+    gh.singleton<_i38.MovieDetailsCubit>(
+        _i38.MovieDetailsCubit(gh<_i10.MovieDetailsRepository>()));
+    gh.singleton<_i39.MovieImagesCubit>(_i39.MovieImagesCubit(
       gh<_i10.MovieDetailsRepository>(),
-      gh<_i39.MovieDetailsCubit>(),
+      gh<_i38.MovieDetailsCubit>(),
       gh<_i31.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i41.PersonDetailsCubit>(
-        _i41.PersonDetailsCubit(gh<_i19.PersonDetailsRepository>()));
-    gh.singleton<_i42.RecommendationsCubit>(_i42.RecommendationsCubit(
+    gh.singleton<_i40.PersonDetailsCubit>(
+        _i40.PersonDetailsCubit(gh<_i19.PersonDetailsRepository>()));
+    gh.singleton<_i41.RecommendationsCubit>(_i41.RecommendationsCubit(
       gh<_i10.MovieDetailsRepository>(),
-      gh<_i39.MovieDetailsCubit>(),
+      gh<_i38.MovieDetailsCubit>(),
       gh<_i31.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i43.VideoCubit>(_i43.VideoCubit(
+    gh.singleton<_i42.VideoCubit>(_i42.VideoCubit(
       gh<_i10.MovieDetailsRepository>(),
-      gh<_i39.MovieDetailsCubit>(),
+      gh<_i38.MovieDetailsCubit>(),
       gh<_i31.TvShowDetailsCubit>(),
     ));
-    gh.factory<_i44.AppleProviderCubit>(
-        () => _i44.AppleProviderCubit(gh<_i33.AuthRepository>()));
-    gh.singleton<_i45.AuthBloc>(_i45.AuthBloc(gh<_i33.AuthRepository>()));
-    gh.singleton<_i46.CastCubit>(_i46.CastCubit(
+    gh.factory<_i43.AppleProviderCubit>(
+        () => _i43.AppleProviderCubit(gh<_i32.AuthRepository>()));
+    gh.singleton<_i44.AuthBloc>(_i44.AuthBloc(gh<_i32.AuthRepository>()));
+    gh.singleton<_i45.CastCubit>(_i45.CastCubit(
       gh<_i10.MovieDetailsRepository>(),
-      gh<_i39.MovieDetailsCubit>(),
+      gh<_i38.MovieDetailsCubit>(),
       gh<_i31.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i47.PersonCreditsCubit>(_i47.PersonCreditsCubit(
+    gh.singleton<_i46.PersonCreditsCubit>(_i46.PersonCreditsCubit(
       gh<_i19.PersonDetailsRepository>(),
-      gh<_i41.PersonDetailsCubit>(),
+      gh<_i40.PersonDetailsCubit>(),
     ));
-    gh.singleton<_i48.UserProfileCubit>(_i48.UserProfileCubit(
+    gh.singleton<_i47.UserProfileCubit>(_i47.UserProfileCubit(
       gh<_i23.ProfileRepository>(),
-      gh<_i45.AuthBloc>(),
+      gh<_i44.AuthBloc>(),
+    ));
+    gh.singleton<_i48.UserListsCubit>(_i48.UserListsCubit(
+      gh<_i47.UserProfileCubit>(),
+      gh<_i10.MovieDetailsRepository>(),
     ));
     return this;
   }

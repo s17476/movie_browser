@@ -48,7 +48,7 @@ class MovieBrowser extends StatelessWidget {
                 const YoutubeVideoPlayer(),
             GenrePage.routeName: (context) => const GenrePage(),
             EmailAuthPage.routeName: (context) => const EmailAuthPage(),
-            FavoritesPage.routeName: (context) => const FavoritesPage(),
+            UserListPage.routeName: (context) => const UserListPage(),
           },
         ),
       ),

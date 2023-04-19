@@ -8,5 +8,6 @@ class UserListsState with _$UserListsState {
   const factory UserListsState.loaded({
     required List<MovieDetails> movies,
     required List<TvShowDetails> shows,
+    required ListType listType,
   }) = _Loaded;
 }
