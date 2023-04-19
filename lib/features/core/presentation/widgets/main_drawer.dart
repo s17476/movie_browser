@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_browser/features/profile/presentation/pages/favorites_page.dart';
 
 import '../../../auth/presentation/blocs/auth/auth_bloc.dart';
 import 'app_logo.dart';
@@ -60,6 +61,25 @@ class MainDrawer extends StatelessWidget {
                               indent: 8,
                               endIndent: 8,
                             ),
+                            DrawerItem(
+                                onPressed: () => Navigator.popAndPushNamed(
+                                      context,
+                                      FavoritesPage.routeName,
+                                    ),
+                                iconData: Icons.favorite,
+                                title: 'Favorites'),
+                            DrawerItem(
+                                onPressed: () {},
+                                iconData: Icons.check_box,
+                                title: 'watchlist'),
+                            DrawerItem(
+                                onPressed: () {},
+                                iconData: Icons.remove_red_eye,
+                                title: 'Watched'),
+                            DrawerItem(
+                                onPressed: () {},
+                                iconData: Icons.star,
+                                title: 'Rated'),
                           ],
                         )),
                         Divider(
@@ -81,6 +101,43 @@ class MainDrawer extends StatelessWidget {
                 );
               },
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class DrawerItem extends StatelessWidget {
+  final Function() onPressed;
+  final IconData iconData;
+  final String title;
+  const DrawerItem({
+    Key? key,
+    required this.onPressed,
+    required this.iconData,
+    required this.title,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialButton(
+      onPressed: onPressed,
+      child: Row(
+        children: [
+          Icon(
+            iconData,
+            color: Colors.black,
+          ),
+          const SizedBox(
+            width: 8,
+          ),
+          Text(
+            title,
+            style: Theme.of(context)
+                .textTheme
+                .bodyLarge!
+                .copyWith(color: Colors.black),
           ),
         ],
       ),

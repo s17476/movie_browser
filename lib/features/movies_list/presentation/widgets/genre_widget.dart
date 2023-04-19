@@ -24,7 +24,14 @@ class _GenreWidgetState extends State<GenreWidget> {
 
   Future<void> _loadNextResultsPage() async {
     if (_scrollController.position.extentAfter < 500) {
-      context.read<CategoryMoviesCubit>().loadNextResultsPage();
+      final categoryCubit = context.read<CategoryMoviesCubit>();
+      categoryCubit.state.mapOrNull(
+        loaded: (state) {
+          if (!state.isLoadingNextPage) {
+            categoryCubit.loadNextResultsPage();
+          }
+        },
+      );
     }
   }
 

@@ -16,7 +16,14 @@ class _ResultsListState extends State<ResultsList> {
 
   Future<void> _loadNextResultsPage() async {
     if (_scrollController.position.extentAfter < 500) {
-      context.read<SearchMoviesCubit>().loadNextresultsPage();
+      final searchCubit = context.read<SearchMoviesCubit>();
+      searchCubit.state.mapOrNull(
+        loaded: (state) {
+          if (!state.isLoadingNextPage) {
+            searchCubit.loadNextresultsPage();
+          }
+        },
+      );
     }
   }
 

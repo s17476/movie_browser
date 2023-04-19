@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_browser/features/auth/presentation/blocs/auth/auth_bloc.dart';
 import 'package:movie_browser/features/auth/presentation/cubits/email_provider/email_provider_cubit.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_lists/user_lists_cubit.dart';
 
 import '../features/auth/presentation/cubits/apple_provider/apple_provider_cubit.dart';
 import '../features/auth/presentation/cubits/facebook_provider/facebook_provider_cubit.dart';
@@ -58,6 +59,7 @@ class CustomMultiBlocProvider extends StatelessWidget {
         BlocProvider(create: (context) => getIt<AppleProviderCubit>()),
         BlocProvider(create: (context) => getIt<FacebookProviderCubit>()),
         BlocProvider(create: (context) => getIt<UserProfileCubit>()),
+        BlocProvider(create: (context) => getIt<UserListsCubit>()),
       ],
       child: child,
     );

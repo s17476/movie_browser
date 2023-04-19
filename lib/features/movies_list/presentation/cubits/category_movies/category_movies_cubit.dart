@@ -39,7 +39,7 @@ class CategoryMoviesCubit extends Cubit<CategoryMoviesState> {
 
           final failureOrMovieList = await _repository.fetchNextPageByGenreId(
             state.genreId,
-            state.movieList.page,
+            state.movieList.page + 1,
           );
           await failureOrMovieList.fold(
             (_) async => emit(state.copyWith(isLoadingNextPage: false)),

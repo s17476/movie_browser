@@ -41,19 +41,21 @@ class SearchMoviesCubit extends Cubit<SearchMoviesState> {
 
           final failureOrMovieList = await _moviesRepository.loadNextPage(
             state.movieList.lastQuery!,
-            state.movieList.page,
+            state.movieList.page + 1,
           );
           await failureOrMovieList.fold(
             (_) async => emit(state.copyWith(isLoadingNextPage: false)),
-            (movieList) async => emit(
-              state.copyWith(
-                isLoadingNextPage: false,
-                movieList: state.movieList.copyWith(
-                  page: state.movieList.page + 1,
-                  results: [...state.movieList.results, ...movieList.results],
+            (movieList) async {
+              emit(
+                state.copyWith(
+                  isLoadingNextPage: false,
+                  movieList: state.movieList.copyWith(
+                    page: state.movieList.page + 1,
+                    results: [...state.movieList.results, ...movieList.results],
+                  ),
                 ),
-              ),
-            ),
+              );
+            },
           );
         }
       },
