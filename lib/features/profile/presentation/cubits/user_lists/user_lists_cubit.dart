@@ -26,7 +26,9 @@ class UserListsCubit extends Cubit<UserListsState> {
       state.mapOrNull(
         loaded: (userState) {
           state.mapOrNull(
-            loaded: (state) => fetchData(listType: state.listType),
+            loaded: (state) {
+              return fetchData(listType: state.listType);
+            },
           );
         },
       );
@@ -37,41 +39,56 @@ class UserListsCubit extends Cubit<UserListsState> {
     required ListType listType,
   }) async {
     await _userProfileCubit.state.mapOrNull(
-      loaded: (state) async {
+      loaded: (userState) async {
         emit(const UserListsState.loading());
 
         bool error = false;
 
         List<MovieDetails> moviesDetails = [];
-        for (var movie in _getMovies(state.userProfile, listType)) {
+
+        for (var movie in _getMovies(userState.userProfile, listType)) {
           final failureOrMovieDetails =
               await _movieDetailsRepository.fetchMovieDetails(movie);
           await failureOrMovieDetails.fold(
             (_) async => error = true,
-            (movieDetails) async => moviesDetails.add(movieDetails),
+            (movieDetails) async {
+              moviesDetails.add(movieDetails);
+              emit(
+                UserListsState.loaded(
+                  movies: [...moviesDetails],
+                  shows: [],
+                  listType: listType,
+                ),
+              );
+
+              await Future.delayed(const Duration(milliseconds: 50));
+            },
           );
         }
 
         List<TvShowDetails> tvShowsDetails = [];
-        for (var tvShow in _getTvShows(state.userProfile, listType)) {
+        for (var tvShow in _getTvShows(userState.userProfile, listType)) {
           final failureOrTvShowDetails =
               await _movieDetailsRepository.fetchTvShowDetails(tvShow);
           await failureOrTvShowDetails.fold(
             (_) async => error = true,
-            (tvShowDetails) async => tvShowsDetails.add(tvShowDetails),
+            (tvShowDetails) async {
+              tvShowsDetails.add(tvShowDetails);
+              emit(
+                UserListsState.loaded(
+                  movies: moviesDetails,
+                  shows: [...tvShowsDetails],
+                  listType: listType,
+                ),
+              );
+
+              await Future.delayed(const Duration(milliseconds: 50));
+            },
           );
         }
 
         if (error && moviesDetails.isEmpty && tvShowsDetails.isEmpty) {
           emit(const UserListsState.error());
-        } else {
-          emit(
-            UserListsState.loaded(
-              movies: moviesDetails,
-              shows: tvShowsDetails,
-              listType: listType,
-            ),
-          );
         }
       },
     );

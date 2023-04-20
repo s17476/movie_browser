@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -40,10 +39,11 @@ class _UserListPageState extends State<UserListPage> {
 
   @override
   void didChangeDependencies() {
+    final userListsCubit = context.watch<UserListsCubit>();
     final listType = ModalRoute.of(context)!.settings.arguments;
     if (listType != null && listType is ListType) {
       _listType = listType;
-      context.watch<UserListsCubit>().state.maybeMap(
+      userListsCubit.state.maybeMap(
         loaded: (state) {
           if (state.listType == listType) {
             _movies = state.movies;
@@ -54,6 +54,7 @@ class _UserListPageState extends State<UserListPage> {
             _isLoading = true;
           }
         },
+        loading: (_) => _isLoading = true,
         orElse: () {
           context.read<UserListsCubit>().fetchData(listType: listType);
           return _isLoading = true;
@@ -74,10 +75,12 @@ class _UserListPageState extends State<UserListPage> {
           ? const Center(
               child: CircularProgressIndicator(),
             )
-          : MoviesGridView(
-              movies: _movies,
-              shows: _tvShows,
-            ),
+          : (_movies.isEmpty && _tvShows.isEmpty)
+              ? const Center(child: Text('Nothing here yet.'))
+              : MoviesGridView(
+                  movies: _movies,
+                  shows: _tvShows,
+                ),
     );
   }
 }
