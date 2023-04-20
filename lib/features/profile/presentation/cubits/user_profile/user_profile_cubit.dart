@@ -1,12 +1,10 @@
 import 'dart:async';
 
-import 'package:dartz/dartz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../auth/presentation/blocs/auth/auth_bloc.dart';
-import '../../../../core/errors/failure.dart';
 import '../../../domain/entities/user_profile.dart';
 import '../../../domain/repositories/profile_repository.dart';
 
@@ -56,31 +54,31 @@ class UserProfileCubit extends Cubit<UserProfileState> {
             movieId: movieId,
           );
 
-          emit(state.copyWith(userProfile: updatedUserProfile));
+          emit(
+            UserProfileState.loaded(
+              userProfile: updatedUserProfile,
+              isError: false,
+            ),
+          );
 
           final failureOrUnit =
               await _repository.updateUserProfile(updatedUserProfile);
           await failureOrUnit.fold(
             (_) async => emit(oldState.copyWith(isError: true)),
             (_) async {
-              Either<Failure, Unit> result;
               if (listType == ListType.ratedMovies) {
-                result = await _repository.rateMovie(
+                await _repository.rateMovie(
                   movieId,
                   state.userProfile.sessionId,
                   value,
                 );
               } else {
-                result = await _repository.rateTvShow(
+                await _repository.rateTvShow(
                   movieId,
                   state.userProfile.sessionId,
                   value,
                 );
               }
-              await result.fold(
-                (_) async => emit(state.copyWith(isError: true)),
-                (_) async => null,
-              );
             },
           );
         },
@@ -102,7 +100,12 @@ class UserProfileCubit extends Cubit<UserProfileState> {
             movieId: movieId,
           );
 
-          emit(state.copyWith(userProfile: updatedUserProfile));
+          emit(
+            UserProfileState.loaded(
+              userProfile: updatedUserProfile,
+              isError: false,
+            ),
+          );
 
           final failureOrUnit =
               await _repository.updateUserProfile(updatedUserProfile);
@@ -128,7 +131,12 @@ class UserProfileCubit extends Cubit<UserProfileState> {
           movieId: movieId,
         );
 
-        emit(state.copyWith(userProfile: updatedUserProfile));
+        emit(
+          UserProfileState.loaded(
+            userProfile: updatedUserProfile,
+            isError: false,
+          ),
+        );
 
         final failureOrUnit =
             await _repository.updateUserProfile(updatedUserProfile);
@@ -146,7 +154,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
         final failureOrUnit =
             await _repository.deleteUserProfile(state.userProfile.id);
         await failureOrUnit.fold(
-          (_) async => emit(const UserProfileState.error()),
+          (_) async => emit(state.copyWith(isError: true)),
           (_) async => emit(const UserProfileState.initial()),
         );
       },
@@ -251,14 +259,6 @@ class UserProfileCubit extends Cubit<UserProfileState> {
         return userProfile.copyWith(
           favoriteTvShows: [...userProfile.favoriteTvShows]..remove(movieId),
         );
-      // case ListType.ratedMovies:
-      //   return userProfile.copyWith(
-      //     ratedMovies: [...userProfile.ratedMovies]..remove(movieId),
-      //   );
-      // case ListType.ratedShows:
-      //   return userProfile.copyWith(
-      //     ratedTvShows: [...userProfile.ratedTvShows]..remove(movieId),
-      //   );
       case ListType.watchedMovies:
         return userProfile.copyWith(
           watchedMovies: [...userProfile.watchedMovies]..remove(movieId),

@@ -41,7 +41,7 @@ class MainDrawer extends StatelessWidget {
                                     radius: 30,
                                   ),
                                   Text(
-                                    state.displayName ?? '',
+                                    state.displayName ?? state.email ?? 'User',
                                     softWrap: true,
                                     maxLines: 2,
                                     style: Theme.of(context)

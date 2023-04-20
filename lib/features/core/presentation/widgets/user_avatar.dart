@@ -21,7 +21,7 @@ class UserAvatar extends StatelessWidget {
           authenticated: (state) {
             final imageProvider = state.photoUrl != null
                 ? CachedNetworkImageProvider(state.photoUrl!) as ImageProvider
-                : const AssetImage('assets/images.user.png');
+                : const AssetImage('assets/images/user.png');
 
             return Padding(
               padding: padding,
