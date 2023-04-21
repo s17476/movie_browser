@@ -1,8 +1,9 @@
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 
 import '../../../movie_details/domain/entities/movie_details.dart';
 import '../../../movie_details/domain/entities/tv_show_details.dart';
-import '../../../movies_list/presentation/widgets/poster.dart';
+import 'movie_tile.dart';
 
 class MoviesGridView extends StatelessWidget {
   final List<MovieDetails> movies;
@@ -28,43 +29,10 @@ class MoviesGridView extends StatelessWidget {
       mainAxisSpacing: 16,
       children: [
         ...movies
-            .map(
-              (e) => Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade500,
-                      blurRadius: 5,
-                    ),
-                  ],
-                ),
-                child: Poster(
-                  id: e.id,
-                  posterPath: e.posterPath,
-                ),
-              ),
-            )
+            .map((movie) => MovieTile(movieOrTvShow: left(movie)))
             .toList(),
         ...shows
-            .map(
-              (e) => Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(15),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.shade500,
-                      blurRadius: 5,
-                    ),
-                  ],
-                ),
-                child: Poster(
-                  id: e.id,
-                  posterPath: e.posterPath!,
-                  isTvShow: true,
-                ),
-              ),
-            )
+            .map((tvShow) => MovieTile(movieOrTvShow: right(tvShow)))
             .toList()
       ],
     );

@@ -61,7 +61,7 @@ class UserListsCubit extends Cubit<UserListsState> {
                 ),
               );
 
-              await Future.delayed(const Duration(milliseconds: 50));
+              await Future.delayed(const Duration(milliseconds: 30));
             },
           );
         }
@@ -82,11 +82,20 @@ class UserListsCubit extends Cubit<UserListsState> {
                 ),
               );
 
-              await Future.delayed(const Duration(milliseconds: 50));
+              await Future.delayed(const Duration(milliseconds: 30));
             },
           );
         }
 
+        if (!error && moviesDetails.isEmpty && tvShowsDetails.isEmpty) {
+          emit(
+            UserListsState.loaded(
+              listType: listType,
+              movies: [],
+              shows: [],
+            ),
+          );
+        }
         if (error && moviesDetails.isEmpty && tvShowsDetails.isEmpty) {
           emit(const UserListsState.error());
         }
