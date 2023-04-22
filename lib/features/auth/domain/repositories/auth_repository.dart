@@ -26,5 +26,5 @@ abstract class AuthRepository {
 
   Future<Either<Failure, Unit>> signout();
 
-  Future<Either<Failure, Unit>> deleteAccount({required String password});
+  Future<Either<Failure, Unit>> deleteAccount({String? password});
 }

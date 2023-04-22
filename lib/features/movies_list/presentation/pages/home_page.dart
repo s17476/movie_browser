@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movie_browser/features/auth/presentation/blocs/auth/auth_bloc.dart';
 
 import '../../../core/presentation/widgets/main_drawer.dart';
 import '../../../core/presentation/widgets/user_avatar.dart';
@@ -50,6 +51,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // TODO
+    context.read<AuthBloc>().state.mapOrNull(
+      authenticated: (value) {
+        print('Auth state');
+        print(value);
+      },
+    );
     return Scaffold(
       drawer: const MainDrawer(),
       extendBodyBehindAppBar: true,

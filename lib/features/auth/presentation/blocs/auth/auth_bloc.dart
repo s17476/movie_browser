@@ -35,6 +35,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
               email: event.user.email,
               displayName: event.user.displayName,
               photoUrl: event.user.photoURL,
+              providerId: event.user.providerData,
             ),
           );
         },

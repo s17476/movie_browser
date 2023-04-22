@@ -10,5 +10,6 @@ class AuthBlocState with _$AuthBlocState {
     required String? displayName,
     required String? email,
     required String? photoUrl,
+    required List<UserInfo> providerId,
   }) = _Authenticated;
 }

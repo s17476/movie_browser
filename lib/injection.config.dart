@@ -164,6 +164,7 @@ extension GetItInjectableX on _i1.GetIt {
               gh<_i5.FirebaseAuth>(),
               gh<_i7.GoogleSignIn>(),
               gh<_i4.FacebookAuth>(),
+              gh<_i6.FirebaseFirestore>(),
             ));
     gh.singleton<_i34.CategoryMoviesCubit>(
         _i34.CategoryMoviesCubit(gh<_i15.MoviesRepository>()));

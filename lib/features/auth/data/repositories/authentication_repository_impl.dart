@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -12,11 +13,13 @@ class AuthenticationRepositoryImpl extends AuthRepository {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
   final FacebookAuth _facebookAuth;
+  final FirebaseFirestore _firebaseFirestore;
 
   AuthenticationRepositoryImpl(
     this._firebaseAuth,
     this._googleSignIn,
     this._facebookAuth,
+    this._firebaseFirestore,
   );
 
   @override
@@ -82,18 +85,52 @@ class AuthenticationRepositoryImpl extends AuthRepository {
 
   @override
   Future<Either<Failure, Unit>> deleteAccount({
-    required String password,
+    String? password,
   }) async {
     try {
       final user = _firebaseAuth.currentUser!;
-      // reauthenticate with credencial
-      final credential =
-          EmailAuthProvider.credential(email: user.email!, password: password);
 
-      final authResult = await user.reauthenticateWithCredential(credential);
+      final providerData = user.providerData[0];
 
-      // delete user account
-      await authResult.user!.delete();
+      UserCredential? authResult;
+
+      if (providerData.providerId.contains('password') && password != null) {
+        final credential = EmailAuthProvider.credential(
+            email: user.email!, password: password);
+        authResult = await user.reauthenticateWithCredential(credential);
+      } else if (providerData.providerId.contains('facebook')) {
+        final LoginResult result = await _facebookAuth.login();
+
+        if (result.status == LoginStatus.success) {
+          final OAuthCredential credential =
+              FacebookAuthProvider.credential(result.accessToken!.token);
+          authResult = await user.reauthenticateWithCredential(credential);
+        }
+      } else if (providerData.providerId.contains('google')) {
+        final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+        if (googleUser == null) {
+          return const Left(Failure.cancelledByUser(message: ''));
+        }
+        final GoogleSignInAuthentication googleAuth =
+            await googleUser.authentication;
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth.accessToken,
+          idToken: googleAuth.idToken,
+        );
+
+        authResult = await user.reauthenticateWithCredential(credential);
+      } else if (providerData.providerId.contains('apple')) {
+        final appleProvider =
+            AppleAuthProvider().addScope('fullName').addScope('email');
+
+        authResult = await user.reauthenticateWithProvider(appleProvider);
+      }
+
+      if (authResult == null) {
+        const Failure.general(message: 'Deletion failed');
+      }
+      await authResult!.user!.delete();
+      await _firebaseFirestore.collection('users').doc(user.uid).delete();
 
       return right(unit);
     } on FirebaseAuthException catch (e) {
