@@ -8,6 +8,7 @@ import '../features/movie_details/presentation/pages/youtube_video_player.dart';
 import '../features/movies_list/presentation/pages/genre_page.dart';
 import '../features/movies_list/presentation/pages/home_page.dart';
 import '../features/people/presentation/pages/person_details_page.dart';
+import '../features/profile/presentation/pages/user_details_page.dart';
 import '../features/profile/presentation/pages/user_lists_page.dart';
 import 'custom_multi_bloc_provider.dart';
 
@@ -61,6 +62,7 @@ class MovieBrowser extends StatelessWidget {
             GenrePage.routeName: (context) => const GenrePage(),
             EmailAuthPage.routeName: (context) => const EmailAuthPage(),
             UserListPage.routeName: (context) => const UserListPage(),
+            UserDetailsPage.routeName: (context) => const UserDetailsPage(),
           },
         ),
       ),

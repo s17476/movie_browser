@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_browser/features/auth/presentation/blocs/auth/auth_bloc.dart';
-import 'package:movie_browser/features/auth/presentation/cubits/email_provider/email_provider_cubit.dart';
-import 'package:movie_browser/features/profile/presentation/cubits/user_lists/user_lists_cubit.dart';
 
+import '../features/auth/presentation/blocs/auth/auth_bloc.dart';
 import '../features/auth/presentation/cubits/apple_provider/apple_provider_cubit.dart';
+import '../features/auth/presentation/cubits/email_provider/email_provider_cubit.dart';
 import '../features/auth/presentation/cubits/facebook_provider/facebook_provider_cubit.dart';
 import '../features/auth/presentation/cubits/google_provider/google_provider_cubit.dart';
 import '../features/movie_details/presentation/cubits/cast/cast_cubit.dart';
@@ -23,6 +22,7 @@ import '../features/movies_list/presentation/cubits/top20_movie_list/top20_movie
 import '../features/movies_list/presentation/cubits/top20_tv_shows_list/top20_tv_shows_list_cubit.dart';
 import '../features/people/presentation/cubits/person_credits/person_credits_cubit.dart';
 import '../features/people/presentation/cubits/person_details/person_details_cubit.dart';
+import '../features/profile/presentation/cubits/user_lists/user_lists_cubit.dart';
 import '../features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
 import '../injection.dart';
 

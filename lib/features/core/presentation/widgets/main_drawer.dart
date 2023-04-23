@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../auth/presentation/blocs/auth/auth_bloc.dart';
 import '../../../profile/presentation/cubits/user_profile/user_profile_cubit.dart';
+import '../../../profile/presentation/pages/user_details_page.dart';
 import '../../../profile/presentation/pages/user_lists_page.dart';
 import 'app_logo.dart';
 import 'sign_in_button.dart';
@@ -33,8 +34,10 @@ class MainDrawer extends StatelessWidget {
                           children: [
                             const SizedBox(height: 8),
                             InkWell(
-                              // TODO go to details page
-                              onTap: () {},
+                              onTap: () => Navigator.popAndPushNamed(
+                                context,
+                                UserDetailsPage.routeName,
+                              ),
                               child: Row(
                                 children: [
                                   const UserAvatar(

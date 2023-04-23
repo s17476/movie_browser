@@ -25,8 +25,6 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
     });
 
     on<AuthBlocEvent>((event, emit) async {
-      emit(const AuthBlocState.submitting());
-
       await event.map(
         autoSignIn: (event) async {
           emit(
@@ -40,6 +38,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
           );
         },
         signOut: (event) async {
+          emit(const AuthBlocState.submitting());
           final failureOrUnit = await _repository.signout();
           await failureOrUnit.fold(
             (failure) async => emit(
@@ -48,6 +47,25 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
               ),
             ),
             (_) async => emit(const AuthBlocState.initial()),
+          );
+        },
+        deleteUser: (event) async {
+          await state.mapOrNull(
+            authenticated: (state) async {
+              final oldState = state;
+              emit(const AuthBlocState.submitting());
+
+              final failureOrUnit =
+                  await _repository.deleteAccount(password: event.password);
+              await failureOrUnit.fold(
+                (failure) async => emit(
+                  oldState.copyWith(
+                    errorMessage: failure.message,
+                  ),
+                ),
+                (_) async => emit(const AuthBlocState.initial()),
+              );
+            },
           );
         },
       );

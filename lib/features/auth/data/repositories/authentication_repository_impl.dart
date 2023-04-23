@@ -127,10 +127,10 @@ class AuthenticationRepositoryImpl extends AuthRepository {
       }
 
       if (authResult == null) {
-        const Failure.general(message: 'Deletion failed');
+        throw Exception('Deletion failed');
       }
-      await authResult!.user!.delete();
       await _firebaseFirestore.collection('users').doc(user.uid).delete();
+      await authResult.user!.delete();
 
       return right(unit);
     } on FirebaseAuthException catch (e) {
