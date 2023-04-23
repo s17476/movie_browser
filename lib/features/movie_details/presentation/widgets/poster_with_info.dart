@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../core/constants/constants.dart';
 import '../../../core/presentation/widgets/images_carousel.dart';
@@ -20,6 +21,9 @@ class PosterWithInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double height = ResponsiveWrapper.of(context).isSmallerThan(TABLET)
+        ? ((MediaQuery.of(context).size.width * 1.5) + 32)
+        : MediaQuery.of(context).size.width * 1.25 + 32;
     return Column(
       children: [
         Stack(
@@ -27,8 +31,10 @@ class PosterWithInfo extends StatelessWidget {
             // background image
             FadeInImage.assetNetwork(
               placeholder: 'assets/images/loading_empty.gif',
-              image: '${kImagesBaseUrl}w500${movie.posterPath}',
+              image: '${kImagesBaseUrl}original${movie.posterPath}',
               fit: BoxFit.fill,
+              width: double.infinity,
+              height: height,
               imageErrorBuilder: (context, error, stackTrace) =>
                   const SizedBox(),
             ),
@@ -38,7 +44,7 @@ class PosterWithInfo extends StatelessWidget {
                 filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                 child: Container(
                   width: double.infinity,
-                  height: (MediaQuery.of(context).size.width * 1.5) + 32,
+                  height: height,
                   color: Colors.black.withOpacity(0.5),
                 ),
               ),
@@ -95,12 +101,16 @@ class PosterWithInfo extends StatelessWidget {
                                   'assets/images/loading.gif',
                                 ),
                                 image: CachedNetworkImageProvider(
-                                  '${kImagesBaseUrl}w500${movie.posterPath}',
+                                  '${kImagesBaseUrl}original${movie.posterPath}',
                                 ),
                                 fit: BoxFit.cover,
                                 placeholderFit: BoxFit.scaleDown,
                                 // placeholderScale: 5,
-                                height: 450,
+                                // height: 450,
+                                height: ResponsiveWrapper.of(context)
+                                        .isSmallerThan(TABLET)
+                                    ? height * 0.73
+                                    : MediaQuery.of(context).size.width * 1.1,
                               ),
                             ),
                           ),

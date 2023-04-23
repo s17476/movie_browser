@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import '../features/auth/presentation/pages/email_auth_page.dart';
 import '../features/movie_details/presentation/pages/movie_details_page.dart';
@@ -26,6 +26,17 @@ class MovieBrowser extends StatelessWidget {
           }
         },
         child: MaterialApp(
+          builder: (context, child) => ResponsiveWrapper.builder(
+            child,
+            defaultScale: true,
+            breakpoints: const [
+              ResponsiveBreakpoint.resize(350, name: MOBILE),
+              ResponsiveBreakpoint.autoScale(600, name: TABLET),
+              ResponsiveBreakpoint.autoScale(800, name: TABLET),
+              ResponsiveBreakpoint.resize(1200, name: DESKTOP),
+              ResponsiveBreakpoint.autoScale(2460, name: "4K"),
+            ],
+          ),
           title: 'Movie Browser',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(

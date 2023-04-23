@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart';
 import '../../domain/entities/movie.dart';
@@ -42,6 +43,26 @@ class _GenreWidgetState extends State<GenreWidget> {
   }
 
   @override
+  void didChangeDependencies() {
+    context.watch<CategoryMoviesCubit>().state.mapOrNull(
+      loaded: (state) {
+        if (ResponsiveWrapper.of(context).isLargerThan(MOBILE) &&
+            state.movieList.page == 1) {
+          final categoryCubit = context.read<CategoryMoviesCubit>();
+          categoryCubit.state.mapOrNull(
+            loaded: (state) {
+              if (!state.isLoadingNextPage) {
+                categoryCubit.loadNextResultsPage();
+              }
+            },
+          );
+        }
+      },
+    );
+    super.didChangeDependencies();
+  }
+
+  @override
   void dispose() {
     _scrollController.dispose();
     super.dispose();
@@ -67,7 +88,8 @@ class _GenreWidgetState extends State<GenreWidget> {
       ),
       body: GridView.count(
         controller: _scrollController,
-        crossAxisCount: 3,
+        crossAxisCount:
+            ResponsiveWrapper.of(context).isSmallerThan(TABLET) ? 3 : 5,
         childAspectRatio: 2 / 3,
         padding: EdgeInsets.only(
           top: MediaQuery.of(context).padding.top + kToolbarHeight + 8,

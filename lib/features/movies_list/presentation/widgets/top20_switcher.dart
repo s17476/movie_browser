@@ -5,6 +5,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../core/constants/constants.dart';
 import '../../../core/utils/format_currency.dart';
@@ -133,7 +134,11 @@ class PosterImage extends StatelessWidget {
               duration: const Duration(milliseconds: 300),
               child: Container(
                 key: UniqueKey(),
-                margin: const EdgeInsets.only(left: 8),
+                margin: EdgeInsets.only(
+                  left: ResponsiveWrapper.of(context).isSmallerThan(TABLET)
+                      ? 8
+                      : 32,
+                ),
                 height: 300,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),

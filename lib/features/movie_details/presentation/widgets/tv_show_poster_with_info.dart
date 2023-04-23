@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../core/constants/constants.dart';
 import '../../../core/presentation/widgets/images_carousel.dart';
@@ -19,6 +20,9 @@ class TvShowPosterWithInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double height = ResponsiveWrapper.of(context).isSmallerThan(TABLET)
+        ? ((MediaQuery.of(context).size.width * 1.5) + 32)
+        : MediaQuery.of(context).size.width * 1.25 + 32;
     return Column(
       children: [
         Stack(
@@ -28,6 +32,8 @@ class TvShowPosterWithInfo extends StatelessWidget {
               placeholder: 'assets/images/loading_empty.gif',
               image: '${kImagesBaseUrl}w500${show.posterPath}',
               fit: BoxFit.fill,
+              height: height,
+              width: double.infinity,
               imageErrorBuilder: (context, error, stackTrace) =>
                   const SizedBox(),
             ),
@@ -37,7 +43,7 @@ class TvShowPosterWithInfo extends StatelessWidget {
                 filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
                 child: Container(
                   width: double.infinity,
-                  height: (MediaQuery.of(context).size.width * 1.5) + 32,
+                  height: height,
                   color: Colors.black.withOpacity(0.5),
                 ),
               ),
@@ -96,7 +102,10 @@ class TvShowPosterWithInfo extends StatelessWidget {
                                 fit: BoxFit.cover,
                                 placeholderFit: BoxFit.scaleDown,
                                 placeholderScale: 5,
-                                height: 450,
+                                height: ResponsiveWrapper.of(context)
+                                        .isSmallerThan(TABLET)
+                                    ? height * 0.73
+                                    : MediaQuery.of(context).size.width * 1.1,
                               ),
                             ),
                           ),

@@ -51,13 +51,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO
-    context.read<AuthBloc>().state.mapOrNull(
-      authenticated: (value) {
-        print('Auth state');
-        print(value);
-      },
-    );
     return Scaffold(
       drawer: const MainDrawer(),
       extendBodyBehindAppBar: true,

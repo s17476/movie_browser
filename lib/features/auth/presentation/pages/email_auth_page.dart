@@ -217,7 +217,7 @@ class _EmailAuthPageState extends State<EmailAuthPage>
                           horizontal: 16,
                         ),
                         child: SizedBox(
-                          width: double.infinity,
+                          width: 500,
                           child: ElevatedButton(
                             onPressed: state.maybeMap(
                               submitting: (_) => () {},

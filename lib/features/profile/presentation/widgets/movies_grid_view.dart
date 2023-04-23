@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
+import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../movie_details/domain/entities/movie_details.dart';
 import '../../../movie_details/domain/entities/tv_show_details.dart';
@@ -17,7 +18,8 @@ class MoviesGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
-      crossAxisCount: 3,
+      crossAxisCount:
+          ResponsiveWrapper.of(context).isSmallerThan(TABLET) ? 3 : 5,
       childAspectRatio: 2 / 3,
       padding: EdgeInsets.only(
         top: MediaQuery.of(context).padding.top + 8,
