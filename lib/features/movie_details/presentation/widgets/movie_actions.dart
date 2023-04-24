@@ -29,53 +29,45 @@ class MovieActions extends StatelessWidget {
         );
       },
       builder: (context, state) {
-        return state.maybeMap(
-          loaded: (state) {
-            return SizedBox(
-              height: 330,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // rate
-                  MovieActionIconButton(
-                    movieId: movieId,
-                    selectedIconData: Icons.star,
-                    unselectedIconData: Icons.star_border,
-                    listType:
-                        isTvShow ? ListType.ratedShows : ListType.ratedMovies,
-                  ),
-                  // favorites
-                  MovieActionIconButton(
-                    movieId: movieId,
-                    selectedIconData: Icons.favorite,
-                    unselectedIconData: Icons.favorite_border,
-                    listType: isTvShow
-                        ? ListType.favoriteShows
-                        : ListType.favoriteMovies,
-                  ),
-                  // watchlist
-                  MovieActionIconButton(
-                    movieId: movieId,
-                    selectedIconData: Icons.check_box,
-                    unselectedIconData: Icons.add_box_outlined,
-                    listType: isTvShow
-                        ? ListType.watchlistShows
-                        : ListType.watchlistMovies,
-                  ),
-                  // watched
-                  MovieActionIconButton(
-                    movieId: movieId,
-                    selectedIconData: Icons.remove_red_eye,
-                    unselectedIconData: Icons.remove_red_eye_outlined,
-                    listType: isTvShow
-                        ? ListType.watchedShows
-                        : ListType.watchedMovies,
-                  ),
-                ],
+        return SizedBox(
+          height: 330,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              // rate
+              MovieActionIconButton(
+                movieId: movieId,
+                selectedIconData: Icons.star,
+                unselectedIconData: Icons.star_border,
+                listType: isTvShow ? ListType.ratedShows : ListType.ratedMovies,
               ),
-            );
-          },
-          orElse: () => const SizedBox(),
+              // favorites
+              MovieActionIconButton(
+                movieId: movieId,
+                selectedIconData: Icons.favorite,
+                unselectedIconData: Icons.favorite_border,
+                listType:
+                    isTvShow ? ListType.favoriteShows : ListType.favoriteMovies,
+              ),
+              // watchlist
+              MovieActionIconButton(
+                movieId: movieId,
+                selectedIconData: Icons.check_box,
+                unselectedIconData: Icons.add_box_outlined,
+                listType: isTvShow
+                    ? ListType.watchlistShows
+                    : ListType.watchlistMovies,
+              ),
+              // watched
+              MovieActionIconButton(
+                movieId: movieId,
+                selectedIconData: Icons.remove_red_eye,
+                unselectedIconData: Icons.remove_red_eye_outlined,
+                listType:
+                    isTvShow ? ListType.watchedShows : ListType.watchedMovies,
+              ),
+            ],
+          ),
         );
       },
     );

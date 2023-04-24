@@ -6,7 +6,7 @@ import '../features/movie_details/presentation/pages/movie_details_page.dart';
 import '../features/movie_details/presentation/pages/tv_show_details_page.dart';
 import '../features/movie_details/presentation/pages/youtube_video_player.dart';
 import '../features/movies_list/presentation/pages/genre_page.dart';
-import '../features/movies_list/presentation/pages/home_page.dart';
+import '../features/core/presentation/pages/home_page.dart';
 import '../features/people/presentation/pages/person_details_page.dart';
 import '../features/profile/presentation/pages/user_details_page.dart';
 import '../features/profile/presentation/pages/user_lists_page.dart';
