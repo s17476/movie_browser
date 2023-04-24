@@ -32,11 +32,7 @@ class _Top20SwitcherState extends State<Top20Switcher> {
             _pos = 0;
             _timer?.cancel();
             _timer = Timer.periodic(const Duration(seconds: 6), (_) {
-              if (mounted) {
-                setState(() {
-                  _pos = (_pos + 1) % _movies.length;
-                });
-              }
+              _pos = (_pos + 1) % _movies.length;
             });
           },
           orElse: () => null,
@@ -99,14 +95,13 @@ class _Top20SwitcherState extends State<Top20Switcher> {
 }
 
 class PosterImage extends StatelessWidget {
+  final List<MovieDetails> movies;
+  final int pos;
   const PosterImage({
     Key? key,
     required this.movies,
     required this.pos,
   }) : super(key: key);
-
-  final List<MovieDetails> movies;
-  final int pos;
 
   @override
   @override
@@ -285,15 +280,13 @@ class PosterImage extends StatelessWidget {
 }
 
 class PosterBackground extends StatelessWidget {
+  final List<MovieDetails> movies;
+  final int pos;
   const PosterBackground({
-    super.key,
-    required List<MovieDetails> movies,
-    required int pos,
-  })  : _movies = movies,
-        _pos = pos;
-
-  final List<MovieDetails> _movies;
-  final int _pos;
+    Key? key,
+    required this.movies,
+    required this.pos,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -305,12 +298,28 @@ class PosterBackground extends StatelessWidget {
           // background image
           SizedBox(
             width: double.infinity,
-            child: FadeInImage.assetNetwork(
-              placeholder: 'assets/images/loading_empty.gif',
-              image: '${kImagesBaseUrl}w500${_movies[_pos].posterPath}',
-              fit: BoxFit.fitWidth,
-              imageErrorBuilder: (context, error, stackTrace) =>
-                  const SizedBox(),
+            child: AnimatedSwitcher(
+              transitionBuilder: (child, animation) {
+                final opacityAnimation = Tween<double>(
+                  begin: 0,
+                  end: 1,
+                ).animate(animation);
+                return FadeTransition(
+                  opacity: opacityAnimation,
+                  child: child,
+                );
+              },
+              duration: const Duration(milliseconds: 300),
+              child: FadeInImage.assetNetwork(
+                key: UniqueKey(),
+                imageErrorBuilder: (context, error, stackTrace) =>
+                    const SizedBox(),
+                placeholder: 'assets/images/loading_empty.gif',
+                placeholderFit: BoxFit.contain,
+                image: '${kImagesBaseUrl}w500${movies[pos].posterPath}',
+                fit: BoxFit.fitWidth,
+                width: double.infinity,
+              ),
             ),
           ),
           // glass efect layer

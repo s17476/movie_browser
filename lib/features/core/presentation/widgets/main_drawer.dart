@@ -81,7 +81,7 @@ class MainDrawer extends StatelessWidget {
                                 arguments: ListType.watchlistMovies,
                               ),
                               iconData: Icons.check_box,
-                              title: 'watchlist',
+                              title: 'Watchlist',
                             ),
                             DrawerItem(
                               onPressed: () => Navigator.popAndPushNamed(
