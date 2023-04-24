@@ -29,44 +29,68 @@ class MovieActions extends StatelessWidget {
         );
       },
       builder: (context, state) {
-        return SizedBox(
-          height: 330,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              // rate
-              MovieActionIconButton(
-                movieId: movieId,
-                selectedIconData: Icons.star,
-                unselectedIconData: Icons.star_border,
-                listType: isTvShow ? ListType.ratedShows : ListType.ratedMovies,
-              ),
-              // favorites
-              MovieActionIconButton(
-                movieId: movieId,
-                selectedIconData: Icons.favorite,
-                unselectedIconData: Icons.favorite_border,
-                listType:
-                    isTvShow ? ListType.favoriteShows : ListType.favoriteMovies,
-              ),
-              // watchlist
-              MovieActionIconButton(
-                movieId: movieId,
-                selectedIconData: Icons.check_box,
-                unselectedIconData: Icons.add_box_outlined,
-                listType: isTvShow
-                    ? ListType.watchlistShows
-                    : ListType.watchlistMovies,
-              ),
-              // watched
-              MovieActionIconButton(
-                movieId: movieId,
-                selectedIconData: Icons.remove_red_eye,
-                unselectedIconData: Icons.remove_red_eye_outlined,
-                listType:
-                    isTvShow ? ListType.watchedShows : ListType.watchedMovies,
-              ),
-            ],
+        return TweenAnimationBuilder(
+          key: const ValueKey('tween'),
+          duration: const Duration(milliseconds: 500),
+          tween: Tween<double>(begin: 0, end: 4),
+          builder: (context, value, _) => SizedBox(
+            height: 330,
+            child: Column(
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                const SizedBox(height: 20),
+                // rate
+                Visibility(
+                  visible: value > 1,
+                  child: MovieActionIconButton(
+                    movieId: movieId,
+                    selectedIconData: Icons.star,
+                    unselectedIconData: Icons.star_border,
+                    listType:
+                        isTvShow ? ListType.ratedShows : ListType.ratedMovies,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // favorites
+                Visibility(
+                  visible: value > 2,
+                  child: MovieActionIconButton(
+                    movieId: movieId,
+                    selectedIconData: Icons.favorite,
+                    unselectedIconData: Icons.favorite_border,
+                    listType: isTvShow
+                        ? ListType.favoriteShows
+                        : ListType.favoriteMovies,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // watchlist
+                Visibility(
+                  visible: value > 3,
+                  child: MovieActionIconButton(
+                    movieId: movieId,
+                    selectedIconData: Icons.check_box,
+                    unselectedIconData: Icons.add_box_outlined,
+                    listType: isTvShow
+                        ? ListType.watchlistShows
+                        : ListType.watchlistMovies,
+                  ),
+                ),
+                const SizedBox(height: 20),
+                // watched
+                Visibility(
+                  visible: value == 4,
+                  child: MovieActionIconButton(
+                    movieId: movieId,
+                    selectedIconData: Icons.remove_red_eye,
+                    unselectedIconData: Icons.remove_red_eye_outlined,
+                    listType: isTvShow
+                        ? ListType.watchedShows
+                        : ListType.watchedMovies,
+                  ),
+                ),
+              ],
+            ),
           ),
         );
       },

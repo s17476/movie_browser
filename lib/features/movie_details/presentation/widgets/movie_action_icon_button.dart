@@ -52,67 +52,78 @@ class MovieActionIconButton extends HookWidget {
     final toggleState = useState(false);
     toggleState.value = _isSelected(context);
     final userProfileCubit = context.read<UserProfileCubit>();
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
-      transitionBuilder: (child, animation) => ScaleTransition(
-        scale: animation,
-        child: child,
+    return TweenAnimationBuilder(
+      key: const ValueKey('tween'),
+      duration: const Duration(milliseconds: 600),
+      tween: Tween<double>(begin: 0, end: 1),
+      builder: (context, value, child) {
+        return Opacity(
+          opacity: value,
+          child: child,
+        );
+      },
+      child: AnimatedSwitcher(
+        duration: const Duration(milliseconds: 300),
+        transitionBuilder: (child, animation) => ScaleTransition(
+          scale: animation,
+          child: child,
+        ),
+        child: toggleState.value
+            ? IconButton(
+                key: const ValueKey('selected'),
+                onPressed: () {
+                  if (listType != ListType.ratedMovies &&
+                      listType != ListType.ratedShows) {
+                    userProfileCubit.removeMovieFrom(
+                      listType: listType,
+                      movieId: movieId,
+                    );
+                  } else {
+                    showSnackBar(
+                      context: context,
+                      message: 'You have already rated this movie.',
+                    );
+                  }
+                },
+                icon: Icon(
+                  selectedIconData,
+                  size: iconSize,
+                  color: Colors.amber,
+                  shadows: const [
+                    Shadow(color: Colors.black, blurRadius: 35),
+                    Shadow(color: Colors.black, blurRadius: 35),
+                  ],
+                ),
+              )
+            : IconButton(
+                key: const ValueKey('unselected'),
+                onPressed: () {
+                  userProfileCubit.state.maybeMap(
+                    loaded: (_) {
+                      if (listType != ListType.ratedMovies &&
+                          listType != ListType.ratedShows) {
+                        userProfileCubit.addMovieTo(
+                          listType: listType,
+                          movieId: movieId,
+                        );
+                        _showFeedback(context);
+                      } else {
+                        showrateDialog(context, listType, movieId);
+                      }
+                    },
+                    orElse: () => showAuthProvidersDialog(context),
+                  );
+                },
+                icon: Icon(
+                  unselectedIconData,
+                  size: iconSize,
+                  shadows: const [
+                    Shadow(color: Colors.black, blurRadius: 35),
+                    Shadow(color: Colors.black, blurRadius: 35),
+                  ],
+                ),
+              ),
       ),
-      child: toggleState.value
-          ? IconButton(
-              key: const ValueKey('selected'),
-              onPressed: () {
-                if (listType != ListType.ratedMovies &&
-                    listType != ListType.ratedShows) {
-                  userProfileCubit.removeMovieFrom(
-                    listType: listType,
-                    movieId: movieId,
-                  );
-                } else {
-                  showSnackBar(
-                    context: context,
-                    message: 'You have already rated this movie.',
-                  );
-                }
-              },
-              icon: Icon(
-                selectedIconData,
-                size: iconSize,
-                color: Colors.amber,
-                shadows: const [
-                  Shadow(color: Colors.black, blurRadius: 35),
-                  Shadow(color: Colors.black, blurRadius: 35),
-                ],
-              ),
-            )
-          : IconButton(
-              key: const ValueKey('unselected'),
-              onPressed: () {
-                userProfileCubit.state.maybeMap(
-                  loaded: (_) {
-                    if (listType != ListType.ratedMovies &&
-                        listType != ListType.ratedShows) {
-                      userProfileCubit.addMovieTo(
-                        listType: listType,
-                        movieId: movieId,
-                      );
-                      _showFeedback(context);
-                    } else {
-                      showrateDialog(context, listType, movieId);
-                    }
-                  },
-                  orElse: () => showAuthProvidersDialog(context),
-                );
-              },
-              icon: Icon(
-                unselectedIconData,
-                size: iconSize,
-                shadows: const [
-                  Shadow(color: Colors.black, blurRadius: 35),
-                  Shadow(color: Colors.black, blurRadius: 35),
-                ],
-              ),
-            ),
     );
   }
 }
