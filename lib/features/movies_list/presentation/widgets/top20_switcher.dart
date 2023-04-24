@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
@@ -161,7 +160,7 @@ class PosterImage extends StatelessWidget {
                               width: double.infinity,
                               color: Colors.black,
                             ),
-                            FadeInImage(
+                            FadeInImage.assetNetwork(
                               imageErrorBuilder: (context, error, stackTrace) =>
                                   const Center(
                                 child: Text(
@@ -169,12 +168,11 @@ class PosterImage extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 ),
                               ),
-                              placeholder:
-                                  const AssetImage('assets/images/loading.gif'),
+                              placeholder: 'assets/images/loading.gif',
                               placeholderFit: BoxFit.scaleDown,
-                              image: CachedNetworkImageProvider(
-                                '${kImagesBaseUrl}w500${movies[pos].posterPath}',
-                              ),
+                              placeholderScale: 2,
+                              image:
+                                  '${kImagesBaseUrl}w500${movies[pos].posterPath}',
                               fit: BoxFit.fitHeight,
                               height: double.infinity,
                               width: double.infinity,
@@ -307,11 +305,9 @@ class PosterBackground extends StatelessWidget {
           // background image
           SizedBox(
             width: double.infinity,
-            child: FadeInImage(
-              placeholder: const AssetImage('assets/images/loading_empty.gif'),
-              image: CachedNetworkImageProvider(
-                '${kImagesBaseUrl}w500${_movies[_pos].posterPath}',
-              ),
+            child: FadeInImage.assetNetwork(
+              placeholder: 'assets/images/loading_empty.gif',
+              image: '${kImagesBaseUrl}w500${_movies[_pos].posterPath}',
               fit: BoxFit.fitWidth,
               imageErrorBuilder: (context, error, stackTrace) =>
                   const SizedBox(),

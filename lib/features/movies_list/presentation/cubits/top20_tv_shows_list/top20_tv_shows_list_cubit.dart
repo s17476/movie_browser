@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:movie_browser/features/movies_list/domain/entities/movie_list.dart';
 import 'package:movie_browser/features/movies_list/domain/repositories/movies_repository.dart';
 
 import '../../../domain/entities/tv_show_list.dart';

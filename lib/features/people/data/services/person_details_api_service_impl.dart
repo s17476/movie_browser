@@ -2,12 +2,11 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
-import 'package:movie_browser/features/movies_list/domain/entities/movie.dart';
-import 'package:movie_browser/features/people/domain/entities/person_credits.dart';
 
 import '../../../../secrets.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/errors/http_error_handler.dart';
+import '../../domain/entities/person_credits.dart';
 import '../../domain/entities/person_details.dart';
 import '../../domain/services/person_details_api_service.dart';
 

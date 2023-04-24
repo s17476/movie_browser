@@ -1,6 +1,5 @@
 import 'dart:ui';
 
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
@@ -88,7 +87,7 @@ class PosterWithInfo extends StatelessWidget {
                                   ),
                                 );
                               },
-                              child: FadeInImage(
+                              child: FadeInImage.assetNetwork(
                                 imageErrorBuilder:
                                     (context, error, stackTrace) => Container(
                                   height: 100,
@@ -97,16 +96,12 @@ class PosterWithInfo extends StatelessWidget {
                                     'No image found',
                                   ),
                                 ),
-                                placeholder: const AssetImage(
-                                  'assets/images/loading.gif',
-                                ),
-                                image: CachedNetworkImageProvider(
-                                  '${kImagesBaseUrl}original${movie.posterPath}',
-                                ),
+                                placeholder: 'assets/images/loading.gif',
+                                image:
+                                    '${kImagesBaseUrl}original${movie.posterPath}',
                                 fit: BoxFit.cover,
                                 placeholderFit: BoxFit.scaleDown,
-                                // placeholderScale: 5,
-                                // height: 450,
+                                placeholderScale: 5,
                                 height: ResponsiveWrapper.of(context)
                                         .isSmallerThan(TABLET)
                                     ? height * 0.73
@@ -123,13 +118,22 @@ class PosterWithInfo extends StatelessWidget {
                     Positioned(
                       bottom: 10,
                       right: 20,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.black.withOpacity(0.8),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width * 0.8,
                         ),
-                        padding: const EdgeInsets.all(8),
-                        child: Text(movie.tagline, softWrap: true),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            movie.tagline,
+                            softWrap: true,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
                       ),
                     ),
                 ]),

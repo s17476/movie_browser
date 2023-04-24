@@ -30,7 +30,7 @@ class TvShowPosterWithInfo extends StatelessWidget {
             // background image
             FadeInImage.assetNetwork(
               placeholder: 'assets/images/loading_empty.gif',
-              image: '${kImagesBaseUrl}w500${show.posterPath}',
+              image: '${kImagesBaseUrl}original${show.posterPath}',
               fit: BoxFit.fill,
               height: height,
               width: double.infinity,
@@ -98,7 +98,7 @@ class TvShowPosterWithInfo extends StatelessWidget {
                                 ),
                                 placeholder: 'assets/images/loading.gif',
                                 image:
-                                    '${kImagesBaseUrl}w500${show.posterPath}',
+                                    '${kImagesBaseUrl}original${show.posterPath}',
                                 fit: BoxFit.cover,
                                 placeholderFit: BoxFit.scaleDown,
                                 placeholderScale: 5,
@@ -118,13 +118,18 @@ class TvShowPosterWithInfo extends StatelessWidget {
                     Positioned(
                       bottom: 10,
                       right: 20,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          color: Colors.black.withOpacity(0.8),
+                      child: ConstrainedBox(
+                        constraints: BoxConstraints(
+                          maxWidth: MediaQuery.of(context).size.width * 0.8,
                         ),
-                        padding: const EdgeInsets.all(8),
-                        child: Text(show.tagline, softWrap: true),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            color: Colors.black.withOpacity(0.8),
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          child: Text(show.tagline, softWrap: true),
+                        ),
                       ),
                     ),
                 ]),
