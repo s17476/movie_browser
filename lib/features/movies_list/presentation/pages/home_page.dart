@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_browser/features/auth/presentation/blocs/auth/auth_bloc.dart';
 
 import '../../../core/presentation/widgets/main_drawer.dart';
 import '../../../core/presentation/widgets/user_avatar.dart';
@@ -77,11 +76,12 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.only(
           bottom: MediaQuery.of(context).padding.bottom + 32,
         ),
+        addAutomaticKeepAlives: true,
         children: [
-          const Top20Switcher(),
-          const Top20List(),
-          const Top20TvList(),
-          const Genreslist(),
+          const Top20Switcher(key: ValueKey('top-switcher')),
+          const Top20List(key: ValueKey('top-movies')),
+          const Top20TvList(key: ValueKey('top-tv')),
+          const Genreslist(key: ValueKey('genres')),
           ..._randomCategoryLists
         ],
       ),

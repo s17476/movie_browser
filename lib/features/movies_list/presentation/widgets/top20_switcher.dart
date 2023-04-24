@@ -5,11 +5,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:responsive_framework/responsive_framework.dart';
 
 import '../../../core/constants/constants.dart';
-import '../../../core/utils/format_currency.dart';
 import '../../../core/presentation/widgets/star_rating.dart';
+import '../../../core/utils/format_currency.dart';
 import '../../../movie_details/domain/entities/movie_details.dart';
 import '../../../movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart';
 import '../../utils/fetch_and_show_movie.dart';
@@ -32,7 +31,8 @@ class _Top20SwitcherState extends State<Top20Switcher> {
           loaded: (state) {
             _movies = state.movies;
             _pos = 0;
-            _timer = Timer.periodic(const Duration(seconds: 10), (_) {
+            _timer?.cancel();
+            _timer = Timer.periodic(const Duration(seconds: 6), (_) {
               if (mounted) {
                 setState(() {
                   _pos = (_pos + 1) % _movies.length;
@@ -101,15 +101,15 @@ class _Top20SwitcherState extends State<Top20Switcher> {
 
 class PosterImage extends StatelessWidget {
   const PosterImage({
-    super.key,
-    required List<MovieDetails> movies,
-    required int pos,
-  })  : _movies = movies,
-        _pos = pos;
+    Key? key,
+    required this.movies,
+    required this.pos,
+  }) : super(key: key);
 
-  final List<MovieDetails> _movies;
-  final int _pos;
+  final List<MovieDetails> movies;
+  final int pos;
 
+  @override
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -135,9 +135,7 @@ class PosterImage extends StatelessWidget {
               child: Container(
                 key: UniqueKey(),
                 margin: EdgeInsets.only(
-                  left: ResponsiveWrapper.of(context).isSmallerThan(TABLET)
-                      ? 8
-                      : 32,
+                  left: MediaQuery.of(context).size.width < 600 ? 8 : 32,
                 ),
                 height: 300,
                 decoration: BoxDecoration(
@@ -175,7 +173,7 @@ class PosterImage extends StatelessWidget {
                                   const AssetImage('assets/images/loading.gif'),
                               placeholderFit: BoxFit.scaleDown,
                               image: CachedNetworkImageProvider(
-                                '${kImagesBaseUrl}w500${_movies[_pos].posterPath}',
+                                '${kImagesBaseUrl}w500${movies[pos].posterPath}',
                               ),
                               fit: BoxFit.fitHeight,
                               height: double.infinity,
@@ -197,7 +195,7 @@ class PosterImage extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
-                          '#${_pos + 1}',
+                          '#${pos + 1}',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),
@@ -227,12 +225,14 @@ class PosterImage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                            _movies[_pos].title,
+                            movies[pos].title,
                             style: Theme.of(context).textTheme.titleLarge,
                             textAlign: TextAlign.center,
                           ),
-                          StarRating(voteAverange: _movies[_pos].voteAverage),
-                          if (_movies[_pos].revenue > 0)
+                          StarRating(
+                            voteAverange: movies[pos].voteAverage,
+                          ),
+                          if (movies[pos].revenue > 0)
                             Column(
                               children: [
                                 // revenue
@@ -250,8 +250,8 @@ class PosterImage extends StatelessWidget {
                                   children: [
                                     Text(
                                       NumberFormat.simpleCurrency(
-                                              locale: 'en_US')
-                                          .currencySymbol,
+                                        locale: 'en_US',
+                                      ).currencySymbol,
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
@@ -262,7 +262,7 @@ class PosterImage extends StatelessWidget {
                                       width: 4,
                                     ),
                                     Text(
-                                      formatCurrency(_movies[_pos].revenue),
+                                      formatCurrency(movies[pos].revenue),
                                       style: const TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 16,
@@ -305,21 +305,16 @@ class PosterBackground extends StatelessWidget {
         alignment: Alignment.bottomCenter,
         children: [
           // background image
-          AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
-            child: SizedBox(
-              key: UniqueKey(),
-              width: double.infinity,
-              child: FadeInImage(
-                placeholder:
-                    const AssetImage('assets/images/loading_empty.gif'),
-                image: CachedNetworkImageProvider(
-                  '${kImagesBaseUrl}w500${_movies[_pos].posterPath}',
-                ),
-                fit: BoxFit.fitWidth,
-                imageErrorBuilder: (context, error, stackTrace) =>
-                    const SizedBox(),
+          SizedBox(
+            width: double.infinity,
+            child: FadeInImage(
+              placeholder: const AssetImage('assets/images/loading_empty.gif'),
+              image: CachedNetworkImageProvider(
+                '${kImagesBaseUrl}w500${_movies[_pos].posterPath}',
               ),
+              fit: BoxFit.fitWidth,
+              imageErrorBuilder: (context, error, stackTrace) =>
+                  const SizedBox(),
             ),
           ),
           // glass efect layer

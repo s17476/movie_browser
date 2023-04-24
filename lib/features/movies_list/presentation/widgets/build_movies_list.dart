@@ -11,6 +11,7 @@ List<Widget> buildMoviesLists(Map<String, MovieList> moviesLists) {
       final movieList = moviesLists[genre]?.results;
       if (movieList != null) {
         return HorizontalMoviesList(
+          key: ValueKey(genre),
           title: genre,
           movies: movieList,
         );
