@@ -37,7 +37,7 @@ import 'features/movie_details/domain/repositories/movie_details_repository.dart
     as _i10;
 import 'features/movie_details/domain/services/movie_details_api_service.dart'
     as _i8;
-import 'features/movie_details/presentation/cubits/cast/cast_cubit.dart'
+import 'features/movie_details/presentation/cubits/Cast/cast_cubit.dart'
     as _i45;
 import 'features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart'
     as _i38;
