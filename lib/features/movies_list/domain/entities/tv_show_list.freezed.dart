@@ -12,7 +12,7 @@ part of 'tv_show_list.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TvShowList _$TvShowListFromJson(Map<String, dynamic> json) {
   return _TvShowList.fromJson(json);
@@ -92,11 +92,11 @@ class _$TvShowListCopyWithImpl<$Res, $Val extends TvShowList>
 }
 
 /// @nodoc
-abstract class _$$_TvShowListCopyWith<$Res>
+abstract class _$$TvShowListImplCopyWith<$Res>
     implements $TvShowListCopyWith<$Res> {
-  factory _$$_TvShowListCopyWith(
-          _$_TvShowList value, $Res Function(_$_TvShowList) then) =
-      __$$_TvShowListCopyWithImpl<$Res>;
+  factory _$$TvShowListImplCopyWith(
+          _$TvShowListImpl value, $Res Function(_$TvShowListImpl) then) =
+      __$$TvShowListImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -108,11 +108,11 @@ abstract class _$$_TvShowListCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_TvShowListCopyWithImpl<$Res>
-    extends _$TvShowListCopyWithImpl<$Res, _$_TvShowList>
-    implements _$$_TvShowListCopyWith<$Res> {
-  __$$_TvShowListCopyWithImpl(
-      _$_TvShowList _value, $Res Function(_$_TvShowList) _then)
+class __$$TvShowListImplCopyWithImpl<$Res>
+    extends _$TvShowListCopyWithImpl<$Res, _$TvShowListImpl>
+    implements _$$TvShowListImplCopyWith<$Res> {
+  __$$TvShowListImplCopyWithImpl(
+      _$TvShowListImpl _value, $Res Function(_$TvShowListImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -124,7 +124,7 @@ class __$$_TvShowListCopyWithImpl<$Res>
     Object? results = null,
     Object? lastQuery = freezed,
   }) {
-    return _then(_$_TvShowList(
+    return _then(_$TvShowListImpl(
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -152,8 +152,8 @@ class __$$_TvShowListCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_TvShowList implements _TvShowList {
-  const _$_TvShowList(
+class _$TvShowListImpl implements _TvShowList {
+  const _$TvShowListImpl(
       {required this.page,
       required this.totalPages,
       required this.totalResults,
@@ -161,8 +161,8 @@ class _$_TvShowList implements _TvShowList {
       @JsonKey(includeFromJson: false) this.lastQuery})
       : _results = results;
 
-  factory _$_TvShowList.fromJson(Map<String, dynamic> json) =>
-      _$$_TvShowListFromJson(json);
+  factory _$TvShowListImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TvShowListImplFromJson(json);
 
   @override
   final int page;
@@ -188,10 +188,10 @@ class _$_TvShowList implements _TvShowList {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TvShowList &&
+            other is _$TvShowListImpl &&
             (identical(other.page, page) || other.page == page) &&
             (identical(other.totalPages, totalPages) ||
                 other.totalPages == totalPages) &&
@@ -210,12 +210,12 @@ class _$_TvShowList implements _TvShowList {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TvShowListCopyWith<_$_TvShowList> get copyWith =>
-      __$$_TvShowListCopyWithImpl<_$_TvShowList>(this, _$identity);
+  _$$TvShowListImplCopyWith<_$TvShowListImpl> get copyWith =>
+      __$$TvShowListImplCopyWithImpl<_$TvShowListImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TvShowListToJson(
+    return _$$TvShowListImplToJson(
       this,
     );
   }
@@ -228,10 +228,10 @@ abstract class _TvShowList implements TvShowList {
           required final int totalResults,
           required final List<TvShow> results,
           @JsonKey(includeFromJson: false) final String? lastQuery}) =
-      _$_TvShowList;
+      _$TvShowListImpl;
 
   factory _TvShowList.fromJson(Map<String, dynamic> json) =
-      _$_TvShowList.fromJson;
+      _$TvShowListImpl.fromJson;
 
   @override
   int get page;
@@ -246,6 +246,6 @@ abstract class _TvShowList implements TvShowList {
   String? get lastQuery;
   @override
   @JsonKey(ignore: true)
-  _$$_TvShowListCopyWith<_$_TvShowList> get copyWith =>
+  _$$TvShowListImplCopyWith<_$TvShowListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

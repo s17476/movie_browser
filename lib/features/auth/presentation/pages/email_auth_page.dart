@@ -10,8 +10,6 @@ import '../widgets/reset_password_text_button.dart';
 class EmailAuthPage extends StatefulWidget {
   const EmailAuthPage({Key? key}) : super(key: key);
 
-  static const routeName = '/authentication';
-
   @override
   State<EmailAuthPage> createState() => _EmailAuthPageState();
 }

@@ -9,8 +9,6 @@ import '../../utils/show_delete_account_dialog.dart';
 class UserDetailsPage extends StatelessWidget {
   const UserDetailsPage({super.key});
 
-  static const routeName = '/user-details';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

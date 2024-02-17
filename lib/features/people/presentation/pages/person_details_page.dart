@@ -8,8 +8,6 @@ import '../widgets/person_details_widget.dart';
 class PersonDetailsPage extends StatelessWidget {
   const PersonDetailsPage({super.key});
 
-  static const routeName = '/person-details';
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<PersonDetailsCubit, PersonDetailsState>(

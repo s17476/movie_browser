@@ -12,7 +12,7 @@ part of 'movie_details.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MovieDetails _$MovieDetailsFromJson(Map<String, dynamic> json) {
   return _Moviedetails.fromJson(json);
@@ -147,11 +147,11 @@ class _$MovieDetailsCopyWithImpl<$Res, $Val extends MovieDetails>
 }
 
 /// @nodoc
-abstract class _$$_MoviedetailsCopyWith<$Res>
+abstract class _$$MoviedetailsImplCopyWith<$Res>
     implements $MovieDetailsCopyWith<$Res> {
-  factory _$$_MoviedetailsCopyWith(
-          _$_Moviedetails value, $Res Function(_$_Moviedetails) then) =
-      __$$_MoviedetailsCopyWithImpl<$Res>;
+  factory _$$MoviedetailsImplCopyWith(
+          _$MoviedetailsImpl value, $Res Function(_$MoviedetailsImpl) then) =
+      __$$MoviedetailsImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -171,11 +171,11 @@ abstract class _$$_MoviedetailsCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_MoviedetailsCopyWithImpl<$Res>
-    extends _$MovieDetailsCopyWithImpl<$Res, _$_Moviedetails>
-    implements _$$_MoviedetailsCopyWith<$Res> {
-  __$$_MoviedetailsCopyWithImpl(
-      _$_Moviedetails _value, $Res Function(_$_Moviedetails) _then)
+class __$$MoviedetailsImplCopyWithImpl<$Res>
+    extends _$MovieDetailsCopyWithImpl<$Res, _$MoviedetailsImpl>
+    implements _$$MoviedetailsImplCopyWith<$Res> {
+  __$$MoviedetailsImplCopyWithImpl(
+      _$MoviedetailsImpl _value, $Res Function(_$MoviedetailsImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -195,7 +195,7 @@ class __$$_MoviedetailsCopyWithImpl<$Res>
     Object? voteAverage = null,
     Object? voteCount = null,
   }) {
-    return _then(_$_Moviedetails(
+    return _then(_$MoviedetailsImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -255,8 +255,8 @@ class __$$_MoviedetailsCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_Moviedetails implements _Moviedetails {
-  const _$_Moviedetails(
+class _$MoviedetailsImpl implements _Moviedetails {
+  const _$MoviedetailsImpl(
       {required this.id,
       required this.adult,
       required this.budget,
@@ -272,8 +272,8 @@ class _$_Moviedetails implements _Moviedetails {
       required this.voteCount})
       : _genres = genres;
 
-  factory _$_Moviedetails.fromJson(Map<String, dynamic> json) =>
-      _$$_MoviedetailsFromJson(json);
+  factory _$MoviedetailsImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MoviedetailsImplFromJson(json);
 
   @override
   final int id;
@@ -314,10 +314,10 @@ class _$_Moviedetails implements _Moviedetails {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_Moviedetails &&
+            other is _$MoviedetailsImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.adult, adult) || other.adult == adult) &&
             (identical(other.budget, budget) || other.budget == budget) &&
@@ -359,12 +359,12 @@ class _$_Moviedetails implements _Moviedetails {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MoviedetailsCopyWith<_$_Moviedetails> get copyWith =>
-      __$$_MoviedetailsCopyWithImpl<_$_Moviedetails>(this, _$identity);
+  _$$MoviedetailsImplCopyWith<_$MoviedetailsImpl> get copyWith =>
+      __$$MoviedetailsImplCopyWithImpl<_$MoviedetailsImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MoviedetailsToJson(
+    return _$$MoviedetailsImplToJson(
       this,
     );
   }
@@ -384,10 +384,10 @@ abstract class _Moviedetails implements MovieDetails {
       required final String tagline,
       required final String title,
       required final double voteAverage,
-      required final int voteCount}) = _$_Moviedetails;
+      required final int voteCount}) = _$MoviedetailsImpl;
 
   factory _Moviedetails.fromJson(Map<String, dynamic> json) =
-      _$_Moviedetails.fromJson;
+      _$MoviedetailsImpl.fromJson;
 
   @override
   int get id;
@@ -417,6 +417,6 @@ abstract class _Moviedetails implements MovieDetails {
   int get voteCount;
   @override
   @JsonKey(ignore: true)
-  _$$_MoviedetailsCopyWith<_$_Moviedetails> get copyWith =>
+  _$$MoviedetailsImplCopyWith<_$MoviedetailsImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

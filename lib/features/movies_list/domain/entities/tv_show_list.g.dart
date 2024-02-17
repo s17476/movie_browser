@@ -6,8 +6,8 @@ part of 'tv_show_list.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TvShowList _$$_TvShowListFromJson(Map<String, dynamic> json) =>
-    _$_TvShowList(
+_$TvShowListImpl _$$TvShowListImplFromJson(Map<String, dynamic> json) =>
+    _$TvShowListImpl(
       page: json['page'] as int,
       totalPages: json['total_pages'] as int,
       totalResults: json['total_results'] as int,
@@ -16,7 +16,7 @@ _$_TvShowList _$$_TvShowListFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_TvShowListToJson(_$_TvShowList instance) =>
+Map<String, dynamic> _$$TvShowListImplToJson(_$TvShowListImpl instance) =>
     <String, dynamic>{
       'page': instance.page,
       'total_pages': instance.totalPages,

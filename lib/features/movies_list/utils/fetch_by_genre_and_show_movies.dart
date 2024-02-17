@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../presentation/cubits/category_movies/category_movies_cubit.dart';
-import '../presentation/pages/genre_page.dart';
+import 'package:movie_browser/app/custom_router.dart';
+import 'package:movie_browser/app/routes.dart';
+import 'package:movie_browser/features/movies_list/presentation/cubits/category_movies/category_movies_cubit.dart';
 
 void fetchByGenreAndShowMovies(BuildContext context, int genreId) {
   context.read<CategoryMoviesCubit>().fetchMovies(genreId);
-  Navigator.pushNamed(context, GenrePage.routeName);
+
+  CustomRouter.go(context, Routes.genrePage);
 }

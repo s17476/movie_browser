@@ -81,7 +81,7 @@ class ActorCard extends StatelessWidget {
             Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () => fetchAndShowPerson(context, actor.id, true),
+                onTap: () => fetchAndShowPerson(context, actor.id),
                 child: const SizedBox(
                   width: double.infinity,
                   height: double.infinity,

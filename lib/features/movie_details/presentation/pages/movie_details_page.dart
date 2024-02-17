@@ -9,8 +9,6 @@ import '../widgets/movie_details_widget.dart';
 class MovieDetailsPage extends StatelessWidget {
   const MovieDetailsPage({super.key});
 
-  static const String routeName = '/details';
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MovieDetailsCubit, MovieDetailsState>(

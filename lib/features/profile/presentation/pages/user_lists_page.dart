@@ -8,9 +8,9 @@ import '../cubits/user_profile/user_profile_cubit.dart';
 import '../widgets/movies_grid_view.dart';
 
 class UserListPage extends StatefulWidget {
-  const UserListPage({super.key});
+  const UserListPage({super.key, this.listType = ListType.favoriteMovies});
 
-  static const routeName = '/user-list';
+  final ListType listType;
 
   @override
   State<UserListPage> createState() => _UserListPageState();
@@ -20,7 +20,6 @@ class _UserListPageState extends State<UserListPage> {
   List<MovieDetails> _movies = [];
   List<TvShowDetails> _tvShows = [];
   bool _isLoading = true;
-  ListType _listType = ListType.favoriteMovies;
 
   String _getTitle(ListType listType) {
     switch (listType) {
@@ -40,27 +39,23 @@ class _UserListPageState extends State<UserListPage> {
   @override
   void didChangeDependencies() {
     final userListsCubit = context.watch<UserListsCubit>();
-    final listType = ModalRoute.of(context)!.settings.arguments;
-    if (listType != null && listType is ListType) {
-      _listType = listType;
-      userListsCubit.state.maybeMap(
-        loaded: (state) {
-          if (state.listType == listType) {
-            _movies = state.movies;
-            _tvShows = state.shows;
-            _isLoading = false;
-          } else {
-            context.read<UserListsCubit>().fetchData(listType: listType);
-            _isLoading = true;
-          }
-        },
-        loading: (_) => _isLoading = true,
-        orElse: () {
-          context.read<UserListsCubit>().fetchData(listType: listType);
-          return _isLoading = true;
-        },
-      );
-    }
+    userListsCubit.state.maybeMap(
+      loaded: (state) {
+        if (state.listType == widget.listType) {
+          _movies = state.movies;
+          _tvShows = state.shows;
+          _isLoading = false;
+        } else {
+          context.read<UserListsCubit>().fetchData(listType: widget.listType);
+          _isLoading = true;
+        }
+      },
+      loading: (_) => _isLoading = true,
+      orElse: () {
+        context.read<UserListsCubit>().fetchData(listType: widget.listType);
+        return _isLoading = true;
+      },
+    );
     super.didChangeDependencies();
   }
 
@@ -69,7 +64,7 @@ class _UserListPageState extends State<UserListPage> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       appBar: AppBar(
-        title: Text(_getTitle(_listType)),
+        title: Text(_getTitle(widget.listType)),
       ),
       body: _isLoading
           ? const Center(

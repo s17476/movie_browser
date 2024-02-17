@@ -8,8 +8,6 @@ import '../widgets/genre_widget.dart';
 class GenrePage extends StatelessWidget {
   const GenrePage({super.key});
 
-  static const routeName = '/genre-page';
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<CategoryMoviesCubit, CategoryMoviesState>(

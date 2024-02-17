@@ -9,8 +9,6 @@ import '../widgets/tv_show_details_widget.dart';
 class TvShowDetailsPage extends StatelessWidget {
   const TvShowDetailsPage({super.key});
 
-  static const String routeName = '/show-details';
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<TvShowDetailsCubit, TvShowDetailsState>(

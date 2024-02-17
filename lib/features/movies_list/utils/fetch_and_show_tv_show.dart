@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../movie_details/presentation/cubits/tv_show_details/tv_show_details_cubit.dart';
-import '../../movie_details/presentation/pages/tv_show_details_page.dart';
+import 'package:movie_browser/app/custom_router.dart';
+import 'package:movie_browser/app/routes.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/tv_show_details/tv_show_details_cubit.dart';
 
 void fetchAndShowTvShow(
   BuildContext context,
-  int showId, [
-  bool shouldReplacePage = false,
-]) {
+  int showId,
+) {
   context.read<TvShowDetailsCubit>().fetchTvShowDetails(showId);
-  if (shouldReplacePage) {
-    Navigator.pushReplacementNamed(context, TvShowDetailsPage.routeName);
-  } else {
-    Navigator.pushNamed(context, TvShowDetailsPage.routeName);
-  }
+
+  CustomRouter.go(context, Routes.tvShowDetails);
 }

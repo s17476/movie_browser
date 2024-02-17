@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../presentation/cubits/person_details/person_details_cubit.dart';
-import '../presentation/pages/person_details_page.dart';
+import 'package:movie_browser/app/custom_router.dart';
+import 'package:movie_browser/app/routes.dart';
+import 'package:movie_browser/features/people/presentation/cubits/person_details/person_details_cubit.dart';
 
 void fetchAndShowPerson(
   BuildContext context,
-  int personId, [
-  bool shouldReplacePage = false,
-]) {
+  int personId,
+) {
   context.read<PersonDetailsCubit>().fetchPersonDetails(personId);
-  if (shouldReplacePage) {
-    Navigator.pushReplacementNamed(context, PersonDetailsPage.routeName);
-  } else {
-    Navigator.pushNamed(context, PersonDetailsPage.routeName);
-  }
+
+  CustomRouter.go(context, Routes.personDetails);
 }

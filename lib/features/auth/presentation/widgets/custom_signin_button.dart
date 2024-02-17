@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:sign_button/sign_button.dart';
 
 class CustomSigninButton extends StatelessWidget {
@@ -15,10 +16,7 @@ class CustomSigninButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return SignInButton(
       buttonType: buttonType,
-      onPressed: () => Navigator.popAndPushNamed(
-        context,
-        route,
-      ),
+      onPressed: () => context.go(route),
     );
   }
 }

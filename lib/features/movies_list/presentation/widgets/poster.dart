@@ -51,8 +51,8 @@ class Poster extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: isTvShow
-                    ? () => fetchAndShowTvShow(context, id, shouldReplacePage)
-                    : () => fetchAndShowMovie(context, id, shouldReplacePage),
+                    ? () => fetchAndShowTvShow(context, id)
+                    : () => fetchAndShowMovie(context, id),
                 child: const SizedBox(
                   width: double.infinity,
                   height: double.infinity,
