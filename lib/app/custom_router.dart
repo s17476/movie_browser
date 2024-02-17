@@ -28,8 +28,14 @@ class CustomRouter {
 
     if (currentRoute.endsWith(updatedRoute)) {
       updatedRoute = currentRoute;
-    } else if (currentRoute != Routes.home) {
+    } else if (!currentRoute.contains(updatedRoute) &&
+        currentRoute != Routes.home) {
       updatedRoute = currentRoute + updatedRoute;
+    }
+
+    if (updatedRoute.contains(Routes.tvShowDetails) &&
+        updatedRoute.contains(Routes.movieDetails)) {
+      updatedRoute = route;
     }
 
     context.go(updatedRoute);
@@ -59,6 +65,10 @@ class CustomRouter {
                         return YoutubeVideoPlayer(vodeoId: videoId);
                       },
                     ),
+                    GoRoute(
+                      path: 'personDetails',
+                      builder: (_, __) => const PersonDetailsPage(),
+                    ),
                   ],
                 ),
                 GoRoute(
@@ -71,6 +81,10 @@ class CustomRouter {
                         final videoId = state.extra as String;
                         return YoutubeVideoPlayer(vodeoId: videoId);
                       },
+                    ),
+                    GoRoute(
+                      path: 'personDetails',
+                      builder: (_, __) => const PersonDetailsPage(),
                     ),
                   ],
                 ),
