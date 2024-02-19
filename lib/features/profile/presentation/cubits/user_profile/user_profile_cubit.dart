@@ -19,7 +19,11 @@ enum ListType {
   watchedMovies,
   watchedShows,
   ratedMovies,
-  ratedShows,
+  ratedShows;
+
+  String toJson() => name.toString();
+
+  static ListType fromJson(String json) => values.byName(json);
 }
 
 @singleton

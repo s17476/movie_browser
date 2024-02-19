@@ -60,8 +60,6 @@ class UserListsCubit extends Cubit<UserListsState> {
                   listType: listType,
                 ),
               );
-
-              await Future.delayed(const Duration(milliseconds: 30));
             },
           );
         }
@@ -81,8 +79,6 @@ class UserListsCubit extends Cubit<UserListsState> {
                   listType: listType,
                 ),
               );
-
-              await Future.delayed(const Duration(milliseconds: 30));
             },
           );
         }

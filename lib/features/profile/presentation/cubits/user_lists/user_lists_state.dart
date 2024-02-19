@@ -1,13 +1,13 @@
 part of 'user_lists_cubit.dart';
 
 @freezed
-class UserListsState with _$UserListsState {
-  const factory UserListsState.initial() = _Initial;
-  const factory UserListsState.error() = _Error;
-  const factory UserListsState.loading() = _Loading;
+sealed class UserListsState with _$UserListsState {
+  const factory UserListsState.initial() = Initial;
+  const factory UserListsState.error() = Error;
+  const factory UserListsState.loading() = Loading;
   const factory UserListsState.loaded({
     required List<MovieDetails> movies,
     required List<TvShowDetails> shows,
     required ListType listType,
-  }) = _Loaded;
+  }) = Loaded;
 }

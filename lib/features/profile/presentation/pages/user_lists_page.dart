@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../movie_details/domain/entities/movie_details.dart';
-import '../../../movie_details/domain/entities/tv_show_details.dart';
 import '../cubits/user_lists/user_lists_cubit.dart';
 import '../cubits/user_profile/user_profile_cubit.dart';
 import '../widgets/movies_grid_view.dart';
@@ -17,10 +15,6 @@ class UserListPage extends StatefulWidget {
 }
 
 class _UserListPageState extends State<UserListPage> {
-  List<MovieDetails> _movies = [];
-  List<TvShowDetails> _tvShows = [];
-  bool _isLoading = true;
-
   String _getTitle(ListType listType) {
     switch (listType) {
       case ListType.favoriteMovies:
@@ -37,45 +31,48 @@ class _UserListPageState extends State<UserListPage> {
   }
 
   @override
-  void didChangeDependencies() {
-    final userListsCubit = context.watch<UserListsCubit>();
-    userListsCubit.state.maybeMap(
-      loaded: (state) {
-        if (state.listType == widget.listType) {
-          _movies = state.movies;
-          _tvShows = state.shows;
-          _isLoading = false;
-        } else {
-          context.read<UserListsCubit>().fetchData(listType: widget.listType);
-          _isLoading = true;
-        }
-      },
-      loading: (_) => _isLoading = true,
-      orElse: () {
-        context.read<UserListsCubit>().fetchData(listType: widget.listType);
-        return _isLoading = true;
-      },
-    );
-    super.didChangeDependencies();
+  void initState() {
+    context.read<UserListsCubit>().fetchData(listType: widget.listType);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        title: Text(_getTitle(widget.listType)),
-      ),
-      body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : (_movies.isEmpty && _tvShows.isEmpty)
-              ? const Center(child: Text('Nothing here yet.'))
-              : MoviesGridView(
-                  movies: _movies,
-                  shows: _tvShows,
-                ),
+    return BlocConsumer<UserListsCubit, UserListsState>(
+      listener: (context, state) {
+        () => switch (state) {
+              Loaded() => () {
+                  if (state.listType != widget.listType) {
+                    context
+                        .read<UserListsCubit>()
+                        .fetchData(listType: widget.listType);
+                  }
+                },
+              Loading() => null,
+              _ => context
+                  .read<UserListsCubit>()
+                  .fetchData(listType: widget.listType),
+            };
+      },
+      builder: (context, state) {
+        return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            title: Text(_getTitle(widget.listType)),
+          ),
+          body: switch (state) {
+            Loaded() => (state.movies.isEmpty && state.shows.isEmpty)
+                ? const Center(child: Text('Nothing here yet.'))
+                : MoviesGridView(
+                    movies: state.movies,
+                    shows: state.shows,
+                  ),
+            _ => const Center(
+                child: CircularProgressIndicator(),
+              ),
+          },
+        );
+      },
     );
   }
 }

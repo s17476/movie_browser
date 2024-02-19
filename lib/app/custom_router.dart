@@ -9,6 +9,7 @@ import 'package:movie_browser/app/routes.dart';
 import 'package:movie_browser/features/auth/presentation/pages/email_auth_page.dart';
 import 'package:movie_browser/features/core/presentation/cubits/current_route/current_route_cubit.dart';
 import 'package:movie_browser/features/core/presentation/pages/home_page.dart';
+import 'package:movie_browser/features/core/utils/logger.dart';
 import 'package:movie_browser/features/movie_details/presentation/pages/movie_details_page.dart';
 import 'package:movie_browser/features/movie_details/presentation/pages/tv_show_details_page.dart';
 import 'package:movie_browser/features/movie_details/presentation/pages/youtube_video_player.dart';
@@ -136,7 +137,7 @@ class CustomRouter {
                   builder: (_, __) => const EmailAuthPage(),
                 ),
                 GoRoute(
-                  path: 'emailAuthPage',
+                  path: 'userListPage',
                   builder: (_, state) {
                     final listType = state.extra as ListType?;
                     if (listType != null) {
