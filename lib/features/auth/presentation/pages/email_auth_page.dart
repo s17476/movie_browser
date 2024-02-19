@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/utils/show_snack_bar.dart';
 import '../blocs/auth/auth_bloc.dart';
@@ -113,7 +114,7 @@ class _EmailAuthPageState extends State<EmailAuthPage>
           state.mapOrNull(
             authenticated: (state) {
               showSnackBar(context: context, message: 'Successfully logged in');
-              Navigator.pop(context);
+              context.pop();
             },
           );
         },

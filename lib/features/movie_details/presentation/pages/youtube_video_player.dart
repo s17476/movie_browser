@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class YoutubeVideoPlayer extends StatefulWidget {
@@ -47,7 +48,12 @@ class _YoutubeVideoPlayerState extends State<YoutubeVideoPlayer> {
           return Scaffold(
             backgroundColor: Colors.transparent,
             extendBodyBehindAppBar: true,
-            appBar: AppBar(),
+            appBar: AppBar(
+              leading: IconButton(
+                onPressed: context.pop,
+                icon: const Icon(Icons.arrow_back),
+              ),
+            ),
             body: Center(
               child: player,
             ),
