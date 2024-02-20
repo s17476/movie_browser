@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:ui';
 
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:intl/intl.dart';
 
 import '../../../core/constants/constants.dart';
@@ -24,26 +27,68 @@ class _Top20SwitcherState extends State<Top20Switcher> {
   Timer? _timer;
   List<MovieDetails> _movies = [];
 
-  @override
-  void didChangeDependencies() {
-    context.watch<Top20MoviesCubit>().state.maybeMap(
-          loaded: (state) {
+  late StreamSubscription _streamSubscription;
+
+  void _tryToSetTimer() async {
+    context.read<Top20MoviesCubit>().state.maybeMap(
+      loaded: (state) {
+        if (state.movies.isNotEmpty) {
+          setState(() {
             _movies = state.movies;
             _pos = 0;
-            _timer?.cancel();
-            _timer = Timer.periodic(const Duration(seconds: 6), (_) {
-              _pos = (_pos + 1) % _movies.length;
-            });
-          },
-          orElse: () => null,
+          });
+
+          _preloadImages();
+
+          _startTimer();
+        }
+      },
+      orElse: () {
+        setState(() {
+          _movies = [];
+          _timer?.cancel();
+        });
+      },
+    );
+  }
+
+  void _startTimer() {
+    _timer?.cancel();
+
+    _timer = Timer.periodic(const Duration(seconds: 6), (_) {
+      setState(() {
+        _pos = (_pos + 1) % _movies.length;
+      });
+    });
+  }
+
+  void _preloadImages() async {
+    if (!kIsWeb) {
+      for (var movie in _movies) {
+        if (movie.posterPath != null) {
+          await DefaultCacheManager().getSingleFile(
+            '${kImagesBaseUrl}w500${movie.posterPath}',
+          );
+        }
+      }
+    }
+  }
+
+  @override
+  void initState() {
+    _tryToSetTimer();
+
+    _streamSubscription = context.read<Top20MoviesCubit>().stream.listen(
+          (_) => _tryToSetTimer(),
         );
-    super.didChangeDependencies();
+
+    super.initState();
   }
 
   @override
   void dispose() {
     _timer?.cancel();
-    _timer = null;
+    _streamSubscription.cancel();
     super.dispose();
   }
 
@@ -54,27 +99,28 @@ class _Top20SwitcherState extends State<Top20Switcher> {
         onTap: () => fetchAndShowMovie(context, _movies[_pos].id),
         onHorizontalDragEnd: (details) {
           int newPos = _pos;
+
           if (details.primaryVelocity! < 0) {
             newPos = (newPos + 1) % _movies.length;
           } else {
             newPos = (newPos - 1) % _movies.length;
           }
+
           setState(() {
             _pos = newPos;
-            _timer?.cancel();
-            _timer = Timer.periodic(const Duration(seconds: 10), (_) {
-              setState(() {
-                _pos = (_pos + 1) % _movies.length;
-              });
-            });
           });
+
+          _startTimer();
         },
         child: Stack(
           children: [
             // background
             PosterBackground(movies: _movies, pos: _pos),
             // image
-            PosterImage(movies: _movies, pos: _pos),
+            PosterImage(
+              movies: _movies,
+              pos: _pos,
+            ),
           ],
         ),
       );
@@ -155,7 +201,7 @@ class PosterImage extends StatelessWidget {
                               width: double.infinity,
                               color: Colors.black,
                             ),
-                            FadeInImage.assetNetwork(
+                            FadeInImage(
                               imageErrorBuilder: (context, error, stackTrace) =>
                                   const Center(
                                 child: Text(
@@ -163,11 +209,13 @@ class PosterImage extends StatelessWidget {
                                   textAlign: TextAlign.center,
                                 ),
                               ),
-                              placeholder: 'assets/images/loading.gif',
+                              placeholder:
+                                  const AssetImage('assets/images/loading.gif'),
                               placeholderFit: BoxFit.scaleDown,
-                              placeholderScale: 2,
-                              image:
-                                  '${kImagesBaseUrl}w500${movies[pos].posterPath}',
+                              image: CachedNetworkImageProvider(
+                                '${kImagesBaseUrl}w500${movies[pos].posterPath}',
+                                cacheManager: DefaultCacheManager(),
+                              ),
                               fit: BoxFit.fitHeight,
                               height: double.infinity,
                               width: double.infinity,
@@ -310,13 +358,16 @@ class PosterBackground extends StatelessWidget {
                 );
               },
               duration: const Duration(milliseconds: 300),
-              child: FadeInImage.assetNetwork(
+              child: FadeInImage(
                 key: UniqueKey(),
                 imageErrorBuilder: (context, error, stackTrace) =>
                     const SizedBox(),
-                placeholder: 'assets/images/loading_empty.gif',
+                placeholder: const AssetImage('assets/images/loading.gif'),
                 placeholderFit: BoxFit.contain,
-                image: '${kImagesBaseUrl}w500${movies[pos].posterPath}',
+                image: CachedNetworkImageProvider(
+                  '${kImagesBaseUrl}w500${movies[pos].posterPath}',
+                  cacheManager: DefaultCacheManager(),
+                ),
                 fit: BoxFit.fitWidth,
                 width: double.infinity,
               ),

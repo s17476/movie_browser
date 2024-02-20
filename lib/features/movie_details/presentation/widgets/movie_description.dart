@@ -26,7 +26,8 @@ class _MovieDescriptionState extends State<MovieDescription> {
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         AnimatedSize(
-          duration: const Duration(milliseconds: 300),
+          duration: Duration(milliseconds: _isExpanded ? 300 : 100),
+          alignment: Alignment.topCenter,
           child: Container(
             padding: const EdgeInsets.only(
               left: 16,
