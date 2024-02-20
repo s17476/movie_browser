@@ -105,13 +105,8 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
-
-  @override
-  String toString() {
-    return 'Top20TvShowsListState.initial()';
-  }
+class _$InitialImpl extends _Initial {
+  const _$InitialImpl() : super._();
 
   @override
   bool operator ==(Object other) {
@@ -197,8 +192,9 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements Top20TvShowsListState {
+abstract class _Initial extends Top20TvShowsListState {
   const factory _Initial() = _$InitialImpl;
+  const _Initial._() : super._();
 }
 
 /// @nodoc
@@ -219,13 +215,8 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
-
-  @override
-  String toString() {
-    return 'Top20TvShowsListState.loading()';
-  }
+class _$LoadingImpl extends _Loading {
+  const _$LoadingImpl() : super._();
 
   @override
   bool operator ==(Object other) {
@@ -311,8 +302,9 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements Top20TvShowsListState {
+abstract class _Loading extends Top20TvShowsListState {
   const factory _Loading() = _$LoadingImpl;
+  const _Loading._() : super._();
 }
 
 /// @nodoc
@@ -333,13 +325,8 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorImpl implements _Error {
-  const _$ErrorImpl();
-
-  @override
-  String toString() {
-    return 'Top20TvShowsListState.error()';
-  }
+class _$ErrorImpl extends _Error {
+  const _$ErrorImpl() : super._();
 
   @override
   bool operator ==(Object other) {
@@ -425,8 +412,9 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements Top20TvShowsListState {
+abstract class _Error extends Top20TvShowsListState {
   const factory _Error() = _$ErrorImpl;
+  const _Error._() : super._();
 }
 
 /// @nodoc
@@ -472,16 +460,11 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadedImpl implements _Loaded {
-  const _$LoadedImpl({required this.showsList});
+class _$LoadedImpl extends _Loaded {
+  const _$LoadedImpl({required this.showsList}) : super._();
 
   @override
   final TvShowList showsList;
-
-  @override
-  String toString() {
-    return 'Top20TvShowsListState.loaded(showsList: $showsList)';
-  }
 
   @override
   bool operator ==(Object other) {
@@ -576,8 +559,9 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements Top20TvShowsListState {
+abstract class _Loaded extends Top20TvShowsListState {
   const factory _Loaded({required final TvShowList showsList}) = _$LoadedImpl;
+  const _Loaded._() : super._();
 
   TvShowList get showsList;
   @JsonKey(ignore: true)

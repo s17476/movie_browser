@@ -104,13 +104,8 @@ class __$$InitialImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$InitialImpl implements _Initial {
-  const _$InitialImpl();
-
-  @override
-  String toString() {
-    return 'Top20MoviesState.initial()';
-  }
+class _$InitialImpl extends _Initial {
+  const _$InitialImpl() : super._();
 
   @override
   bool operator ==(Object other) {
@@ -196,8 +191,9 @@ class _$InitialImpl implements _Initial {
   }
 }
 
-abstract class _Initial implements Top20MoviesState {
+abstract class _Initial extends Top20MoviesState {
   const factory _Initial() = _$InitialImpl;
+  const _Initial._() : super._();
 }
 
 /// @nodoc
@@ -218,13 +214,8 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$ErrorImpl implements _Error {
-  const _$ErrorImpl();
-
-  @override
-  String toString() {
-    return 'Top20MoviesState.error()';
-  }
+class _$ErrorImpl extends _Error {
+  const _$ErrorImpl() : super._();
 
   @override
   bool operator ==(Object other) {
@@ -310,8 +301,9 @@ class _$ErrorImpl implements _Error {
   }
 }
 
-abstract class _Error implements Top20MoviesState {
+abstract class _Error extends Top20MoviesState {
   const factory _Error() = _$ErrorImpl;
+  const _Error._() : super._();
 }
 
 /// @nodoc
@@ -332,13 +324,8 @@ class __$$LoadingImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadingImpl implements _Loading {
-  const _$LoadingImpl();
-
-  @override
-  String toString() {
-    return 'Top20MoviesState.loading()';
-  }
+class _$LoadingImpl extends _Loading {
+  const _$LoadingImpl() : super._();
 
   @override
   bool operator ==(Object other) {
@@ -424,8 +411,9 @@ class _$LoadingImpl implements _Loading {
   }
 }
 
-abstract class _Loading implements Top20MoviesState {
+abstract class _Loading extends Top20MoviesState {
   const factory _Loading() = _$LoadingImpl;
+  const _Loading._() : super._();
 }
 
 /// @nodoc
@@ -461,9 +449,10 @@ class __$$LoadedImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$LoadedImpl implements _Loaded {
+class _$LoadedImpl extends _Loaded {
   const _$LoadedImpl({required final List<MovieDetails> movies})
-      : _movies = movies;
+      : _movies = movies,
+        super._();
 
   final List<MovieDetails> _movies;
   @override
@@ -471,11 +460,6 @@ class _$LoadedImpl implements _Loaded {
     if (_movies is EqualUnmodifiableListView) return _movies;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_movies);
-  }
-
-  @override
-  String toString() {
-    return 'Top20MoviesState.loaded(movies: $movies)';
   }
 
   @override
@@ -571,9 +555,10 @@ class _$LoadedImpl implements _Loaded {
   }
 }
 
-abstract class _Loaded implements Top20MoviesState {
+abstract class _Loaded extends Top20MoviesState {
   const factory _Loaded({required final List<MovieDetails> movies}) =
       _$LoadedImpl;
+  const _Loaded._() : super._();
 
   List<MovieDetails> get movies;
   @JsonKey(ignore: true)

@@ -13,7 +13,9 @@ class UserProfileDto with _$UserProfileDto {
   const UserProfileDto._();
 
   const factory UserProfileDto({
-    @JsonKey(ignore: true) @Default('') String id,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    @Default('')
+    String id,
     required String sessionId,
     required List<int> ratedMovies,
     required List<int> ratedTvShows,

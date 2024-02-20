@@ -55,7 +55,9 @@ class TvShowPosterWithInfo extends StatelessWidget {
                 Stack(children: [
                   Padding(
                     padding: EdgeInsets.only(
-                      top: MediaQueryData.fromWindow(window).padding.top + 8,
+                      top: MediaQuery.of(context).padding.top -
+                          kToolbarHeight +
+                          8,
                       left: 16,
                       right: 16,
                     ),

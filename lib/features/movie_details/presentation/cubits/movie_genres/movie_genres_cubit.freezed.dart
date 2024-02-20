@@ -108,11 +108,6 @@ class _$InitialImpl extends _Initial {
   const _$InitialImpl() : super._();
 
   @override
-  String toString() {
-    return 'MovieGenresState.initial()';
-  }
-
-  @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$InitialImpl);
@@ -223,11 +218,6 @@ class _$LoadingImpl extends _Loading {
   const _$LoadingImpl() : super._();
 
   @override
-  String toString() {
-    return 'MovieGenresState.loading()';
-  }
-
-  @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType && other is _$LoadingImpl);
@@ -336,11 +326,6 @@ class __$$ErrorImplCopyWithImpl<$Res>
 
 class _$ErrorImpl extends _Error {
   const _$ErrorImpl() : super._();
-
-  @override
-  String toString() {
-    return 'MovieGenresState.error()';
-  }
 
   @override
   bool operator ==(Object other) {
@@ -479,11 +464,6 @@ class _$LoadedImpl extends _Loaded {
 
   @override
   final MovieGenreList genreList;
-
-  @override
-  String toString() {
-    return 'MovieGenresState.loaded(genreList: $genreList)';
-  }
 
   @override
   bool operator ==(Object other) {
