@@ -7,13 +7,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_cache_manager/flutter_cache_manager.dart';
 import 'package:intl/intl.dart';
+import 'package:movie_browser/app/routes.dart';
 
-import '../../../core/constants/constants.dart';
-import '../../../core/presentation/widgets/star_rating.dart';
-import '../../../core/utils/format_currency.dart';
-import '../../../movie_details/domain/entities/movie_details.dart';
-import '../../../movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart';
-import '../../utils/fetch_and_show_movie.dart';
+import 'package:movie_browser/features/core/constants/constants.dart';
+import 'package:movie_browser/features/core/presentation/cubits/current_route/current_route_cubit.dart';
+import 'package:movie_browser/features/core/presentation/widgets/star_rating.dart';
+import 'package:movie_browser/features/core/utils/format_currency.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart';
+import 'package:movie_browser/features/movies_list/utils/fetch_and_show_movie.dart';
 
 class Top20Switcher extends StatefulWidget {
   const Top20Switcher({super.key});
@@ -57,7 +59,9 @@ class _Top20SwitcherState extends State<Top20Switcher> {
 
     _timer = Timer.periodic(const Duration(seconds: 6), (_) {
       setState(() {
-        _pos = (_pos + 1) % _movies.length;
+        if (context.read<CurrentRouteCubit>().state.isCurrent(Routes.home)) {
+          _pos = (_pos + 1) % _movies.length;
+        }
       });
     });
   }

@@ -1,20 +1,23 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 
-import '../../../../secrets.dart';
-import '../../../core/constants/constants.dart';
-import '../../../core/errors/http_error_handler.dart';
-import '../../../core/errors/movie_exception.dart';
-import '../../../movies_list/domain/entities/movie_list.dart';
-import '../../domain/entities/credits.dart';
-import '../../domain/entities/movie_details.dart';
-import '../../domain/entities/movie_genre_list.dart';
-import '../../domain/entities/movie_image_list.dart';
-import '../../domain/entities/tv_show_details.dart';
-import '../../domain/entities/video_list.dart';
-import '../../domain/services/movie_details_api_service.dart';
+import 'package:movie_browser/features/core/constants/constants.dart';
+import 'package:movie_browser/features/core/errors/http_error_handler.dart';
+import 'package:movie_browser/features/core/errors/movie_exception.dart';
+import 'package:movie_browser/features/core/utils/logger.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/credits.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_genre_list.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_image_list.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/tv_show_details.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/video_list.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/watch_provider.dart';
+import 'package:movie_browser/features/movie_details/domain/services/movie_details_api_service.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie_list.dart';
+import 'package:movie_browser/secrets.dart';
 
 @LazySingleton(as: MovieDetailsApiService)
 class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
@@ -164,6 +167,58 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
     } catch (e) {
       rethrow;
     }
+  }
+
+  @override
+  Future<List<WatchProvider>> fetchWatchProviders(
+      int movieId, bool isTvShow) async {
+    try {
+      final endpoint = isTvShow ? 'tv' : 'movie';
+      final Uri uri = Uri(
+        scheme: 'https',
+        host: kBaseUrl,
+        path: '3/$endpoint/$movieId/watch/providers',
+        queryParameters: {
+          'api_key': kApiKey,
+        },
+      );
+      final response = await client.get(uri);
+
+      if (response.statusCode != 200) {
+        throw Exception(httpErrorHandler(response));
+      }
+
+      final watchProviders = await compute(_parseWatchProviders, response.body);
+
+      return watchProviders;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  static Future<List<WatchProvider>> _parseWatchProviders(String body) async {
+    List<WatchProvider> watchProviders = [];
+    final json = jsonDecode(body) as Map<String, dynamic>;
+
+    for (var providerType in ProviderType.values) {
+      final buyProviders = json['results']['US'] // TODO - internationalisation
+          ?[providerType.name];
+
+      Log.f(buyProviders);
+
+      if (buyProviders != null) {
+        for (var provider in buyProviders as List<dynamic>) {
+          final watchProvider = WatchProvider.fromJsonWithType(
+            provider,
+            providerType,
+          );
+
+          watchProviders.add(watchProvider);
+        }
+      }
+    }
+
+    return watchProviders;
   }
 
   @override

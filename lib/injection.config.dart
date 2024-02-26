@@ -19,9 +19,9 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'features/auth/data/repositories/authentication_repository_impl.dart'
     as _i34;
 import 'features/auth/domain/repositories/auth_repository.dart' as _i33;
-import 'features/auth/presentation/blocs/auth/auth_bloc.dart' as _i45;
+import 'features/auth/presentation/blocs/auth/auth_bloc.dart' as _i46;
 import 'features/auth/presentation/cubits/apple_provider/apple_provider_cubit.dart'
-    as _i44;
+    as _i45;
 import 'features/auth/presentation/cubits/email_provider/email_provider_cubit.dart'
     as _i36;
 import 'features/auth/presentation/cubits/facebook_provider/facebook_provider_cubit.dart'
@@ -39,7 +39,7 @@ import 'features/movie_details/domain/repositories/movie_details_repository.dart
 import 'features/movie_details/domain/services/movie_details_api_service.dart'
     as _i9;
 import 'features/movie_details/presentation/cubits/cast/cast_cubit.dart'
-    as _i46;
+    as _i47;
 import 'features/movie_details/presentation/cubits/movie_details/movie_details_cubit.dart'
     as _i39;
 import 'features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart'
@@ -54,6 +54,8 @@ import 'features/movie_details/presentation/cubits/tv_show_details/tv_show_detai
     as _i32;
 import 'features/movie_details/presentation/cubits/video/video_cubit.dart'
     as _i43;
+import 'features/movie_details/presentation/cubits/watch_providers/watch_providers_cubit.dart'
+    as _i44;
 import 'features/movies_list/data/repositories/movies_repository_impl.dart'
     as _i17;
 import 'features/movies_list/data/services/movies_api_service_impl.dart'
@@ -82,7 +84,7 @@ import 'features/people/domain/repositories/person_details_repository.dart'
 import 'features/people/domain/services/person_details_api_service.dart'
     as _i18;
 import 'features/people/presentation/cubits/person_credits/person_credits_cubit.dart'
-    as _i47;
+    as _i48;
 import 'features/people/presentation/cubits/person_details/person_details_cubit.dart'
     as _i41;
 import 'features/profile/data/repositories/profile_repository_impl.dart'
@@ -91,10 +93,10 @@ import 'features/profile/data/services/profile_api_service_impl.dart' as _i23;
 import 'features/profile/domain/repositories/profile_repository.dart' as _i24;
 import 'features/profile/domain/services/profile_api_service.dart' as _i22;
 import 'features/profile/presentation/cubits/user_lists/user_lists_cubit.dart'
-    as _i49;
+    as _i50;
 import 'features/profile/presentation/cubits/user_profile/user_profile_cubit.dart'
-    as _i48;
-import 'injectable_modules.dart' as _i50;
+    as _i49;
+import 'injectable_modules.dart' as _i51;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -195,37 +197,42 @@ extension GetItInjectableX on _i1.GetIt {
       gh<_i39.MovieDetailsCubit>(),
       gh<_i32.TvShowDetailsCubit>(),
     ));
-    gh.factory<_i44.AppleProviderCubit>(
-        () => _i44.AppleProviderCubit(gh<_i33.AuthRepository>()));
-    gh.singleton<_i45.AuthBloc>(_i45.AuthBloc(gh<_i33.AuthRepository>()));
-    gh.singleton<_i46.CastCubit>(_i46.CastCubit(
+    gh.singleton<_i44.WatchProvidersCubit>(_i44.WatchProvidersCubit(
       gh<_i11.MovieDetailsRepository>(),
       gh<_i39.MovieDetailsCubit>(),
       gh<_i32.TvShowDetailsCubit>(),
     ));
-    gh.singleton<_i47.PersonCreditsCubit>(_i47.PersonCreditsCubit(
+    gh.factory<_i45.AppleProviderCubit>(
+        () => _i45.AppleProviderCubit(gh<_i33.AuthRepository>()));
+    gh.singleton<_i46.AuthBloc>(_i46.AuthBloc(gh<_i33.AuthRepository>()));
+    gh.singleton<_i47.CastCubit>(_i47.CastCubit(
+      gh<_i11.MovieDetailsRepository>(),
+      gh<_i39.MovieDetailsCubit>(),
+      gh<_i32.TvShowDetailsCubit>(),
+    ));
+    gh.singleton<_i48.PersonCreditsCubit>(_i48.PersonCreditsCubit(
       gh<_i20.PersonDetailsRepository>(),
       gh<_i41.PersonDetailsCubit>(),
     ));
-    gh.singleton<_i48.UserProfileCubit>(_i48.UserProfileCubit(
+    gh.singleton<_i49.UserProfileCubit>(_i49.UserProfileCubit(
       gh<_i24.ProfileRepository>(),
-      gh<_i45.AuthBloc>(),
+      gh<_i46.AuthBloc>(),
     ));
-    gh.singleton<_i49.UserListsCubit>(_i49.UserListsCubit(
-      gh<_i48.UserProfileCubit>(),
+    gh.singleton<_i50.UserListsCubit>(_i50.UserListsCubit(
+      gh<_i49.UserProfileCubit>(),
       gh<_i11.MovieDetailsRepository>(),
     ));
     return this;
   }
 }
 
-class _$HttpClient extends _i50.HttpClient {}
+class _$HttpClient extends _i51.HttpClient {}
 
-class _$FacebookSignInService extends _i50.FacebookSignInService {}
+class _$FacebookSignInService extends _i51.FacebookSignInService {}
 
 class _$FirebaseAuthenticationService
-    extends _i50.FirebaseAuthenticationService {}
+    extends _i51.FirebaseAuthenticationService {}
 
-class _$FirebaseFirestoreService extends _i50.FirebaseFirestoreService {}
+class _$FirebaseFirestoreService extends _i51.FirebaseFirestoreService {}
 
-class _$GoogleSignInService extends _i50.GoogleSignInService {}
+class _$GoogleSignInService extends _i51.GoogleSignInService {}

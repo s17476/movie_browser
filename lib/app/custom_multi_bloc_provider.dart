@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie_browser/features/core/presentation/cubits/current_route/current_route_cubit.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/watch_providers/watch_providers_cubit.dart';
 
 import '../features/auth/presentation/blocs/auth/auth_bloc.dart';
 import '../features/auth/presentation/cubits/apple_provider/apple_provider_cubit.dart';
@@ -62,6 +63,7 @@ class CustomMultiBlocProvider extends StatelessWidget {
         BlocProvider(create: (context) => getIt<UserProfileCubit>()),
         BlocProvider(create: (context) => getIt<UserListsCubit>()),
         BlocProvider(create: (context) => getIt<CurrentRouteCubit>()),
+        BlocProvider(create: (context) => getIt<WatchProvidersCubit>()),
       ],
       child: child,
     );
