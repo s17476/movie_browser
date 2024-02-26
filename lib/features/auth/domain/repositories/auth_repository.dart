@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-import '../../../core/errors/failure.dart';
+import 'package:movie_browser/features/core/errors/failure.dart';
 
 abstract class AuthRepository {
   Stream<User?> get user;

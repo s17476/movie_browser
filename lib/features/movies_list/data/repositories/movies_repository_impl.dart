@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../core/errors/failure.dart';
-import '../../../core/errors/movie_exception.dart';
-import '../../domain/entities/movie_list.dart';
-import '../../domain/entities/tv_show_list.dart';
-import '../../domain/repositories/movies_repository.dart';
-import '../../domain/services/movies_api_service.dart';
+import 'package:movie_browser/features/core/errors/failure.dart';
+import 'package:movie_browser/features/core/errors/movie_exception.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie_list.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/tv_show_list.dart';
+import 'package:movie_browser/features/movies_list/domain/repositories/movies_repository.dart';
+import 'package:movie_browser/features/movies_list/domain/services/movies_api_service.dart';
 
 @LazySingleton(as: MoviesRepository)
 class MoviesRepositoryImpl extends MoviesRepository {

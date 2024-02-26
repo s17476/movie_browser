@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../domain/entities/user_profile.dart';
+import 'package:movie_browser/features/profile/domain/entities/user_profile.dart';
 
 part 'user_profile_dto.freezed.dart';
 part 'user_profile_dto.g.dart';

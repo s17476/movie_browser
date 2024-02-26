@@ -8,8 +8,8 @@ import 'package:movie_browser/features/core/constants/constants.dart';
 import 'package:movie_browser/features/core/presentation/widgets/images_carousel.dart';
 import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
 import 'package:movie_browser/features/movie_details/presentation/cubits/movie_images/movie_images_cubit.dart';
-import 'info_box.dart';
-import 'movie_actions.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/info_box.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/movie_actions.dart';
 
 class PosterWithInfo extends StatelessWidget {
   final MovieDetails movie;

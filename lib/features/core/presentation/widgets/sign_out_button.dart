@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../auth/utils/show_signout_dialog.dart';
+import 'package:movie_browser/features/auth/utils/show_signout_dialog.dart';
 
 class SignOutButton extends StatelessWidget {
   const SignOutButton({

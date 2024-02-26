@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart';
-import 'horizontal_genres_list.dart';
-import 'shimmer_horizontal_movies_list.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/horizontal_genres_list.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/shimmer_horizontal_movies_list.dart';
 
 class Genreslist extends StatelessWidget {
   const Genreslist({super.key});

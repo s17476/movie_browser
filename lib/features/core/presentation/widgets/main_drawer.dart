@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../../app/routes.dart';
-import '../../../auth/presentation/blocs/auth/auth_bloc.dart';
-import '../../../profile/presentation/cubits/user_profile/user_profile_cubit.dart';
-import 'app_logo.dart';
-import 'sign_in_button.dart';
-import 'sign_out_button.dart';
-import 'user_avatar.dart';
+import 'package:movie_browser/app/routes.dart';
+import 'package:movie_browser/features/auth/presentation/blocs/auth/auth_bloc.dart';
+import 'package:movie_browser/features/core/presentation/widgets/app_logo.dart';
+import 'package:movie_browser/features/core/presentation/widgets/sign_in_button.dart';
+import 'package:movie_browser/features/core/presentation/widgets/sign_out_button.dart';
+import 'package:movie_browser/features/core/presentation/widgets/user_avatar.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});

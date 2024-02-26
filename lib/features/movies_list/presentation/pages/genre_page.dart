@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../movie_details/presentation/widgets/movie_details_error_info.dart';
-import '../cubits/category_movies/category_movies_cubit.dart';
-import '../widgets/genre_widget.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/movie_details_error_info.dart';
+import 'package:movie_browser/features/movies_list/presentation/cubits/category_movies/category_movies_cubit.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/genre_widget.dart';
 
 class GenrePage extends StatelessWidget {
   const GenrePage({super.key});

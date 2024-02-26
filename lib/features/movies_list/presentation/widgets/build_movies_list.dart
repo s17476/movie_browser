@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../domain/entities/movie_list.dart';
 
-import 'horizontal_movies_list.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie_list.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/horizontal_movies_list.dart';
 
 List<Widget> buildMoviesLists(Map<String, MovieList> moviesLists) {
   final genres = moviesLists.keys;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../movie_details/domain/entities/movie_genre.dart';
-import '../../utils/fetch_by_genre_and_show_movies.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_genre.dart';
+import 'package:movie_browser/features/movies_list/utils/fetch_by_genre_and_show_movies.dart';
 
 class HorizontalGenresList extends StatelessWidget {
   final String title;

@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../auth/presentation/blocs/auth/auth_bloc.dart';
-import '../../../domain/entities/user_profile.dart';
-import '../../../domain/repositories/profile_repository.dart';
+import 'package:movie_browser/features/auth/presentation/blocs/auth/auth_bloc.dart';
+import 'package:movie_browser/features/profile/domain/entities/user_profile.dart';
+import 'package:movie_browser/features/profile/domain/repositories/profile_repository.dart';
 
 part 'user_profile_cubit.freezed.dart';
 part 'user_profile_state.dart';

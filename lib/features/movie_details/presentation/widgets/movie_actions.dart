@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../core/utils/show_snack_bar.dart';
-import '../../../profile/presentation/cubits/user_profile/user_profile_cubit.dart';
-import 'movie_action_icon_button.dart';
+import 'package:movie_browser/features/core/utils/show_snack_bar.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/movie_action_icon_button.dart';
 
 class MovieActions extends StatelessWidget {
   final bool isTvShow;

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubits/movie_images/movie_images_cubit.dart';
-import 'movie_image.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/movie_images/movie_images_cubit.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/movie_image.dart';
 
 class HorizontalImagesList extends StatelessWidget {
   const HorizontalImagesList({super.key});

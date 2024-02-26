@@ -4,11 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../movie_details/domain/entities/movie_details.dart';
-import '../../../../movie_details/domain/entities/tv_show_details.dart';
-import '../../../../movie_details/domain/repositories/movie_details_repository.dart';
-import '../../../domain/entities/user_profile.dart';
-import '../user_profile/user_profile_cubit.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/tv_show_details.dart';
+import 'package:movie_browser/features/movie_details/domain/repositories/movie_details_repository.dart';
+import 'package:movie_browser/features/profile/domain/entities/user_profile.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 part 'user_lists_cubit.freezed.dart';
 part 'user_lists_state.dart';

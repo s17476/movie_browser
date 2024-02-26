@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/presentation/cubits/current_route/current_route_cubit.dart';
-import '../../domain/entities/video.dart';
+import 'package:movie_browser/features/core/presentation/cubits/current_route/current_route_cubit.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/video.dart';
 
 class MovieVideo extends StatelessWidget {
   final Video video;

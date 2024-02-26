@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../movies_list/presentation/widgets/horizontal_movies_list.dart';
-import '../cubits/recommendations/recommendations_cubit.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/recommendations/recommendations_cubit.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/horizontal_movies_list.dart';
 
 class RecommendedMovies extends StatelessWidget {
   const RecommendedMovies({super.key});

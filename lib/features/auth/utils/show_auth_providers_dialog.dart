@@ -4,12 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:sign_button/sign_button.dart';
 
-import '../../../app/routes.dart';
-import '../../core/presentation/widgets/glass_layer.dart';
-import '../presentation/cubits/apple_provider/apple_provider_cubit.dart';
-import '../presentation/cubits/facebook_provider/facebook_provider_cubit.dart';
-import '../presentation/cubits/google_provider/google_provider_cubit.dart';
-import '../presentation/widgets/custom_signin_button.dart';
+import 'package:movie_browser/app/routes.dart';
+import 'package:movie_browser/features/auth/presentation/cubits/apple_provider/apple_provider_cubit.dart';
+import 'package:movie_browser/features/auth/presentation/cubits/facebook_provider/facebook_provider_cubit.dart';
+import 'package:movie_browser/features/auth/presentation/cubits/google_provider/google_provider_cubit.dart';
+import 'package:movie_browser/features/auth/presentation/widgets/custom_signin_button.dart';
+import 'package:movie_browser/features/core/presentation/widgets/glass_layer.dart';
 
 void showAuthProvidersDialog(BuildContext context) {
   showDialog(

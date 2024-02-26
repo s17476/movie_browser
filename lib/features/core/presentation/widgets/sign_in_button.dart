@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../auth/utils/show_auth_providers_dialog.dart';
+import 'package:movie_browser/features/auth/utils/show_auth_providers_dialog.dart';
 
 class SignInButton extends StatelessWidget {
   const SignInButton({

@@ -2,7 +2,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'movie_image.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_image.dart';
 
 part 'movie_image_list.freezed.dart';
 part 'movie_image_list.g.dart';

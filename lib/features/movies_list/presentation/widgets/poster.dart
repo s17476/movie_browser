@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/constants.dart';
-import '../../utils/fetch_and_show_movie.dart';
-import '../../utils/fetch_and_show_tv_show.dart';
+import 'package:movie_browser/features/core/constants/constants.dart';
+import 'package:movie_browser/features/movies_list/utils/fetch_and_show_movie.dart';
+import 'package:movie_browser/features/movies_list/utils/fetch_and_show_tv_show.dart';
 
 class Poster extends StatelessWidget {
   final int id;

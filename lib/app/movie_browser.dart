@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
+import 'package:movie_browser/app/custom_multi_bloc_provider.dart';
 import 'package:movie_browser/app/custom_router.dart';
-
-import 'custom_multi_bloc_provider.dart';
 
 class MovieBrowser extends StatelessWidget {
   const MovieBrowser({super.key});

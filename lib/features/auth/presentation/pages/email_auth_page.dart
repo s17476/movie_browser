@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../../core/utils/show_snack_bar.dart';
-import '../blocs/auth/auth_bloc.dart';
-import '../cubits/email_provider/email_provider_cubit.dart';
-import '../widgets/custom_text_form_field.dart';
-import '../widgets/reset_password_text_button.dart';
+import 'package:movie_browser/features/auth/presentation/blocs/auth/auth_bloc.dart';
+import 'package:movie_browser/features/auth/presentation/cubits/email_provider/email_provider_cubit.dart';
+import 'package:movie_browser/features/auth/presentation/widgets/custom_text_form_field.dart';
+import 'package:movie_browser/features/auth/presentation/widgets/reset_password_text_button.dart';
+import 'package:movie_browser/features/core/utils/show_snack_bar.dart';
 
 class EmailAuthPage extends StatefulWidget {
   const EmailAuthPage({Key? key}) : super(key: key);

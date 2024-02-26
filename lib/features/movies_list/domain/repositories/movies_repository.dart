@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 
-import '../../../core/errors/failure.dart';
-import '../entities/movie_list.dart';
-import '../entities/tv_show_list.dart';
+import 'package:movie_browser/features/core/errors/failure.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie_list.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/tv_show_list.dart';
 
 abstract class MoviesRepository {
   Future<Either<Failure, MovieList>> top20Movies();

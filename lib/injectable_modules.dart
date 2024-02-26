@@ -5,7 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 
-import 'firebase_options.dart';
+import 'package:movie_browser/firebase_options.dart';
 
 @module
 abstract class HttpClient {

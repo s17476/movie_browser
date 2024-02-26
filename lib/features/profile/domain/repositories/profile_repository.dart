@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 
-import '../../../core/errors/failure.dart';
-import '../entities/user_profile.dart';
+import 'package:movie_browser/features/core/errors/failure.dart';
+import 'package:movie_browser/features/profile/domain/entities/user_profile.dart';
 
 abstract class ProfileRepository {
   Future<Either<Failure, UserProfile>> fetchUserProfile(String userId);

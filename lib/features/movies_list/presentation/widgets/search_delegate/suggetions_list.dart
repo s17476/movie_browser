@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubits/search_suggestions/search_suggestions_cubit.dart';
-import 'suggestion_tile.dart';
+import 'package:movie_browser/features/movies_list/presentation/cubits/search_suggestions/search_suggestions_cubit.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/search_delegate/suggestion_tile.dart';
 
 class SuggestionsList extends StatelessWidget {
   final Function(BuildContext, String) search;

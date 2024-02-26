@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../movies_list/presentation/cubits/random_genres/random_genres_cubit.dart';
-import '../../../movies_list/presentation/widgets/build_movies_list.dart';
-import '../../../movies_list/presentation/widgets/genres_list.dart';
-import '../../../movies_list/presentation/widgets/search_delegate/movie_search.dart';
-import '../../../movies_list/presentation/widgets/top20_list.dart';
-import '../../../movies_list/presentation/widgets/top20_switcher.dart';
-import '../../../movies_list/presentation/widgets/top20_tv_list.dart';
-import '../widgets/main_drawer.dart';
-import '../widgets/sign_in_listener.dart';
-import '../widgets/user_avatar.dart';
+import 'package:movie_browser/features/core/presentation/widgets/main_drawer.dart';
+import 'package:movie_browser/features/core/presentation/widgets/sign_in_listener.dart';
+import 'package:movie_browser/features/core/presentation/widgets/user_avatar.dart';
+import 'package:movie_browser/features/movies_list/presentation/cubits/random_genres/random_genres_cubit.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/build_movies_list.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/genres_list.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/search_delegate/movie_search.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/top20_list.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/top20_switcher.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/top20_tv_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -39,12 +39,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void didChangeDependencies() {
-    // loads random movie lists
-    context.watch<RandomGenresCubit>().state.maybeMap(
-        loaded: (state) {
+    context.watch<RandomGenresCubit>().state.mapOrNull(
+      loaded: (state) {
+        if (_randomCategoryLists.isEmpty) {
           _randomCategoryLists = buildMoviesLists(state.movieLists);
-        },
-        orElse: () => null);
+        }
+      },
+    );
 
     super.didChangeDependencies();
   }

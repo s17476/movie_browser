@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubits/user_lists/user_lists_cubit.dart';
-import '../cubits/user_profile/user_profile_cubit.dart';
-import '../widgets/movies_grid_view.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_lists/user_lists_cubit.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
+import 'package:movie_browser/features/profile/presentation/widgets/movies_grid_view.dart';
 
 class UserListPage extends StatefulWidget {
   const UserListPage({super.key, this.listType = ListType.favoriteMovies});

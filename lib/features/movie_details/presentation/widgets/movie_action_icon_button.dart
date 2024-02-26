@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import '../../../auth/utils/show_auth_providers_dialog.dart';
-import '../../../core/utils/show_snack_bar.dart';
-import '../../../profile/presentation/cubits/user_profile/user_profile_cubit.dart';
-import '../../utils/show_rate_dialog.dart';
+import 'package:movie_browser/features/auth/utils/show_auth_providers_dialog.dart';
+import 'package:movie_browser/features/core/utils/show_snack_bar.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
+import 'package:movie_browser/features/movie_details/utils/show_rate_dialog.dart';
 
 class MovieActionIconButton extends HookWidget {
   final int movieId;

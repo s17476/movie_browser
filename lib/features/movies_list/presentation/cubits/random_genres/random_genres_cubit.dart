@@ -4,10 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../movie_details/domain/entities/movie_genre.dart';
-import '../../../../movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart';
-import '../../../domain/entities/movie_list.dart';
-import '../../../domain/repositories/movies_repository.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_genre.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie_list.dart';
+import 'package:movie_browser/features/movies_list/domain/repositories/movies_repository.dart';
 
 part 'random_genres_cubit.freezed.dart';
 part 'random_genres_state.dart';

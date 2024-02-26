@@ -1,5 +1,5 @@
-import '../entities/movie_list.dart';
-import '../entities/tv_show_list.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie_list.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/tv_show_list.dart';
 
 abstract class MoviesApiService {
   Future<MovieList> top20Movies();

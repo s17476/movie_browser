@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubits/top20_tv_shows_list/top20_tv_shows_list_cubit.dart';
-import 'horizontal_tv_shows_list.dart';
-import 'shimmer_horizontal_movies_list.dart';
+import 'package:movie_browser/features/movies_list/presentation/cubits/top20_tv_shows_list/top20_tv_shows_list_cubit.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/horizontal_tv_shows_list.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/shimmer_horizontal_movies_list.dart';
 
 class Top20TvList extends StatelessWidget {
   const Top20TvList({super.key});
