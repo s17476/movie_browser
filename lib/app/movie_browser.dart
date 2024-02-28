@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
 import 'package:movie_browser/app/custom_multi_bloc_provider.dart';
@@ -19,6 +20,8 @@ class MovieBrowser extends StatelessWidget {
           }
         },
         child: MaterialApp.router(
+          title: 'Movie Browser',
+          debugShowCheckedModeBanner: false,
           routerConfig: CustomRouter.routerConfig(),
           builder: (context, child) => ResponsiveWrapper.builder(
             child,
@@ -31,8 +34,6 @@ class MovieBrowser extends StatelessWidget {
               ResponsiveBreakpoint.autoScale(2460, name: "4K"),
             ],
           ),
-          title: 'Movie Browser',
-          debugShowCheckedModeBanner: false,
           theme: ThemeData(
             colorScheme: const ColorScheme.dark().copyWith(
               primary: Colors.amber.shade800,
@@ -45,6 +46,14 @@ class MovieBrowser extends StatelessWidget {
               elevation: 0.0,
             ),
           ),
+          localizationsDelegates: const [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
+            GlobalCupertinoLocalizations.delegate,
+          ],
+          supportedLocales: const [
+            Locale('en'),
+          ],
         ),
       ),
     );

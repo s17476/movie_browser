@@ -26,6 +26,7 @@ import 'package:movie_browser/features/people/presentation/cubits/person_credits
 import 'package:movie_browser/features/people/presentation/cubits/person_details/person_details_cubit.dart';
 import 'package:movie_browser/features/profile/presentation/cubits/user_lists/user_lists_cubit.dart';
 import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
+import 'package:movie_browser/features/settings/presentation/blocs/language_cubit.dart';
 import 'package:movie_browser/injection.dart';
 
 class CustomMultiBlocProvider extends StatelessWidget {
@@ -64,6 +65,7 @@ class CustomMultiBlocProvider extends StatelessWidget {
         BlocProvider(create: (context) => getIt<UserListsCubit>()),
         BlocProvider(create: (context) => getIt<CurrentRouteCubit>()),
         BlocProvider(create: (context) => getIt<WatchProvidersCubit>()),
+        BlocProvider(create: (context) => getIt<LanguageCubit>()),
       ],
       child: child,
     );
