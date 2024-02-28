@@ -5,6 +5,11 @@ const kBaseUrl = 'api.themoviedb.org';
 // list tile leading image base URL
 const kImagesBaseUrl = 'https://image.tmdb.org/t/p/';
 
+const kProvidersBaseUrl = 'https://media.themoviedb.org/t/p/original/';
+
+const kWatchUrlPrefix = 'https://www.themoviedb.org/movie/';
+const kWatchUrlSufix = '/watch?translate=false&locale=US';
+
 // shimmer base color
 const kShimmerBaseColor = Colors.black;
 // shimmer highlight color

@@ -6,7 +6,7 @@ part of 'tv_show.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_TvShow _$$_TvShowFromJson(Map<String, dynamic> json) => _$_TvShow(
+_$TvShowImpl _$$TvShowImplFromJson(Map<String, dynamic> json) => _$TvShowImpl(
       name: json['name'] as String,
       voteAverage: (json['vote_average'] as num).toDouble(),
       id: json['id'] as int,
@@ -15,7 +15,8 @@ _$_TvShow _$$_TvShowFromJson(Map<String, dynamic> json) => _$_TvShow(
       overview: json['overview'],
     );
 
-Map<String, dynamic> _$$_TvShowToJson(_$_TvShow instance) => <String, dynamic>{
+Map<String, dynamic> _$$TvShowImplToJson(_$TvShowImpl instance) =>
+    <String, dynamic>{
       'name': instance.name,
       'vote_average': instance.voteAverage,
       'id': instance.id,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../auth/presentation/cubits/apple_provider/apple_provider_cubit.dart';
-import '../../../auth/presentation/cubits/email_provider/email_provider_cubit.dart';
-import '../../../auth/presentation/cubits/facebook_provider/facebook_provider_cubit.dart';
-import '../../../auth/presentation/cubits/google_provider/google_provider_cubit.dart';
-import '../../utils/show_sign_in_snackbar.dart';
+import 'package:movie_browser/features/auth/presentation/cubits/apple_provider/apple_provider_cubit.dart';
+import 'package:movie_browser/features/auth/presentation/cubits/email_provider/email_provider_cubit.dart';
+import 'package:movie_browser/features/auth/presentation/cubits/facebook_provider/facebook_provider_cubit.dart';
+import 'package:movie_browser/features/auth/presentation/cubits/google_provider/google_provider_cubit.dart';
+import 'package:movie_browser/features/core/utils/show_sign_in_snackbar.dart';
 
 class SignInListener extends StatelessWidget {
   final Widget child;

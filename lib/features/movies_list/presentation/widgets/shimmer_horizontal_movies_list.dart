@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../../../core/constants/constants.dart';
+import 'package:movie_browser/features/core/constants/constants.dart';
 
 class ShimmerHorizontalMoviesList extends StatelessWidget {
   final String title;

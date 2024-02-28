@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-import '../../../movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart';
-import '../../domain/entities/movie.dart';
-import '../cubits/category_movies/category_movies_cubit.dart';
-import 'poster.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie.dart';
+import 'package:movie_browser/features/movies_list/presentation/cubits/category_movies/category_movies_cubit.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/poster.dart';
 
 class GenreWidget extends StatefulWidget {
   final int genreId;

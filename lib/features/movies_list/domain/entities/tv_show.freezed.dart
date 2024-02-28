@@ -12,7 +12,7 @@ part of 'tv_show.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 TvShow _$TvShowFromJson(Map<String, dynamic> json) {
   return _TvShow.fromJson(json);
@@ -96,9 +96,10 @@ class _$TvShowCopyWithImpl<$Res, $Val extends TvShow>
 }
 
 /// @nodoc
-abstract class _$$_TvShowCopyWith<$Res> implements $TvShowCopyWith<$Res> {
-  factory _$$_TvShowCopyWith(_$_TvShow value, $Res Function(_$_TvShow) then) =
-      __$$_TvShowCopyWithImpl<$Res>;
+abstract class _$$TvShowImplCopyWith<$Res> implements $TvShowCopyWith<$Res> {
+  factory _$$TvShowImplCopyWith(
+          _$TvShowImpl value, $Res Function(_$TvShowImpl) then) =
+      __$$TvShowImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
@@ -111,10 +112,11 @@ abstract class _$$_TvShowCopyWith<$Res> implements $TvShowCopyWith<$Res> {
 }
 
 /// @nodoc
-class __$$_TvShowCopyWithImpl<$Res>
-    extends _$TvShowCopyWithImpl<$Res, _$_TvShow>
-    implements _$$_TvShowCopyWith<$Res> {
-  __$$_TvShowCopyWithImpl(_$_TvShow _value, $Res Function(_$_TvShow) _then)
+class __$$TvShowImplCopyWithImpl<$Res>
+    extends _$TvShowCopyWithImpl<$Res, _$TvShowImpl>
+    implements _$$TvShowImplCopyWith<$Res> {
+  __$$TvShowImplCopyWithImpl(
+      _$TvShowImpl _value, $Res Function(_$TvShowImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -127,7 +129,7 @@ class __$$_TvShowCopyWithImpl<$Res>
     Object? firstAirDate = freezed,
     Object? overview = freezed,
   }) {
-    return _then(_$_TvShow(
+    return _then(_$TvShowImpl(
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -159,8 +161,8 @@ class __$$_TvShowCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_TvShow extends _TvShow with DiagnosticableTreeMixin {
-  const _$_TvShow(
+class _$TvShowImpl extends _TvShow with DiagnosticableTreeMixin {
+  const _$TvShowImpl(
       {required this.name,
       required this.voteAverage,
       required this.id,
@@ -169,8 +171,8 @@ class _$_TvShow extends _TvShow with DiagnosticableTreeMixin {
       required this.overview})
       : super._();
 
-  factory _$_TvShow.fromJson(Map<String, dynamic> json) =>
-      _$$_TvShowFromJson(json);
+  factory _$TvShowImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TvShowImplFromJson(json);
 
   @override
   final String name;
@@ -204,10 +206,10 @@ class _$_TvShow extends _TvShow with DiagnosticableTreeMixin {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_TvShow &&
+            other is _$TvShowImpl &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.voteAverage, voteAverage) ||
                 other.voteAverage == voteAverage) &&
@@ -233,12 +235,12 @@ class _$_TvShow extends _TvShow with DiagnosticableTreeMixin {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_TvShowCopyWith<_$_TvShow> get copyWith =>
-      __$$_TvShowCopyWithImpl<_$_TvShow>(this, _$identity);
+  _$$TvShowImplCopyWith<_$TvShowImpl> get copyWith =>
+      __$$TvShowImplCopyWithImpl<_$TvShowImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_TvShowToJson(
+    return _$$TvShowImplToJson(
       this,
     );
   }
@@ -251,10 +253,10 @@ abstract class _TvShow extends TvShow {
       required final int id,
       required final dynamic posterPath,
       required final dynamic firstAirDate,
-      required final dynamic overview}) = _$_TvShow;
+      required final dynamic overview}) = _$TvShowImpl;
   const _TvShow._() : super._();
 
-  factory _TvShow.fromJson(Map<String, dynamic> json) = _$_TvShow.fromJson;
+  factory _TvShow.fromJson(Map<String, dynamic> json) = _$TvShowImpl.fromJson;
 
   @override
   String get name;
@@ -270,6 +272,6 @@ abstract class _TvShow extends TvShow {
   dynamic get overview;
   @override
   @JsonKey(ignore: true)
-  _$$_TvShowCopyWith<_$_TvShow> get copyWith =>
+  _$$TvShowImplCopyWith<_$TvShowImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

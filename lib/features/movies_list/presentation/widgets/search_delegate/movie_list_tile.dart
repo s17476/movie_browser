@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../../../../core/constants/constants.dart';
-import '../../../../core/presentation/widgets/star_rating.dart';
-import '../../../domain/entities/movie.dart';
-import '../../../utils/fetch_and_show_movie.dart';
+import 'package:movie_browser/features/core/constants/constants.dart';
+import 'package:movie_browser/features/core/presentation/widgets/star_rating.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie.dart';
+import 'package:movie_browser/features/movies_list/utils/fetch_and_show_movie.dart';
 
 class MovieListTile extends StatelessWidget {
   final Movie movie;

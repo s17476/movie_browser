@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../../domain/entities/movie.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie.dart';
 
 class SuggestionTile extends StatelessWidget {
   final Movie movie;

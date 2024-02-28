@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'show_snack_bar.dart';
+import 'package:movie_browser/features/core/utils/show_snack_bar.dart';
 
 void showSignInSnackbar({
   required BuildContext context,

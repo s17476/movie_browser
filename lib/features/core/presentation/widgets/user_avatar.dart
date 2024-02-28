@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../auth/presentation/blocs/auth/auth_bloc.dart';
+import 'package:movie_browser/features/auth/presentation/blocs/auth/auth_bloc.dart';
 
 class UserAvatar extends StatelessWidget {
   final double? radius;

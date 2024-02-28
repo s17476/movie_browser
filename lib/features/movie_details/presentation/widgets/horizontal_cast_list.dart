@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubits/cast/cast_cubit.dart';
-import 'actor_card.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/cast/cast_cubit.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/actor_card.dart';
 
 class HorizontalCastList extends StatelessWidget {
   const HorizontalCastList({super.key});

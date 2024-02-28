@@ -2,8 +2,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../domain/entities/movie_details.dart';
-import '../../../domain/repositories/movie_details_repository.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
+import 'package:movie_browser/features/movie_details/domain/repositories/movie_details_repository.dart';
 
 part 'movie_details_cubit.freezed.dart';
 part 'movie_details_state.dart';

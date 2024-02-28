@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../cubits/email_provider/email_provider_cubit.dart';
+import 'package:movie_browser/features/auth/presentation/cubits/email_provider/email_provider_cubit.dart';
 
 class ResetPasswordTextButton extends StatelessWidget {
   const ResetPasswordTextButton({
@@ -40,10 +41,8 @@ class ResetPasswordTextButton extends StatelessWidget {
               ),
               actions: [
                 TextButton(
+                  onPressed: context.pop,
                   child: const Text('Cancel'),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
                 ),
                 TextButton(
                   child: Text(
@@ -56,7 +55,7 @@ class ResetPasswordTextButton extends StatelessWidget {
                     context
                         .read<EmailProviderCubit>()
                         .resetPassword(textEditingController.text);
-                    Navigator.pop(context);
+                    context.pop();
                   },
                 ),
               ],

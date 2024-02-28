@@ -25,4 +25,11 @@ class MovieGenresState with _$MovieGenresState {
       },
     );
   }
+
+  @override
+  String toString() => maybeMap(
+        loaded: (state) =>
+            'Loaded.\nGrnres: ${state.genreList.genres.map((e) => e.name)}',
+        orElse: () => super.toString(),
+      );
 }

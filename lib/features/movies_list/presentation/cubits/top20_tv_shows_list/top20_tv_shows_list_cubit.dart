@@ -3,8 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:movie_browser/features/movies_list/domain/repositories/movies_repository.dart';
-
-import '../../../domain/entities/tv_show_list.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/tv_show_list.dart';
 
 part 'top20_tv_shows_list_cubit.freezed.dart';
 part 'top20_tv_shows_list_state.dart';

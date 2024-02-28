@@ -2,11 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../core/errors/failure.dart';
-import '../../domain/entities/user_profile.dart';
-import '../../domain/repositories/profile_repository.dart';
-import '../../domain/services/profile_api_service.dart';
-import '../models/user_profile_dto.dart';
+import 'package:movie_browser/features/core/errors/failure.dart';
+import 'package:movie_browser/features/profile/domain/entities/user_profile.dart';
+import 'package:movie_browser/features/profile/domain/repositories/profile_repository.dart';
+import 'package:movie_browser/features/profile/domain/services/profile_api_service.dart';
+import 'package:movie_browser/features/profile/data/models/user_profile_dto.dart';
 
 @LazySingleton(as: ProfileRepository)
 class ProfileRepositoryImpl extends ProfileRepository {

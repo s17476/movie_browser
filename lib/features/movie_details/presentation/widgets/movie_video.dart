@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../domain/entities/video.dart';
-import '../pages/youtube_video_player.dart';
+import 'package:movie_browser/features/core/presentation/cubits/current_route/current_route_cubit.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/video.dart';
 
 class MovieVideo extends StatelessWidget {
   final Video video;
@@ -28,11 +30,10 @@ class MovieVideo extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   if (video.site.toLowerCase().contains('youtube')) {
-                    Navigator.pushNamed(
-                      context,
-                      YoutubeVideoPlayer.routeName,
-                      arguments: video.key,
-                    );
+                    final currentRoute =
+                        context.read<CurrentRouteCubit>().state.route;
+
+                    context.go('$currentRoute/ytPlayer', extra: video.key);
                   } else {
                     ScaffoldMessenger.of(context)
                       ..hideCurrentSnackBar()

@@ -1,17 +1,18 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../core/errors/failure.dart';
-import '../../../core/errors/movie_exception.dart';
-import '../../../movies_list/domain/entities/movie_list.dart';
-import '../../domain/entities/credits.dart';
-import '../../domain/entities/movie_details.dart';
-import '../../domain/entities/movie_genre_list.dart';
-import '../../domain/entities/movie_image_list.dart';
-import '../../domain/entities/tv_show_details.dart';
-import '../../domain/entities/video_list.dart';
-import '../../domain/repositories/movie_details_repository.dart';
-import '../../domain/services/movie_details_api_service.dart';
+import 'package:movie_browser/features/core/errors/failure.dart';
+import 'package:movie_browser/features/core/errors/movie_exception.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/watch_provider.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie_list.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/credits.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_genre_list.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_image_list.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/tv_show_details.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/video_list.dart';
+import 'package:movie_browser/features/movie_details/domain/repositories/movie_details_repository.dart';
+import 'package:movie_browser/features/movie_details/domain/services/movie_details_api_service.dart';
 
 @LazySingleton(as: MovieDetailsRepository)
 class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
@@ -81,6 +82,22 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
   ) async {
     try {
       final Credits credits = await apiService.fetchCredits(movieId, isTvShow);
+      return right(credits);
+    } on MovieException catch (e) {
+      return left(Failure.general(message: e.message));
+    } catch (e) {
+      return left(Failure.general(message: e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<Failure, List<WatchProvider>>> fetchWatchProviders(
+    int movieId,
+    bool isTvShow,
+  ) async {
+    try {
+      final List<WatchProvider> credits =
+          await apiService.fetchWatchProviders(movieId, isTvShow);
       return right(credits);
     } on MovieException catch (e) {
       return left(Failure.general(message: e.message));

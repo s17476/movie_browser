@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../cubits/tv_show_details/tv_show_details_cubit.dart';
-import '../widgets/movie_details_error_info.dart';
-import '../widgets/movie_details_loading_indicator.dart';
-import '../widgets/tv_show_details_widget.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/tv_show_details/tv_show_details_cubit.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/movie_details_error_info.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/movie_details_loading_indicator.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/tv_show_details_widget.dart';
 
 class TvShowDetailsPage extends StatelessWidget {
   const TvShowDetailsPage({super.key});
-
-  static const String routeName = '/show-details';
 
   @override
   Widget build(BuildContext context) {

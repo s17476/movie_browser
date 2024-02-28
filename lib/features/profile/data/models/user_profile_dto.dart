@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../../domain/entities/user_profile.dart';
+import 'package:movie_browser/features/profile/domain/entities/user_profile.dart';
 
 part 'user_profile_dto.freezed.dart';
 part 'user_profile_dto.g.dart';
@@ -13,7 +13,9 @@ class UserProfileDto with _$UserProfileDto {
   const UserProfileDto._();
 
   const factory UserProfileDto({
-    @JsonKey(ignore: true) @Default('') String id,
+    @JsonKey(includeToJson: false, includeFromJson: false)
+    @Default('')
+    String id,
     required String sessionId,
     required List<int> ratedMovies,
     required List<int> ratedTvShows,

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../core/utils/format_currency.dart';
-import '../../../core/presentation/widgets/star_rating.dart';
-import '../../domain/entities/movie_details.dart';
+import 'package:movie_browser/features/core/utils/format_currency.dart';
+import 'package:movie_browser/features/core/presentation/widgets/star_rating.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
 
 class InfoBox extends StatelessWidget {
   final MovieDetails movie;

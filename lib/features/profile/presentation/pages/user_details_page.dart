@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../auth/presentation/blocs/auth/auth_bloc.dart';
-import '../../../core/presentation/widgets/user_avatar.dart';
-import '../../../core/utils/show_snack_bar.dart';
-import '../../utils/show_delete_account_dialog.dart';
+import 'package:movie_browser/features/auth/presentation/blocs/auth/auth_bloc.dart';
+import 'package:movie_browser/features/core/presentation/widgets/user_avatar.dart';
+import 'package:movie_browser/features/core/utils/show_snack_bar.dart';
+import 'package:movie_browser/features/profile/utils/show_delete_account_dialog.dart';
 
 class UserDetailsPage extends StatelessWidget {
   const UserDetailsPage({super.key});
-
-  static const routeName = '/user-details';
 
   @override
   Widget build(BuildContext context) {

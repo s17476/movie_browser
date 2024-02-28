@@ -3,13 +3,13 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 
-import '../../../../secrets.dart';
-import '../../../core/constants/constants.dart';
-import '../../../core/errors/http_error_handler.dart';
-import '../../../core/errors/movie_exception.dart';
-import '../../domain/entities/movie_list.dart';
-import '../../domain/entities/tv_show_list.dart';
-import '../../domain/services/movies_api_service.dart';
+import 'package:movie_browser/secrets.dart';
+import 'package:movie_browser/features/core/constants/constants.dart';
+import 'package:movie_browser/features/core/errors/http_error_handler.dart';
+import 'package:movie_browser/features/core/errors/movie_exception.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie_list.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/tv_show_list.dart';
+import 'package:movie_browser/features/movies_list/domain/services/movies_api_service.dart';
 
 @LazySingleton(as: MoviesApiService)
 class MoviesApiServiceImpl extends MoviesApiService {

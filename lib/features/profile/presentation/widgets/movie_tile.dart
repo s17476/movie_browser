@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 
-import '../../../movie_details/domain/entities/movie_details.dart';
-import '../../../movie_details/domain/entities/tv_show_details.dart';
-import '../../../movies_list/presentation/widgets/poster.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/tv_show_details.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/poster.dart';
 
 class MovieTile extends StatelessWidget {
   final Either<MovieDetails, TvShowDetails> movieOrTvShow;

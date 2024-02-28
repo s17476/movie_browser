@@ -5,8 +5,8 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../core/errors/failure.dart';
-import '../../domain/repositories/auth_repository.dart';
+import 'package:movie_browser/features/auth/domain/repositories/auth_repository.dart';
+import 'package:movie_browser/features/core/errors/failure.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthenticationRepositoryImpl extends AuthRepository {

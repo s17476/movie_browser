@@ -12,7 +12,7 @@ part of 'movie_genre_list.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MovieGenreList _$MovieGenreListFromJson(Map<String, dynamic> json) {
   return _MovieGenreList.fromJson(json);
@@ -62,22 +62,22 @@ class _$MovieGenreListCopyWithImpl<$Res, $Val extends MovieGenreList>
 }
 
 /// @nodoc
-abstract class _$$_MovieGenreListCopyWith<$Res>
+abstract class _$$MovieGenreListImplCopyWith<$Res>
     implements $MovieGenreListCopyWith<$Res> {
-  factory _$$_MovieGenreListCopyWith(
-          _$_MovieGenreList value, $Res Function(_$_MovieGenreList) then) =
-      __$$_MovieGenreListCopyWithImpl<$Res>;
+  factory _$$MovieGenreListImplCopyWith(_$MovieGenreListImpl value,
+          $Res Function(_$MovieGenreListImpl) then) =
+      __$$MovieGenreListImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({List<MovieGenre> genres});
 }
 
 /// @nodoc
-class __$$_MovieGenreListCopyWithImpl<$Res>
-    extends _$MovieGenreListCopyWithImpl<$Res, _$_MovieGenreList>
-    implements _$$_MovieGenreListCopyWith<$Res> {
-  __$$_MovieGenreListCopyWithImpl(
-      _$_MovieGenreList _value, $Res Function(_$_MovieGenreList) _then)
+class __$$MovieGenreListImplCopyWithImpl<$Res>
+    extends _$MovieGenreListCopyWithImpl<$Res, _$MovieGenreListImpl>
+    implements _$$MovieGenreListImplCopyWith<$Res> {
+  __$$MovieGenreListImplCopyWithImpl(
+      _$MovieGenreListImpl _value, $Res Function(_$MovieGenreListImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -85,7 +85,7 @@ class __$$_MovieGenreListCopyWithImpl<$Res>
   $Res call({
     Object? genres = null,
   }) {
-    return _then(_$_MovieGenreList(
+    return _then(_$MovieGenreListImpl(
       genres: null == genres
           ? _value._genres
           : genres // ignore: cast_nullable_to_non_nullable
@@ -97,12 +97,12 @@ class __$$_MovieGenreListCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_MovieGenreList implements _MovieGenreList {
-  const _$_MovieGenreList({required final List<MovieGenre> genres})
+class _$MovieGenreListImpl implements _MovieGenreList {
+  const _$MovieGenreListImpl({required final List<MovieGenre> genres})
       : _genres = genres;
 
-  factory _$_MovieGenreList.fromJson(Map<String, dynamic> json) =>
-      _$$_MovieGenreListFromJson(json);
+  factory _$MovieGenreListImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MovieGenreListImplFromJson(json);
 
   final List<MovieGenre> _genres;
   @override
@@ -118,10 +118,10 @@ class _$_MovieGenreList implements _MovieGenreList {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MovieGenreList &&
+            other is _$MovieGenreListImpl &&
             const DeepCollectionEquality().equals(other._genres, _genres));
   }
 
@@ -133,12 +133,13 @@ class _$_MovieGenreList implements _MovieGenreList {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MovieGenreListCopyWith<_$_MovieGenreList> get copyWith =>
-      __$$_MovieGenreListCopyWithImpl<_$_MovieGenreList>(this, _$identity);
+  _$$MovieGenreListImplCopyWith<_$MovieGenreListImpl> get copyWith =>
+      __$$MovieGenreListImplCopyWithImpl<_$MovieGenreListImpl>(
+          this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MovieGenreListToJson(
+    return _$$MovieGenreListImplToJson(
       this,
     );
   }
@@ -146,15 +147,15 @@ class _$_MovieGenreList implements _MovieGenreList {
 
 abstract class _MovieGenreList implements MovieGenreList {
   const factory _MovieGenreList({required final List<MovieGenre> genres}) =
-      _$_MovieGenreList;
+      _$MovieGenreListImpl;
 
   factory _MovieGenreList.fromJson(Map<String, dynamic> json) =
-      _$_MovieGenreList.fromJson;
+      _$MovieGenreListImpl.fromJson;
 
   @override
   List<MovieGenre> get genres;
   @override
   @JsonKey(ignore: true)
-  _$$_MovieGenreListCopyWith<_$_MovieGenreList> get copyWith =>
+  _$$MovieGenreListImplCopyWith<_$MovieGenreListImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

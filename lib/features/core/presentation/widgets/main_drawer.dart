@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
-import '../../../auth/presentation/blocs/auth/auth_bloc.dart';
-import '../../../profile/presentation/cubits/user_profile/user_profile_cubit.dart';
-import '../../../profile/presentation/pages/user_details_page.dart';
-import '../../../profile/presentation/pages/user_lists_page.dart';
-import 'app_logo.dart';
-import 'sign_in_button.dart';
-import 'sign_out_button.dart';
-import 'user_avatar.dart';
+import 'package:movie_browser/app/routes.dart';
+import 'package:movie_browser/features/auth/presentation/blocs/auth/auth_bloc.dart';
+import 'package:movie_browser/features/core/presentation/widgets/app_logo.dart';
+import 'package:movie_browser/features/core/presentation/widgets/sign_in_button.dart';
+import 'package:movie_browser/features/core/presentation/widgets/sign_out_button.dart';
+import 'package:movie_browser/features/core/presentation/widgets/user_avatar.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -34,10 +34,7 @@ class MainDrawer extends StatelessWidget {
                           children: [
                             const SizedBox(height: 8),
                             InkWell(
-                              onTap: () => Navigator.popAndPushNamed(
-                                context,
-                                UserDetailsPage.routeName,
-                              ),
+                              onTap: () => context.go(Routes.userDetailsPage),
                               child: Row(
                                 children: [
                                   const UserAvatar(
@@ -66,37 +63,33 @@ class MainDrawer extends StatelessWidget {
                               endIndent: 8,
                             ),
                             DrawerItem(
-                              onPressed: () => Navigator.popAndPushNamed(
-                                context,
-                                UserListPage.routeName,
-                                arguments: ListType.favoriteMovies,
+                              onPressed: () => context.go(
+                                Routes.userListPage,
+                                extra: ListType.favoriteMovies,
                               ),
                               iconData: Icons.favorite,
                               title: 'Favorites',
                             ),
                             DrawerItem(
-                              onPressed: () => Navigator.popAndPushNamed(
-                                context,
-                                UserListPage.routeName,
-                                arguments: ListType.watchlistMovies,
+                              onPressed: () => context.go(
+                                Routes.userListPage,
+                                extra: ListType.watchlistMovies,
                               ),
                               iconData: Icons.check_box,
                               title: 'Watchlist',
                             ),
                             DrawerItem(
-                              onPressed: () => Navigator.popAndPushNamed(
-                                context,
-                                UserListPage.routeName,
-                                arguments: ListType.watchedMovies,
+                              onPressed: () => context.go(
+                                Routes.userListPage,
+                                extra: ListType.watchedMovies,
                               ),
                               iconData: Icons.remove_red_eye,
                               title: 'Watched',
                             ),
                             DrawerItem(
-                              onPressed: () => Navigator.popAndPushNamed(
-                                context,
-                                UserListPage.routeName,
-                                arguments: ListType.ratedMovies,
+                              onPressed: () => context.go(
+                                Routes.userListPage,
+                                extra: ListType.ratedMovies,
                               ),
                               iconData: Icons.star,
                               title: 'Rated',

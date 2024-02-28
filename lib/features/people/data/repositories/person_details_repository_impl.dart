@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../core/errors/failure.dart';
-import '../../../core/errors/movie_exception.dart';
-import '../../domain/entities/person_credits.dart';
-import '../../domain/entities/person_details.dart';
-import '../../domain/repositories/person_details_repository.dart';
-import '../../domain/services/person_details_api_service.dart';
+import 'package:movie_browser/features/core/errors/failure.dart';
+import 'package:movie_browser/features/core/errors/movie_exception.dart';
+import 'package:movie_browser/features/people/domain/entities/person_credits.dart';
+import 'package:movie_browser/features/people/domain/entities/person_details.dart';
+import 'package:movie_browser/features/people/domain/repositories/person_details_repository.dart';
+import 'package:movie_browser/features/people/domain/services/person_details_api_service.dart';
 
 @LazySingleton(as: PersonDetailsRepository)
 class PersonDetailsRepositoryImpl extends PersonDetailsRepository {

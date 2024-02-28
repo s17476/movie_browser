@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../domain/repositories/auth_repository.dart';
+import 'package:movie_browser/features/auth/domain/repositories/auth_repository.dart';
 
 part 'email_provider_cubit.freezed.dart';
 part 'email_provider_state.dart';

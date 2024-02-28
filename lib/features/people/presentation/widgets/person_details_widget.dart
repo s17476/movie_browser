@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/constants.dart';
-import '../../domain/entities/person_details.dart';
-import 'person_movies_list.dart';
+import 'package:movie_browser/features/core/constants/constants.dart';
+import 'package:movie_browser/features/people/domain/entities/person_details.dart';
+import 'package:movie_browser/features/people/presentation/widgets/person_movies_list.dart';
 
 class PersonDetailsWidget extends StatelessWidget {
   final PersonDetails person;

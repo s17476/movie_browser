@@ -2,9 +2,9 @@ import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-import '../../../movie_details/domain/entities/movie_details.dart';
-import '../../../movie_details/domain/entities/tv_show_details.dart';
-import 'movie_tile.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/tv_show_details.dart';
+import 'package:movie_browser/features/profile/presentation/widgets/movie_tile.dart';
 
 class MoviesGridView extends StatelessWidget {
   final List<MovieDetails> movies;

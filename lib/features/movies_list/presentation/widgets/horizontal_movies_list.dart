@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/movie.dart';
-import 'position_count.dart';
-import 'poster.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/position_count.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/poster.dart';
 
 class HorizontalMoviesList extends StatelessWidget {
   final String title;

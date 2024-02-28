@@ -4,9 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../../movies_list/domain/entities/movie.dart';
-import '../../../domain/repositories/person_details_repository.dart';
-import '../person_details/person_details_cubit.dart';
+import 'package:movie_browser/features/movies_list/domain/entities/movie.dart';
+import 'package:movie_browser/features/people/domain/repositories/person_details_repository.dart';
+import 'package:movie_browser/features/people/presentation/cubits/person_details/person_details_cubit.dart';
 
 part 'person_credits_cubit.freezed.dart';
 part 'person_credits_state.dart';

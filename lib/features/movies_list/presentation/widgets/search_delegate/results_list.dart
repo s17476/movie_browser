@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../cubits/search_movies/search_movies_cubit.dart';
-import 'movie_list_tile.dart';
+import 'package:movie_browser/features/movies_list/presentation/cubits/search_movies/search_movies_cubit.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/search_delegate/movie_list_tile.dart';
 
 class ResultsList extends StatefulWidget {
   const ResultsList({super.key});

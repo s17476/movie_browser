@@ -12,7 +12,7 @@ part of 'movie_genre.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 MovieGenre _$MovieGenreFromJson(Map<String, dynamic> json) {
   return _MovieGenre.fromJson(json);
@@ -68,22 +68,22 @@ class _$MovieGenreCopyWithImpl<$Res, $Val extends MovieGenre>
 }
 
 /// @nodoc
-abstract class _$$_MovieGenreCopyWith<$Res>
+abstract class _$$MovieGenreImplCopyWith<$Res>
     implements $MovieGenreCopyWith<$Res> {
-  factory _$$_MovieGenreCopyWith(
-          _$_MovieGenre value, $Res Function(_$_MovieGenre) then) =
-      __$$_MovieGenreCopyWithImpl<$Res>;
+  factory _$$MovieGenreImplCopyWith(
+          _$MovieGenreImpl value, $Res Function(_$MovieGenreImpl) then) =
+      __$$MovieGenreImplCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int id, String name});
 }
 
 /// @nodoc
-class __$$_MovieGenreCopyWithImpl<$Res>
-    extends _$MovieGenreCopyWithImpl<$Res, _$_MovieGenre>
-    implements _$$_MovieGenreCopyWith<$Res> {
-  __$$_MovieGenreCopyWithImpl(
-      _$_MovieGenre _value, $Res Function(_$_MovieGenre) _then)
+class __$$MovieGenreImplCopyWithImpl<$Res>
+    extends _$MovieGenreCopyWithImpl<$Res, _$MovieGenreImpl>
+    implements _$$MovieGenreImplCopyWith<$Res> {
+  __$$MovieGenreImplCopyWithImpl(
+      _$MovieGenreImpl _value, $Res Function(_$MovieGenreImpl) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -92,7 +92,7 @@ class __$$_MovieGenreCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
   }) {
-    return _then(_$_MovieGenre(
+    return _then(_$MovieGenreImpl(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -108,11 +108,11 @@ class __$$_MovieGenreCopyWithImpl<$Res>
 /// @nodoc
 
 @JsonSerializable(fieldRename: FieldRename.snake)
-class _$_MovieGenre implements _MovieGenre {
-  const _$_MovieGenre({required this.id, required this.name});
+class _$MovieGenreImpl implements _MovieGenre {
+  const _$MovieGenreImpl({required this.id, required this.name});
 
-  factory _$_MovieGenre.fromJson(Map<String, dynamic> json) =>
-      _$$_MovieGenreFromJson(json);
+  factory _$MovieGenreImpl.fromJson(Map<String, dynamic> json) =>
+      _$$MovieGenreImplFromJson(json);
 
   @override
   final int id;
@@ -125,10 +125,10 @@ class _$_MovieGenre implements _MovieGenre {
   }
 
   @override
-  bool operator ==(dynamic other) {
+  bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_MovieGenre &&
+            other is _$MovieGenreImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name));
   }
@@ -140,12 +140,12 @@ class _$_MovieGenre implements _MovieGenre {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_MovieGenreCopyWith<_$_MovieGenre> get copyWith =>
-      __$$_MovieGenreCopyWithImpl<_$_MovieGenre>(this, _$identity);
+  _$$MovieGenreImplCopyWith<_$MovieGenreImpl> get copyWith =>
+      __$$MovieGenreImplCopyWithImpl<_$MovieGenreImpl>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_MovieGenreToJson(
+    return _$$MovieGenreImplToJson(
       this,
     );
   }
@@ -153,10 +153,10 @@ class _$_MovieGenre implements _MovieGenre {
 
 abstract class _MovieGenre implements MovieGenre {
   const factory _MovieGenre(
-      {required final int id, required final String name}) = _$_MovieGenre;
+      {required final int id, required final String name}) = _$MovieGenreImpl;
 
   factory _MovieGenre.fromJson(Map<String, dynamic> json) =
-      _$_MovieGenre.fromJson;
+      _$MovieGenreImpl.fromJson;
 
   @override
   int get id;
@@ -164,6 +164,6 @@ abstract class _MovieGenre implements MovieGenre {
   String get name;
   @override
   @JsonKey(ignore: true)
-  _$$_MovieGenreCopyWith<_$_MovieGenre> get copyWith =>
+  _$$MovieGenreImplCopyWith<_$MovieGenreImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

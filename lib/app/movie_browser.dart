@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
-import '../features/auth/presentation/pages/email_auth_page.dart';
-import '../features/movie_details/presentation/pages/movie_details_page.dart';
-import '../features/movie_details/presentation/pages/tv_show_details_page.dart';
-import '../features/movie_details/presentation/pages/youtube_video_player.dart';
-import '../features/movies_list/presentation/pages/genre_page.dart';
-import '../features/core/presentation/pages/home_page.dart';
-import '../features/people/presentation/pages/person_details_page.dart';
-import '../features/profile/presentation/pages/user_details_page.dart';
-import '../features/profile/presentation/pages/user_lists_page.dart';
-import 'custom_multi_bloc_provider.dart';
+import 'package:movie_browser/app/custom_multi_bloc_provider.dart';
+import 'package:movie_browser/app/custom_router.dart';
 
 class MovieBrowser extends StatelessWidget {
   const MovieBrowser({super.key});
@@ -26,7 +18,8 @@ class MovieBrowser extends StatelessWidget {
             focusNode.unfocus();
           }
         },
-        child: MaterialApp(
+        child: MaterialApp.router(
+          routerConfig: CustomRouter.routerConfig(),
           builder: (context, child) => ResponsiveWrapper.builder(
             child,
             defaultScale: true,
@@ -52,18 +45,6 @@ class MovieBrowser extends StatelessWidget {
               elevation: 0.0,
             ),
           ),
-          home: const HomePage(),
-          routes: {
-            MovieDetailsPage.routeName: (context) => const MovieDetailsPage(),
-            TvShowDetailsPage.routeName: (context) => const TvShowDetailsPage(),
-            PersonDetailsPage.routeName: (context) => const PersonDetailsPage(),
-            YoutubeVideoPlayer.routeName: (context) =>
-                const YoutubeVideoPlayer(),
-            GenrePage.routeName: (context) => const GenrePage(),
-            EmailAuthPage.routeName: (context) => const EmailAuthPage(),
-            UserListPage.routeName: (context) => const UserListPage(),
-            UserDetailsPage.routeName: (context) => const UserDetailsPage(),
-          },
         ),
       ),
     );

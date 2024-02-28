@@ -4,10 +4,10 @@ import 'package:http/http.dart';
 import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
 
-import '../../../../secrets.dart';
-import '../../../core/constants/constants.dart';
-import '../../../core/errors/http_error_handler.dart';
-import '../../domain/services/profile_api_service.dart';
+import 'package:movie_browser/secrets.dart';
+import 'package:movie_browser/features/core/constants/constants.dart';
+import 'package:movie_browser/features/core/errors/http_error_handler.dart';
+import 'package:movie_browser/features/profile/domain/services/profile_api_service.dart';
 
 @LazySingleton(as: ProfileApiService)
 class ProfileApiServiceImpl extends ProfileApiService {

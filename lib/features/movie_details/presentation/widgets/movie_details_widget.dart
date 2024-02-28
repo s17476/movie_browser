@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/movie_details.dart';
-import 'horizontal_cast_list.dart';
-import 'horizontal_images_list.dart';
-import 'horizontal_videos_list.dart';
-import 'movie_description.dart';
-import 'poster_with_info.dart';
-import 'recommended_movies.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/horizontal_cast_list.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/horizontal_images_list.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/horizontal_videos_list.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/movie_description.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/poster_with_info.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/recommended_movies.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/warch_providers_widget.dart';
 
 class MovieDetailsWidget extends StatelessWidget {
   final MovieDetails movie;
@@ -43,6 +44,10 @@ class MovieDetailsWidget extends StatelessWidget {
           children: [
             PosterWithInfo(movie: movie),
             MovieDescription(description: movie.overview),
+            WatchProvidersWidget(detailsId: movie.id),
+            const SizedBox(
+              height: 4,
+            ),
             const HorizontalVideosList(),
             const SizedBox(
               height: 4,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/presentation/widgets/star_rating.dart';
-import '../../domain/entities/tv_show_details.dart';
+import 'package:movie_browser/features/core/presentation/widgets/star_rating.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/tv_show_details.dart';
 
 class TvShowInfoBox extends StatelessWidget {
   final TvShowDetails show;

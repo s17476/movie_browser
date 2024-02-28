@@ -1,27 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../movie_details/domain/entities/movie_details.dart';
-import '../../../movie_details/domain/entities/tv_show_details.dart';
-import '../cubits/user_lists/user_lists_cubit.dart';
-import '../cubits/user_profile/user_profile_cubit.dart';
-import '../widgets/movies_grid_view.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_lists/user_lists_cubit.dart';
+import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
+import 'package:movie_browser/features/profile/presentation/widgets/movies_grid_view.dart';
 
 class UserListPage extends StatefulWidget {
-  const UserListPage({super.key});
+  const UserListPage({super.key, this.listType = ListType.favoriteMovies});
 
-  static const routeName = '/user-list';
+  final ListType listType;
 
   @override
   State<UserListPage> createState() => _UserListPageState();
 }
 
 class _UserListPageState extends State<UserListPage> {
-  List<MovieDetails> _movies = [];
-  List<TvShowDetails> _tvShows = [];
-  bool _isLoading = true;
-  ListType _listType = ListType.favoriteMovies;
-
   String _getTitle(ListType listType) {
     switch (listType) {
       case ListType.favoriteMovies:
@@ -38,49 +31,48 @@ class _UserListPageState extends State<UserListPage> {
   }
 
   @override
-  void didChangeDependencies() {
-    final userListsCubit = context.watch<UserListsCubit>();
-    final listType = ModalRoute.of(context)!.settings.arguments;
-    if (listType != null && listType is ListType) {
-      _listType = listType;
-      userListsCubit.state.maybeMap(
-        loaded: (state) {
-          if (state.listType == listType) {
-            _movies = state.movies;
-            _tvShows = state.shows;
-            _isLoading = false;
-          } else {
-            context.read<UserListsCubit>().fetchData(listType: listType);
-            _isLoading = true;
-          }
-        },
-        loading: (_) => _isLoading = true,
-        orElse: () {
-          context.read<UserListsCubit>().fetchData(listType: listType);
-          return _isLoading = true;
-        },
-      );
-    }
-    super.didChangeDependencies();
+  void initState() {
+    context.read<UserListsCubit>().fetchData(listType: widget.listType);
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      extendBodyBehindAppBar: true,
-      appBar: AppBar(
-        title: Text(_getTitle(_listType)),
-      ),
-      body: _isLoading
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : (_movies.isEmpty && _tvShows.isEmpty)
-              ? const Center(child: Text('Nothing here yet.'))
-              : MoviesGridView(
-                  movies: _movies,
-                  shows: _tvShows,
-                ),
+    return BlocConsumer<UserListsCubit, UserListsState>(
+      listener: (context, state) {
+        () => switch (state) {
+              Loaded() => () {
+                  if (state.listType != widget.listType) {
+                    context
+                        .read<UserListsCubit>()
+                        .fetchData(listType: widget.listType);
+                  }
+                },
+              Loading() => null,
+              _ => context
+                  .read<UserListsCubit>()
+                  .fetchData(listType: widget.listType),
+            };
+      },
+      builder: (context, state) {
+        return Scaffold(
+          extendBodyBehindAppBar: true,
+          appBar: AppBar(
+            title: Text(_getTitle(widget.listType)),
+          ),
+          body: switch (state) {
+            Loaded() => (state.movies.isEmpty && state.shows.isEmpty)
+                ? const Center(child: Text('Nothing here yet.'))
+                : MoviesGridView(
+                    movies: state.movies,
+                    shows: state.shows,
+                  ),
+            _ => const Center(
+                child: CircularProgressIndicator(),
+              ),
+          },
+        );
+      },
     );
   }
 }

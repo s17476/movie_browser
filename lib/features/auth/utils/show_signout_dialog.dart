@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../core/presentation/widgets/glass_layer.dart';
-import '../presentation/blocs/auth/auth_bloc.dart';
+import 'package:movie_browser/features/auth/presentation/blocs/auth/auth_bloc.dart';
+import 'package:movie_browser/features/core/presentation/widgets/glass_layer.dart';
 
 Future<dynamic> showSignoutDialog({
   required BuildContext context,

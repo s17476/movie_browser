@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/constants.dart';
-import '../../../people/utils/fetch_and_show_person.dart';
-import '../../domain/entities/actor.dart';
+import 'package:movie_browser/features/core/constants/constants.dart';
+import 'package:movie_browser/features/people/utils/fetch_and_show_person.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/actor.dart';
 
 class ActorCard extends StatelessWidget {
   final Actor actor;
@@ -81,7 +81,7 @@ class ActorCard extends StatelessWidget {
             Material(
               color: Colors.transparent,
               child: InkWell(
-                onTap: () => fetchAndShowPerson(context, actor.id, true),
+                onTap: () => fetchAndShowPerson(context, actor.id),
                 child: const SizedBox(
                   width: double.infinity,
                   height: double.infinity,

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/entities/tv_show_details.dart';
-import 'horizontal_cast_list.dart';
-import 'horizontal_images_list.dart';
-import 'horizontal_videos_list.dart';
-import 'movie_description.dart';
-import 'recommended_movies.dart';
-import 'tv_show_poster_with_info.dart';
+import 'package:movie_browser/features/movie_details/domain/entities/tv_show_details.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/horizontal_cast_list.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/horizontal_images_list.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/horizontal_videos_list.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/movie_description.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/recommended_movies.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/tv_show_poster_with_info.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/warch_providers_widget.dart';
 
 class TvShowDetailsWidget extends StatelessWidget {
   final TvShowDetails show;
@@ -43,6 +44,10 @@ class TvShowDetailsWidget extends StatelessWidget {
           children: [
             TvShowPosterWithInfo(show: show),
             MovieDescription(description: show.overview),
+            WatchProvidersWidget(detailsId: show.id),
+            const SizedBox(
+              height: 4,
+            ),
             const HorizontalVideosList(),
             const SizedBox(height: 4),
             const HorizontalImagesList(),

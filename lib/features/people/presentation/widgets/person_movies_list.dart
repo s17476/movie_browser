@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../movies_list/presentation/widgets/horizontal_movies_list.dart';
-import '../cubits/person_credits/person_credits_cubit.dart';
+import 'package:movie_browser/features/movies_list/presentation/widgets/horizontal_movies_list.dart';
+import 'package:movie_browser/features/people/presentation/cubits/person_credits/person_credits_cubit.dart';
 
 class PersonMoviesList extends StatelessWidget {
   const PersonMoviesList({super.key});
