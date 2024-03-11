@@ -17,7 +17,7 @@ class InfoBox extends StatelessWidget {
   Widget build(BuildContext context) {
     final format = NumberFormat.simpleCurrency(locale: 'en_US');
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(8, 8, 8, 16),
       color: Colors.black26,
       child: Column(
         children: [

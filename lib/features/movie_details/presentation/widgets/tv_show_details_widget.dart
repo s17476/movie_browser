@@ -7,7 +7,7 @@ import 'package:movie_browser/features/movie_details/presentation/widgets/horizo
 import 'package:movie_browser/features/movie_details/presentation/widgets/movie_description.dart';
 import 'package:movie_browser/features/movie_details/presentation/widgets/recommended_movies.dart';
 import 'package:movie_browser/features/movie_details/presentation/widgets/tv_show_poster_with_info.dart';
-import 'package:movie_browser/features/movie_details/presentation/widgets/warch_providers_widget.dart';
+import 'package:movie_browser/features/movie_details/presentation/widgets/watch_providers_widget.dart';
 
 class TvShowDetailsWidget extends StatelessWidget {
   final TvShowDetails show;
@@ -23,6 +23,7 @@ class TvShowDetailsWidget extends StatelessWidget {
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
+        forceMaterialTransparency: true,
         elevation: 0.0,
         leading: IconButton(
           onPressed: () => Navigator.pop(context),

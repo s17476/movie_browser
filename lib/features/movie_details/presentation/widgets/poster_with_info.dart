@@ -28,14 +28,32 @@ class PosterWithInfo extends StatelessWidget {
         Stack(
           children: [
             // background image
-            FadeInImage.assetNetwork(
-              placeholder: 'assets/images/loading_empty.gif',
-              image: '${kImagesBaseUrl}original${movie.posterPath}',
-              fit: BoxFit.fill,
-              width: double.infinity,
-              height: height,
-              imageErrorBuilder: (context, error, stackTrace) =>
-                  const SizedBox(),
+            Stack(
+              children: [
+                FadeInImage.assetNetwork(
+                  placeholder: 'assets/images/loading_empty.gif',
+                  image: '${kImagesBaseUrl}original${movie.posterPath}',
+                  fit: BoxFit.fill,
+                  width: double.infinity,
+                  height: height,
+                  imageErrorBuilder: (context, error, stackTrace) =>
+                      const SizedBox(),
+                ),
+                Positioned(
+                  bottom: 0,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: [Colors.transparent, Colors.black],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
+                    ),
+                    height: 100,
+                    width: MediaQuery.sizeOf(context).width,
+                  ),
+                ),
+              ],
             ),
             // glass efect layer
             ClipRect(
@@ -48,6 +66,7 @@ class PosterWithInfo extends StatelessWidget {
                 ),
               ),
             ),
+
             Column(
               mainAxisSize: MainAxisSize.min,
               children: [
@@ -148,6 +167,7 @@ class PosterWithInfo extends StatelessWidget {
                 ),
               ],
             ),
+
             Positioned(
               top: MediaQuery.of(context).padding.top,
               right: 24,

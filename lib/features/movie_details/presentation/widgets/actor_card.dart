@@ -66,7 +66,7 @@ class ActorCard extends StatelessWidget {
                   height: 42,
                   alignment: Alignment.center,
                   child: Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: const EdgeInsets.all(0.0),
                     child: Text(
                       actor.name,
                       textAlign: TextAlign.center,

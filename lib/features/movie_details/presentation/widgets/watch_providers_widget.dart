@@ -21,7 +21,7 @@ class WatchProvidersWidget extends StatelessWidget {
           loaded: (state) {
             if (state.id == detailsId) {
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.fromLTRB(8, 16, 8, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -75,7 +75,7 @@ class _ProvidersList extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(title),
-        const SizedBox(height: 2),
+        const SizedBox(height: 4),
         Wrap(
           spacing: 8,
           children: providers
@@ -104,6 +104,7 @@ class ProviderIcon extends StatelessWidget {
       width: 40,
       margin: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.shade500,
@@ -114,26 +115,42 @@ class ProviderIcon extends StatelessWidget {
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(10),
-        child: InkWell(
-          onTap: () {
-            final url = Uri.parse('$kWatchUrlPrefix$id$kWatchUrlSufix');
-            launchUrl(url, mode: LaunchMode.externalApplication);
-          },
-          child: FadeInImage(
-            imageErrorBuilder: (context, error, stackTrace) => const Center(
-              child: Text(
-                'No image found',
-                textAlign: TextAlign.center,
+        child: Stack(
+          children: [
+            Container(
+              height: double.infinity,
+              width: double.infinity,
+              color: Colors.black,
+            ),
+            FadeInImage(
+              imageErrorBuilder: (context, error, stackTrace) => const Center(
+                child: Text(
+                  'No image found',
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              placeholder: const AssetImage('assets/images/loading.gif'),
+              placeholderFit: BoxFit.scaleDown,
+              image: CachedNetworkImageProvider(
+                '$kProvidersBaseUrl${provider.logoPath}',
+                cacheManager: DefaultCacheManager(),
+              ),
+              fit: BoxFit.fitHeight,
+            ),
+            Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: () {
+                  final url = Uri.parse('$kWatchUrlPrefix$id$kWatchUrlSufix');
+                  launchUrl(url, mode: LaunchMode.externalApplication);
+                },
+                child: const SizedBox(
+                  width: double.infinity,
+                  height: double.infinity,
+                ),
               ),
             ),
-            placeholder: const AssetImage('assets/images/loading.gif'),
-            placeholderFit: BoxFit.scaleDown,
-            image: CachedNetworkImageProvider(
-              '$kProvidersBaseUrl${provider.logoPath}',
-              cacheManager: DefaultCacheManager(),
-            ),
-            fit: BoxFit.fitHeight,
-          ),
+          ],
         ),
       ),
     );
