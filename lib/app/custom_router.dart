@@ -9,6 +9,7 @@ import 'package:movie_browser/app/routes.dart';
 import 'package:movie_browser/features/auth/presentation/pages/email_auth_page.dart';
 import 'package:movie_browser/features/core/presentation/cubits/current_route/current_route_cubit.dart';
 import 'package:movie_browser/features/core/presentation/pages/home_page.dart';
+import 'package:movie_browser/features/core/utils/logger.dart';
 import 'package:movie_browser/features/movie_details/presentation/pages/movie_details_page.dart';
 import 'package:movie_browser/features/movie_details/presentation/pages/tv_show_details_page.dart';
 import 'package:movie_browser/features/movie_details/presentation/pages/youtube_video_player.dart';
@@ -16,6 +17,7 @@ import 'package:movie_browser/features/movies_list/presentation/pages/genre_page
 import 'package:movie_browser/features/people/presentation/pages/person_details_page.dart';
 import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
 import 'package:movie_browser/features/profile/presentation/pages/user_lists_page.dart';
+import 'package:movie_browser/features/settings/presentation/blocs/localization/localization_cubit.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -52,7 +54,15 @@ class CustomRouter {
         routes: [
           GoRoute(
               path: Routes.home,
-              builder: (_, __) => const _Observer(child: HomePage()),
+              builder: (context, __) {
+                final localizationCubit = context.read<LocalizationCubit>();
+
+                if (!localizationCubit.state.isInitialized) {
+                  final Locale locale = Localizations.localeOf(context);
+                  localizationCubit.initialize(locale);
+                }
+                return const _Observer(child: HomePage());
+              },
               routes: [
                 GoRoute(
                   path: 'movieDetails',

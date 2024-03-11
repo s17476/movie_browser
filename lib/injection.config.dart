@@ -96,7 +96,8 @@ import 'features/profile/presentation/cubits/user_lists/user_lists_cubit.dart'
     as _i51;
 import 'features/profile/presentation/cubits/user_profile/user_profile_cubit.dart'
     as _i50;
-import 'features/settings/presentation/blocs/language_cubit.dart' as _i9;
+import 'features/settings/presentation/blocs/localization/localization_cubit.dart'
+    as _i9;
 import 'injectable_modules.dart' as _i52;
 
 extension GetItInjectableX on _i1.GetIt {
@@ -124,7 +125,7 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i7.FirebaseFirestore>(
         () => firebaseFirestoreService.firebaseFirestore);
     gh.lazySingleton<_i8.GoogleSignIn>(() => googleSignInService.googleSignIn);
-    gh.singleton<_i9.LanguageCubit>(_i9.LanguageCubit());
+    gh.singleton<_i9.LocalizationCubit>(_i9.LocalizationCubit());
     gh.lazySingleton<_i10.MovieDetailsApiService>(
         () => _i11.MovieDetailsApiServiceImpl(client: gh<_i3.Client>()));
     gh.lazySingleton<_i12.MovieDetailsRepository>(() =>

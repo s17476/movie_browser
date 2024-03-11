@@ -11,7 +11,7 @@ part 'movie_list.g.dart';
 class MovieList with _$MovieList {
   @JsonSerializable(fieldRename: FieldRename.snake)
   const factory MovieList({
-    required int page,
+    @Default('defaultValue') page,
     required int totalPages,
     required int totalResults,
     required List<Movie> results,

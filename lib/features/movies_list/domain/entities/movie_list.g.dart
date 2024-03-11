@@ -8,7 +8,7 @@ part of 'movie_list.dart';
 
 _$MovieListImpl _$$MovieListImplFromJson(Map<String, dynamic> json) =>
     _$MovieListImpl(
-      page: json['page'] as int,
+      page: json['page'] ?? 'defaultValue',
       totalPages: json['total_pages'] as int,
       totalResults: json['total_results'] as int,
       results: (json['results'] as List<dynamic>)

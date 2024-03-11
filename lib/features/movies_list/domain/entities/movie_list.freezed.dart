@@ -20,7 +20,7 @@ MovieList _$MovieListFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MovieList {
-  int get page => throw _privateConstructorUsedError;
+  dynamic get page => throw _privateConstructorUsedError;
   int get totalPages => throw _privateConstructorUsedError;
   int get totalResults => throw _privateConstructorUsedError;
   List<Movie> get results => throw _privateConstructorUsedError;
@@ -39,7 +39,7 @@ abstract class $MovieListCopyWith<$Res> {
       _$MovieListCopyWithImpl<$Res, MovieList>;
   @useResult
   $Res call(
-      {int page,
+      {dynamic page,
       int totalPages,
       int totalResults,
       List<Movie> results,
@@ -59,17 +59,17 @@ class _$MovieListCopyWithImpl<$Res, $Val extends MovieList>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? page = null,
+    Object? page = freezed,
     Object? totalPages = null,
     Object? totalResults = null,
     Object? results = null,
     Object? lastQuery = freezed,
   }) {
     return _then(_value.copyWith(
-      page: null == page
+      page: freezed == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
-              as int,
+              as dynamic,
       totalPages: null == totalPages
           ? _value.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
@@ -99,7 +99,7 @@ abstract class _$$MovieListImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int page,
+      {dynamic page,
       int totalPages,
       int totalResults,
       List<Movie> results,
@@ -117,17 +117,14 @@ class __$$MovieListImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? page = null,
+    Object? page = freezed,
     Object? totalPages = null,
     Object? totalResults = null,
     Object? results = null,
     Object? lastQuery = freezed,
   }) {
     return _then(_$MovieListImpl(
-      page: null == page
-          ? _value.page
-          : page // ignore: cast_nullable_to_non_nullable
-              as int,
+      page: freezed == page ? _value.page! : page,
       totalPages: null == totalPages
           ? _value.totalPages
           : totalPages // ignore: cast_nullable_to_non_nullable
@@ -153,7 +150,7 @@ class __$$MovieListImplCopyWithImpl<$Res>
 @JsonSerializable(fieldRename: FieldRename.snake)
 class _$MovieListImpl implements _MovieList {
   const _$MovieListImpl(
-      {required this.page,
+      {this.page = 'defaultValue',
       required this.totalPages,
       required this.totalResults,
       required final List<Movie> results,
@@ -164,7 +161,8 @@ class _$MovieListImpl implements _MovieList {
       _$$MovieListImplFromJson(json);
 
   @override
-  final int page;
+  @JsonKey()
+  final dynamic page;
   @override
   final int totalPages;
   @override
@@ -191,7 +189,7 @@ class _$MovieListImpl implements _MovieList {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$MovieListImpl &&
-            (identical(other.page, page) || other.page == page) &&
+            const DeepCollectionEquality().equals(other.page, page) &&
             (identical(other.totalPages, totalPages) ||
                 other.totalPages == totalPages) &&
             (identical(other.totalResults, totalResults) ||
@@ -203,8 +201,13 @@ class _$MovieListImpl implements _MovieList {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, page, totalPages, totalResults,
-      const DeepCollectionEquality().hash(_results), lastQuery);
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(page),
+      totalPages,
+      totalResults,
+      const DeepCollectionEquality().hash(_results),
+      lastQuery);
 
   @JsonKey(ignore: true)
   @override
@@ -222,7 +225,7 @@ class _$MovieListImpl implements _MovieList {
 
 abstract class _MovieList implements MovieList {
   const factory _MovieList(
-          {required final int page,
+          {final dynamic page,
           required final int totalPages,
           required final int totalResults,
           required final List<Movie> results,
@@ -233,7 +236,7 @@ abstract class _MovieList implements MovieList {
       _$MovieListImpl.fromJson;
 
   @override
-  int get page;
+  dynamic get page;
   @override
   int get totalPages;
   @override

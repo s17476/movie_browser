@@ -44,6 +44,8 @@ dependencies:
   url_launcher: ^6.2.5
   uuid: ^4.3.3
   youtube_player_iframe: ^5.0.0
+  analyzer: ^6.4.1
+  path_provider: ^2.1.2
 
 dev_dependencies:
   bloc_test: ^9.1.6
