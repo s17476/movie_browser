@@ -24,6 +24,7 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
   Future<Either<Failure, MovieGenreList>> fetchMovieGenres() async {
     try {
       final MovieGenreList genres = await apiService.fetchMovieGenres();
+
       return right(genres);
     } on MovieException catch (e) {
       return left(Failure.general(message: e.message));
@@ -36,6 +37,7 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
   Future<Either<Failure, MovieDetails>> fetchMovieDetails(int movieId) async {
     try {
       final MovieDetails movie = await apiService.fetchMovieDetails(movieId);
+
       return right(movie);
     } on MovieException catch (e) {
       return left(Failure.general(message: e.message));
@@ -50,11 +52,12 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
     bool isTvShow,
   ) async {
     try {
-      final MovieImageList images =
-          await apiService.fetchMovieImages(movieId, isTvShow);
+      final MovieImageList images = await apiService.fetchMovieImages(
+        movieId,
+        isTvShow,
+      );
+
       return right(images);
-    } on MovieException catch (e) {
-      return left(Failure.general(message: e.message));
     } catch (e) {
       return left(Failure.general(message: e.toString()));
     }
@@ -67,9 +70,8 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
   ) async {
     try {
       final VideoList videos = await apiService.fetchVideos(movieId, isTvShow);
+
       return right(videos);
-    } on MovieException catch (e) {
-      return left(Failure.general(message: e.message));
     } catch (e) {
       return left(Failure.general(message: e.toString()));
     }
@@ -82,9 +84,8 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
   ) async {
     try {
       final Credits credits = await apiService.fetchCredits(movieId, isTvShow);
+
       return right(credits);
-    } on MovieException catch (e) {
-      return left(Failure.general(message: e.message));
     } catch (e) {
       return left(Failure.general(message: e.toString()));
     }
@@ -96,11 +97,12 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
     bool isTvShow,
   ) async {
     try {
-      final List<WatchProvider> credits =
-          await apiService.fetchWatchProviders(movieId, isTvShow);
+      final List<WatchProvider> credits = await apiService.fetchWatchProviders(
+        movieId,
+        isTvShow,
+      );
+
       return right(credits);
-    } on MovieException catch (e) {
-      return left(Failure.general(message: e.message));
     } catch (e) {
       return left(Failure.general(message: e.toString()));
     }
@@ -112,11 +114,12 @@ class MovieDetailsRepositoryImpl extends MovieDetailsRepository {
     bool isTvShow,
   ) async {
     try {
-      final MovieList movieList =
-          await apiService.fetchRecommendations(movieId, isTvShow);
+      final MovieList movieList = await apiService.fetchRecommendations(
+        movieId,
+        isTvShow,
+      );
+
       return right(movieList);
-    } on MovieException catch (e) {
-      return left(Failure.general(message: e.message));
     } catch (e) {
       return left(Failure.general(message: e.toString()));
     }
