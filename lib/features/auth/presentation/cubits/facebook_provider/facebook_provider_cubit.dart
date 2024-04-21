@@ -9,16 +9,16 @@ part 'facebook_provider_state.dart';
 
 @injectable
 class FacebookProviderCubit extends Cubit<FacebookProviderState> {
-  final AuthRepository _repository;
+  final AuthRepository repository;
 
   FacebookProviderCubit(
-    this._repository,
+    this.repository,
   ) : super(const FacebookProviderState.initial());
 
   Future<void> signIn() async {
     emit(const FacebookProviderState.submitting());
 
-    final failureOrUnit = await _repository.signInWithFacebook();
+    final failureOrUnit = await repository.signInWithFacebook();
 
     await failureOrUnit.fold(
         (failure) async =>
