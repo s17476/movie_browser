@@ -6,6 +6,7 @@ import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mocktail/mocktail.dart';
+
 import 'package:movie_browser/features/auth/data/repositories/authentication_repository_impl.dart';
 import 'package:movie_browser/features/core/errors/failure.dart';
 

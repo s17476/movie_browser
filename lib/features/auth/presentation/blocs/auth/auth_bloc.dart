@@ -13,12 +13,12 @@ part 'auth_state.dart';
 
 @singleton
 class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
-  final AuthRepository _repository;
-  late StreamSubscription _streamSubscription;
+  final AuthRepository repository;
+  late StreamSubscription streamSubscription;
   AuthBloc(
-    this._repository,
+    this.repository,
   ) : super(const _Initial()) {
-    _streamSubscription = _repository.user.listen((user) {
+    streamSubscription = repository.user.listen((user) {
       if (user != null) {
         add(AuthBlocEvent.autoSignIn(user: user));
       }
@@ -39,7 +39,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
         },
         signOut: (event) async {
           emit(const AuthBlocState.submitting());
-          final failureOrUnit = await _repository.signout();
+          final failureOrUnit = await repository.signout();
           await failureOrUnit.fold(
             (failure) async => emit(
               AuthBlocState.error(
@@ -56,7 +56,7 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
               emit(const AuthBlocState.submitting());
 
               final failureOrUnit =
-                  await _repository.deleteAccount(password: event.password);
+                  await repository.deleteAccount(password: event.password);
               await failureOrUnit.fold(
                 (failure) async => emit(
                   oldState.copyWith(
@@ -72,9 +72,10 @@ class AuthBloc extends Bloc<AuthBlocEvent, AuthBlocState> {
     });
   }
 
+  @disposeMethod
   @override
   Future<void> close() {
-    _streamSubscription.cancel();
+    streamSubscription.cancel();
     return super.close();
   }
 }
