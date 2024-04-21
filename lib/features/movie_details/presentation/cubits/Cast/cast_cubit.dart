@@ -14,23 +14,23 @@ part 'cast_state.dart';
 
 @singleton
 class CastCubit extends Cubit<CastState> {
-  final MovieDetailsRepository _repository;
-  final MovieDetailsCubit _movieDetailsCubit;
-  final TvShowDetailsCubit _tvShowDetailsCubit;
-  late StreamSubscription _movieStreamSubscription;
-  late StreamSubscription _tvShowStreamSubscription;
+  final MovieDetailsRepository repository;
+  final MovieDetailsCubit movieDetailsCubit;
+  final TvShowDetailsCubit tvShowDetailsCubit;
+  late StreamSubscription movieStreamSubscription;
+  late StreamSubscription tvShowStreamSubscription;
   CastCubit(
-    this._repository,
-    this._movieDetailsCubit,
-    this._tvShowDetailsCubit,
+    this.repository,
+    this.movieDetailsCubit,
+    this.tvShowDetailsCubit,
   ) : super(const CastState.initial()) {
-    _movieStreamSubscription = _movieDetailsCubit.stream.listen((state) {
+    movieStreamSubscription = movieDetailsCubit.stream.listen((state) {
       state.mapOrNull(
         loaded: (state) => fetchCredits(state.id, false),
       );
     });
 
-    _tvShowStreamSubscription = _tvShowDetailsCubit.stream.listen((state) {
+    tvShowStreamSubscription = tvShowDetailsCubit.stream.listen((state) {
       state.mapOrNull(
         loaded: (state) => fetchCredits(state.id, true),
       );
@@ -40,21 +40,18 @@ class CastCubit extends Cubit<CastState> {
   Future<void> fetchCredits(int movieId, bool isTvShow) async {
     emit(const CastState.loading());
 
-    final failureOrCredits = await _repository.fetchCredits(movieId, isTvShow);
+    final failureOrCredits = await repository.fetchCredits(movieId, isTvShow);
     await failureOrCredits.fold(
       (_) async => emit(const CastState.error()),
-      (credits) async => emit(
-        CastState.loaded(
-          credits: credits,
-        ),
-      ),
+      (credits) async => emit(CastState.loaded(credits: credits)),
     );
   }
 
+  @disposeMethod
   @override
   Future<void> close() {
-    _movieStreamSubscription.cancel();
-    _tvShowStreamSubscription.cancel();
+    movieStreamSubscription.cancel();
+    tvShowStreamSubscription.cancel();
     return super.close();
   }
 }

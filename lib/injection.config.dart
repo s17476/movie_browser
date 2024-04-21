@@ -208,11 +208,14 @@ extension GetItInjectableX on _i1.GetIt {
       _i46.AuthBloc(gh<_i33.AuthRepository>()),
       dispose: (i) => i.close(),
     );
-    gh.singleton<_i47.CastCubit>(_i47.CastCubit(
-      gh<_i11.MovieDetailsRepository>(),
-      gh<_i39.MovieDetailsCubit>(),
-      gh<_i32.TvShowDetailsCubit>(),
-    ));
+    gh.singleton<_i47.CastCubit>(
+      _i47.CastCubit(
+        gh<_i11.MovieDetailsRepository>(),
+        gh<_i39.MovieDetailsCubit>(),
+        gh<_i32.TvShowDetailsCubit>(),
+      ),
+      dispose: (i) => i.close(),
+    );
     gh.singleton<_i48.PersonCreditsCubit>(_i48.PersonCreditsCubit(
       gh<_i20.PersonDetailsRepository>(),
       gh<_i41.PersonDetailsCubit>(),

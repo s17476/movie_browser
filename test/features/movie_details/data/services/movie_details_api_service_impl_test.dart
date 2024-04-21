@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
+
 import 'package:movie_browser/features/core/errors/movie_exception.dart';
 import 'package:movie_browser/features/movie_details/data/services/movie_details_api_service_impl.dart';
 import 'package:movie_browser/features/movie_details/domain/entities/credits.dart';
@@ -31,8 +32,6 @@ void main() {
 
     service = MovieDetailsApiServiceImpl(client: mockHttpClient);
   });
-
-  final tUri = Uri();
 
   group('MovieDetailsApiServiceImpl', () {
     group('fetchMovieGenres()', () {
