@@ -9,16 +9,16 @@ part 'apple_provider_state.dart';
 
 @injectable
 class AppleProviderCubit extends Cubit<AppleProviderState> {
-  final AuthRepository _repository;
+  final AuthRepository repository;
 
   AppleProviderCubit(
-    this._repository,
+    this.repository,
   ) : super(const AppleProviderState.initial());
 
   Future<void> signIn() async {
     emit(const AppleProviderState.submitting());
 
-    final failureOrUnit = await _repository.signInWithApple();
+    final failureOrUnit = await repository.signInWithApple();
 
     await failureOrUnit.fold(
         (failure) async =>
