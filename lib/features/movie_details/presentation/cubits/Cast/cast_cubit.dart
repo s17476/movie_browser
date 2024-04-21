@@ -17,20 +17,21 @@ class CastCubit extends Cubit<CastState> {
   final MovieDetailsRepository repository;
   final MovieDetailsCubit movieDetailsCubit;
   final TvShowDetailsCubit tvShowDetailsCubit;
-  late StreamSubscription movieStreamSubscription;
-  late StreamSubscription tvShowStreamSubscription;
+
+  late StreamSubscription _movieStreamSubscription;
+  late StreamSubscription _tvShowStreamSubscription;
   CastCubit(
     this.repository,
     this.movieDetailsCubit,
     this.tvShowDetailsCubit,
   ) : super(const CastState.initial()) {
-    movieStreamSubscription = movieDetailsCubit.stream.listen((state) {
+    _movieStreamSubscription = movieDetailsCubit.stream.listen((state) {
       state.mapOrNull(
         loaded: (state) => fetchCredits(state.id, false),
       );
     });
 
-    tvShowStreamSubscription = tvShowDetailsCubit.stream.listen((state) {
+    _tvShowStreamSubscription = tvShowDetailsCubit.stream.listen((state) {
       state.mapOrNull(
         loaded: (state) => fetchCredits(state.id, true),
       );
@@ -50,8 +51,8 @@ class CastCubit extends Cubit<CastState> {
   @disposeMethod
   @override
   Future<void> close() {
-    movieStreamSubscription.cancel();
-    tvShowStreamSubscription.cancel();
+    _movieStreamSubscription.cancel();
+    _tvShowStreamSubscription.cancel();
     return super.close();
   }
 }

@@ -3,7 +3,7 @@ part of 'movie_images_cubit.dart';
 @freezed
 class MovieImagesState with _$MovieImagesState {
   const factory MovieImagesState.initial() = _Initial;
-  const factory MovieImagesState.lodaing() = _Loading;
+  const factory MovieImagesState.loading() = _Loading;
   const factory MovieImagesState.error() = _Error;
   const factory MovieImagesState.loaded({
     required int id,

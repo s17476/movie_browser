@@ -13,18 +13,19 @@ part 'movie_images_state.dart';
 
 @singleton
 class MovieImagesCubit extends Cubit<MovieImagesState> {
-  final MovieDetailsRepository _repository;
-  final MovieDetailsCubit _movieDetailsCubit;
-  final TvShowDetailsCubit _tvShowDetailsCubit;
+  final MovieDetailsRepository repository;
+  final MovieDetailsCubit movieDetailsCubit;
+  final TvShowDetailsCubit tvShowDetailsCubit;
+
   late StreamSubscription _movieStreamSubscription;
   late StreamSubscription _showStreamSubscription;
 
   MovieImagesCubit(
-    this._repository,
-    this._movieDetailsCubit,
-    this._tvShowDetailsCubit,
+    this.repository,
+    this.movieDetailsCubit,
+    this.tvShowDetailsCubit,
   ) : super(const MovieImagesState.initial()) {
-    _movieStreamSubscription = _movieDetailsCubit.stream.listen((state) {
+    _movieStreamSubscription = movieDetailsCubit.stream.listen((state) {
       state.mapOrNull(
         loaded: (state) => fetchMovieImages(
           state.id,
@@ -34,7 +35,7 @@ class MovieImagesCubit extends Cubit<MovieImagesState> {
       );
     });
 
-    _showStreamSubscription = _tvShowDetailsCubit.stream.listen((state) {
+    _showStreamSubscription = tvShowDetailsCubit.stream.listen((state) {
       state.mapOrNull(
         loaded: (state) =>
             fetchMovieImages(state.id, state.tvShow.posterPath ?? '', true),
@@ -47,10 +48,10 @@ class MovieImagesCubit extends Cubit<MovieImagesState> {
     String posterUrl,
     bool isTvShow,
   ) async {
-    emit(const MovieImagesState.lodaing());
+    emit(const MovieImagesState.loading());
 
     final failureOrImages =
-        await _repository.fetchMovieImages(movieId, isTvShow);
+        await repository.fetchMovieImages(movieId, isTvShow);
     await failureOrImages.fold(
       (_) async => emit(const MovieImagesState.error()),
       (images) async {
