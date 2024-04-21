@@ -171,7 +171,9 @@ class MovieDetailsApiServiceImpl extends MovieDetailsApiService {
 
   @override
   Future<List<WatchProvider>> fetchWatchProviders(
-      int movieId, bool isTvShow) async {
+    int movieId,
+    bool isTvShow,
+  ) async {
     try {
       final endpoint = isTvShow ? 'tv' : 'movie';
       final Uri uri = Uri(
