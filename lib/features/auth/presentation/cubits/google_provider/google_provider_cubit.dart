@@ -9,16 +9,16 @@ part 'google_provider_state.dart';
 
 @injectable
 class GoogleProviderCubit extends Cubit<GoogleProviderState> {
-  final AuthRepository _repository;
+  final AuthRepository repository;
 
   GoogleProviderCubit(
-    this._repository,
+    this.repository,
   ) : super(const GoogleProviderState.initial());
 
   Future<void> signIn() async {
     emit(const GoogleProviderState.submitting());
 
-    final failureOrUnit = await _repository.signInWithGoogle();
+    final failureOrUnit = await repository.signInWithGoogle();
 
     await failureOrUnit.fold(
         (failure) async =>
