@@ -10,20 +10,20 @@ import 'package:movie_browser/features/core/errors/failure.dart';
 
 @LazySingleton(as: AuthRepository)
 class AuthenticationRepositoryImpl extends AuthRepository {
-  final FirebaseAuth _firebaseAuth;
-  final GoogleSignIn _googleSignIn;
-  final FacebookAuth _facebookAuth;
-  final FirebaseFirestore _firebaseFirestore;
+  final FirebaseAuth firebaseAuth;
+  final GoogleSignIn googleSignIn;
+  final FacebookAuth facebookAuth;
+  final FirebaseFirestore firebaseFirestore;
 
   AuthenticationRepositoryImpl(
-    this._firebaseAuth,
-    this._googleSignIn,
-    this._facebookAuth,
-    this._firebaseFirestore,
+    this.firebaseAuth,
+    this.googleSignIn,
+    this.facebookAuth,
+    this.firebaseFirestore,
   );
 
   @override
-  Stream<User?> get user => _firebaseAuth.authStateChanges();
+  Stream<User?> get user => firebaseAuth.authStateChanges();
 
   @override
   Future<Either<Failure, Unit>> signinWithEmailAndPassword({
@@ -31,10 +31,11 @@ class AuthenticationRepositoryImpl extends AuthRepository {
     required String password,
   }) async {
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
+      await firebaseAuth.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
+
       return right(unit);
     } on FirebaseAuthException catch (e) {
       return Left(Failure.auth(message: e.message ?? ''));
@@ -45,9 +46,14 @@ class AuthenticationRepositoryImpl extends AuthRepository {
 
   @override
   Future<Either<Failure, Unit>> signout() async {
-    await _firebaseAuth.signOut();
-    await _googleSignIn.signOut();
-    await _facebookAuth.logOut();
+    try {
+      await firebaseAuth.signOut();
+      await googleSignIn.signOut();
+      await facebookAuth.logOut();
+    } catch (_) {
+      return left(const Failure.general(message: ''));
+    }
+
     return right(unit);
   }
 
@@ -57,10 +63,11 @@ class AuthenticationRepositoryImpl extends AuthRepository {
     required String password,
   }) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      await firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
+
       return right(unit);
     } on FirebaseAuthException catch (e) {
       return Left(Failure.auth(message: e.message ?? ''));
@@ -74,7 +81,8 @@ class AuthenticationRepositoryImpl extends AuthRepository {
     required String email,
   }) async {
     try {
-      await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+      await firebaseAuth.sendPasswordResetEmail(email: email);
+
       return right(unit);
     } on FirebaseAuthException catch (e) {
       return Left(Failure.auth(message: e.message ?? ''));
@@ -88,7 +96,7 @@ class AuthenticationRepositoryImpl extends AuthRepository {
     String? password,
   }) async {
     try {
-      final user = _firebaseAuth.currentUser!;
+      final user = firebaseAuth.currentUser!;
 
       final providerData = user.providerData[0];
 
@@ -96,23 +104,31 @@ class AuthenticationRepositoryImpl extends AuthRepository {
 
       if (providerData.providerId.contains('password') && password != null) {
         final credential = EmailAuthProvider.credential(
-            email: user.email!, password: password);
+          email: user.email!,
+          password: password,
+        );
+
         authResult = await user.reauthenticateWithCredential(credential);
       } else if (providerData.providerId.contains('facebook')) {
-        final LoginResult result = await _facebookAuth.login();
+        final LoginResult result = await facebookAuth.login();
 
         if (result.status == LoginStatus.success) {
-          final OAuthCredential credential =
-              FacebookAuthProvider.credential(result.accessToken!.token);
+          final OAuthCredential credential = FacebookAuthProvider.credential(
+            result.accessToken!.token,
+          );
+
           authResult = await user.reauthenticateWithCredential(credential);
         }
       } else if (providerData.providerId.contains('google')) {
-        final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+        final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
+
         if (googleUser == null) {
           return const Left(Failure.cancelledByUser(message: ''));
         }
+
         final GoogleSignInAuthentication googleAuth =
             await googleUser.authentication;
+
         final credential = GoogleAuthProvider.credential(
           accessToken: googleAuth.accessToken,
           idToken: googleAuth.idToken,
@@ -129,7 +145,7 @@ class AuthenticationRepositoryImpl extends AuthRepository {
       if (authResult == null) {
         throw Exception('Deletion failed');
       }
-      await _firebaseFirestore.collection('users').doc(user.uid).delete();
+      await firebaseFirestore.collection('users').doc(user.uid).delete();
       await authResult.user!.delete();
 
       return right(unit);
@@ -143,7 +159,7 @@ class AuthenticationRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, Unit>> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAccount? googleUser = await googleSignIn.signIn();
 
       if (googleUser == null) {
         return const Left(Failure.cancelledByUser(message: ''));
@@ -157,7 +173,7 @@ class AuthenticationRepositoryImpl extends AuthRepository {
         idToken: googleAuth.idToken,
       );
 
-      await _firebaseAuth.signInWithCredential(credential);
+      await firebaseAuth.signInWithCredential(credential);
 
       return right(unit);
     } on FirebaseAuthException catch (e) {
@@ -173,7 +189,7 @@ class AuthenticationRepositoryImpl extends AuthRepository {
       final appleProvider =
           AppleAuthProvider().addScope('fullName').addScope('email');
 
-      await _firebaseAuth.signInWithProvider(appleProvider);
+      await firebaseAuth.signInWithProvider(appleProvider);
 
       return right(unit);
     } on FirebaseAuthException catch (e) {
@@ -186,14 +202,16 @@ class AuthenticationRepositoryImpl extends AuthRepository {
   @override
   Future<Either<Failure, Unit>> signInWithFacebook() async {
     try {
-      final LoginResult result = await _facebookAuth.login();
+      final LoginResult result = await facebookAuth.login();
 
       if (result.status == LoginStatus.success) {
         // Create a credential from the access token
-        final OAuthCredential credential =
-            FacebookAuthProvider.credential(result.accessToken!.token);
+        final OAuthCredential credential = FacebookAuthProvider.credential(
+          result.accessToken!.token,
+        );
+
         // Once signed in, return the UserCredential
-        await FirebaseAuth.instance.signInWithCredential(credential);
+        await firebaseAuth.signInWithCredential(credential);
 
         return right(unit);
       }
