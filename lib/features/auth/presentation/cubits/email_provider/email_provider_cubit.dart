@@ -9,10 +9,10 @@ part 'email_provider_state.dart';
 
 @injectable
 class EmailProviderCubit extends Cubit<EmailProviderState> {
-  final AuthRepository _repository;
+  final AuthRepository repository;
 
   EmailProviderCubit(
-    this._repository,
+    this.repository,
   ) : super(const EmailProviderState.initial());
 
   Future<void> signupWithEmailAndPassword(
@@ -21,7 +21,7 @@ class EmailProviderCubit extends Cubit<EmailProviderState> {
   ) async {
     emit(const EmailProviderState.submitting());
 
-    final failureOrUnit = await _repository.signupWithEmailAndPassword(
+    final failureOrUnit = await repository.signupWithEmailAndPassword(
       email: email,
       password: password,
     );
@@ -38,7 +38,7 @@ class EmailProviderCubit extends Cubit<EmailProviderState> {
   ) async {
     emit(const EmailProviderState.submitting());
 
-    final failureOrUnit = await _repository.signinWithEmailAndPassword(
+    final failureOrUnit = await repository.signinWithEmailAndPassword(
       email: email,
       password: password,
     );
@@ -52,8 +52,7 @@ class EmailProviderCubit extends Cubit<EmailProviderState> {
   Future<void> resetPassword(String email) async {
     emit(const EmailProviderState.submitting());
 
-    final failureOrUnit =
-        await _repository.sendPasswordResetEmail(email: email);
+    final failureOrUnit = await repository.sendPasswordResetEmail(email: email);
 
     await failureOrUnit.fold(
         (failure) async =>
@@ -64,7 +63,7 @@ class EmailProviderCubit extends Cubit<EmailProviderState> {
   Future<void> deleteAccount(String password) async {
     emit(const EmailProviderState.submitting());
 
-    final failureOrUnit = await _repository.deleteAccount(password: password);
+    final failureOrUnit = await repository.deleteAccount(password: password);
 
     await failureOrUnit.fold(
         (failure) async =>
