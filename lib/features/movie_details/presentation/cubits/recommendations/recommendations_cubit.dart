@@ -14,23 +14,25 @@ part 'recommendations_state.dart';
 
 @singleton
 class RecommendationsCubit extends Cubit<RecommendationsState> {
-  final MovieDetailsRepository _repository;
-  final MovieDetailsCubit _movieDetailsCubit;
-  final TvShowDetailsCubit _tvShowDetailsCubit;
+  final MovieDetailsRepository repository;
+  final MovieDetailsCubit movieDetailsCubit;
+  final TvShowDetailsCubit tvShowDetailsCubit;
+
   late StreamSubscription _movieStreamSubscription;
   late StreamSubscription _tvShowStreamSubscription;
+
   RecommendationsCubit(
-    this._repository,
-    this._movieDetailsCubit,
-    this._tvShowDetailsCubit,
+    this.repository,
+    this.movieDetailsCubit,
+    this.tvShowDetailsCubit,
   ) : super(const RecommendationsState.initial()) {
-    _movieStreamSubscription = _movieDetailsCubit.stream.listen((state) {
+    _movieStreamSubscription = movieDetailsCubit.stream.listen((state) {
       state.mapOrNull(
         loaded: (state) => fetchRecommendations(state.id, false),
       );
     });
 
-    _tvShowStreamSubscription = _tvShowDetailsCubit.stream.listen((state) {
+    _tvShowStreamSubscription = tvShowDetailsCubit.stream.listen((state) {
       state.mapOrNull(
         loaded: (state) => fetchRecommendations(state.id, true),
       );
@@ -41,7 +43,7 @@ class RecommendationsCubit extends Cubit<RecommendationsState> {
     emit(const RecommendationsState.loading());
 
     final failureOrMovieList =
-        await _repository.fetchRecommendations(movieId, isTvShow);
+        await repository.fetchRecommendations(movieId, isTvShow);
     await failureOrMovieList.fold(
       (_) async => emit(const RecommendationsState.error()),
       (movieList) async => emit(
