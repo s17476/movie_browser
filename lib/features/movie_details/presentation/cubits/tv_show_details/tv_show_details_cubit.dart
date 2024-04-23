@@ -10,16 +10,16 @@ part 'tv_show_details_state.dart';
 
 @singleton
 class TvShowDetailsCubit extends Cubit<TvShowDetailsState> {
-  final MovieDetailsRepository _repository;
+  final MovieDetailsRepository repository;
 
   TvShowDetailsCubit(
-    this._repository,
+    this.repository,
   ) : super(const TvShowDetailsState.initial());
 
   Future<void> fetchTvShowDetails(int showId) async {
     emit(const TvShowDetailsState.loading());
 
-    final failureOrShowDetails = await _repository.fetchTvShowDetails(showId);
+    final failureOrShowDetails = await repository.fetchTvShowDetails(showId);
     await failureOrShowDetails.fold(
       (_) async => emit(const TvShowDetailsState.error()),
       (tvShow) async => emit(
