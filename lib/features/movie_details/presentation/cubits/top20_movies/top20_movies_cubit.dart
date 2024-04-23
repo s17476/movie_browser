@@ -14,14 +14,16 @@ part 'top20_movies_state.dart';
 
 @singleton
 class Top20MoviesCubit extends Cubit<Top20MoviesState> {
-  final MovieDetailsRepository _repository;
-  final Top20MovieListCubit _top20movieListCubit;
+  final MovieDetailsRepository repository;
+  final Top20MovieListCubit top20movieListCubit;
+
   late StreamSubscription _top20StreamSubscription;
+
   Top20MoviesCubit(
-    this._top20movieListCubit,
-    this._repository,
+    this.top20movieListCubit,
+    this.repository,
   ) : super(const Top20MoviesState.initial()) {
-    _top20StreamSubscription = _top20movieListCubit.stream.listen((state) {
+    _top20StreamSubscription = top20movieListCubit.stream.listen((state) {
       state.maybeMap(
         loaded: (state) => fetchTop20(state.movieList.results),
         orElse: () => null,
@@ -33,7 +35,8 @@ class Top20MoviesCubit extends Cubit<Top20MoviesState> {
     List<MovieDetails> movies = [];
     for (var movie in movieList) {
       final failureOrMovieDetails =
-          await _repository.fetchMovieDetails(movie.id);
+          await repository.fetchMovieDetails(movie.id);
+
       await failureOrMovieDetails.fold(
         (_) async => null,
         (movie) async => movies.add(movie),

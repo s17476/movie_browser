@@ -14,7 +14,7 @@ import 'package:movie_browser/features/core/presentation/cubits/current_route/cu
 import 'package:movie_browser/features/core/presentation/widgets/star_rating.dart';
 import 'package:movie_browser/features/core/utils/format_currency.dart';
 import 'package:movie_browser/features/movie_details/domain/entities/movie_details.dart';
-import 'package:movie_browser/features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/top20_movies/top20_movies_cubit.dart';
 import 'package:movie_browser/features/movies_list/utils/fetch_and_show_movie.dart';
 
 class Top20Switcher extends StatefulWidget {

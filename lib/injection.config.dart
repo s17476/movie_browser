@@ -48,7 +48,7 @@ import 'features/movie_details/presentation/cubits/movie_images/movie_images_cub
     as _i40;
 import 'features/movie_details/presentation/cubits/recommendations/recommendations_cubit.dart'
     as _i42;
-import 'features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart'
+import 'features/movie_details/presentation/cubits/top20_movies/top20_movies_cubit.dart'
     as _i30;
 import 'features/movie_details/presentation/cubits/tv_show_details/tv_show_details_cubit.dart'
     as _i32;

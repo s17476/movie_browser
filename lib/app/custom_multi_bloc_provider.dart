@@ -12,7 +12,7 @@ import 'package:movie_browser/features/movie_details/presentation/cubits/movie_d
 import 'package:movie_browser/features/movie_details/presentation/cubits/movie_genres/movie_genres_cubit.dart';
 import 'package:movie_browser/features/movie_details/presentation/cubits/movie_images/movie_images_cubit.dart';
 import 'package:movie_browser/features/movie_details/presentation/cubits/recommendations/recommendations_cubit.dart';
-import 'package:movie_browser/features/movie_details/presentation/cubits/top5_movies/top20_movies_cubit.dart';
+import 'package:movie_browser/features/movie_details/presentation/cubits/top20_movies/top20_movies_cubit.dart';
 import 'package:movie_browser/features/movie_details/presentation/cubits/tv_show_details/tv_show_details_cubit.dart';
 import 'package:movie_browser/features/movie_details/presentation/cubits/video/video_cubit.dart';
 import 'package:movie_browser/features/movie_details/presentation/cubits/watch_providers/watch_providers_cubit.dart';
