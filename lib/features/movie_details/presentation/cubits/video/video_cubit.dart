@@ -14,23 +14,25 @@ part 'video_state.dart';
 
 @singleton
 class VideoCubit extends Cubit<VideoState> {
-  final MovieDetailsRepository _repository;
-  final MovieDetailsCubit _movieDetailsCubit;
-  final TvShowDetailsCubit _tvShowDetailsCubit;
+  final MovieDetailsRepository repository;
+  final MovieDetailsCubit movieDetailsCubit;
+  final TvShowDetailsCubit tvShowDetailsCubit;
+
   late StreamSubscription _movieStreamSubscription;
   late StreamSubscription _showStreamSubscription;
+
   VideoCubit(
-    this._repository,
-    this._movieDetailsCubit,
-    this._tvShowDetailsCubit,
+    this.repository,
+    this.movieDetailsCubit,
+    this.tvShowDetailsCubit,
   ) : super(const VideoState.initial()) {
-    _movieStreamSubscription = _movieDetailsCubit.stream.listen((state) {
+    _movieStreamSubscription = movieDetailsCubit.stream.listen((state) {
       state.mapOrNull(
         loaded: (state) => fetchVideos(state.id, false),
       );
     });
 
-    _showStreamSubscription = _tvShowDetailsCubit.stream.listen((state) {
+    _showStreamSubscription = tvShowDetailsCubit.stream.listen((state) {
       state.mapOrNull(
         loaded: (state) => fetchVideos(state.id, true),
       );
@@ -40,7 +42,7 @@ class VideoCubit extends Cubit<VideoState> {
   Future<void> fetchVideos(int movieId, bool isTvShow) async {
     emit(const VideoState.loading());
 
-    final failureOrVideos = await _repository.fetchVideos(movieId, isTvShow);
+    final failureOrVideos = await repository.fetchVideos(movieId, isTvShow);
     await failureOrVideos.fold(
       (_) async => emit(const VideoState.error()),
       (videos) async => emit(VideoState.loaded(videos: videos)),
