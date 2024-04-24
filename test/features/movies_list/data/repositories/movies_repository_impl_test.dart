@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
+
 import 'package:movie_browser/features/core/errors/failure.dart';
 import 'package:movie_browser/features/core/errors/movie_exception.dart';
 import 'package:movie_browser/features/movies_list/data/repositories/movies_repository_impl.dart';
