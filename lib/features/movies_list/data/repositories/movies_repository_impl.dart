@@ -20,6 +20,7 @@ class MoviesRepositoryImpl extends MoviesRepository {
   Future<Either<Failure, MovieList>> searchMovies(String query) async {
     try {
       final MovieList movieList = await apiService.searchMovies(query);
+
       return right(movieList);
     } on MovieException catch (e) {
       return left(Failure.general(message: e.message));
@@ -32,8 +33,11 @@ class MoviesRepositoryImpl extends MoviesRepository {
   Future<Either<Failure, MovieList>> loadNextPage(
       String query, int page) async {
     try {
-      final MovieList movieList =
-          await apiService.loadNextResultsPage(query, page);
+      final MovieList movieList = await apiService.loadNextResultsPage(
+        query,
+        page,
+      );
+
       return right(movieList);
     } on MovieException catch (e) {
       return left(Failure.general(message: e.message));
@@ -44,12 +48,12 @@ class MoviesRepositoryImpl extends MoviesRepository {
 
   @override
   Future<Either<Failure, MovieList>> top20Movies() async {
-    return performApiCall(apiService.top20Movies);
+    return _performApiCall(apiService.top20Movies);
   }
 
   @override
   Future<Either<Failure, TvShowList>> top20TvShows() async {
-    return performApiCall(apiService.top20TvShows);
+    return _performApiCall(apiService.top20TvShows);
   }
 
   @override
@@ -68,8 +72,11 @@ class MoviesRepositoryImpl extends MoviesRepository {
   Future<Either<Failure, MovieList>> fetchNextPageByGenreId(
       int id, int page) async {
     try {
-      final MovieList movieList =
-          await apiService.fetchNextPageByGenreId(id, page);
+      final MovieList movieList = await apiService.fetchNextPageByGenreId(
+        id,
+        page,
+      );
+
       return right(movieList);
     } on MovieException catch (e) {
       return left(Failure.general(message: e.message));
@@ -78,7 +85,7 @@ class MoviesRepositoryImpl extends MoviesRepository {
     }
   }
 
-  Future<Either<Failure, T>> performApiCall<T>(Function apiFunction) async {
+  Future<Either<Failure, T>> _performApiCall<T>(Function apiFunction) async {
     try {
       final T list = await apiFunction();
       return right(list);
