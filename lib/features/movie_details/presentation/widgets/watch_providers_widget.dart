@@ -9,9 +9,9 @@ import 'package:movie_browser/features/movie_details/domain/entities/watch_provi
 import 'package:movie_browser/features/movie_details/presentation/cubits/watch_providers/watch_providers_cubit.dart';
 
 class WatchProvidersWidget extends StatelessWidget {
-  const WatchProvidersWidget({super.key, required this.detailsId});
-
   final int detailsId;
+
+  const WatchProvidersWidget({super.key, required this.detailsId});
 
   @override
   Widget build(BuildContext context) {

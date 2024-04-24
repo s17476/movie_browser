@@ -6,6 +6,7 @@ import 'package:movie_browser/features/core/presentation/widgets/images_carousel
 class MovieImage extends StatelessWidget {
   final List<String> images;
   final int index;
+
   const MovieImage({
     Key? key,
     required this.images,

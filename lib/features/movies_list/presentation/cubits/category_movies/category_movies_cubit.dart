@@ -10,15 +10,15 @@ part 'category_movies_state.dart';
 
 @singleton
 class CategoryMoviesCubit extends Cubit<CategoryMoviesState> {
-  final MoviesRepository _repository;
+  final MoviesRepository repository;
   CategoryMoviesCubit(
-    this._repository,
+    this.repository,
   ) : super(const CategoryMoviesState.initial());
 
   Future<void> fetchMovies(int genreId) async {
     emit(const CategoryMoviesState.loading());
 
-    final failureOrMovieList = await _repository.fetchByGenreId(genreId);
+    final failureOrMovieList = await repository.fetchByGenreId(genreId);
     await failureOrMovieList.fold(
       (_) async => emit(const CategoryMoviesState.loading()),
       (movieList) async => emit(
@@ -37,7 +37,7 @@ class CategoryMoviesCubit extends Cubit<CategoryMoviesState> {
         if (state.movieList.page < state.movieList.totalPages) {
           emit(state.copyWith(isLoadingNextPage: true));
 
-          final failureOrMovieList = await _repository.fetchNextPageByGenreId(
+          final failureOrMovieList = await repository.fetchNextPageByGenreId(
             state.genreId,
             state.movieList.page + 1,
           );

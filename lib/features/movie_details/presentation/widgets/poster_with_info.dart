@@ -13,6 +13,7 @@ import 'package:movie_browser/features/movie_details/presentation/widgets/movie_
 
 class PosterWithInfo extends StatelessWidget {
   final MovieDetails movie;
+
   const PosterWithInfo({
     Key? key,
     required this.movie,
@@ -23,6 +24,7 @@ class PosterWithInfo extends StatelessWidget {
     final double height = ResponsiveWrapper.of(context).isSmallerThan(TABLET)
         ? ((MediaQuery.of(context).size.width * 1.5) + 32)
         : MediaQuery.of(context).size.width * 1.25 + 32;
+
     return Column(
       children: [
         Stack(

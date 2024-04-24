@@ -4,7 +4,7 @@ part of 'watch_providers_cubit.dart';
 class WatchProvidersState with _$WatchProvidersState {
   const WatchProvidersState._();
   const factory WatchProvidersState.initial() = _Initial;
-  const factory WatchProvidersState.lodaing() = _Loading;
+  const factory WatchProvidersState.loading() = _Loading;
   const factory WatchProvidersState.error() = _Error;
   const factory WatchProvidersState.loaded({
     required int id,

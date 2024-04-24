@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class MovieDescription extends StatelessWidget {
   final String description;
+
   const MovieDescription({
     Key? key,
     required this.description,

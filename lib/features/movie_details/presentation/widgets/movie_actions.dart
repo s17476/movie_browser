@@ -8,6 +8,7 @@ import 'package:movie_browser/features/movie_details/presentation/widgets/movie_
 class MovieActions extends StatelessWidget {
   final bool isTvShow;
   final int movieId;
+
   const MovieActions({
     Key? key,
     required this.isTvShow,

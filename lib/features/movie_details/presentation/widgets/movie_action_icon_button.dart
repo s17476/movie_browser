@@ -13,6 +13,7 @@ class MovieActionIconButton extends HookWidget {
   final IconData unselectedIconData;
   final double iconSize;
   final ListType listType;
+
   const MovieActionIconButton({
     Key? key,
     required this.movieId,
@@ -51,7 +52,9 @@ class MovieActionIconButton extends HookWidget {
   Widget build(BuildContext context) {
     final toggleState = useState(false);
     toggleState.value = _isSelected(context);
+
     final userProfileCubit = context.read<UserProfileCubit>();
+
     return TweenAnimationBuilder(
       key: const ValueKey('tween'),
       duration: const Duration(milliseconds: 600),

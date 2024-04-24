@@ -7,6 +7,7 @@ import 'package:movie_browser/features/movie_details/domain/entities/video.dart'
 
 class MovieVideo extends StatelessWidget {
   final Video video;
+
   const MovieVideo({
     Key? key,
     required this.video,
