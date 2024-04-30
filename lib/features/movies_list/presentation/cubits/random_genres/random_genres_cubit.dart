@@ -14,16 +14,17 @@ part 'random_genres_state.dart';
 
 @singleton
 class RandomGenresCubit extends Cubit<RandomGenresState> {
-  final MoviesRepository _moviesRepository;
-  final MovieGenresCubit _movieGenresCubit;
+  final MoviesRepository moviesRepository;
+  final MovieGenresCubit movieGenresCubit;
 
   static const int _randomCategoriesCount = 5;
+
   RandomGenresCubit(
-    this._moviesRepository,
-    this._movieGenresCubit,
+    this.moviesRepository,
+    this.movieGenresCubit,
   ) : super(const RandomGenresState.initial()) {
     // gets genres
-    _movieGenresCubit.stream.listen((state) {
+    movieGenresCubit.stream.listen((state) {
       state.maybeMap(
           orElse: () => null,
           loaded: (state) {
@@ -48,7 +49,7 @@ class RandomGenresCubit extends Cubit<RandomGenresState> {
     // fetch movie list for each genre
     for (var genre in genres) {
       final failureOrMovieList =
-          await _moviesRepository.fetchByGenreId(genre.id);
+          await moviesRepository.fetchByGenreId(genre.id);
 
       await failureOrMovieList.fold(
         (_) async => null,

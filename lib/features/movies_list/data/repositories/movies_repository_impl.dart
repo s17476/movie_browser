@@ -31,7 +31,9 @@ class MoviesRepositoryImpl extends MoviesRepository {
 
   @override
   Future<Either<Failure, MovieList>> loadNextPage(
-      String query, int page) async {
+    String query,
+    int page,
+  ) async {
     try {
       final MovieList movieList = await apiService.loadNextResultsPage(
         query,
@@ -70,7 +72,9 @@ class MoviesRepositoryImpl extends MoviesRepository {
 
   @override
   Future<Either<Failure, MovieList>> fetchNextPageByGenreId(
-      int id, int page) async {
+    int id,
+    int page,
+  ) async {
     try {
       final MovieList movieList = await apiService.fetchNextPageByGenreId(
         id,

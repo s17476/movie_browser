@@ -10,15 +10,15 @@ part 'search_suggestions_state.dart';
 
 @injectable
 class SearchSuggestionsCubit extends Cubit<SearchSuggestionsState> {
-  final MoviesRepository _moviesRepository;
+  final MoviesRepository moviesRepository;
   SearchSuggestionsCubit(
-    this._moviesRepository,
+    this.moviesRepository,
   ) : super(const SearchSuggestionsState.initial());
 
   Future<void> fetchSuggestions(String query) async {
     emit(const SearchSuggestionsState.loading());
 
-    final failureOrMovieList = await _moviesRepository.searchMovies(query);
+    final failureOrMovieList = await moviesRepository.searchMovies(query);
 
     await failureOrMovieList.fold(
       (_) async => emit(const SearchSuggestionsState.error()),

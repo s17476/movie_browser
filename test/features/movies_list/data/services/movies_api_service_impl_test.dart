@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mocktail/mocktail.dart';
+
 import 'package:movie_browser/features/core/errors/movie_exception.dart';
 import 'package:movie_browser/features/movies_list/data/services/movies_api_service_impl.dart';
 import 'package:movie_browser/features/movies_list/domain/entities/movie.dart';
 import 'package:movie_browser/features/movies_list/domain/entities/movie_list.dart';
-import 'package:movie_browser/features/movies_list/domain/services/movies_api_service.dart';
 
 class MockHttpClient extends Mock implements http.Client {}
 

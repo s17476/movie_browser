@@ -10,9 +10,9 @@ part 'top20_tv_shows_list_state.dart';
 
 @singleton
 class Top20TvShowsListCubit extends Cubit<Top20TvShowsListState> {
-  final MoviesRepository _moviesRepository;
+  final MoviesRepository moviesRepository;
   Top20TvShowsListCubit(
-    this._moviesRepository,
+    this.moviesRepository,
   ) : super(const Top20TvShowsListState.initial()) {
     fetchTop20TvShows();
   }
@@ -21,7 +21,7 @@ class Top20TvShowsListCubit extends Cubit<Top20TvShowsListState> {
   Future<void> fetchTop20TvShows() async {
     emit(const Top20TvShowsListState.loading());
 
-    final failureOrMovieList = await _moviesRepository.top20TvShows();
+    final failureOrMovieList = await moviesRepository.top20TvShows();
 
     await failureOrMovieList.fold(
       (failure) async {

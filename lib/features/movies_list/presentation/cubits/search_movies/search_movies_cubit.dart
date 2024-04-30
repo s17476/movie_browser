@@ -10,16 +10,16 @@ part 'search_movies_state.dart';
 
 @injectable
 class SearchMoviesCubit extends Cubit<SearchMoviesState> {
-  final MoviesRepository _moviesRepository;
+  final MoviesRepository moviesRepository;
 
   SearchMoviesCubit(
-    this._moviesRepository,
+    this.moviesRepository,
   ) : super(const SearchMoviesState.initial());
 
   Future<void> searchMovies(String query) async {
     emit(const SearchMoviesState.loading());
 
-    final failureOrMovieList = await _moviesRepository.searchMovies(query);
+    final failureOrMovieList = await moviesRepository.searchMovies(query);
     await failureOrMovieList.fold(
       (_) async => emit(const SearchMoviesState.error()),
       (movieList) async => emit(
@@ -39,7 +39,7 @@ class SearchMoviesCubit extends Cubit<SearchMoviesState> {
             state.movieList.lastQuery!.isNotEmpty) {
           emit(state.copyWith(isLoadingNextPage: true));
 
-          final failureOrMovieList = await _moviesRepository.loadNextPage(
+          final failureOrMovieList = await moviesRepository.loadNextPage(
             state.movieList.lastQuery!,
             state.movieList.page + 1,
           );

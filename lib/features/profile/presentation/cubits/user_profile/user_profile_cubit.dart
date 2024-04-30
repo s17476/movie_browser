@@ -28,14 +28,16 @@ enum ListType {
 
 @singleton
 class UserProfileCubit extends Cubit<UserProfileState> {
-  final ProfileRepository _repository;
-  final AuthBloc _authBloc;
+  final ProfileRepository repository;
+  final AuthBloc authBloc;
+
   late StreamSubscription _streamSubscription;
+
   UserProfileCubit(
-    this._repository,
-    this._authBloc,
+    this.repository,
+    this.authBloc,
   ) : super(const UserProfileState.initial()) {
-    _streamSubscription = _authBloc.stream.listen((state) {
+    _streamSubscription = authBloc.stream.listen((state) {
       state.maybeMap(
         authenticated: (state) => fetchUserProfile(state.userId),
         orElse: () => _reset(),
@@ -66,18 +68,18 @@ class UserProfileCubit extends Cubit<UserProfileState> {
           );
 
           final failureOrUnit =
-              await _repository.updateUserProfile(updatedUserProfile);
+              await repository.updateUserProfile(updatedUserProfile);
           await failureOrUnit.fold(
             (_) async => emit(oldState.copyWith(isError: true)),
             (_) async {
               if (listType == ListType.ratedMovies) {
-                await _repository.rateMovie(
+                await repository.rateMovie(
                   movieId,
                   state.userProfile.sessionId,
                   value,
                 );
               } else {
-                await _repository.rateTvShow(
+                await repository.rateTvShow(
                   movieId,
                   state.userProfile.sessionId,
                   value,
@@ -112,7 +114,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
           );
 
           final failureOrUnit =
-              await _repository.updateUserProfile(updatedUserProfile);
+              await repository.updateUserProfile(updatedUserProfile);
           await failureOrUnit.fold(
             (_) async => emit(oldState.copyWith(isError: true)),
             (_) async => null,
@@ -143,7 +145,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
         );
 
         final failureOrUnit =
-            await _repository.updateUserProfile(updatedUserProfile);
+            await repository.updateUserProfile(updatedUserProfile);
         await failureOrUnit.fold(
           (_) async => emit(oldState.copyWith(isError: true)),
           (_) async => null,
@@ -156,7 +158,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     await state.mapOrNull(
       loaded: (state) async {
         final failureOrUnit =
-            await _repository.deleteUserProfile(state.userProfile.id);
+            await repository.deleteUserProfile(state.userProfile.id);
         await failureOrUnit.fold(
           (_) async => emit(state.copyWith(isError: true)),
           (_) async => emit(const UserProfileState.initial()),
@@ -168,7 +170,7 @@ class UserProfileCubit extends Cubit<UserProfileState> {
   Future<void> fetchUserProfile(String userId) async {
     emit(const UserProfileState.loading());
 
-    final failureOrUserProfile = await _repository.fetchUserProfile(userId);
+    final failureOrUserProfile = await repository.fetchUserProfile(userId);
     await failureOrUserProfile.fold(
       (failure) async => await failure.maybeMap(
         // first log in
@@ -184,14 +186,14 @@ class UserProfileCubit extends Cubit<UserProfileState> {
 
   Future<void> _createNewUser(String userId) async {
     // create The Movie DB guest session
-    final failureOrSessionId = await _repository.createGuestSession();
+    final failureOrSessionId = await repository.createGuestSession();
     await failureOrSessionId.fold(
       (_) async => emit(const UserProfileState.error()),
       (sessionId) async {
         // create new user in the DB
         final userProfile =
             UserProfile.newUser(userId).copyWith(sessionId: sessionId);
-        final failureOrUnit = await _repository.createUserProfile(userProfile);
+        final failureOrUnit = await repository.createUserProfile(userProfile);
         await failureOrUnit.fold(
           (_) async => emit(const UserProfileState.error()),
           (_) async => emit(

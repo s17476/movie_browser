@@ -10,16 +10,17 @@ part 'person_details_state.dart';
 
 @singleton
 class PersonDetailsCubit extends Cubit<PersonDetailsState> {
-  final PersonDetailsRepository _repository;
+  final PersonDetailsRepository repository;
+
   PersonDetailsCubit(
-    this._repository,
+    this.repository,
   ) : super(const PersonDetailsState.initial());
 
   Future<void> fetchPersonDetails(int personId) async {
     emit(const PersonDetailsState.loading());
 
     final failureOrPersonDetails =
-        await _repository.fetchPersonDetails(personId);
+        await repository.fetchPersonDetails(personId);
     await failureOrPersonDetails.fold(
       (_) async => emit(const PersonDetailsState.error()),
       (personDetails) async => emit(

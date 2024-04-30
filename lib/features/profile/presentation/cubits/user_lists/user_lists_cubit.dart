@@ -15,14 +15,16 @@ part 'user_lists_state.dart';
 
 @singleton
 class UserListsCubit extends Cubit<UserListsState> {
-  final UserProfileCubit _userProfileCubit;
-  final MovieDetailsRepository _movieDetailsRepository;
+  final UserProfileCubit userProfileCubit;
+  final MovieDetailsRepository movieDetailsRepository;
+
   late StreamSubscription _streamSubscription;
+
   UserListsCubit(
-    this._userProfileCubit,
-    this._movieDetailsRepository,
+    this.userProfileCubit,
+    this.movieDetailsRepository,
   ) : super(const UserListsState.initial()) {
-    _streamSubscription = _userProfileCubit.stream.listen((userState) {
+    _streamSubscription = userProfileCubit.stream.listen((userState) {
       state.mapOrNull(
         loaded: (userState) {
           state.mapOrNull(
@@ -38,7 +40,7 @@ class UserListsCubit extends Cubit<UserListsState> {
   Future<void> fetchData({
     required ListType listType,
   }) async {
-    await _userProfileCubit.state.mapOrNull(
+    await userProfileCubit.state.mapOrNull(
       loaded: (userState) async {
         emit(const UserListsState.loading());
 
@@ -48,7 +50,7 @@ class UserListsCubit extends Cubit<UserListsState> {
 
         for (var movie in _getMovies(userState.userProfile, listType)) {
           final failureOrMovieDetails =
-              await _movieDetailsRepository.fetchMovieDetails(movie);
+              await movieDetailsRepository.fetchMovieDetails(movie);
           await failureOrMovieDetails.fold(
             (_) async => error = true,
             (movieDetails) async {
@@ -67,7 +69,7 @@ class UserListsCubit extends Cubit<UserListsState> {
         List<TvShowDetails> tvShowsDetails = [];
         for (var tvShow in _getTvShows(userState.userProfile, listType)) {
           final failureOrTvShowDetails =
-              await _movieDetailsRepository.fetchTvShowDetails(tvShow);
+              await movieDetailsRepository.fetchTvShowDetails(tvShow);
           await failureOrTvShowDetails.fold(
             (_) async => error = true,
             (tvShowDetails) async {

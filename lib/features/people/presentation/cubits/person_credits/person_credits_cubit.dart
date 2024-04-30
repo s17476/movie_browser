@@ -13,14 +13,15 @@ part 'person_credits_state.dart';
 
 @singleton
 class PersonCreditsCubit extends Cubit<PersonCreditsState> {
-  final PersonDetailsRepository _repository;
-  final PersonDetailsCubit _personDetailsCubit;
-  late StreamSubscription _streamSubscription;
+  final PersonDetailsRepository repository;
+  final PersonDetailsCubit personDetailsCubit;
+  late StreamSubscription streamSubscription;
+
   PersonCreditsCubit(
-    this._repository,
-    this._personDetailsCubit,
+    this.repository,
+    this.personDetailsCubit,
   ) : super(const PersonCreditsState.initial()) {
-    _streamSubscription = _personDetailsCubit.stream.listen((state) {
+    streamSubscription = personDetailsCubit.stream.listen((state) {
       state.mapOrNull(loaded: (state) => fetchPersonCredits(state.person.id));
     });
   }
@@ -28,7 +29,7 @@ class PersonCreditsCubit extends Cubit<PersonCreditsState> {
   Future<void> fetchPersonCredits(int personId) async {
     emit(const PersonCreditsState.loading());
 
-    final failureOrCredits = await _repository.fetchPersonCredits(personId);
+    final failureOrCredits = await repository.fetchPersonCredits(personId);
     await failureOrCredits.fold(
       (_) async => emit(const PersonCreditsState.error()),
       (credits) async => emit(
@@ -41,7 +42,7 @@ class PersonCreditsCubit extends Cubit<PersonCreditsState> {
 
   @override
   Future<void> close() {
-    _streamSubscription.cancel();
+    streamSubscription.cancel();
     return super.close();
   }
 }
