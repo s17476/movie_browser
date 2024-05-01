@@ -136,17 +136,52 @@ class CustomRouter {
                   builder: (_, __) => const EmailAuthPage(),
                 ),
                 GoRoute(
-                  path: 'userListPage',
-                  builder: (_, state) {
-                    final listType = state.extra as ListType?;
-                    if (listType != null) {
-                      return UserListPage(
-                        listType: listType,
-                      );
-                    }
-                    return const UserListPage();
-                  },
-                ),
+                    path: 'userListPage',
+                    builder: (_, state) {
+                      final listType = state.extra as ListType?;
+                      if (listType != null) {
+                        return UserListPage(
+                          listType: listType,
+                        );
+                      }
+                      return const UserListPage();
+                    },
+                    routes: [
+                      GoRoute(
+                        path: 'movieDetails',
+                        builder: (_, __) => const MovieDetailsPage(),
+                        routes: [
+                          GoRoute(
+                            path: 'ytPlayer',
+                            builder: (_, state) {
+                              final videoId = state.extra as String;
+                              return YoutubeVideoPlayer(vodeoId: videoId);
+                            },
+                          ),
+                          GoRoute(
+                            path: 'personDetails',
+                            builder: (_, __) => const PersonDetailsPage(),
+                          ),
+                        ],
+                      ),
+                      GoRoute(
+                        path: 'tvShowDetails',
+                        builder: (_, __) => const TvShowDetailsPage(),
+                        routes: [
+                          GoRoute(
+                            path: 'ytPlayer',
+                            builder: (_, state) {
+                              final videoId = state.extra as String;
+                              return YoutubeVideoPlayer(vodeoId: videoId);
+                            },
+                          ),
+                          GoRoute(
+                            path: 'personDetails',
+                            builder: (_, __) => const PersonDetailsPage(),
+                          ),
+                        ],
+                      ),
+                    ]),
               ]),
         ],
       );
