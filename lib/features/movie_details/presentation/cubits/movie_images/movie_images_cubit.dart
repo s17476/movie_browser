@@ -29,7 +29,7 @@ class MovieImagesCubit extends Cubit<MovieImagesState> {
       state.mapOrNull(
         loaded: (state) => fetchMovieImages(
           state.id,
-          state.movie.posterPath,
+          state.movie.posterPath ?? '',
           false,
         ),
       );

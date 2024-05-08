@@ -112,7 +112,7 @@ class _GenreWidgetState extends State<GenreWidget> {
                   ),
                   child: Poster(
                     id: e.id,
-                    posterPath: e.posterPath,
+                    posterPath: e.posterPath ?? '',
                   ),
                 ))
             .toList(),
