@@ -8,7 +8,7 @@ part of 'movie_genre.dart';
 
 _$MovieGenreImpl _$$MovieGenreImplFromJson(Map<String, dynamic> json) =>
     _$MovieGenreImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       name: json['name'] as String,
     );
 

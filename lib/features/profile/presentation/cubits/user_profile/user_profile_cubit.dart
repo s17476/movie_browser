@@ -188,7 +188,11 @@ class UserProfileCubit extends Cubit<UserProfileState> {
     // create The Movie DB guest session
     final failureOrSessionId = await repository.createGuestSession();
     await failureOrSessionId.fold(
-      (_) async => emit(const UserProfileState.error()),
+      (_) async {
+        print(_);
+        print(userId);
+        emit(const UserProfileState.error());
+      },
       (sessionId) async {
         // create new user in the DB
         final userProfile =

@@ -39,22 +39,26 @@ class ProfileApiServiceImpl extends ProfileApiService {
       final sessionId = json['guest_session_id'];
 
       // Prevent auto deletion.
-      // Get the rated movies for a guest session.
-      // If a guest session is not used for the first time within 24 hours, it will be automatically deleted.
+      // If a guest session is not used for the first time within 60 minutes, it will be automatically deleted.
       uri = Uri(
         scheme: 'https',
         host: kBaseUrl,
-        path: '3/guest_session/$sessionId/rated/movies',
+        path: '3/movie/24428/rating',
         queryParameters: {
           'api_key': kApiKey,
+          'guest_session_id': sessionId,
         },
       );
 
-      response = await client.get(uri);
+      final body = {'value': '10'};
 
-      if (response.statusCode != 200) {
+      response = await client.post(uri, body: body);
+
+      if (response.statusCode != 201) {
         throw Exception(httpErrorHandler(response));
       }
+
+      client.delete(uri);
 
       return sessionId;
     } catch (e) {

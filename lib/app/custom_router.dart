@@ -15,6 +15,7 @@ import 'package:movie_browser/features/movie_details/presentation/pages/youtube_
 import 'package:movie_browser/features/movies_list/presentation/pages/genre_page.dart';
 import 'package:movie_browser/features/people/presentation/pages/person_details_page.dart';
 import 'package:movie_browser/features/profile/presentation/cubits/user_profile/user_profile_cubit.dart';
+import 'package:movie_browser/features/profile/presentation/pages/user_details_page.dart';
 import 'package:movie_browser/features/profile/presentation/pages/user_lists_page.dart';
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -89,8 +90,8 @@ class CustomRouter {
                   ],
                 ),
                 GoRoute(
-                  path: 'personDetails',
-                  builder: (_, __) => const PersonDetailsPage(),
+                  path: 'userDetailsPage',
+                  builder: (_, __) => const UserDetailsPage(),
                 ),
                 GoRoute(
                     path: 'genrePage',

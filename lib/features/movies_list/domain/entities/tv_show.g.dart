@@ -9,7 +9,7 @@ part of 'tv_show.dart';
 _$TvShowImpl _$$TvShowImplFromJson(Map<String, dynamic> json) => _$TvShowImpl(
       name: json['name'] as String,
       voteAverage: (json['vote_average'] as num).toDouble(),
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       posterPath: json['poster_path'],
       firstAirDate: json['first_air_date'],
       overview: json['overview'],

@@ -9,7 +9,7 @@ part of 'movie.dart';
 _$MovieImpl _$$MovieImplFromJson(Map<String, dynamic> json) => _$MovieImpl(
       title: json['title'] as String,
       voteAverage: (json['vote_average'] as num).toDouble(),
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       posterPath: json['poster_path'],
       releaseDate: json['release_date'],
       overview: json['overview'],
